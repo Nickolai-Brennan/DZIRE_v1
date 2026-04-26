@@ -1,0 +1,130 @@
+{
+  "id": "WF-PROJECT-BOOTSTRAP",
+  "name": "Project Bootstrap",
+  "version": "v1.0",
+  "owner": "planning-agent",
+  "category": "build",
+  "priority": 5,
+  "status": "active",
+  "trigger": "New project is approved",
+  "objective": "Create a working project repo and local development environment",
+  "scope": {
+    "in_scope": [
+      "repo setup",
+      "environment setup",
+      "base documentation",
+      "initial file structure"
+    ],
+    "out_of_scope": [
+      "feature development",
+      "production deployment"
+    ]
+  },
+  "inputs": [
+    {
+      "name": "project_name",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "project_description",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "tech_stack",
+      "type": "object",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "name": "initialized_repo",
+      "type": "directory"
+    },
+    {
+      "name": "README.md",
+      "type": "file"
+    },
+    {
+      "name": "copilot-instructions.md",
+      "type": "file"
+    }
+  ],
+  "dependencies": [
+    "GitHub",
+    "VS Code",
+    "Node/Python environment"
+  ],
+  "agents": [
+    "planning-agent",
+    "repo-agent",
+    "docs-agent"
+  ],
+  "steps": [
+    {
+      "id": "STEP-001",
+      "name": "Define project",
+      "agent": "planning-agent",
+      "action": "Collect project name, description, goals, and stack.",
+      "outputs": ["project_brief"],
+      "acceptance_criteria": [
+        "Project name exists",
+        "Project description exists",
+        "Stack is selected"
+      ]
+    },
+    {
+      "id": "STEP-002",
+      "name": "Create repo structure",
+      "agent": "repo-agent",
+      "action": "Create frontend, backend, database, docs, workflows, and tasks folders.",
+      "outputs": ["repo_structure"]
+    },
+    {
+      "id": "STEP-003",
+      "name": "Create base docs",
+      "agent": "docs-agent",
+      "action": "Create README, docs index, setup guide, and Copilot instructions.",
+      "outputs": ["base_docs"]
+    }
+  ],
+  "decision_logic": [
+    {
+      "condition": "If no backend is required",
+      "action": "Skip backend folder and API setup steps"
+    }
+  ],
+  "failure_handling": [
+    {
+      "scenario": "Dependency install fails",
+      "action": "Log error and create fix task"
+    }
+  ],
+  "automation_opportunities": [
+    "Auto-generate repo folders",
+    "Auto-create README",
+    "Auto-create GitHub issues"
+  ],
+  "deliverables": [
+    "Working repo scaffold",
+    "Environment checklist",
+    "Project startup docs"
+  ],
+  "kpis": [
+    {
+      "name": "bootstrap_completion",
+      "target": "100%",
+      "source": "workflow task status"
+    }
+  ],
+  "tracking": {
+    "logs_stored_in": "logs/workflows/project-bootstrap.log",
+    "events_tracked": [
+      "workflow_started",
+      "step_completed",
+      "workflow_completed"
+    ]
+  },
+  "notes": "Use this as the default workflow for starting new projects."
+}

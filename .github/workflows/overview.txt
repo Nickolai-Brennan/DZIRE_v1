@@ -1,0 +1,28 @@
+.github/workflows/
+├── registry.md
+├── execution-engine.md
+├── routing.md
+├── active-workflows/
+│   ├── project-bootstrap.md
+│   ├── full-stack-app-build.md
+│   ├── database-build.md
+│   ├── api-build.md
+│   ├── data-pipeline-build.md
+│   ├── ui-dashboard-build.md
+│   ├── content-engine-build.md
+│   ├── marketing-campaign-build.md
+│   ├── advertising-campaign-build.md
+│   ├── revenue-model-build.md
+│   ├── traffic-growth-build.md
+│   ├── analytics-tracking-build.md
+│   ├── seo-content-cluster-build.md
+│   ├── product-launch-build.md
+│   ├── experiment-ab-testing.md
+│   ├── validation-review.md
+│   └── workflow-improvement-loop.md
+├── templates/
+│   ├── workflow-template.md
+│   ├── product-build-template.md
+│   ├── growth-build-template.md
+│   ├── data-template.md
+│   └── validation-template.md

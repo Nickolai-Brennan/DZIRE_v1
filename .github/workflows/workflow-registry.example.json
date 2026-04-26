@@ -1,0 +1,22 @@
+{
+  "workflows": [
+    {
+      "id": "WF-PROJECT-BOOTSTRAP",
+      "name": "Project Bootstrap",
+      "path": "workflows/project-bootstrap.json",
+      "category": "build",
+      "status": "active",
+      "owner": "planning-agent",
+      "description": "Starts a new project and creates the initial repo structure."
+    },
+    {
+      "id": "WF-FULL-STACK-APP-BUILD",
+      "name": "Full Stack App Build",
+      "path": "workflows/full-stack-app-build.json",
+      "category": "build",
+      "status": "active",
+      "owner": "full-stack-agent",
+      "description": "Builds frontend, backend, database, and API layers."
+    }
+  ]
+}

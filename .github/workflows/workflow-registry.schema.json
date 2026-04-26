@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "workflow-registry.schema.json",
+  "title": "Workflow Registry",
+  "type": "object",
+  "required": ["workflows"],
+  "properties": {
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "path", "category", "status"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["draft", "active", "paused", "deprecated"]
+          },
+          "owner": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
