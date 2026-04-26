@@ -1,15 +1,15 @@
 ---
-name: rest-endpoint-design-skill
-description: Rest Endpoint Design capability
+name: seo-keyword-research-skill
+description: Seo Keyword Research capability
 version: 1.0.0
 status: active
-category: api
+category: seo
 ---
 
-# Rest Endpoint Design
+# Seo Keyword Research
 
 ## Purpose
-Rest Endpoint Design capability
+Seo Keyword Research capability
 
 ## Output
 ```yaml
