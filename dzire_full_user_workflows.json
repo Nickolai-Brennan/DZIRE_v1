@@ -1,0 +1,1304 @@
+{
+  "project": "DZire",
+  "artifact_type": "user_flow_workflows",
+  "version": "1.0",
+  "description": "Full-site user workflows for discovery, positions, playlists, articles, products, models, monetization, and retention.",
+  "total_workflows": 64,
+  "workflow_categories": [
+    "account_profile",
+    "article_engagement",
+    "chatbot",
+    "content_editorial",
+    "core_discovery",
+    "model_conversion",
+    "models",
+    "monetization",
+    "personalization",
+    "playlist",
+    "position_detail",
+    "product_reviews",
+    "retention",
+    "search_filters"
+  ],
+  "workflows": [
+    {
+      "id": "WF-001",
+      "category": "core_discovery",
+      "title": "Homepage to Trending Positions",
+      "goal": "User discovers trending positions and saves one to a playlist",
+      "phase": "MVP",
+      "steps": [
+        "User lands on homepage",
+        "User scrolls trending positions section",
+        "User clicks a position card",
+        "System opens position detail page",
+        "User clicks Save to Playlist",
+        "System confirms save"
+      ],
+      "key_events": [
+        "homepage_view",
+        "position_card_click",
+        "position_detail_view",
+        "playlist_save"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-002",
+      "category": "core_discovery",
+      "title": "Homepage to Category Entry",
+      "goal": "User browses positions by category",
+      "phase": "MVP",
+      "steps": [
+        "User lands on homepage",
+        "User opens category grid",
+        "User selects a category such as Beginner",
+        "System opens filtered category page",
+        "User browses cards",
+        "User saves a position"
+      ],
+      "key_events": [
+        "category_grid_view",
+        "category_select",
+        "position_save"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-003",
+      "category": "core_discovery",
+      "title": "Global Search to Results",
+      "goal": "User searches for a specific position or type",
+      "phase": "MVP",
+      "steps": [
+        "User enters query in global search",
+        "System opens search results page",
+        "User applies filters",
+        "User clicks result",
+        "System opens detail page",
+        "User saves item"
+      ],
+      "key_events": [
+        "search_submit",
+        "filter_apply",
+        "search_result_click"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-004",
+      "category": "core_discovery",
+      "title": "Tag-Based Navigation",
+      "goal": "User navigates from tags into related content",
+      "phase": "MVP",
+      "steps": [
+        "User clicks tag such as Low Energy",
+        "System opens tag results page",
+        "User browses related items",
+        "User clicks item",
+        "User saves item"
+      ],
+      "key_events": [
+        "tag_click",
+        "tag_results_view",
+        "position_save"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-005",
+      "category": "core_discovery",
+      "title": "Explore Hub Page",
+      "goal": "User explores mixed content across the platform",
+      "phase": "MVP",
+      "steps": [
+        "User opens Explore page",
+        "System displays positions, articles, products, and models",
+        "User clicks content card",
+        "System routes to selected detail page",
+        "User continues discovery journey"
+      ],
+      "key_events": [
+        "explore_view",
+        "mixed_card_click"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-006",
+      "category": "search_filters",
+      "title": "Advanced Filtering",
+      "goal": "User narrows position results by comfort, difficulty, and energy",
+      "phase": "MVP",
+      "steps": [
+        "User opens search or category page",
+        "User opens advanced filters",
+        "User adjusts comfort slider",
+        "User adjusts difficulty slider",
+        "User selects energy level",
+        "System updates results",
+        "User saves item"
+      ],
+      "key_events": [
+        "advanced_filter_open",
+        "filter_apply",
+        "position_save"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-007",
+      "category": "search_filters",
+      "title": "Multi-Select Add to Playlist",
+      "goal": "User saves multiple positions at once",
+      "phase": "MVP",
+      "steps": [
+        "User opens results grid",
+        "User enables multi-select",
+        "User selects multiple position cards",
+        "User clicks Add to Playlist",
+        "User chooses playlist",
+        "System saves all selected items"
+      ],
+      "key_events": [
+        "multi_select_enable",
+        "bulk_add_playlist"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-008",
+      "category": "search_filters",
+      "title": "Saved Search Profiles",
+      "goal": "User saves a filtered search for later",
+      "phase": "Phase 2",
+      "steps": [
+        "User applies filters",
+        "User clicks Save Search",
+        "User names search",
+        "System stores search in profile",
+        "User returns later and re-runs search"
+      ],
+      "key_events": [
+        "saved_search_create",
+        "saved_search_run"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-009",
+      "category": "position_detail",
+      "title": "Position Detail Save",
+      "goal": "User saves a position from its detail page",
+      "phase": "MVP",
+      "steps": [
+        "User opens position detail page",
+        "User reviews ratings",
+        "User reads overview",
+        "User clicks Save to Playlist",
+        "System confirms save"
+      ],
+      "key_events": [
+        "position_detail_view",
+        "playlist_save"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-010",
+      "category": "position_detail",
+      "title": "Related Positions Chain",
+      "goal": "User follows recommendations from one position to another",
+      "phase": "MVP",
+      "steps": [
+        "User opens position page",
+        "User scrolls to Try This Next",
+        "User clicks related position",
+        "System opens new position page",
+        "User repeats exploration or saves"
+      ],
+      "key_events": [
+        "related_position_view",
+        "related_position_click"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-011",
+      "category": "position_detail",
+      "title": "Attribute Drilldown",
+      "goal": "User explores positions by a rating attribute",
+      "phase": "MVP",
+      "steps": [
+        "User opens position page",
+        "User clicks an attribute such as Comfort 9",
+        "System opens similar results page",
+        "User browses",
+        "User saves item"
+      ],
+      "key_events": [
+        "attribute_click",
+        "attribute_results_view"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-012",
+      "category": "position_detail",
+      "title": "Position Comparison",
+      "goal": "User compares multiple positions before saving",
+      "phase": "Phase 2",
+      "steps": [
+        "User selects 2 or 3 positions",
+        "User clicks Compare",
+        "System displays side-by-side ratings",
+        "User chooses preferred item",
+        "User saves to playlist"
+      ],
+      "key_events": [
+        "comparison_start",
+        "comparison_view",
+        "playlist_save"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-013",
+      "category": "playlist",
+      "title": "Create Playlist",
+      "goal": "User creates a new playlist while saving an item",
+      "phase": "MVP",
+      "steps": [
+        "User clicks Save on position",
+        "System opens playlist modal",
+        "User chooses Create New Playlist",
+        "User enters playlist name",
+        "System creates playlist and saves item"
+      ],
+      "key_events": [
+        "playlist_create",
+        "playlist_save"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-014",
+      "category": "playlist",
+      "title": "Add to Existing Playlist",
+      "goal": "User saves a position to an existing playlist",
+      "phase": "MVP",
+      "steps": [
+        "User clicks Save",
+        "System opens playlist selector",
+        "User selects existing playlist",
+        "System adds item",
+        "System confirms"
+      ],
+      "key_events": [
+        "playlist_select",
+        "playlist_save"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-015",
+      "category": "playlist",
+      "title": "Playlist Management",
+      "goal": "User edits an existing playlist",
+      "phase": "MVP",
+      "steps": [
+        "User opens profile",
+        "User selects My Playlists",
+        "User opens playlist",
+        "User reorders items",
+        "User removes or adds notes",
+        "System saves updates"
+      ],
+      "key_events": [
+        "playlist_open",
+        "playlist_reorder",
+        "playlist_update"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-016",
+      "category": "playlist",
+      "title": "Playlist Playback Mode",
+      "goal": "User moves through playlist in a guided sequence",
+      "phase": "Phase 2",
+      "steps": [
+        "User opens playlist",
+        "User clicks Start Mode",
+        "System displays first item",
+        "User advances through playlist",
+        "System tracks progress"
+      ],
+      "key_events": [
+        "playlist_start_mode",
+        "playlist_progress"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-017",
+      "category": "playlist",
+      "title": "Playlist Sharing",
+      "goal": "User shares a playlist with another person",
+      "phase": "MVP",
+      "steps": [
+        "User opens playlist",
+        "User clicks Share",
+        "System generates share link",
+        "Recipient opens link",
+        "Recipient views playlist",
+        "Recipient may duplicate playlist"
+      ],
+      "key_events": [
+        "playlist_share",
+        "shared_link_open",
+        "playlist_duplicate"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-018",
+      "category": "personalization",
+      "title": "Quiz to Personalized Results",
+      "goal": "User receives a custom list from onboarding questions",
+      "phase": "MVP",
+      "steps": [
+        "User clicks Find Your Style",
+        "User answers preference questions",
+        "System generates personalized results",
+        "User reviews list",
+        "User saves as playlist"
+      ],
+      "key_events": [
+        "quiz_start",
+        "quiz_complete",
+        "personalized_results_view",
+        "playlist_create"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-019",
+      "category": "personalization",
+      "title": "Behavior-Based Recommendations",
+      "goal": "System suggests more content based on saved items",
+      "phase": "MVP",
+      "steps": [
+        "User saves 3 or more items",
+        "System detects preference pattern",
+        "System displays similar recommendations",
+        "User clicks recommendation",
+        "User saves more items"
+      ],
+      "key_events": [
+        "preference_signal_created",
+        "recommendation_view",
+        "recommendation_click"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-020",
+      "category": "personalization",
+      "title": "Continue Exploring Loop",
+      "goal": "Returning user resumes discovery",
+      "phase": "MVP",
+      "steps": [
+        "User returns to site",
+        "System loads recent activity",
+        "System displays Continue Exploring",
+        "User clicks suggested item",
+        "User saves or reads more"
+      ],
+      "key_events": [
+        "returning_user_detected",
+        "continue_exploring_click"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-021",
+      "category": "content_editorial",
+      "title": "Article to Embedded Positions",
+      "goal": "User reads article and interacts with embedded position cards",
+      "phase": "MVP",
+      "steps": [
+        "User opens article",
+        "User reads content",
+        "System displays embedded position card",
+        "User clicks card",
+        "System opens position detail",
+        "User saves to playlist",
+        "User returns to article"
+      ],
+      "key_events": [
+        "article_view",
+        "embedded_card_click",
+        "playlist_save"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-022",
+      "category": "content_editorial",
+      "title": "Magazine Experience",
+      "goal": "User explores interactive monthly publication",
+      "phase": "MVP",
+      "steps": [
+        "User opens publication page",
+        "User scrolls issue sections",
+        "User clicks interactive elements",
+        "System opens related content",
+        "User saves items or shares content"
+      ],
+      "key_events": [
+        "publication_view",
+        "publication_interaction"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-023",
+      "category": "content_editorial",
+      "title": "Story to Related Positions",
+      "goal": "User reads a non-explicit fantasy story and explores related educational content",
+      "phase": "MVP",
+      "steps": [
+        "User opens story",
+        "User reads story",
+        "System displays Inspired By This section",
+        "User clicks related position",
+        "System opens detail page",
+        "User saves item"
+      ],
+      "key_events": [
+        "story_view",
+        "related_content_click"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-024",
+      "category": "chatbot",
+      "title": "Chatbot Playlist Builder",
+      "goal": "User asks chatbot for position suggestions",
+      "phase": "MVP",
+      "steps": [
+        "User opens chatbot",
+        "User asks for beginner-friendly options",
+        "Bot returns suggested positions",
+        "User clicks Add All",
+        "System creates playlist"
+      ],
+      "key_events": [
+        "chatbot_open",
+        "chatbot_recommendation",
+        "playlist_create"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-025",
+      "category": "chatbot",
+      "title": "Chatbot Exploration Loop",
+      "goal": "User refines chatbot recommendations",
+      "phase": "MVP",
+      "steps": [
+        "Bot suggests positions",
+        "User gives refinement such as lower difficulty",
+        "Bot returns updated suggestions",
+        "User saves selected items"
+      ],
+      "key_events": [
+        "chatbot_refine",
+        "chatbot_recommendation_update",
+        "playlist_save"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-026",
+      "category": "account_profile",
+      "title": "Signup to Onboarding",
+      "goal": "New user creates an account and selects interests",
+      "phase": "MVP",
+      "steps": [
+        "User clicks Sign Up",
+        "User creates account",
+        "System opens onboarding",
+        "User selects interests",
+        "System creates starter recommendations"
+      ],
+      "key_events": [
+        "signup_start",
+        "signup_complete",
+        "onboarding_complete"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-027",
+      "category": "account_profile",
+      "title": "Profile Activity Tracking",
+      "goal": "User reviews saved and recent activity",
+      "phase": "MVP",
+      "steps": [
+        "User opens profile",
+        "User views saved content",
+        "User views recent activity",
+        "User resumes browsing"
+      ],
+      "key_events": [
+        "profile_view",
+        "activity_click"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-028",
+      "category": "account_profile",
+      "title": "Favorites System",
+      "goal": "User likes or favorites content for later",
+      "phase": "MVP",
+      "steps": [
+        "User views position, article, product, or model",
+        "User clicks Favorite",
+        "System stores item in profile",
+        "User revisits Favorites page later"
+      ],
+      "key_events": [
+        "favorite_add",
+        "favorites_view"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-029",
+      "category": "monetization",
+      "title": "Free to VIP Upgrade",
+      "goal": "User upgrades after hitting locked content",
+      "phase": "MVP",
+      "steps": [
+        "User clicks locked content",
+        "System displays upgrade prompt",
+        "User selects plan",
+        "User completes payment",
+        "System unlocks content"
+      ],
+      "key_events": [
+        "locked_content_click",
+        "upgrade_prompt_view",
+        "subscription_start"
+      ],
+      "monetization": [
+        "subscription"
+      ]
+    },
+    {
+      "id": "WF-030",
+      "category": "monetization",
+      "title": "VIP Playlist Access",
+      "goal": "VIP user accesses curated premium playlists",
+      "phase": "MVP",
+      "steps": [
+        "User opens VIP page",
+        "User selects VIP playlist",
+        "System opens playlist",
+        "User saves or starts playlist"
+      ],
+      "key_events": [
+        "vip_page_view",
+        "vip_playlist_open"
+      ],
+      "monetization": [
+        "subscription"
+      ]
+    },
+    {
+      "id": "WF-031",
+      "category": "monetization",
+      "title": "Affiliate Product Integration",
+      "goal": "User clicks a product recommendation from a position page",
+      "phase": "MVP",
+      "steps": [
+        "User views position detail",
+        "System displays suggested products",
+        "User clicks product",
+        "System opens product review or affiliate link",
+        "Outbound click is tracked"
+      ],
+      "key_events": [
+        "product_recommendation_view",
+        "affiliate_click"
+      ],
+      "monetization": [
+        "affiliate"
+      ]
+    },
+    {
+      "id": "WF-032",
+      "category": "models",
+      "title": "Model Profile Discovery",
+      "goal": "User discovers a featured model",
+      "phase": "MVP",
+      "steps": [
+        "User lands on homepage",
+        "User sees featured model section",
+        "User clicks model card",
+        "System opens model profile page"
+      ],
+      "key_events": [
+        "featured_model_view",
+        "model_card_click",
+        "model_profile_view"
+      ],
+      "monetization": [
+        "model_promo"
+      ]
+    },
+    {
+      "id": "WF-033",
+      "category": "models",
+      "title": "Model Recommended Playlist",
+      "goal": "User adds model-recommended positions to playlist",
+      "phase": "MVP",
+      "steps": [
+        "User opens model page",
+        "User views Recommended by Model section",
+        "User clicks Add to Playlist",
+        "System saves recommended items"
+      ],
+      "key_events": [
+        "model_recommendation_view",
+        "playlist_save"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-034",
+      "category": "retention",
+      "title": "Notifications Return Loop",
+      "goal": "User returns after receiving a content notification",
+      "phase": "Phase 2",
+      "steps": [
+        "System sends notification",
+        "User clicks notification",
+        "System opens relevant content",
+        "User reads, saves, or shares"
+      ],
+      "key_events": [
+        "notification_sent",
+        "notification_click"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-035",
+      "category": "retention",
+      "title": "Email Capture Return Loop",
+      "goal": "User joins email list and returns through curated content",
+      "phase": "MVP",
+      "steps": [
+        "User sees email prompt",
+        "User enters email",
+        "System sends curated content later",
+        "User clicks email link",
+        "System opens relevant page"
+      ],
+      "key_events": [
+        "email_capture",
+        "newsletter_click"
+      ],
+      "monetization": [
+        "email_list"
+      ]
+    },
+    {
+      "id": "WF-036",
+      "category": "article_engagement",
+      "title": "Article Read to Direct Share",
+      "goal": "User reads and shares an article",
+      "phase": "MVP",
+      "steps": [
+        "User opens article",
+        "User reads content",
+        "User clicks Share button",
+        "System displays share options",
+        "User copies link or shares socially"
+      ],
+      "key_events": [
+        "article_view",
+        "article_share_click",
+        "share_complete"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-037",
+      "category": "article_engagement",
+      "title": "Article Inline Share Trigger",
+      "goal": "User is prompted to share while reading",
+      "phase": "MVP",
+      "steps": [
+        "User opens article",
+        "User scrolls 50 percent",
+        "System displays share CTA",
+        "User clicks share",
+        "System records share"
+      ],
+      "key_events": [
+        "article_scroll_50",
+        "share_prompt_view",
+        "share_complete"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-038",
+      "category": "article_engagement",
+      "title": "Article Comment Engagement",
+      "goal": "Signed-in user comments on an article",
+      "phase": "MVP",
+      "steps": [
+        "User opens article",
+        "User scrolls to comments",
+        "User clicks Add Comment",
+        "User writes comment",
+        "System publishes comment"
+      ],
+      "key_events": [
+        "comment_box_open",
+        "comment_submit"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-039",
+      "category": "article_engagement",
+      "title": "Article Comment to Signup",
+      "goal": "Guest creates an account to comment",
+      "phase": "MVP",
+      "steps": [
+        "Guest opens article",
+        "Guest clicks Add Comment",
+        "System prompts signup",
+        "Guest creates account",
+        "System returns user to article",
+        "User submits comment"
+      ],
+      "key_events": [
+        "comment_requires_signup",
+        "signup_complete",
+        "comment_submit"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-040",
+      "category": "article_engagement",
+      "title": "Article Like or Helpful Vote",
+      "goal": "User rates article usefulness",
+      "phase": "MVP",
+      "steps": [
+        "User reads article",
+        "User clicks Like or Helpful",
+        "System stores engagement signal",
+        "Recommendation engine updates preferences"
+      ],
+      "key_events": [
+        "article_like",
+        "helpful_vote"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-041",
+      "category": "article_engagement",
+      "title": "Article Save for Later",
+      "goal": "User saves article to profile library",
+      "phase": "MVP",
+      "steps": [
+        "User opens article",
+        "User clicks Save Article",
+        "System stores article in user library",
+        "User returns later through profile"
+      ],
+      "key_events": [
+        "article_save",
+        "saved_article_open"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-042",
+      "category": "article_engagement",
+      "title": "Article Embedded CTA to Playlist",
+      "goal": "Article sends user into playlist-building flow",
+      "phase": "MVP",
+      "steps": [
+        "User reads article",
+        "User clicks embedded position or product card",
+        "System opens detail page",
+        "User saves item to playlist"
+      ],
+      "key_events": [
+        "embedded_cta_click",
+        "playlist_save"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-043",
+      "category": "article_engagement",
+      "title": "Shared Article New User Entry",
+      "goal": "A shared article brings in a new user",
+      "phase": "MVP",
+      "steps": [
+        "Existing user shares article",
+        "New user opens shared link",
+        "System displays article",
+        "System prompts save or signup",
+        "New user creates account"
+      ],
+      "key_events": [
+        "shared_article_open",
+        "signup_prompt_view",
+        "signup_complete"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-044",
+      "category": "article_engagement",
+      "title": "Comment Thread Return Loop",
+      "goal": "User returns after comment reply notification",
+      "phase": "Phase 2",
+      "steps": [
+        "User comments on article",
+        "Another user replies",
+        "System sends notification",
+        "User returns to thread",
+        "User replies again"
+      ],
+      "key_events": [
+        "comment_reply",
+        "reply_notification_click",
+        "comment_submit"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-045",
+      "category": "product_reviews",
+      "title": "Product Discovery to Review Page",
+      "goal": "User opens a reviewed product page",
+      "phase": "MVP",
+      "steps": [
+        "User sees product card on homepage, article, or category page",
+        "User clicks product card",
+        "System opens review page",
+        "User reviews score breakdown"
+      ],
+      "key_events": [
+        "product_card_click",
+        "product_review_view"
+      ],
+      "monetization": [
+        "affiliate"
+      ]
+    },
+    {
+      "id": "WF-046",
+      "category": "product_reviews",
+      "title": "Product Compare Options",
+      "goal": "User compares similar reviewed products",
+      "phase": "MVP",
+      "steps": [
+        "User opens product review page",
+        "User clicks Compare Similar",
+        "System displays alternatives",
+        "User compares scores",
+        "User selects best option"
+      ],
+      "key_events": [
+        "compare_similar_click",
+        "product_compare_view"
+      ],
+      "monetization": [
+        "affiliate"
+      ]
+    },
+    {
+      "id": "WF-047",
+      "category": "product_reviews",
+      "title": "Best Value Product Filter",
+      "goal": "User sorts products by value score",
+      "phase": "MVP",
+      "steps": [
+        "User opens product category page",
+        "User selects Best Value filter",
+        "System sorts products by value score",
+        "User clicks top option"
+      ],
+      "key_events": [
+        "best_value_filter",
+        "product_card_click"
+      ],
+      "monetization": [
+        "affiliate"
+      ]
+    },
+    {
+      "id": "WF-048",
+      "category": "product_reviews",
+      "title": "Product Affiliate Click",
+      "goal": "User clicks purchase link from review",
+      "phase": "MVP",
+      "steps": [
+        "User opens product review page",
+        "User clicks Buy Now",
+        "System tracks outbound click",
+        "User lands on partner site"
+      ],
+      "key_events": [
+        "buy_now_click",
+        "affiliate_outbound"
+      ],
+      "monetization": [
+        "affiliate"
+      ]
+    },
+    {
+      "id": "WF-049",
+      "category": "product_reviews",
+      "title": "Product Wishlist Save",
+      "goal": "User saves product for later",
+      "phase": "MVP",
+      "steps": [
+        "User opens product review",
+        "User clicks Save to Wishlist",
+        "System stores product in profile",
+        "User later opens wishlist"
+      ],
+      "key_events": [
+        "wishlist_add",
+        "wishlist_view"
+      ],
+      "monetization": [
+        "affiliate"
+      ]
+    },
+    {
+      "id": "WF-050",
+      "category": "product_reviews",
+      "title": "Product Add to Playlist Cross-System",
+      "goal": "User adds product-position combo to a playlist",
+      "phase": "MVP",
+      "steps": [
+        "User views product review",
+        "System displays Use With These Positions",
+        "User clicks Add Combo to Playlist",
+        "System saves related items"
+      ],
+      "key_events": [
+        "product_combo_view",
+        "combo_playlist_save"
+      ],
+      "monetization": [
+        "affiliate"
+      ]
+    },
+    {
+      "id": "WF-051",
+      "category": "product_reviews",
+      "title": "Product Decision Loop",
+      "goal": "User reviews multiple products before purchasing",
+      "phase": "MVP",
+      "steps": [
+        "User opens product A",
+        "User opens product B",
+        "User compares scores",
+        "User returns to highest value product",
+        "User clicks purchase link"
+      ],
+      "key_events": [
+        "product_review_view",
+        "product_compare_view",
+        "affiliate_click"
+      ],
+      "monetization": [
+        "affiliate"
+      ]
+    },
+    {
+      "id": "WF-052",
+      "category": "product_reviews",
+      "title": "Product Review Summary Shortcut",
+      "goal": "User makes quick decision from summary box",
+      "phase": "MVP",
+      "steps": [
+        "User lands on product page",
+        "System displays Best For You summary",
+        "User reads quick verdict",
+        "User clicks affiliate CTA"
+      ],
+      "key_events": [
+        "quick_verdict_view",
+        "affiliate_click"
+      ],
+      "monetization": [
+        "affiliate"
+      ]
+    },
+    {
+      "id": "WF-053",
+      "category": "product_reviews",
+      "title": "Product User Rating Input",
+      "goal": "User returns to rate a purchased product",
+      "phase": "Phase 2",
+      "steps": [
+        "User purchases product externally",
+        "User returns to DZire review page",
+        "User clicks Leave Rating",
+        "User submits score and comment",
+        "System updates community rating"
+      ],
+      "key_events": [
+        "user_product_rating_submit"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-054",
+      "category": "product_reviews",
+      "title": "Article to Product Review",
+      "goal": "Editorial content sends user to a product review",
+      "phase": "MVP",
+      "steps": [
+        "User reads article",
+        "User sees mentioned product",
+        "User clicks product link",
+        "System opens review page",
+        "User clicks affiliate CTA"
+      ],
+      "key_events": [
+        "article_product_click",
+        "product_review_view",
+        "affiliate_click"
+      ],
+      "monetization": [
+        "affiliate"
+      ]
+    },
+    {
+      "id": "WF-055",
+      "category": "model_conversion",
+      "title": "Model Discovery to Profile View",
+      "goal": "User discovers and opens model profile",
+      "phase": "MVP",
+      "steps": [
+        "User lands on homepage",
+        "User sees featured model",
+        "User clicks model card",
+        "System opens profile page"
+      ],
+      "key_events": [
+        "model_card_click",
+        "model_profile_view"
+      ],
+      "monetization": [
+        "model_promo"
+      ]
+    },
+    {
+      "id": "WF-056",
+      "category": "model_conversion",
+      "title": "Model Profile Content Exploration",
+      "goal": "User explores model profile content",
+      "phase": "MVP",
+      "steps": [
+        "User opens model profile",
+        "User scrolls bio",
+        "User reads interview",
+        "User clicks tags or related content"
+      ],
+      "key_events": [
+        "model_profile_view",
+        "model_interview_view",
+        "model_tag_click"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-057",
+      "category": "model_conversion",
+      "title": "Model Profile Promo CTA Click",
+      "goal": "User views promo code and clicks external CTA",
+      "phase": "MVP",
+      "steps": [
+        "User opens model profile",
+        "User scrolls to Exclusive Offer",
+        "System displays promo code",
+        "User clicks external platform CTA"
+      ],
+      "key_events": [
+        "promo_code_view",
+        "model_external_click"
+      ],
+      "monetization": [
+        "affiliate",
+        "model_promo"
+      ]
+    },
+    {
+      "id": "WF-058",
+      "category": "model_conversion",
+      "title": "Model External Platform Signup",
+      "goal": "User signs up to model platform with promo code",
+      "phase": "MVP",
+      "steps": [
+        "User clicks tracked external model link",
+        "Partner platform opens",
+        "User signs up using promo code",
+        "Conversion is attributed when available"
+      ],
+      "key_events": [
+        "model_external_click",
+        "promo_code_copy",
+        "external_signup_attributed"
+      ],
+      "monetization": [
+        "affiliate",
+        "model_promo"
+      ]
+    },
+    {
+      "id": "WF-059",
+      "category": "model_conversion",
+      "title": "Model Conversion Tracking Funnel",
+      "goal": "System tracks model profile funnel performance",
+      "phase": "MVP",
+      "steps": [
+        "User views model profile",
+        "User clicks promo CTA",
+        "System records outbound click",
+        "System stores campaign and model attribution",
+        "Admin dashboard reports conversion estimate"
+      ],
+      "key_events": [
+        "model_profile_view",
+        "model_external_click",
+        "conversion_estimate_update"
+      ],
+      "monetization": [
+        "analytics",
+        "model_promo"
+      ]
+    },
+    {
+      "id": "WF-060",
+      "category": "model_conversion",
+      "title": "Model Save for Later",
+      "goal": "User follows or saves a model profile",
+      "phase": "MVP",
+      "steps": [
+        "User opens model profile",
+        "User clicks Follow or Save",
+        "System stores model in profile",
+        "User returns through saved models list"
+      ],
+      "key_events": [
+        "model_follow",
+        "saved_model_open"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-061",
+      "category": "model_conversion",
+      "title": "Model to Playlist Influence",
+      "goal": "User saves model-recommended content",
+      "phase": "MVP",
+      "steps": [
+        "User opens model profile",
+        "User views Recommended Positions",
+        "User clicks Add to Playlist",
+        "System saves selected items"
+      ],
+      "key_events": [
+        "model_recommendation_view",
+        "playlist_save"
+      ],
+      "monetization": []
+    },
+    {
+      "id": "WF-062",
+      "category": "model_conversion",
+      "title": "Model Newsletter Funnel",
+      "goal": "User joins email list for model updates",
+      "phase": "MVP",
+      "steps": [
+        "User opens model profile",
+        "User sees Get Exclusive Drops CTA",
+        "User enters email",
+        "System adds email to model interest segment"
+      ],
+      "key_events": [
+        "model_email_capture",
+        "newsletter_segment_add"
+      ],
+      "monetization": [
+        "email_list",
+        "model_promo"
+      ]
+    },
+    {
+      "id": "WF-063",
+      "category": "model_conversion",
+      "title": "Model VIP Content Gate",
+      "goal": "User upgrades to view locked model preview content",
+      "phase": "MVP",
+      "steps": [
+        "User opens model profile",
+        "User clicks locked gallery preview",
+        "System displays VIP prompt",
+        "User upgrades",
+        "System unlocks VIP preview"
+      ],
+      "key_events": [
+        "locked_gallery_click",
+        "upgrade_prompt_view",
+        "subscription_start"
+      ],
+      "monetization": [
+        "subscription"
+      ]
+    },
+    {
+      "id": "WF-064",
+      "category": "model_conversion",
+      "title": "Model Social Amplification Loop",
+      "goal": "User shares model profile and brings in new users",
+      "phase": "MVP",
+      "steps": [
+        "User opens model profile",
+        "User clicks Share",
+        "System generates share link",
+        "New user opens shared link",
+        "System tracks referral source"
+      ],
+      "key_events": [
+        "model_share",
+        "shared_model_open"
+      ],
+      "monetization": [
+        "model_promo"
+      ]
+    }
+  ]
+}
