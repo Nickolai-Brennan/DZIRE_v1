@@ -19,6 +19,10 @@ from .sponsors.routes import router as sponsors_router
 from .newsletter.routes import router as newsletter_router
 from .subscriptions.routes import router as subscriptions_router
 
+# Step 7 routers
+from .auth.routes import router as auth_v2_router
+from .users.routes import router as users_router
+
 logger = logging.getLogger(__name__)
 settings = get_settings()
 
@@ -44,6 +48,10 @@ app.include_router(affiliates_router)
 app.include_router(sponsors_router)
 app.include_router(newsletter_router)
 app.include_router(subscriptions_router)
+
+# Step 7 routers
+app.include_router(auth_v2_router)
+app.include_router(users_router)
 
 
 @app.get("/health")

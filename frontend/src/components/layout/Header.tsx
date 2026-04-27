@@ -86,7 +86,7 @@ export const Header: React.FC = () => {
               <div className="flex items-center gap-1">
                 <Link to="/profile" className="flex items-center gap-2 p-2 hover:bg-surface rounded-lg transition-colors">
                   <User className="w-5 h-5 text-textMuted" />
-                  <span className="hidden sm:block text-sm text-textMuted">{user?.displayName}</span>
+                  <span className="hidden sm:block text-sm text-textMuted">{user?.username}</span>
                 </Link>
                 <button onClick={logout} className="p-2 hover:bg-surface rounded-lg transition-colors">
                   <LogOut className="w-4 h-4 text-textMuted" />

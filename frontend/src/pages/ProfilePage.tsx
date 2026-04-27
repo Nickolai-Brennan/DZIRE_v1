@@ -46,7 +46,7 @@ export const ProfilePage: React.FC = () => {
               <User className="w-8 h-8 text-primary" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-textPrimary">{user?.displayName}</h1>
+              <h1 className="text-2xl font-bold text-textPrimary">{user?.first_name ? `${user.first_name} ${user.last_name ?? ''}`.trim() : user?.username}</h1>
               <p className="text-sm text-textMuted">{user?.email}</p>
               {isVip && (
                 <Badge variant="trophy" className="mt-2">
