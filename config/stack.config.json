@@ -1,0 +1,19 @@
+{
+  "project_name": "DZIRE_v1",
+  "project_type": "webapp",
+  "frontend": "React + Vite + TypeScript + Tailwind",
+  "backend": "FastAPI + Python",
+  "database": "PostgreSQL (MotherDuck)",
+  "api": "REST + GraphQL",
+  "auth": "JWT (access + refresh; refresh token stored in HttpOnly cookie)",
+  "admin_panel": true,
+  "cms": false,
+  "analytics": false,
+  "payments": false,
+  "docs": "Markdown",
+  "deployment": {
+    "frontend": "Vercel",
+    "backend": "Render",
+    "database": "MotherDuck"
+  }
+}

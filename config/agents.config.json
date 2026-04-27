@@ -1,0 +1,21 @@
+{
+  "repo_agent": ".github/copilot-instructions.md",
+  "sub_agents_path": ".github/agents/",
+  "runtime_agents_path": "agents/",
+  "skills_path": "skills/",
+  "instructions_path": "instructions/",
+  "default_execution_order": [
+    "project-startup-agent",
+    "stack-verifier-agent",
+    "system-architect-agent",
+    "database-agent",
+    "backend-agent",
+    "api-agent",
+    "frontend-agent",
+    "testing-agent",
+    "documentation-agent",
+    "deployment-agent",
+    "code-cleaner-agent",
+    "workflow-builder-agent"
+  ]
+}
