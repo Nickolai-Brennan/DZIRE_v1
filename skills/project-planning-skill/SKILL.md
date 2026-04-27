@@ -1,6 +1,6 @@
 ---
 name: project-planning-skill
-description: Convert raw ideas into structured project briefs with defined scope, audience, features, and revenue paths. Use when the user describes a product idea, startup concept, or app they want to build and needs a clear, actionable brief.
+description: Convert product ideas into structured briefs with scope, audience, features, and revenue paths. Use for startup concepts, app ideas, or any project needing a clear, actionable brief.
 category: planning
 version: v1.0
 inputs:

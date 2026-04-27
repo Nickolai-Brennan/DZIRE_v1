@@ -1,6 +1,6 @@
 ---
 name: metrics-definition-skill
-description: Define KPIs, metrics, events, dimensions, and reporting views for a project or feature. Use when the user asks to define success metrics, set up tracking events, create a measurement plan, or decide what to measure and how to report it.
+description: Define KPIs, events, and reporting views for a project or feature. Use for success metrics, tracking plans, measurement frameworks, or analytics dashboards.
 category: analytics
 version: v1.0
 inputs:

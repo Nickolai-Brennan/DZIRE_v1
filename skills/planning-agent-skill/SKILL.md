@@ -1,6 +1,6 @@
 ---
 name: planning-agent-skill
-description: Convert raw ideas into structured project plans, phases, modules, and tech recommendations. Use when the user wants to plan a new project, define scope, create a roadmap, identify system modules, or break a goal into phases and deliverables.
+description: Convert ideas into structured project plans with phases, modules, and tech stack. Use for new projects, roadmaps, scope definition, or breaking goals into deliverables.
 category: planning
 version: v1.0
 inputs:
