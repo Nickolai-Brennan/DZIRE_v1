@@ -1,0 +1,63 @@
+{
+  "title": "Analytics API Contract",
+  "version": "1.0.0",
+  "base_path": "/api/analytics",
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/api/analytics/events",
+      "description": "Track a generic analytics event",
+      "body": "AnalyticsEventCreate",
+      "response": "AnalyticsEventRead",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/analytics/page-view",
+      "description": "Track a page view",
+      "body": "PageViewCreate",
+      "response": "PageViewRead",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/analytics/click",
+      "description": "Track a click event",
+      "body": "ClickEventCreate",
+      "response": "{ status: 'recorded' }",
+      "status": 201
+    }
+  ],
+  "schemas": {
+    "AnalyticsEventCreate": {
+      "event_type": "page_view | post_view | affiliate_click | sponsor_click | newsletter_signup | vip_signup | social_embed_click | search_query | tag_click | category_click",
+      "user_id": "uuid | null",
+      "session_id": "string | null",
+      "post_id": "uuid | null",
+      "source": "string | null",
+      "referrer": "string | null",
+      "utm_source": "string | null",
+      "utm_medium": "string | null",
+      "utm_campaign": "string | null",
+      "device_type": "string | null",
+      "country": "string | null",
+      "region": "string | null",
+      "city": "string | null"
+    },
+    "PageViewCreate": {
+      "path": "string",
+      "referrer": "string | null",
+      "session_id": "string | null",
+      "user_id": "uuid | null",
+      "device_type": "string | null",
+      "country": "string | null"
+    },
+    "ClickEventCreate": {
+      "element": "string",
+      "url": "string | null",
+      "post_id": "uuid | null",
+      "session_id": "string | null",
+      "user_id": "uuid | null"
+    }
+  }
+}

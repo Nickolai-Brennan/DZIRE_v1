@@ -1,0 +1,109 @@
+{
+  "title": "Admin API Contract",
+  "version": "1.0.0",
+  "base_path": "/api/admin",
+  "auth": "Bearer token (admin role required)",
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/admin/dashboard",
+      "description": "Admin dashboard stats summary",
+      "roles": ["admin", "editor", "marketing", "sponsor_manager", "analyst", "viewer"],
+      "response": "{ status, admin, stats }"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/content",
+      "description": "List all CMS posts (all statuses)",
+      "roles": ["admin", "editor"],
+      "response": "{ posts: PostRead[] }"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/content",
+      "description": "Create a new CMS post",
+      "roles": ["admin", "editor"],
+      "body": "PostCreate",
+      "response": "PostRead"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/admin/content/{post_id}",
+      "description": "Update a CMS post",
+      "roles": ["admin", "editor"],
+      "body": "PostUpdate",
+      "response": "PostRead"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/admin/content/{post_id}",
+      "description": "Delete a CMS post",
+      "roles": ["admin", "editor"],
+      "response": "204 No Content"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/seo",
+      "description": "SEO dashboard reports",
+      "roles": ["admin", "analyst"],
+      "response": "{ reports: SEOReport[] }"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/marketing",
+      "description": "Marketing dashboard data",
+      "roles": ["admin", "marketing"],
+      "response": "object"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/advertising",
+      "description": "Advertising dashboard data",
+      "roles": ["admin", "sponsor_manager"],
+      "response": "object"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/social",
+      "description": "Social media stats",
+      "roles": ["admin", "marketing"],
+      "response": "object"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/affiliates",
+      "description": "Affiliate management overview",
+      "roles": ["admin", "sponsor_manager"],
+      "response": "object"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/sponsors",
+      "description": "Sponsor management overview",
+      "roles": ["admin", "sponsor_manager"],
+      "response": "object"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/newsletter",
+      "description": "Newsletter management overview",
+      "roles": ["admin", "marketing"],
+      "response": "object"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/vip",
+      "description": "VIP subscription management overview",
+      "roles": ["admin"],
+      "response": "object"
+    }
+  ],
+  "roles": {
+    "admin": "Full access",
+    "editor": "Content only",
+    "marketing": "Marketing + SEO + newsletter",
+    "sponsor_manager": "Sponsors + affiliates",
+    "analyst": "Dashboards only",
+    "viewer": "Read-only"
+  }
+}

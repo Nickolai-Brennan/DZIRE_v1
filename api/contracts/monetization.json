@@ -1,0 +1,126 @@
+{
+  "title": "Monetization API Contract",
+  "version": "1.0.0",
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/affiliates",
+      "description": "List affiliate partners",
+      "auth": "admin (sponsor_manager role)",
+      "response": "AffiliateRead[]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/affiliates",
+      "description": "Create an affiliate partner",
+      "auth": "admin (sponsor_manager role)",
+      "body": "AffiliateCreate",
+      "response": "AffiliateRead",
+      "status": 201
+    },
+    {
+      "method": "GET",
+      "path": "/api/affiliates/links",
+      "description": "List affiliate links",
+      "auth": "admin (sponsor_manager role)",
+      "response": "AffiliateLinkRead[]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/affiliates/links",
+      "description": "Create an affiliate link",
+      "auth": "admin (sponsor_manager role)",
+      "body": "AffiliateLinkCreate",
+      "response": "AffiliateLinkRead",
+      "status": 201
+    },
+    {
+      "method": "GET",
+      "path": "/api/sponsors",
+      "description": "List sponsors",
+      "auth": "admin (sponsor_manager role)",
+      "response": "SponsorRead[]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sponsors",
+      "description": "Create a sponsor",
+      "auth": "admin (sponsor_manager role)",
+      "body": "SponsorCreate",
+      "response": "SponsorRead",
+      "status": 201
+    },
+    {
+      "method": "GET",
+      "path": "/api/sponsors/campaigns",
+      "description": "List sponsor campaigns",
+      "auth": "admin (sponsor_manager role)",
+      "response": "SponsorCampaignRead[]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sponsors/campaigns",
+      "description": "Create a sponsor campaign",
+      "auth": "admin (sponsor_manager role)",
+      "body": "SponsorCampaignCreate",
+      "response": "SponsorCampaignRead",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/newsletter/subscribe",
+      "description": "Subscribe to newsletter",
+      "auth": "public",
+      "body": "SubscribeRequest",
+      "response": "SubscriberRead",
+      "status": 201
+    },
+    {
+      "method": "GET",
+      "path": "/api/vip/plans",
+      "description": "List active VIP subscription plans",
+      "auth": "public",
+      "response": "VipPlanRead[]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/vip/subscribe",
+      "description": "Subscribe to a VIP plan",
+      "auth": "public",
+      "body": "VipSubscribeRequest",
+      "response": "VipSubscriptionRead",
+      "status": 201
+    }
+  ],
+  "schemas": {
+    "AffiliateCreate": {
+      "name": "string",
+      "website": "string | null",
+      "contact_email": "string | null",
+      "network": "string | null",
+      "commission_rate": "float | null",
+      "status": "active | inactive | pending",
+      "notes": "string | null"
+    },
+    "SponsorCreate": {
+      "name": "string",
+      "website": "string | null",
+      "contact_name": "string | null",
+      "contact_email": "string | null",
+      "logo_url": "string | null",
+      "status": "active | inactive | pending",
+      "notes": "string | null"
+    },
+    "SubscribeRequest": {
+      "email": "string (email)",
+      "first_name": "string | null",
+      "source": "string | null"
+    },
+    "VipSubscribeRequest": {
+      "user_id": "uuid",
+      "plan_id": "uuid",
+      "payment_provider": "string | null",
+      "provider_subscription_id": "string | null"
+    }
+  }
+}

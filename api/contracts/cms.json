@@ -1,0 +1,79 @@
+{
+  "title": "CMS API Contract",
+  "version": "1.0.0",
+  "base_path": "/api",
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/posts",
+      "description": "List published CMS posts",
+      "query_params": ["skip", "limit"],
+      "response": "array of PostRead"
+    },
+    {
+      "method": "GET",
+      "path": "/api/posts/{slug}",
+      "description": "Get a single post by slug",
+      "response": "PostRead"
+    },
+    {
+      "method": "GET",
+      "path": "/api/categories",
+      "description": "List all CMS categories",
+      "response": "array of CategoryRead"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tags",
+      "description": "List all CMS tags",
+      "response": "array of TagRead"
+    },
+    {
+      "method": "GET",
+      "path": "/api/media",
+      "description": "List uploaded media files",
+      "query_params": ["skip", "limit"],
+      "response": "array of MediaRead"
+    }
+  ],
+  "schemas": {
+    "PostRead": {
+      "id": "uuid",
+      "title": "string",
+      "slug": "string",
+      "subtitle": "string | null",
+      "excerpt": "string | null",
+      "body_content": "string | null",
+      "content_type": "string",
+      "status": "draft | scheduled | published | archived",
+      "visibility": "public | members | vip | private",
+      "featured_image": "string | null",
+      "seo_title": "string | null",
+      "seo_description": "string | null",
+      "keywords": "string[] | null",
+      "is_vip_only": "boolean",
+      "published_at": "datetime | null",
+      "created_at": "datetime",
+      "updated_at": "datetime"
+    },
+    "CategoryRead": {
+      "id": "uuid",
+      "name": "string",
+      "slug": "string",
+      "description": "string | null"
+    },
+    "TagRead": {
+      "id": "uuid",
+      "name": "string",
+      "slug": "string"
+    },
+    "MediaRead": {
+      "id": "uuid",
+      "filename": "string",
+      "url": "string",
+      "mime_type": "string | null",
+      "size_bytes": "integer | null",
+      "alt_text": "string | null"
+    }
+  }
+}
