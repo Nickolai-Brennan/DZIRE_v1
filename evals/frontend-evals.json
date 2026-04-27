@@ -1,1 +1,35 @@
-{ "version": "1.0", "domain": "frontend", "evals": [] }
+{
+  "version": "1.0",
+  "domain": "frontend",
+  "skill_name": "frontend-builder",
+  "evals": [
+    {
+      "id": 1,
+      "name": "component-scaffold",
+      "prompt": "Create a React TypeScript component for a job listings card using Tailwind CSS.",
+      "expected_output": "A typed React functional component with props interface, Tailwind classes, and a default export.",
+      "files": ["frontend/src/components/JobCard.tsx"]
+    },
+    {
+      "id": 2,
+      "name": "api-service-layer",
+      "prompt": "Create a frontend API service for fetching positions from the backend REST API.",
+      "expected_output": "TypeScript service module using fetch or axios with typed response interfaces and error handling.",
+      "files": ["frontend/src/services/positionsService.ts"]
+    },
+    {
+      "id": 3,
+      "name": "route-setup",
+      "prompt": "Set up React Router routes for Home, Login, Dashboard, and a 404 page.",
+      "expected_output": "Router configuration with typed routes, lazy loading where appropriate, and a fallback 404 route.",
+      "files": ["frontend/src/App.tsx"]
+    },
+    {
+      "id": 4,
+      "name": "tailwind-config",
+      "prompt": "Configure Tailwind CSS with a custom color palette matching the DZIRE brand.",
+      "expected_output": "tailwind.config.ts with extended theme colors, font family, and content paths set correctly.",
+      "files": ["frontend/tailwind.config.ts"]
+    }
+  ]
+}

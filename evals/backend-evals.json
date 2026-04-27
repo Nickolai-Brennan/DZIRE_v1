@@ -1,1 +1,35 @@
-{ "version": "1.0", "domain": "backend", "evals": [] }
+{
+  "version": "1.0",
+  "domain": "backend",
+  "skill_name": "backend-builder",
+  "evals": [
+    {
+      "id": 1,
+      "name": "fastapi-route",
+      "prompt": "Create a FastAPI route for GET /positions that returns a paginated list of job positions.",
+      "expected_output": "FastAPI router with typed Pydantic response model, pagination query params, and SQLAlchemy query.",
+      "files": ["backend/app/routes/positions.py"]
+    },
+    {
+      "id": 2,
+      "name": "service-layer",
+      "prompt": "Create a service function that retrieves a user by ID from the database.",
+      "expected_output": "Python async service function with SQLAlchemy session dependency, error handling, and typed return.",
+      "files": ["backend/app/services/user_service.py"]
+    },
+    {
+      "id": 3,
+      "name": "jwt-auth",
+      "prompt": "Implement JWT token creation and verification for the FastAPI backend.",
+      "expected_output": "JWT utility functions for encoding/decoding tokens with expiry, using python-jose or PyJWT.",
+      "files": ["backend/app/auth/jwt.py"]
+    },
+    {
+      "id": 4,
+      "name": "pydantic-schema",
+      "prompt": "Create Pydantic schemas for User creation, update, and response models.",
+      "expected_output": "Pydantic v2 models with field validators, optional fields for update, and an ORM-compatible response model.",
+      "files": ["backend/app/schemas/user.py"]
+    }
+  ]
+}

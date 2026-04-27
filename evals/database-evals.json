@@ -1,1 +1,35 @@
-{ "version": "1.0", "domain": "database", "evals": [] }
+{
+  "version": "1.0",
+  "domain": "database",
+  "skill_name": "database-designer",
+  "evals": [
+    {
+      "id": 1,
+      "name": "users-schema",
+      "prompt": "Design a PostgreSQL schema for the users table with auth fields.",
+      "expected_output": "SQL CREATE TABLE statement with id (UUID), email (unique), hashed_password, created_at, updated_at, and is_active columns.",
+      "files": ["database/schemas/users.sql"]
+    },
+    {
+      "id": 2,
+      "name": "migration-script",
+      "prompt": "Write an Alembic migration to add a role column to the users table.",
+      "expected_output": "Alembic migration file with upgrade() adding a VARCHAR role column with a default of 'user', and downgrade() removing it.",
+      "files": ["database/migrations/"]
+    },
+    {
+      "id": 3,
+      "name": "seed-data",
+      "prompt": "Create a seed script that inserts 5 sample job positions into the positions table.",
+      "expected_output": "Python seed script using SQLAlchemy session to insert typed Position model instances with realistic sample data.",
+      "files": ["database/seeds/positions_seed.py"]
+    },
+    {
+      "id": 4,
+      "name": "index-design",
+      "prompt": "Define indexes for the positions table to optimize search by company and status.",
+      "expected_output": "SQL CREATE INDEX statements covering company_id and status columns, with notes on index type selection.",
+      "files": ["database/indexes/positions_indexes.sql"]
+    }
+  ]
+}

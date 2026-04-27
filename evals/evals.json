@@ -1,1 +1,42 @@
-{ "version": "1.0", "project": "DZIRE_v1", "evals": [] }
+{
+  "version": "1.0",
+  "project": "DZIRE_v1",
+  "skill_name": "project-ai-system",
+  "evals": [
+    {
+      "id": 1,
+      "name": "project-startup-plan",
+      "prompt": "Create a project startup plan for a full-stack app.",
+      "expected_output": "A complete project plan with stack, folders, agents, workflows, and first tasks.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "agent-routing",
+      "prompt": "Route a database schema request to the correct agent and skill.",
+      "expected_output": "Correct routing to database-agent and database-designer skill with output checklist.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "stack-selection",
+      "prompt": "Select the correct stack for a full-stack SaaS web application with auth, dashboard, and REST API.",
+      "expected_output": "Stack recommendation: React + Vite + TypeScript + Tailwind (frontend), FastAPI + Python (backend), PostgreSQL (database), REST (API), JWT (auth).",
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "file-tree-generation",
+      "prompt": "Generate the file tree for a new DZIRE project following the approved folder structure.",
+      "expected_output": "Complete folder tree including instructions/, .github/agents/, agents/, skills/, workflows/, prompts/, evals/, config/, scripts/, docs/, frontend/, backend/, database/, api/, tests/.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "changelog-update",
+      "prompt": "Write a changelog entry for completing Step 4 of the project blueprint.",
+      "expected_output": "Markdown changelog entry with date, task IDs, files added/changed, and notes.",
+      "files": ["docs/changelog.md"]
+    }
+  ]
+}
