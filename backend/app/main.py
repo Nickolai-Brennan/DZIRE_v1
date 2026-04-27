@@ -10,6 +10,15 @@ from .core.database import AsyncSessionLocal
 from .routes.auth import router as auth_router
 from .seed.dev_admin import seed_dev_admin
 
+# Step 5 routers
+from .cms.routes import router as cms_router
+from .admin.routes import router as admin_router
+from .analytics.routes import router as analytics_router
+from .affiliates.routes import router as affiliates_router
+from .sponsors.routes import router as sponsors_router
+from .newsletter.routes import router as newsletter_router
+from .subscriptions.routes import router as subscriptions_router
+
 logger = logging.getLogger(__name__)
 settings = get_settings()
 
@@ -26,6 +35,15 @@ app.add_middleware(
 # Routers
 app.include_router(auth_router)
 app.include_router(admin_auth_router)
+
+# Step 5 routers
+app.include_router(cms_router)
+app.include_router(admin_router)
+app.include_router(analytics_router)
+app.include_router(affiliates_router)
+app.include_router(sponsors_router)
+app.include_router(newsletter_router)
+app.include_router(subscriptions_router)
 
 
 @app.get("/health")
