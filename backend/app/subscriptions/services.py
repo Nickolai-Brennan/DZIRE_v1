@@ -25,6 +25,13 @@ async def create_plan(db: AsyncSession, data: VipPlanCreate) -> VipPlan:
     return plan
 
 
+async def get_plan_by_id(db: AsyncSession, plan_id: UUID) -> Optional[VipPlan]:
+    result = await db.execute(
+        select(VipPlan).where(VipPlan.id == plan_id, VipPlan.status == "active")
+    )
+    return result.scalar_one_or_none()
+
+
 async def subscribe(db: AsyncSession, data: VipSubscribeRequest) -> VipSubscription:
     sub = VipSubscription(**data.model_dump())
     db.add(sub)

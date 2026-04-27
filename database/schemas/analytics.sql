@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS analytics_events (
     country       TEXT,
     region        TEXT,
     city          TEXT,
-    metadata      JSONB,
+    event_metadata JSONB,
     created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 

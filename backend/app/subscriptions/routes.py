@@ -33,10 +33,8 @@ async def subscribe(
     body: VipSubscribeRequest,
     db: AsyncSession = Depends(get_db),
 ) -> VipSubscriptionRead:
-    # Verify plan exists
-    plans = await services.list_plans(db)
-    plan_ids = {str(p.id) for p in plans}
-    if str(body.plan_id) not in plan_ids:
+    plan = await services.get_plan_by_id(db, body.plan_id)
+    if not plan:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="VIP plan not found")
     sub = await services.subscribe(db, body)
     return VipSubscriptionRead.model_validate(sub)

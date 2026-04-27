@@ -12,17 +12,17 @@ from ..subscriptions.models import VipSubscription
 
 async def get_dashboard_stats(db: AsyncSession) -> dict:
     """Aggregate top-level KPI stats for the admin dashboard."""
-    async def _count(model, *filters):
+    async def _count_records(model, *filters):
         result = await db.execute(select(func.count()).select_from(model).where(*filters))
         return result.scalar_one() or 0
 
-    total_posts = await _count(CmsPost)
-    published_posts = await _count(CmsPost, CmsPost.status == "published")
-    draft_posts = await _count(CmsPost, CmsPost.status == "draft")
-    total_events = await _count(AnalyticsEvent)
-    total_page_views = await _count(PageView)
-    newsletter_subs = await _count(NewsletterSubscriber, NewsletterSubscriber.status == "active")
-    vip_subs = await _count(VipSubscription, VipSubscription.status == "active")
+    total_posts = await _count_records(CmsPost)
+    published_posts = await _count_records(CmsPost, CmsPost.status == "published")
+    draft_posts = await _count_records(CmsPost, CmsPost.status == "draft")
+    total_events = await _count_records(AnalyticsEvent)
+    total_page_views = await _count_records(PageView)
+    newsletter_subs = await _count_records(NewsletterSubscriber, NewsletterSubscriber.status == "active")
+    vip_subs = await _count_records(VipSubscription, VipSubscription.status == "active")
 
     return {
         "content": {

@@ -58,12 +58,15 @@ def compute_seo_score(
     else:
         recommendations.append("Add a featured image.")
 
-    grade = (
-        "Excellent" if score >= 90
-        else "Good" if score >= 75
-        else "Needs Work" if score >= 60
-        else "Poor"
-    )
+    grade: str
+    if score >= 90:
+        grade = "Excellent"
+    elif score >= 75:
+        grade = "Good"
+    elif score >= 60:
+        grade = "Needs Work"
+    else:
+        grade = "Poor"
 
     return {
         "seo_score": score,
