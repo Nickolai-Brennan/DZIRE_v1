@@ -19,7 +19,7 @@
 
 ## Project-Wide Rules
 
-1. All new features must follow the layered folder structure defined in `phases/Step 2.md`.
+1. All new features must follow the layered folder structure defined in `phases/step-2.md`.
 2. Stack choices are locked in `config/stack.config.json`. Do not introduce new framework dependencies without updating that file.
 3. JWT auth is the only auth method. Do not implement session-based or OAuth-only flows without user approval.
 4. Every new API endpoint must have a Pydantic schema, a route, and a test.
