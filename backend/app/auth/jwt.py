@@ -24,6 +24,15 @@ def create_refresh_token(subject: str) -> str:
     return jwt.encode(payload, settings.jwt_secret, algorithm=settings.jwt_algorithm)
 
 
+def create_admin_access_token(admin_id: int) -> str:
+    """Create a short-lived JWT for admin API access."""
+    expire = datetime.now(tz=timezone.utc) + timedelta(
+        minutes=settings.access_token_expire_minutes
+    )
+    payload = {"sub": str(admin_id), "exp": expire, "type": "admin_access"}
+    return jwt.encode(payload, settings.jwt_secret, algorithm=settings.jwt_algorithm)
+
+
 def decode_token(token: str) -> dict:
     """Decode and validate a JWT. Raises JWTError on failure."""
     return jwt.decode(token, settings.jwt_secret, algorithms=[settings.jwt_algorithm])
