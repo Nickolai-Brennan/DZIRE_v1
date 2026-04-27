@@ -1,3 +1,24 @@
+## Stack Verification
+
+[![Stack Verify](../../actions/workflows/stack-verify.yml/badge.svg)](../../actions/workflows/stack-verify.yml)
+
+Run a quick local check:
+
+```bash
+bash scripts/verify-stack.sh
+```
+
+Run the full CI-style environment check (requires a populated `.env`):
+
+```bash
+cp config/env.example .env   # fill in values first
+bash scripts/ci-verify-stack.sh
+```
+
+See [`docs/stack-verification.md`](docs/stack-verification.md) for details on required secrets and CI setup.
+
+---
+
 DZIRE FULL BUILD ORDER
 
 Goal:
