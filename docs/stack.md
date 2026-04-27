@@ -9,7 +9,8 @@
 
 | Layer | Choice | Notes |
 |-------|--------|-------|
-| Frontend | React 18 + Vite + TypeScript + Tailwind CSS | Strict TypeScript; Tailwind utility-first |
+| Frontend | React 19 + Vite + TypeScript + Tailwind CSS v4 | Strict TypeScript; Tailwind v4 with `@theme` CSS variables |
+| Design System | `frontend/src/design-system/` | Tokens, components, layouts, patterns — Step 6 |
 | Backend | FastAPI + Python 3.11+ | Async; Pydantic v2 schemas |
 | Database | PostgreSQL (MotherDuck) | Managed Postgres; Alembic migrations |
 | API | REST + GraphQL | REST primary (`/api/v1/`); GraphQL (Strawberry) planned |
@@ -50,6 +51,7 @@ See [`config/env.example`](../config/env.example) for the full list of required 
 | Domain | Folder | Agent |
 |--------|--------|-------|
 | UI | `frontend/` | `frontend-agent` |
+| Design System | `frontend/src/design-system/` | `design-system-agent` |
 | Server | `backend/` | `backend-agent` |
 | Data | `database/` | `database-agent` |
 | Contracts | `api/` | `api-agent` |
