@@ -1,5 +1,82 @@
 # Changelog
 
+## 2026-04-27 — Step 7: Authentication + Users + Roles + Permissions (T-101..T-120)
+
+### Backend — Auth Module (`backend/app/auth/`)
+- Added: `models.py` — `AuditLog` ORM model (actor_id, event, target_id, detail, ip, created_at)
+- Added: `schemas.py` — Pydantic v2 schemas: `RegisterRequest`, `LoginRequest`, `ForgotPasswordRequest`, `ResetPasswordRequest`, `VerifyEmailRequest`, `TokenResponse`, `UserPublicResponse`
+- Added: `security.py` — bcrypt password hashing via `passlib` (`hash_password`, `verify_password`)
+- Added: `tokens.py` — JWT creation with rich claims: `user_id`, `email`, `role`, `is_vip`, `exp`, `type`; plus `decode_token`
+- Added: `services.py` — full auth business logic: `register_user`, `authenticate_user`, `make_token_pair`, `verify_email`, `initiate_password_reset`, `complete_password_reset`, audit logging, email stubs with integration docs
+- Added: `routes.py` — `/api/auth/*` endpoints: register, login, logout, refresh (rotation), forgot-password, reset-password, verify-email; both access + refresh tokens in HttpOnly cookies
+- Changed: `dependencies.py` — added `get_current_user` (cookie + Bearer header) and `get_current_user_optional`; preserved legacy helpers
+
+### Backend — Permissions Module (`backend/app/permissions/`)
+- Added: `roles.py` — `Role` enum: admin, editor, marketing, sponsor_manager, analyst, member, vip, guest
+- Added: `permissions.py` — `Permission` enum (12 permissions) + `ROLE_PERMISSIONS` map + `has_permission` helper
+- Added: `guards.py` — FastAPI dependency guards: `require_admin`, `require_vip`, `require_permission(permission)`
+- Added: `services.py` — `get_role_summary`, `user_can` helpers
+
+### Backend — Users Module (`backend/app/users/`)
+- Added: `models.py` — re-exports `User` from `app.models.user`
+- Added: `schemas.py` — `UserPublicResponse`, `UserUpdateRequest`, `AdminUserUpdateRequest`
+- Added: `services.py` — `get_user_by_id`, `list_users`, `update_user`, `admin_update_user`, `delete_user`
+- Added: `routes.py` — `/api/users/*` endpoints: me (GET), update (PUT), list (admin), get by id (admin), admin-update (admin), delete (admin)
+
+### Backend — User Model (`backend/app/models/user.py`)
+- Changed: Added 11 new columns: `first_name`, `last_name`, `avatar_url`, `status`, `is_verified`, `is_vip`, `vip_plan_id`, `email_verify_token`, `password_reset_token`, `password_reset_expires`, `last_login`
+
+### Backend — App (`backend/app/main.py`)
+- Changed: Registered `auth_v2_router` (`/api/auth/*`) and `users_router` (`/api/users/*`)
+
+### Database — Migration (`backend/alembic/versions/0002_step7_auth.py`)
+- Added: `upgrade()` — extends `users` table with 11 new columns; creates `audit_logs` table with indexes
+- Added: `downgrade()` — reverses all changes cleanly
+
+### Frontend — Auth Pages (`frontend/src/auth/`)
+- Added: `LoginPage.tsx` — cookie-based login with `useAuth` + redirect to `from` location
+- Added: `RegisterPage.tsx` — full registration form using real API
+- Added: `ForgotPasswordPage.tsx` — email input → stub email confirmation
+- Added: `ResetPasswordPage.tsx` — reads `?token=` from URL, sets new password, redirects on success
+
+### Frontend — Auth Components (`frontend/src/components/auth/`)
+- Added: `LoginForm.tsx` — reusable login form with "Forgot password?" link
+- Added: `RegisterForm.tsx` — reusable register form (first/last name, username, email, password)
+- Added: `ProtectedRoute.tsx` — redirects to `/login` if unauthenticated; shows loading state
+- Added: `RoleGate.tsx` — renders children only for matching role (admin always passes); accepts `fallback` slot
+
+### Frontend — Hooks (`frontend/src/hooks/`)
+- Added: `useAuth.ts` — re-exports `useAuth` and `User` type from `AuthContext`
+- Added: `usePermissions.ts` — `hasPermission`, `hasRole`, `isAdmin`, `isVip`; mirrors backend `ROLE_PERMISSIONS`
+
+### Frontend — AuthContext (`frontend/src/context/AuthContext.tsx`)
+- Changed: Replaced mock auth with real API calls; added silent session restore on mount via `/api/auth/refresh`; updated `User` type (username, role, is_vip, first_name, last_name, etc.); `logout` is now async; added `isLoading` state and `refreshUser` method
+
+### Frontend — Auth Service (`frontend/src/services/authService.ts`)
+- Changed: Updated `login`/`logout` paths to `/api/auth/*`; added `register`, `refreshTokens`, `forgotPassword`, `resetPassword`, `verifyEmail`; updated `getMe` to `/api/users/me`; updated `CurrentUser` type
+
+### Frontend — App (`frontend/src/App.tsx`)
+- Changed: Added `/forgot-password` and `/reset-password` routes; wrapped `/profile` in `ProtectedRoute`; added imports for new auth pages and `ProtectedRoute`
+
+### Frontend — Pages (`frontend/src/pages/`)
+- Changed: `SignupPage.tsx` — replaced `displayName` with `username` field
+- Changed: `ProfilePage.tsx` — replaced `user?.displayName` with `user?.first_name`/`user?.username`
+- Changed: `Header.tsx` — replaced `user?.displayName` with `user?.username`
+
+### Documentation
+- Added: `docs/authentication.md` — cookie-based JWT flow, API endpoints, email integration, audit logging
+- Added: `docs/roles-permissions.md` — role and permission tables, RBAC usage examples, how to add new roles/permissions
+- Added: `docs/security.md` — password hashing, token storage, CORS, CSRF, rate limiting, secrets, audit log reference
+- Updated: `docs/backend.md` — full folder structure with Step 7 modules, all API endpoints, env vars table
+- Updated: `docs/frontend.md` — full folder structure with Step 7 additions, auth usage examples, updated route table
+- Updated: `docs/api.md` — added `/api/auth/*` and `/api/users/*` endpoints, user response schema
+- Updated: `docs/database.md` — updated tables list; added full `users` and `audit_logs` column tables; updated migration table
+- Updated: `docs/architecture.md` — updated backend and frontend folder structure diagrams
+- Updated: `docs/checklist.md` — Step 7 items marked complete
+
+### Build Verification
+- `npm run build` — ✅ 0 TypeScript errors, 1819 modules, 448 KB JS bundle
+
 ## 2026-04-27 — Step 6: Design System + Brand Guidelines (T-076..T-100)
 
 ### Design System — Tokens (`frontend/src/design-system/tokens/`)

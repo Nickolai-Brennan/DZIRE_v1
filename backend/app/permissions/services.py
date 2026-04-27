@@ -23,4 +23,4 @@ def user_can(role: str, permission: str) -> bool:
         perm = Permission(permission)
     except ValueError:
         return False
-    return permission in [p.value for p in get_permissions_for_role(role)]
+    return perm in get_permissions_for_role(role)

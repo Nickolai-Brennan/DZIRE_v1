@@ -14,6 +14,8 @@ the JSON body for API clients that prefer the Bearer header pattern.
 """
 from __future__ import annotations
 
+import uuid
+
 from fastapi import APIRouter, Cookie, Depends, HTTPException, Request, Response, status
 from jose import JWTError
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -145,7 +147,6 @@ async def refresh_tokens(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid refresh token."
         )
 
-    import uuid
     user = await services.get_user_by_id(db, uuid.UUID(user_id))
     if not user or user.status != "active":
         raise HTTPException(
