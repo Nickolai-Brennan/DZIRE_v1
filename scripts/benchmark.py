@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """benchmark.py — Run DZIRE_v1 eval benchmarks."""
 
+import glob
 import json
 import os
 
 EVALS_DIR = os.path.join(os.path.dirname(__file__), "..", "evals")
 
 print("==> Running DZIRE_v1 benchmarks...")
-for fname in ["evals.json", "frontend-evals.json", "backend-evals.json", "database-evals.json", "api-evals.json"]:
-    path = os.path.join(EVALS_DIR, fname)
+for path in sorted(glob.glob(os.path.join(EVALS_DIR, "*-evals.json")) + [os.path.join(EVALS_DIR, "evals.json")]):
+    fname = os.path.basename(path)
     if os.path.exists(path):
         with open(path) as f:
             data = json.load(f)

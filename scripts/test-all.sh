@@ -2,19 +2,21 @@
 # test-all.sh — Run the full DZIRE_v1 test suite
 set -e
 
-echo "==> Running all DZIRE_v1 tests..."
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+
+echo "==> Running all DZIRE_v1 tests from: $REPO_ROOT"
 
 echo ""
 echo "--- Backend tests (pytest) ---"
-cd backend && pytest ../tests/backend/ -v && cd ..
+pytest "$REPO_ROOT/tests/backend/" -v
 
 echo ""
 echo "--- API tests (pytest) ---"
-cd backend && pytest ../tests/api/ -v && cd ..
+pytest "$REPO_ROOT/tests/api/" -v
 
 echo ""
 echo "--- Frontend tests (vitest) ---"
-cd frontend && npm run test && cd ..
+cd "$REPO_ROOT/frontend" && npm run test
 
 echo ""
 echo "==> All tests complete."
