@@ -1,1 +1,35 @@
-{ "version": "1.0", "domain": "api", "evals": [] }
+{
+  "version": "1.0",
+  "domain": "api",
+  "skill_name": "api-designer",
+  "evals": [
+    {
+      "id": 1,
+      "name": "rest-route-map",
+      "prompt": "Document the REST API routes for positions: list, create, retrieve, update, delete.",
+      "expected_output": "Markdown table with method, path, auth requirement, request body, and response shape for all 5 CRUD routes.",
+      "files": ["api/routes.md"]
+    },
+    {
+      "id": 2,
+      "name": "request-response-contract",
+      "prompt": "Define the request/response contract for POST /auth/login.",
+      "expected_output": "Typed contract showing request body (email, password), success response (access_token, token_type), and error responses (401, 422).",
+      "files": ["api/contracts.md"]
+    },
+    {
+      "id": 3,
+      "name": "pagination-pattern",
+      "prompt": "Define a reusable pagination pattern for all list endpoints in the API.",
+      "expected_output": "Standard query params (page, limit), response envelope with data array, total, page, and limit fields, and example for GET /positions.",
+      "files": ["api/contracts.md"]
+    },
+    {
+      "id": 4,
+      "name": "error-response-standard",
+      "prompt": "Define a standard error response format for the REST API.",
+      "expected_output": "JSON error envelope with status, code, message, and optional detail field, with examples for 400, 401, 403, 404, and 500.",
+      "files": ["api/contracts.md"]
+    }
+  ]
+}

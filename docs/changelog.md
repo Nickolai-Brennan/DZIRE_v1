@@ -77,5 +77,13 @@
 - Added: `frontend/src/services/authService.ts`
 - Notes: Frontend API client layer scaffolded
 
+## 2026-04-27 — Step 4 Completion (T-031–T-045)
+- Expanded: `evals/evals.json` — added 5 realistic project-ai-system eval entries
+- Expanded: `evals/frontend-evals.json` — added 4 realistic frontend-builder eval entries
+- Expanded: `evals/backend-evals.json` — added 4 realistic backend-builder eval entries
+- Expanded: `evals/database-evals.json` — added 4 realistic database-designer eval entries
+- Expanded: `evals/api-evals.json` — added 4 realistic api-designer eval entries
+- Notes: All Step 4 required files verified present; eval stubs replaced with full entries per `phases/Step 4.md` template. All 11 `.github/agents/` sub-agents, 4 `agents/` runtime agents, 9 `skills/` SKILL.md files, and `tests/README.md` confirmed in place.
+
 ## Unreleased
 - Initial project structure planned.
