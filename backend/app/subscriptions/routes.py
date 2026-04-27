@@ -1,13 +1,15 @@
 """backend/app/subscriptions/routes.py — VIP subscription API routes."""
+
 from __future__ import annotations
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from ..core.database import get_db
 from ..admin.permissions import require_role_any_admin
+from ..core.database import get_db
 from . import services
-from .schemas import VipPlanRead, VipPlanCreate, VipSubscribeRequest, VipSubscriptionRead
+from .schemas import (VipPlanCreate, VipPlanRead, VipSubscribeRequest,
+                      VipSubscriptionRead)
 
 router = APIRouter(prefix="/api/vip", tags=["vip"])
 
@@ -35,6 +37,8 @@ async def subscribe(
 ) -> VipSubscriptionRead:
     plan = await services.get_plan_by_id(db, body.plan_id)
     if not plan:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="VIP plan not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="VIP plan not found"
+        )
     sub = await services.subscribe(db, body)
     return VipSubscriptionRead.model_validate(sub)

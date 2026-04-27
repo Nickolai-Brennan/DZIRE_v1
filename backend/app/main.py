@@ -1,26 +1,25 @@
 """DZIRE_v1 — FastAPI application entry point."""
+
 import logging
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .api.routes.admin_auth import router as admin_auth_router
-from .core.config import get_settings
-from .core.database import AsyncSessionLocal
-from .routes.auth import router as auth_router
-from .seed.dev_admin import seed_dev_admin
-
-# Step 5 routers
-from .cms.routes import router as cms_router
 from .admin.routes import router as admin_router
-from .analytics.routes import router as analytics_router
 from .affiliates.routes import router as affiliates_router
-from .sponsors.routes import router as sponsors_router
-from .newsletter.routes import router as newsletter_router
-from .subscriptions.routes import router as subscriptions_router
-
+from .analytics.routes import router as analytics_router
+from .api.routes.admin_auth import router as admin_auth_router
 # Step 7 routers
 from .auth.routes import router as auth_v2_router
+# Step 5 routers
+from .cms.routes import router as cms_router
+from .core.config import get_settings
+from .core.database import AsyncSessionLocal
+from .newsletter.routes import router as newsletter_router
+from .routes.auth import router as auth_router
+from .seed.dev_admin import seed_dev_admin
+from .sponsors.routes import router as sponsors_router
+from .subscriptions.routes import router as subscriptions_router
 from .users.routes import router as users_router
 
 logger = logging.getLogger(__name__)
@@ -67,4 +66,8 @@ async def on_startup() -> None:
             async with AsyncSessionLocal() as db:
                 await seed_dev_admin(db)
         except Exception as exc:  # noqa: BLE001
-            logger.warning("Dev seed skipped (DB may not be ready): %s: %s", type(exc).__name__, exc)
+            logger.warning(
+                "Dev seed skipped (DB may not be ready): %s: %s",
+                type(exc).__name__,
+                exc,
+            )

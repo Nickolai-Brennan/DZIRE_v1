@@ -1,11 +1,12 @@
 """backend/app/newsletter/services.py — Newsletter business logic."""
+
 from __future__ import annotations
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from .models import NewsletterSubscriber, NewsletterCampaign
-from .schemas import SubscribeRequest, CampaignCreate
+from .models import NewsletterCampaign, NewsletterSubscriber
+from .schemas import CampaignCreate, SubscribeRequest
 
 
 async def subscribe(db: AsyncSession, data: SubscribeRequest) -> NewsletterSubscriber:

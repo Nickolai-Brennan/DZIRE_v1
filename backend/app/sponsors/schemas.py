@@ -1,5 +1,7 @@
 """backend/app/sponsors/schemas.py — Pydantic v2 schemas for sponsors."""
+
 from __future__ import annotations
+
 from datetime import date, datetime
 from typing import Optional
 from uuid import UUID

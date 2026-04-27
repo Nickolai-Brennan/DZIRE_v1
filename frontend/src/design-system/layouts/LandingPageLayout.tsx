@@ -4,9 +4,9 @@
  * Minimal, full-width layout for marketing / landing pages.
  * No container constraints — each section is responsible for its own width.
  */
-import React from 'react';
-import { Header } from '../../components/layout/Header';
-import { Footer } from '../../components/layout/Footer';
+import React from "react";
+import { Header } from "../../components/layout/Header";
+import { Footer } from "../../components/layout/Footer";
 
 export interface LandingPageLayoutProps {
   children: React.ReactNode;

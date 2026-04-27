@@ -3,18 +3,18 @@ import os
 import sys
 from logging.config import fileConfig
 
+from alembic import context
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
-
-from alembic import context
 
 # Make sure the app package is importable
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 # Import all models so Alembic autogenerate can detect them
 from app.core.database import Base  # noqa: E402
-from app.models import admin_login_attempt, admin_role, admin_user, user  # noqa: E402, F401
+from app.models import (admin_login_attempt, admin_role,  # noqa: E402, F401
+                        admin_user, user)
 
 # Alembic Config object
 config = context.config

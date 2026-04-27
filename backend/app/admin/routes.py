@@ -1,22 +1,20 @@
 """backend/app/admin/routes.py — Admin dashboard API routes."""
+
 from __future__ import annotations
+
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from ..cms import services as cms_services
+from ..cms.schemas import PostCreate, PostRead, PostUpdate
 from ..core.database import get_db
 from ..models.admin_user import AdminUser
-from .permissions import (
-    require_role_any_admin,
-    require_role_content,
-    require_role_marketing,
-    require_role_sponsor,
-    require_role_analyst,
-)
 from . import services
-from ..cms import services as cms_services
-from ..cms.schemas import PostRead, PostCreate, PostUpdate
+from .permissions import (require_role_analyst, require_role_any_admin,
+                          require_role_content, require_role_marketing,
+                          require_role_sponsor)
 
 router = APIRouter(prefix="/api/admin", tags=["admin"])
 
@@ -58,7 +56,9 @@ async def content_update(
 ) -> PostRead:
     post = await cms_services.update_post(db, post_id, body)
     if not post:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Post not found"
+        )
     return PostRead.model_validate(post)
 
 
@@ -70,7 +70,9 @@ async def content_delete(
 ) -> None:
     deleted = await cms_services.delete_post(db, post_id)
     if not deleted:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Post not found"
+        )
 
 
 @router.get("/seo")

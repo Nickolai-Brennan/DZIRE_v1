@@ -7,6 +7,7 @@ Routes:
   GET    /api/users/{id}          — get user by ID (admin only)
   DELETE /api/users/delete/{id}   — delete user (admin only)
 """
+
 from __future__ import annotations
 
 import uuid
@@ -19,7 +20,8 @@ from ..core.database import get_db
 from ..models.user import User
 from ..permissions.roles import Role
 from . import services
-from .schemas import AdminUserUpdateRequest, UserPublicResponse, UserUpdateRequest
+from .schemas import (AdminUserUpdateRequest, UserPublicResponse,
+                      UserUpdateRequest)
 
 router = APIRouter(prefix="/api/users", tags=["users"])
 
@@ -34,6 +36,7 @@ def _require_admin(current_user: User) -> None:
 # ---------------------------------------------------------------------------
 # Current user
 # ---------------------------------------------------------------------------
+
 
 @router.get("/me", response_model=UserPublicResponse)
 async def me(current_user: User = Depends(get_current_user)) -> UserPublicResponse:
@@ -61,6 +64,7 @@ async def update_me(
 # Admin endpoints
 # ---------------------------------------------------------------------------
 
+
 @router.get("/list", response_model=list[UserPublicResponse])
 async def list_users(
     offset: int = 0,
@@ -82,7 +86,9 @@ async def get_user(
     _require_admin(current_user)
     user = await services.get_user_by_id(db, user_id)
     if not user:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found.")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="User not found."
+        )
     return UserPublicResponse.model_validate(user)
 
 
@@ -96,7 +102,9 @@ async def admin_update(
     _require_admin(current_user)
     user = await services.get_user_by_id(db, user_id)
     if not user:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found.")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="User not found."
+        )
     updated = await services.admin_update_user(
         db,
         user,
@@ -117,5 +125,7 @@ async def delete_user(
     _require_admin(current_user)
     user = await services.get_user_by_id(db, user_id)
     if not user:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found.")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="User not found."
+        )
     await services.delete_user(db, user)

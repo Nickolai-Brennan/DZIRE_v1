@@ -3,11 +3,15 @@
  * Admin dashboard — placeholder page protected by auth guard.
  * Redirects to /admin/login if no valid token is present.
  */
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { LayoutDashboard, LogOut } from 'lucide-react';
-import { adminMe, adminLogout } from '../../lib/api/admin';
-import { getAdminToken, clearAdminToken, isAdminAuthenticated } from '../../lib/auth/token';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { LayoutDashboard, LogOut } from "lucide-react";
+import { adminMe, adminLogout } from "../../lib/api/admin";
+import {
+  getAdminToken,
+  clearAdminToken,
+  isAdminAuthenticated,
+} from "../../lib/auth/token";
 
 export const AdminDashboardPage: React.FC = () => {
   const navigate = useNavigate();
@@ -15,19 +19,19 @@ export const AdminDashboardPage: React.FC = () => {
 
   useEffect(() => {
     if (!isAdminAuthenticated()) {
-      navigate('/admin/login', { replace: true });
+      navigate("/admin/login", { replace: true });
       return;
     }
     const token = getAdminToken();
     if (!token) {
-      navigate('/admin/login', { replace: true });
+      navigate("/admin/login", { replace: true });
       return;
     }
     adminMe(token)
       .then((user) => setUsername(user.username))
       .catch(() => {
         clearAdminToken();
-        navigate('/admin/login', { replace: true });
+        navigate("/admin/login", { replace: true });
       });
   }, [navigate]);
 
@@ -41,7 +45,7 @@ export const AdminDashboardPage: React.FC = () => {
       }
     }
     clearAdminToken();
-    navigate('/admin/login', { replace: true });
+    navigate("/admin/login", { replace: true });
   };
 
   return (
@@ -55,7 +59,8 @@ export const AdminDashboardPage: React.FC = () => {
         {username && (
           <div className="flex items-center gap-4">
             <span className="text-sm text-textMuted">
-              Signed in as <strong className="text-textPrimary">{username}</strong>
+              Signed in as{" "}
+              <strong className="text-textPrimary">{username}</strong>
             </span>
             <button
               onClick={handleLogout}
@@ -74,7 +79,8 @@ export const AdminDashboardPage: React.FC = () => {
           Dashboard
         </h1>
         <p className="text-textMuted">
-          Admin dashboard — coming soon. More sections will be added in Phase 3+.
+          Admin dashboard — coming soon. More sections will be added in Phase
+          3+.
         </p>
       </main>
     </div>

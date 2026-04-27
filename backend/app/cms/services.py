@@ -1,18 +1,23 @@
 """backend/app/cms/services.py — Business logic for CMS."""
+
 from __future__ import annotations
+
 from typing import Optional
 from uuid import UUID
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from .models import CmsPost, CmsCategory, CmsTag, CmsMedia, CmsSocialEmbed
-from .schemas import PostCreate, PostUpdate, CategoryCreate, TagCreate, SocialEmbedCreate
-
+from .models import CmsCategory, CmsMedia, CmsPost, CmsSocialEmbed, CmsTag
+from .schemas import (CategoryCreate, PostCreate, PostUpdate,
+                      SocialEmbedCreate, TagCreate)
 
 # ── Posts ────────────────────────────────────────────────────────────────────
 
-async def list_published_posts(db: AsyncSession, skip: int = 0, limit: int = 20) -> list[CmsPost]:
+
+async def list_published_posts(
+    db: AsyncSession, skip: int = 0, limit: int = 20
+) -> list[CmsPost]:
     result = await db.execute(
         select(CmsPost)
         .where(CmsPost.status == "published", CmsPost.visibility == "public")
@@ -28,7 +33,9 @@ async def get_post_by_slug(db: AsyncSession, slug: str) -> Optional[CmsPost]:
     return result.scalar_one_or_none()
 
 
-async def list_all_posts(db: AsyncSession, skip: int = 0, limit: int = 50) -> list[CmsPost]:
+async def list_all_posts(
+    db: AsyncSession, skip: int = 0, limit: int = 50
+) -> list[CmsPost]:
     result = await db.execute(
         select(CmsPost).order_by(CmsPost.created_at.desc()).offset(skip).limit(limit)
     )
@@ -43,7 +50,9 @@ async def create_post(db: AsyncSession, data: PostCreate) -> CmsPost:
     return post
 
 
-async def update_post(db: AsyncSession, post_id: UUID, data: PostUpdate) -> Optional[CmsPost]:
+async def update_post(
+    db: AsyncSession, post_id: UUID, data: PostUpdate
+) -> Optional[CmsPost]:
     result = await db.execute(select(CmsPost).where(CmsPost.id == post_id))
     post = result.scalar_one_or_none()
     if not post:
@@ -67,6 +76,7 @@ async def delete_post(db: AsyncSession, post_id: UUID) -> bool:
 
 # ── Categories ───────────────────────────────────────────────────────────────
 
+
 async def list_categories(db: AsyncSession) -> list[CmsCategory]:
     result = await db.execute(select(CmsCategory).order_by(CmsCategory.name))
     return list(result.scalars().all())
@@ -81,6 +91,7 @@ async def create_category(db: AsyncSession, data: CategoryCreate) -> CmsCategory
 
 
 # ── Tags ─────────────────────────────────────────────────────────────────────
+
 
 async def list_tags(db: AsyncSession) -> list[CmsTag]:
     result = await db.execute(select(CmsTag).order_by(CmsTag.name))
@@ -97,7 +108,10 @@ async def create_tag(db: AsyncSession, data: TagCreate) -> CmsTag:
 
 # ── Media ─────────────────────────────────────────────────────────────────────
 
-async def list_media(db: AsyncSession, skip: int = 0, limit: int = 50) -> list[CmsMedia]:
+
+async def list_media(
+    db: AsyncSession, skip: int = 0, limit: int = 50
+) -> list[CmsMedia]:
     result = await db.execute(
         select(CmsMedia).order_by(CmsMedia.created_at.desc()).offset(skip).limit(limit)
     )
@@ -106,12 +120,17 @@ async def list_media(db: AsyncSession, skip: int = 0, limit: int = 50) -> list[C
 
 # ── Social Embeds ─────────────────────────────────────────────────────────────
 
+
 async def list_social_embeds(db: AsyncSession) -> list[CmsSocialEmbed]:
-    result = await db.execute(select(CmsSocialEmbed).order_by(CmsSocialEmbed.created_at.desc()))
+    result = await db.execute(
+        select(CmsSocialEmbed).order_by(CmsSocialEmbed.created_at.desc())
+    )
     return list(result.scalars().all())
 
 
-async def create_social_embed(db: AsyncSession, data: SocialEmbedCreate) -> CmsSocialEmbed:
+async def create_social_embed(
+    db: AsyncSession, data: SocialEmbedCreate
+) -> CmsSocialEmbed:
     embed = CmsSocialEmbed(**data.model_dump())
     db.add(embed)
     await db.commit()

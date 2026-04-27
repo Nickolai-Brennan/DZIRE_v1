@@ -2,8 +2,8 @@
  * frontend/src/pages/BlogPostPage.tsx
  * Public blog post detail page — fetches post by slug.
  */
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 
 interface Post {
   id: string;
@@ -44,13 +44,19 @@ export const BlogPostPage: React.FC = () => {
   }, [slug]);
 
   if (loading) {
-    return <div className="max-w-3xl mx-auto px-4 py-12 text-textMuted">Loading…</div>;
+    return (
+      <div className="max-w-3xl mx-auto px-4 py-12 text-textMuted">
+        Loading…
+      </div>
+    );
   }
 
   if (notFound || !post) {
     return (
       <div className="max-w-3xl mx-auto px-4 py-12 text-center">
-        <h1 className="text-2xl font-bold text-textPrimary mb-4">Post Not Found</h1>
+        <h1 className="text-2xl font-bold text-textPrimary mb-4">
+          Post Not Found
+        </h1>
         <Link to="/blog" className="text-primary hover:underline">
           ← Back to Blog
         </Link>
@@ -60,7 +66,10 @@ export const BlogPostPage: React.FC = () => {
 
   return (
     <article className="max-w-3xl mx-auto px-4 py-12">
-      <Link to="/blog" className="text-sm text-textMuted hover:text-primary mb-6 inline-block">
+      <Link
+        to="/blog"
+        className="text-sm text-textMuted hover:text-primary mb-6 inline-block"
+      >
         ← Back to Blog
       </Link>
 
@@ -73,12 +82,16 @@ export const BlogPostPage: React.FC = () => {
       )}
 
       <header className="mb-8">
-        <h1 className="text-3xl font-bold text-textPrimary mb-3">{post.title}</h1>
+        <h1 className="text-3xl font-bold text-textPrimary mb-3">
+          {post.title}
+        </h1>
         {post.subtitle && (
           <p className="text-lg text-textMuted mb-3">{post.subtitle}</p>
         )}
         <div className="flex items-center gap-4 text-xs text-textMuted">
-          <span className="capitalize">{post.content_type.replace('_', ' ')}</span>
+          <span className="capitalize">
+            {post.content_type.replace("_", " ")}
+          </span>
           {post.published_at && (
             <span>{new Date(post.published_at).toLocaleDateString()}</span>
           )}

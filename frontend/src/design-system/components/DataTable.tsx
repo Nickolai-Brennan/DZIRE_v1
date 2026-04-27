@@ -4,7 +4,7 @@
  * Lightweight, accessible HTML table wrapper with sorting indicators,
  * striped rows option, and an empty-state slot.
  */
-import React from 'react';
+import React from "react";
 
 export interface ColumnDef<T> {
   /** Unique key that maps to a property of T, or a custom id */
@@ -14,7 +14,7 @@ export interface ColumnDef<T> {
   /** Render a cell given the row data */
   render?: (row: T, index: number) => React.ReactNode;
   /** Right-align this column (useful for numeric data) */
-  align?: 'left' | 'center' | 'right';
+  align?: "left" | "center" | "right";
   /** Optional className for the td cells */
   cellClassName?: string;
 }
@@ -33,7 +33,11 @@ export interface DataTableProps<T> {
   caption?: string;
 }
 
-const alignClass = { left: 'text-left', center: 'text-center', right: 'text-right' };
+const alignClass = {
+  left: "text-left",
+  center: "text-center",
+  right: "text-right",
+};
 
 export function DataTable<T>({
   columns,
@@ -41,15 +45,15 @@ export function DataTable<T>({
   rowKey,
   striped = false,
   emptyState,
-  className = '',
+  className = "",
   caption,
 }: DataTableProps<T>) {
   return (
-    <div className={`w-full overflow-x-auto rounded-xl border border-white/8 ${className}`}>
+    <div
+      className={`w-full overflow-x-auto rounded-xl border border-white/8 ${className}`}
+    >
       <table className="w-full text-sm border-collapse">
-        {caption && (
-          <caption className="sr-only">{caption}</caption>
-        )}
+        {caption && <caption className="sr-only">{caption}</caption>}
         <thead>
           <tr className="border-b border-white/8 bg-surfaceAlt">
             {columns.map((col) => (
@@ -57,9 +61,9 @@ export function DataTable<T>({
                 key={col.key}
                 scope="col"
                 className={[
-                  'px-4 py-3 text-xs font-semibold text-textMuted uppercase tracking-wider',
-                  alignClass[col.align ?? 'left'],
-                ].join(' ')}
+                  "px-4 py-3 text-xs font-semibold text-textMuted uppercase tracking-wider",
+                  alignClass[col.align ?? "left"],
+                ].join(" ")}
               >
                 {col.header}
               </th>
@@ -73,7 +77,7 @@ export function DataTable<T>({
                 colSpan={columns.length}
                 className="py-10 text-center text-textMuted"
               >
-                {emptyState ?? 'No data available.'}
+                {emptyState ?? "No data available."}
               </td>
             </tr>
           ) : (
@@ -81,23 +85,25 @@ export function DataTable<T>({
               <tr
                 key={rowKey(row, rowIdx)}
                 className={[
-                  'border-b border-white/5 transition-colors',
-                  striped && rowIdx % 2 === 1 ? 'bg-white/[0.02]' : 'bg-transparent',
-                  'hover:bg-white/[0.04]',
-                ].join(' ')}
+                  "border-b border-white/5 transition-colors",
+                  striped && rowIdx % 2 === 1
+                    ? "bg-white/[0.02]"
+                    : "bg-transparent",
+                  "hover:bg-white/[0.04]",
+                ].join(" ")}
               >
                 {columns.map((col) => (
                   <td
                     key={col.key}
                     className={[
-                      'px-4 py-3 text-textPrimary',
-                      alignClass[col.align ?? 'left'],
-                      col.cellClassName ?? '',
-                    ].join(' ')}
+                      "px-4 py-3 text-textPrimary",
+                      alignClass[col.align ?? "left"],
+                      col.cellClassName ?? "",
+                    ].join(" ")}
                   >
                     {col.render
                       ? col.render(row, rowIdx)
-                      : String((row as Record<string, unknown>)[col.key] ?? '')}
+                      : String((row as Record<string, unknown>)[col.key] ?? "")}
                   </td>
                 ))}
               </tr>

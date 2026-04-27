@@ -2,8 +2,8 @@
  * frontend/src/pages/BlogIndexPage.tsx
  * Public blog index — lists published CMS posts.
  */
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 interface Post {
   id: string;
@@ -20,7 +20,7 @@ export const BlogIndexPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/posts?limit=20')
+    fetch("/api/posts?limit=20")
       .then((r) => r.json())
       .then((data: Post[]) => setPosts(data))
       .catch(() => setPosts([]))
@@ -56,7 +56,9 @@ export const BlogIndexPage: React.FC = () => {
               <p className="text-textMuted text-sm mb-3">{post.excerpt}</p>
             )}
             <div className="flex items-center gap-4 text-xs text-textMuted">
-              <span className="capitalize">{post.content_type.replace('_', ' ')}</span>
+              <span className="capitalize">
+                {post.content_type.replace("_", " ")}
+              </span>
               {post.published_at && (
                 <span>{new Date(post.published_at).toLocaleDateString()}</span>
               )}

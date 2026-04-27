@@ -1,5 +1,5 @@
-import React from 'react';
-import { Search } from 'lucide-react';
+import React from "react";
+import { Search } from "lucide-react";
 
 interface SearchBarProps {
   placeholder?: string;
@@ -7,10 +7,10 @@ interface SearchBarProps {
   onChange: (value: string) => void;
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({ 
-  placeholder = 'Search...', 
-  value, 
-  onChange 
+export const SearchBar: React.FC<SearchBarProps> = ({
+  placeholder = "Search...",
+  value,
+  onChange,
 }) => {
   return (
     <div className="relative w-full">

@@ -1,5 +1,6 @@
 """backend/app/api/deps.py — Admin auth dependency."""
-from fastapi import Depends, HTTPException, Header, status
+
+from fastapi import Depends, Header, HTTPException, status
 from jose import JWTError
 from sqlalchemy.ext.asyncio import AsyncSession
 

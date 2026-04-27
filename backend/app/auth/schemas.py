@@ -1,4 +1,5 @@
 """backend/app/auth/schemas.py — Pydantic v2 schemas for auth endpoints."""
+
 from __future__ import annotations
 
 import uuid
@@ -6,10 +7,10 @@ from datetime import datetime
 
 from pydantic import BaseModel, EmailStr, Field
 
-
 # ---------------------------------------------------------------------------
 # Request schemas
 # ---------------------------------------------------------------------------
+
 
 class RegisterRequest(BaseModel):
     email: EmailStr
@@ -41,14 +42,17 @@ class VerifyEmailRequest(BaseModel):
 # Response schemas
 # ---------------------------------------------------------------------------
 
+
 class TokenResponse(BaseModel):
     """Returned after successful login/refresh (access token in body, refresh in cookie)."""
+
     access_token: str
     token_type: str = "bearer"
 
 
 class UserPublicResponse(BaseModel):
     """Publicly safe user data included in auth responses."""
+
     id: uuid.UUID
     email: str
     username: str

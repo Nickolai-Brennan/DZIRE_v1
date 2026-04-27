@@ -2,9 +2,9 @@
  * frontend/src/components/auth/ProtectedRoute.tsx
  * Redirects unauthenticated users to /login.
  */
-import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import React from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ interface ProtectedRouteProps {
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
-  redirectTo = '/login',
+  redirectTo = "/login",
 }) => {
   const { isAuthenticated, isLoading } = useAuth();
   const location = useLocation();

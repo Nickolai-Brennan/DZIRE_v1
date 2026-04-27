@@ -1,4 +1,5 @@
 """backend/app/users/services.py — User management business logic."""
+
 from __future__ import annotations
 
 import uuid
@@ -14,9 +15,7 @@ async def get_user_by_id(db: AsyncSession, user_id: str | uuid.UUID) -> User | N
     return result.scalar_one_or_none()
 
 
-async def list_users(
-    db: AsyncSession, offset: int = 0, limit: int = 50
-) -> list[User]:
+async def list_users(db: AsyncSession, offset: int = 0, limit: int = 50) -> list[User]:
     result = await db.execute(select(User).offset(offset).limit(limit))
     return list(result.scalars().all())
 

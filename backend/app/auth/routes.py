@@ -12,25 +12,23 @@ Routes:
 Tokens are stored in HttpOnly cookies. The access_token is also returned in
 the JSON body for API clients that prefer the Bearer header pattern.
 """
+
 from __future__ import annotations
 
 import uuid
 
-from fastapi import APIRouter, Cookie, Depends, HTTPException, Request, Response, status
+from fastapi import (APIRouter, Cookie, Depends, HTTPException, Request,
+                     Response, status)
 from jose import JWTError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..auth import services
-from ..auth.schemas import (
-    ForgotPasswordRequest,
-    LoginRequest,
-    RegisterRequest,
-    ResetPasswordRequest,
-    TokenResponse,
-    UserPublicResponse,
-    VerifyEmailRequest,
-)
-from ..auth.tokens import create_access_token, create_refresh_token, decode_token
+from ..auth.schemas import (ForgotPasswordRequest, LoginRequest,
+                            RegisterRequest, ResetPasswordRequest,
+                            TokenResponse, UserPublicResponse,
+                            VerifyEmailRequest)
+from ..auth.tokens import (create_access_token, create_refresh_token,
+                           decode_token)
 from ..core.config import get_settings
 from ..core.database import get_db
 
@@ -66,6 +64,7 @@ def _set_tokens(response: Response, access_token: str, refresh_token: str) -> No
 # Register
 # ---------------------------------------------------------------------------
 
+
 @router.post("/register", response_model=UserPublicResponse, status_code=201)
 async def register(
     body: RegisterRequest,
@@ -92,6 +91,7 @@ async def register(
 # Login
 # ---------------------------------------------------------------------------
 
+
 @router.post("/login", response_model=TokenResponse)
 async def login(
     body: LoginRequest,
@@ -115,6 +115,7 @@ async def login(
 # Logout
 # ---------------------------------------------------------------------------
 
+
 @router.post("/logout", status_code=status.HTTP_204_NO_CONTENT)
 async def logout(response: Response) -> None:
     response.delete_cookie(_ACCESS_COOKIE)
@@ -124,6 +125,7 @@ async def logout(response: Response) -> None:
 # ---------------------------------------------------------------------------
 # Refresh
 # ---------------------------------------------------------------------------
+
 
 @router.post("/refresh", response_model=TokenResponse)
 async def refresh_tokens(
@@ -150,7 +152,8 @@ async def refresh_tokens(
     user = await services.get_user_by_id(db, uuid.UUID(user_id))
     if not user or user.status != "active":
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found or inactive."
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="User not found or inactive.",
         )
     access, new_refresh = services.make_token_pair(user)
     _set_tokens(response, access, new_refresh)
@@ -160,6 +163,7 @@ async def refresh_tokens(
 # ---------------------------------------------------------------------------
 # Forgot password
 # ---------------------------------------------------------------------------
+
 
 @router.post("/forgot-password", status_code=status.HTTP_204_NO_CONTENT)
 async def forgot_password(
@@ -172,6 +176,7 @@ async def forgot_password(
 # ---------------------------------------------------------------------------
 # Reset password
 # ---------------------------------------------------------------------------
+
 
 @router.post("/reset-password", status_code=status.HTTP_204_NO_CONTENT)
 async def reset_password(
@@ -187,6 +192,7 @@ async def reset_password(
 # ---------------------------------------------------------------------------
 # Verify email
 # ---------------------------------------------------------------------------
+
 
 @router.post("/verify-email", status_code=status.HTTP_204_NO_CONTENT)
 async def verify_email(

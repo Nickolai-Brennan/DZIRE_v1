@@ -5,6 +5,7 @@ Provides:
   require_vip(user)          — user must have is_vip = True
   require_permission(perm)   — user must have the given permission
 """
+
 from __future__ import annotations
 
 from fastapi import Depends, HTTPException, status
@@ -48,8 +49,10 @@ def require_permission(permission: Permission):
             _=Depends(require_permission(Permission.create_post)),
         ): ...
     """
+
     def _guard(user=Depends()) -> None:  # type: ignore[assignment]
         if not has_permission(user.role, permission):
             raise _forbidden(f"Permission '{permission}' required.")
         return user
+
     return _guard

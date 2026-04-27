@@ -1,4 +1,5 @@
 """backend/app/analytics/routes.py — Analytics tracking API routes."""
+
 from __future__ import annotations
 
 from fastapi import APIRouter, Depends
@@ -6,11 +7,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..core.database import get_db
 from . import services
-from .schemas import (
-    AnalyticsEventCreate, AnalyticsEventRead,
-    PageViewCreate, PageViewRead,
-    ClickEventCreate,
-)
+from .schemas import (AnalyticsEventCreate, AnalyticsEventRead,
+                      ClickEventCreate, PageViewCreate, PageViewRead)
 
 router = APIRouter(prefix="/api/analytics", tags=["analytics"])
 

@@ -1,4 +1,5 @@
 """backend/app/auth/security.py — Password hashing utilities using bcrypt."""
+
 from passlib.context import CryptContext
 
 _pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

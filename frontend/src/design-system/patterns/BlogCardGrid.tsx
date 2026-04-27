@@ -3,9 +3,9 @@
  *
  * Responsive 3-column grid of article cards.
  */
-import React from 'react';
-import { Card, CardBody } from '../components/Card';
-import { Badge } from '../components/Badge';
+import React from "react";
+import { Card, CardBody } from "../components/Card";
+import { Badge } from "../components/Badge";
 
 export interface BlogPost {
   id: string | number;
@@ -33,9 +33,9 @@ export const BlogCardGrid: React.FC<BlogCardGridProps> = ({
   onCardClick,
 }) => {
   const colClass = {
-    2: 'grid-cols-1 sm:grid-cols-2',
-    3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
-    4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+    2: "grid-cols-1 sm:grid-cols-2",
+    3: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+    4: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
   }[columns];
 
   if (posts.length === 0) {
@@ -47,7 +47,11 @@ export const BlogCardGrid: React.FC<BlogCardGridProps> = ({
   }
 
   return (
-    <div className={`grid ${colClass} gap-6`} role="list" aria-label="Blog posts">
+    <div
+      className={`grid ${colClass} gap-6`}
+      role="list"
+      aria-label="Blog posts"
+    >
       {posts.map((post) => (
         <Card
           key={post.id}
@@ -75,15 +79,28 @@ export const BlogCardGrid: React.FC<BlogCardGridProps> = ({
           <CardBody className="flex flex-col gap-2">
             {/* Badges row */}
             <div className="flex items-center gap-2 flex-wrap">
-              <Badge variant="category" size="sm">{post.category}</Badge>
-              {post.isVip && <Badge variant="vip" size="sm">VIP</Badge>}
-              {post.isSponsored && <Badge variant="sponsor" size="sm">Sponsored</Badge>}
+              <Badge variant="category" size="sm">
+                {post.category}
+              </Badge>
+              {post.isVip && (
+                <Badge variant="vip" size="sm">
+                  VIP
+                </Badge>
+              )}
+              {post.isSponsored && (
+                <Badge variant="sponsor" size="sm">
+                  Sponsored
+                </Badge>
+              )}
             </div>
 
             {/* Title */}
             <h3 className="text-base font-semibold text-textPrimary line-clamp-2 leading-snug">
               {post.href ? (
-                <a href={post.href} className="hover:text-accent transition-colors">
+                <a
+                  href={post.href}
+                  className="hover:text-accent transition-colors"
+                >
                   {post.title}
                 </a>
               ) : (
@@ -92,7 +109,9 @@ export const BlogCardGrid: React.FC<BlogCardGridProps> = ({
             </h3>
 
             {/* Excerpt */}
-            <p className="text-sm text-textMuted line-clamp-2">{post.excerpt}</p>
+            <p className="text-sm text-textMuted line-clamp-2">
+              {post.excerpt}
+            </p>
 
             {/* Meta */}
             <div className="flex items-center justify-between text-xs text-textSubtle mt-1">

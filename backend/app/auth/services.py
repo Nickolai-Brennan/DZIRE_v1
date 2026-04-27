@@ -3,6 +3,7 @@
 Handles: registration, password verification, token generation,
 email verification stubs, password reset stubs, and audit logging.
 """
+
 from __future__ import annotations
 
 import logging
@@ -26,6 +27,7 @@ logger = logging.getLogger(__name__)
 # User lookup helpers
 # ---------------------------------------------------------------------------
 
+
 async def get_user_by_email(db: AsyncSession, email: str) -> User | None:
     result = await db.execute(select(User).where(User.email == email))
     return result.scalar_one_or_none()
@@ -44,6 +46,7 @@ async def get_user_by_username(db: AsyncSession, username: str) -> User | None:
 # ---------------------------------------------------------------------------
 # Registration
 # ---------------------------------------------------------------------------
+
 
 async def register_user(
     db: AsyncSession,
@@ -88,6 +91,7 @@ async def register_user(
 # Authentication
 # ---------------------------------------------------------------------------
 
+
 async def authenticate_user(
     db: AsyncSession, email: str, password: str, ip: str | None = None
 ) -> User | None:
@@ -130,11 +134,10 @@ def make_token_pair(user: User) -> tuple[str, str]:
 # Email verification
 # ---------------------------------------------------------------------------
 
+
 async def verify_email(db: AsyncSession, token: str) -> User:
     """Mark the user's email as verified. Raises ValueError if invalid."""
-    result = await db.execute(
-        select(User).where(User.email_verify_token == token)
-    )
+    result = await db.execute(select(User).where(User.email_verify_token == token))
     user = result.scalar_one_or_none()
     if not user:
         raise ValueError("Invalid or expired verification token.")
@@ -149,6 +152,7 @@ async def verify_email(db: AsyncSession, token: str) -> User:
 # ---------------------------------------------------------------------------
 # Password reset
 # ---------------------------------------------------------------------------
+
 
 async def initiate_password_reset(db: AsyncSession, email: str) -> None:
     """Generate a reset token and send reset email (stub)."""
@@ -168,9 +172,7 @@ async def complete_password_reset(
     db: AsyncSession, token: str, new_password: str
 ) -> User:
     """Apply the new password if the reset token is valid."""
-    result = await db.execute(
-        select(User).where(User.password_reset_token == token)
-    )
+    result = await db.execute(select(User).where(User.password_reset_token == token))
     user = result.scalar_one_or_none()
     if not user or not user.password_reset_expires:
         raise ValueError("Invalid or expired reset token.")
@@ -188,6 +190,7 @@ async def complete_password_reset(
 # ---------------------------------------------------------------------------
 # Audit logging
 # ---------------------------------------------------------------------------
+
 
 async def _audit(
     db: AsyncSession,
@@ -213,6 +216,7 @@ async def _audit(
 # Email stubs — replace with real provider (SendGrid, Mailgun, etc.)
 # ---------------------------------------------------------------------------
 
+
 def _send_verification_email(email: str, token: str) -> None:
     """Placeholder: log verification token.
 
@@ -221,9 +225,7 @@ def _send_verification_email(email: str, token: str) -> None:
       2. Replace this function with an async call to the provider API.
       3. Set SENDGRID_API_KEY (or equivalent) in your environment.
     """
-    logger.info(
-        "[EMAIL STUB] Verification email for %s — token: %s", email, token
-    )
+    logger.info("[EMAIL STUB] Verification email for %s — token: %s", email, token)
 
 
 def _send_password_reset_email(email: str, token: str) -> None:
@@ -231,6 +233,4 @@ def _send_password_reset_email(email: str, token: str) -> None:
 
     See _send_verification_email for integration instructions.
     """
-    logger.info(
-        "[EMAIL STUB] Password reset email for %s — token: %s", email, token
-    )
+    logger.info("[EMAIL STUB] Password reset email for %s — token: %s", email, token)

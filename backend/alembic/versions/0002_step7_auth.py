@@ -4,8 +4,9 @@ Revision ID: 0002_step7_auth
 Revises: 0001_initial
 Create Date: 2026-04-27
 """
-from alembic import op
+
 import sqlalchemy as sa
+from alembic import op
 from sqlalchemy.dialects import postgresql
 
 revision = "0002_step7_auth"
@@ -32,8 +33,12 @@ def upgrade() -> None:
         sa.Column("is_vip", sa.Boolean(), nullable=False, server_default="false"),
     )
     op.add_column("users", sa.Column("vip_plan_id", sa.String(128), nullable=True))
-    op.add_column("users", sa.Column("email_verify_token", sa.String(256), nullable=True))
-    op.add_column("users", sa.Column("password_reset_token", sa.String(256), nullable=True))
+    op.add_column(
+        "users", sa.Column("email_verify_token", sa.String(256), nullable=True)
+    )
+    op.add_column(
+        "users", sa.Column("password_reset_token", sa.String(256), nullable=True)
+    )
     op.add_column(
         "users",
         sa.Column("password_reset_expires", sa.DateTime(timezone=True), nullable=True),

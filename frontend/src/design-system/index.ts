@@ -18,13 +18,13 @@
  */
 
 // Tokens
-export * from './tokens';
+export * from "./tokens";
 
 // Components
-export * from './components';
+export * from "./components";
 
 // Layouts
-export * from './layouts';
+export * from "./layouts";
 
 // Patterns
-export * from './patterns';
+export * from "./patterns";

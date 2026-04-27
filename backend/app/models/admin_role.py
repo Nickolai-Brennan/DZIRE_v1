@@ -1,4 +1,5 @@
 """backend/app/models/admin_role.py — AdminRole SQLAlchemy model."""
+
 from datetime import datetime
 
 from sqlalchemy import DateTime, Integer, String, func
@@ -11,7 +12,9 @@ class AdminRole(Base):
     __tablename__ = "admin_roles"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    name: Mapped[str] = mapped_column(String(64), unique=True, nullable=False, index=True)
+    name: Mapped[str] = mapped_column(
+        String(64), unique=True, nullable=False, index=True
+    )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )

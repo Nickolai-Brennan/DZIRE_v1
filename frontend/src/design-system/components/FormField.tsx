@@ -4,7 +4,7 @@
  * Wraps a label, optional hint, required indicator, and error message
  * around any form control child.
  */
-import React from 'react';
+import React from "react";
 
 export interface FormFieldProps {
   /** HTML id used to associate label with control */
@@ -27,7 +27,7 @@ export const FormField: React.FC<FormFieldProps> = ({
   error,
   required = false,
   children,
-  className = '',
+  className = "",
 }) => {
   const descriptionId = hint ? `${id}-hint` : undefined;
   const errorId = error ? `${id}-error` : undefined;
@@ -35,10 +35,7 @@ export const FormField: React.FC<FormFieldProps> = ({
   return (
     <div className={`flex flex-col gap-1.5 ${className}`}>
       {/* Label */}
-      <label
-        htmlFor={id}
-        className="text-sm font-medium text-textPrimary"
-      >
+      <label htmlFor={id} className="text-sm font-medium text-textPrimary">
         {label}
         {required && (
           <span className="ml-1 text-primary" aria-hidden="true">
@@ -56,13 +53,16 @@ export const FormField: React.FC<FormFieldProps> = ({
 
       {/* Control — forward aria props via cloneElement */}
       {React.isValidElement(children)
-        ? React.cloneElement(children as React.ReactElement<React.HTMLAttributes<HTMLElement>>, {
-            id,
-            'aria-describedby':
-              [descriptionId, errorId].filter(Boolean).join(' ') || undefined,
-            'aria-invalid': error ? true : undefined,
-            'aria-required': required ? true : undefined,
-          })
+        ? React.cloneElement(
+            children as React.ReactElement<React.HTMLAttributes<HTMLElement>>,
+            {
+              id,
+              "aria-describedby":
+                [descriptionId, errorId].filter(Boolean).join(" ") || undefined,
+              "aria-invalid": error ? true : undefined,
+              "aria-required": required ? true : undefined,
+            },
+          )
         : children}
 
       {/* Error */}
@@ -77,8 +77,8 @@ export const FormField: React.FC<FormFieldProps> = ({
 
 // ── Shared input style helper (export for reuse) ───────────────
 export const inputBaseClasses =
-  'w-full rounded-xl bg-surfaceAlt border border-white/10 px-4 py-2.5 text-sm text-textPrimary placeholder:text-textMuted ' +
-  'focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/40 ' +
-  'aria-invalid:border-red-500 aria-invalid:ring-red-500/30 ' +
-  'disabled:opacity-50 disabled:cursor-not-allowed ' +
-  'transition-colors duration-200';
+  "w-full rounded-xl bg-surfaceAlt border border-white/10 px-4 py-2.5 text-sm text-textPrimary placeholder:text-textMuted " +
+  "focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/40 " +
+  "aria-invalid:border-red-500 aria-invalid:ring-red-500/30 " +
+  "disabled:opacity-50 disabled:cursor-not-allowed " +
+  "transition-colors duration-200";

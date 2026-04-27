@@ -1,4 +1,5 @@
 """backend/app/models/user.py — SQLAlchemy ORM model for users."""
+
 import uuid
 from datetime import datetime, timezone
 
@@ -16,7 +17,9 @@ class User(Base):
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
     email: Mapped[str] = mapped_column(String, unique=True, nullable=False, index=True)
-    username: Mapped[str] = mapped_column(String, unique=True, nullable=False, index=True)
+    username: Mapped[str] = mapped_column(
+        String, unique=True, nullable=False, index=True
+    )
     hashed_password: Mapped[str] = mapped_column(String, nullable=False)
     # Profile fields
     first_name: Mapped[str | None] = mapped_column(String(128), nullable=True)

@@ -4,7 +4,7 @@
  * Full-width dashboard layout: left sidebar + main content area.
  * Sidebar collapses on mobile.
  */
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -35,11 +35,11 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
       {/* Sidebar */}
       <aside
         className={[
-          'fixed lg:static inset-y-0 left-0 z-[300]',
-          'w-60 flex-shrink-0 flex flex-col bg-surfaceAlt border-r border-white/10',
-          'transition-transform duration-200',
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
-        ].join(' ')}
+          "fixed lg:static inset-y-0 left-0 z-[300]",
+          "w-60 flex-shrink-0 flex flex-col bg-surfaceAlt border-r border-white/10",
+          "transition-transform duration-200",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
+        ].join(" ")}
         aria-label="Dashboard navigation"
       >
         {sidebar}
@@ -55,7 +55,17 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             onClick={() => setSidebarOpen(true)}
             aria-label="Open navigation"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
               <line x1="3" y1="12" x2="21" y2="12" />
               <line x1="3" y1="6" x2="21" y2="6" />
               <line x1="3" y1="18" x2="21" y2="18" />
@@ -65,9 +75,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
         </header>
 
         {/* Content */}
-        <main className="flex-1 overflow-auto p-6 lg:p-8">
-          {children}
-        </main>
+        <main className="flex-1 overflow-auto p-6 lg:p-8">{children}</main>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 """backend/app/auth/models.py — Audit log model for security event tracking."""
+
 from __future__ import annotations
 
 from datetime import datetime
@@ -11,6 +12,7 @@ from ..core.database import Base
 
 class AuditLog(Base):
     """Tracks security-relevant events: logins, role changes, admin actions, etc."""
+
     __tablename__ = "audit_logs"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)

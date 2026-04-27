@@ -1,5 +1,7 @@
 """backend/app/affiliates/schemas.py — Pydantic v2 schemas for affiliates."""
+
 from __future__ import annotations
+
 from datetime import datetime
 from typing import Optional
 from uuid import UUID

@@ -2,30 +2,40 @@
  * frontend/src/admin/AdminLayout.tsx
  * Shared admin dashboard layout with sidebar navigation.
  */
-import React from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
-  LayoutDashboard, FileText, PenSquare, Search, Tag,
-  TrendingUp, Megaphone, Share2, Link2, Building2,
-  Mail, Crown, LogOut,
-} from 'lucide-react';
-import { adminLogout } from '../lib/api/admin';
-import { clearAdminToken, getAdminToken } from '../lib/auth/token';
+  LayoutDashboard,
+  FileText,
+  PenSquare,
+  Search,
+  Tag,
+  TrendingUp,
+  Megaphone,
+  Share2,
+  Link2,
+  Building2,
+  Mail,
+  Crown,
+  LogOut,
+} from "lucide-react";
+import { adminLogout } from "../lib/api/admin";
+import { clearAdminToken, getAdminToken } from "../lib/auth/token";
 
 const NAV_ITEMS = [
-  { label: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
-  { label: 'Content', path: '/admin/content', icon: FileText },
-  { label: 'Post Editor', path: '/admin/editor', icon: PenSquare },
-  { label: 'SEO Reports', path: '/admin/seo', icon: Search },
-  { label: 'Keyword / Tags', path: '/admin/keywords', icon: Tag },
-  { label: 'Traffic Analytics', path: '/admin/analytics', icon: TrendingUp },
-  { label: 'Marketing', path: '/admin/marketing', icon: Megaphone },
-  { label: 'Advertising', path: '/admin/advertising', icon: Building2 },
-  { label: 'Social Media', path: '/admin/social', icon: Share2 },
-  { label: 'Affiliates', path: '/admin/affiliates', icon: Link2 },
-  { label: 'Sponsors', path: '/admin/sponsors', icon: Building2 },
-  { label: 'Newsletter', path: '/admin/newsletter', icon: Mail },
-  { label: 'VIP', path: '/admin/vip', icon: Crown },
+  { label: "Dashboard", path: "/admin/dashboard", icon: LayoutDashboard },
+  { label: "Content", path: "/admin/content", icon: FileText },
+  { label: "Post Editor", path: "/admin/editor", icon: PenSquare },
+  { label: "SEO Reports", path: "/admin/seo", icon: Search },
+  { label: "Keyword / Tags", path: "/admin/keywords", icon: Tag },
+  { label: "Traffic Analytics", path: "/admin/analytics", icon: TrendingUp },
+  { label: "Marketing", path: "/admin/marketing", icon: Megaphone },
+  { label: "Advertising", path: "/admin/advertising", icon: Building2 },
+  { label: "Social Media", path: "/admin/social", icon: Share2 },
+  { label: "Affiliates", path: "/admin/affiliates", icon: Link2 },
+  { label: "Sponsors", path: "/admin/sponsors", icon: Building2 },
+  { label: "Newsletter", path: "/admin/newsletter", icon: Mail },
+  { label: "VIP", path: "/admin/vip", icon: Crown },
 ];
 
 interface AdminLayoutProps {
@@ -33,17 +43,24 @@ interface AdminLayoutProps {
   title?: string;
 }
 
-export const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
+export const AdminLayout: React.FC<AdminLayoutProps> = ({
+  children,
+  title,
+}) => {
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     const token = getAdminToken();
     if (token) {
-      try { await adminLogout(token); } catch { /* ignore */ }
+      try {
+        await adminLogout(token);
+      } catch {
+        /* ignore */
+      }
     }
     clearAdminToken();
-    navigate('/admin/login', { replace: true });
+    navigate("/admin/login", { replace: true });
   };
 
   return (
@@ -51,7 +68,9 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => 
       {/* Sidebar */}
       <aside className="w-56 flex-shrink-0 bg-surfaceAlt border-r border-white/10 flex flex-col">
         <div className="px-5 py-5 border-b border-white/10">
-          <span className="text-textPrimary font-bold text-lg">DZIRE Admin</span>
+          <span className="text-textPrimary font-bold text-lg">
+            DZIRE Admin
+          </span>
         </div>
         <nav className="flex-1 overflow-y-auto py-4 space-y-0.5 px-3">
           {NAV_ITEMS.map(({ label, path, icon: Icon }) => {
@@ -62,8 +81,8 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => 
                 to={path}
                 className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors ${
                   active
-                    ? 'bg-primary/20 text-primary font-medium'
-                    : 'text-textMuted hover:text-textPrimary hover:bg-white/5'
+                    ? "bg-primary/20 text-primary font-medium"
+                    : "text-textMuted hover:text-textPrimary hover:bg-white/5"
                 }`}
               >
                 <Icon className="w-4 h-4 flex-shrink-0" />

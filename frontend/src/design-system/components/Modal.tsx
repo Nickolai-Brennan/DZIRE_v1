@@ -4,10 +4,10 @@
  * Accessible modal dialog with backdrop, focus trap, and keyboard
  * dismiss support (Escape key).
  */
-import React, { useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
+import React, { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 
-export type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
+export type ModalSize = "sm" | "md" | "lg" | "xl" | "full";
 
 export interface ModalProps {
   /** Controls visibility */
@@ -24,18 +24,18 @@ export interface ModalProps {
 }
 
 const sizeClasses: Record<ModalSize, string> = {
-  sm: 'max-w-sm',
-  md: 'max-w-md',
-  lg: 'max-w-lg',
-  xl: 'max-w-2xl',
-  full: 'max-w-full m-4',
+  sm: "max-w-sm",
+  md: "max-w-md",
+  lg: "max-w-lg",
+  xl: "max-w-2xl",
+  full: "max-w-full m-4",
 };
 
 export const Modal: React.FC<ModalProps> = ({
   open,
   onClose,
   title,
-  size = 'md',
+  size = "md",
   children,
   footer,
 }) => {
@@ -45,21 +45,21 @@ export const Modal: React.FC<ModalProps> = ({
   useEffect(() => {
     if (!open) return;
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === "Escape") onClose();
     };
-    document.addEventListener('keydown', handleKey);
-    return () => document.removeEventListener('keydown', handleKey);
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
   }, [open, onClose]);
 
   // Lock body scroll
   useEffect(() => {
     if (open) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [open]);
 
@@ -77,7 +77,7 @@ export const Modal: React.FC<ModalProps> = ({
       className="fixed inset-0 z-[400] flex items-center justify-center p-4"
       aria-modal="true"
       role="dialog"
-      aria-labelledby={title ? 'modal-title' : undefined}
+      aria-labelledby={title ? "modal-title" : undefined}
     >
       {/* Backdrop */}
       <div
@@ -91,16 +91,19 @@ export const Modal: React.FC<ModalProps> = ({
         ref={dialogRef}
         tabIndex={-1}
         className={[
-          'relative w-full bg-surface border border-white/10 rounded-2xl shadow-xl',
-          'flex flex-col max-h-[90vh]',
-          'focus:outline-none',
+          "relative w-full bg-surface border border-white/10 rounded-2xl shadow-xl",
+          "flex flex-col max-h-[90vh]",
+          "focus:outline-none",
           sizeClasses[size],
-        ].join(' ')}
+        ].join(" ")}
       >
         {/* Header */}
         {title && (
           <div className="flex items-center justify-between px-6 py-4 border-b border-white/8 shrink-0">
-            <h2 id="modal-title" className="text-lg font-semibold text-textPrimary">
+            <h2
+              id="modal-title"
+              className="text-lg font-semibold text-textPrimary"
+            >
               {title}
             </h2>
             <button

@@ -2,11 +2,11 @@
  * frontend/src/admin/ContentManager.tsx
  * Admin content manager — lists all CMS posts with status.
  */
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { AdminLayout } from './AdminLayout';
-import { getAdminToken, isAdminAuthenticated } from '../lib/auth/token';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { AdminLayout } from "./AdminLayout";
+import { getAdminToken, isAdminAuthenticated } from "../lib/auth/token";
+import { useNavigate } from "react-router-dom";
 
 interface Post {
   id: string;
@@ -25,11 +25,11 @@ export const ContentManager: React.FC = () => {
 
   useEffect(() => {
     if (!isAdminAuthenticated()) {
-      navigate('/admin/login', { replace: true });
+      navigate("/admin/login", { replace: true });
       return;
     }
     const token = getAdminToken();
-    fetch('/api/admin/content', {
+    fetch("/api/admin/content", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => (r.ok ? r.json() : { posts: [] }))
@@ -40,13 +40,15 @@ export const ContentManager: React.FC = () => {
 
   const statusBadge = (status: string) => {
     const colors: Record<string, string> = {
-      published: 'bg-green-500/20 text-green-400',
-      draft: 'bg-yellow-500/20 text-yellow-400',
-      scheduled: 'bg-blue-500/20 text-blue-400',
-      archived: 'bg-white/10 text-textMuted',
+      published: "bg-green-500/20 text-green-400",
+      draft: "bg-yellow-500/20 text-yellow-400",
+      scheduled: "bg-blue-500/20 text-blue-400",
+      archived: "bg-white/10 text-textMuted",
     };
     return (
-      <span className={`px-2 py-0.5 rounded text-xs font-medium ${colors[status] ?? 'bg-white/10 text-textMuted'}`}>
+      <span
+        className={`px-2 py-0.5 rounded text-xs font-medium ${colors[status] ?? "bg-white/10 text-textMuted"}`}
+      >
         {status}
       </span>
     );
@@ -83,10 +85,13 @@ export const ContentManager: React.FC = () => {
             </thead>
             <tbody className="divide-y divide-white/5">
               {posts.map((post) => (
-                <tr key={post.id} className="hover:bg-white/3 transition-colors">
+                <tr
+                  key={post.id}
+                  className="hover:bg-white/3 transition-colors"
+                >
                   <td className="py-3 pr-4 text-textPrimary">{post.title}</td>
                   <td className="py-3 pr-4 text-textMuted capitalize">
-                    {post.content_type.replace('_', ' ')}
+                    {post.content_type.replace("_", " ")}
                   </td>
                   <td className="py-3 pr-4">{statusBadge(post.status)}</td>
                   <td className="py-3 text-textMuted">

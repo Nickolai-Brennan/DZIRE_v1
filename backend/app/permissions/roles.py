@@ -2,6 +2,7 @@
 
 Defines all user-facing roles for the DZIRE platform.
 """
+
 from enum import Enum
 
 

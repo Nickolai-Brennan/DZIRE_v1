@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 import {
   login as apiLogin,
   logout as apiLogout,
@@ -8,8 +14,8 @@ import {
   type CurrentUser,
   type LoginPayload,
   type RegisterPayload,
-} from '../services/authService';
-import { setAccessToken } from '../services/api';
+} from "../services/authService";
+import { setAccessToken } from "../services/api";
 
 export type { CurrentUser as User };
 
@@ -19,7 +25,13 @@ interface AuthContextValue {
   isVip: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  signup: (email: string, username: string, password: string, firstName?: string, lastName?: string) => Promise<void>;
+  signup: (
+    email: string,
+    username: string,
+    password: string,
+    firstName?: string,
+    lastName?: string,
+  ) => Promise<void>;
   logout: () => Promise<void>;
   upgradeToVip: () => void;
   refreshUser: () => Promise<void>;
@@ -27,7 +39,9 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<CurrentUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -54,7 +68,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const signup = useCallback(
-    async (email: string, username: string, password: string, firstName?: string, lastName?: string) => {
+    async (
+      email: string,
+      username: string,
+      password: string,
+      firstName?: string,
+      lastName?: string,
+    ) => {
       const payload: RegisterPayload = {
         email,
         username,
@@ -65,7 +85,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const me = await apiRegister(payload);
       setUser(me);
     },
-    []
+    [],
   );
 
   const logout = useCallback(async () => {
@@ -78,7 +98,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const upgradeToVip = useCallback(() => {
-    setUser(prev => prev ? { ...prev, is_vip: true } : prev);
+    setUser((prev) => (prev ? { ...prev, is_vip: true } : prev));
   }, []);
 
   const refreshUser = useCallback(async () => {
@@ -111,6 +131,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
 export function useAuth(): AuthContextValue {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error('useAuth must be used inside AuthProvider');
+  if (!ctx) throw new Error("useAuth must be used inside AuthProvider");
   return ctx;
 }

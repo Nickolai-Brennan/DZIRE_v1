@@ -1,8 +1,9 @@
 """backend/app/permissions/services.py — Permission lookup services."""
+
 from __future__ import annotations
 
 from .permissions import Permission, get_permissions_for_role
-from .roles import Role, ROLE_DESCRIPTIONS
+from .roles import ROLE_DESCRIPTIONS, Role
 
 
 def get_role_summary() -> list[dict]:

@@ -3,8 +3,8 @@
  *
  * Displays a grid of feature/benefit cards, each with an icon, title, and description.
  */
-import React from 'react';
-import { Card, CardBody } from '../components/Card';
+import React from "react";
+import { Card, CardBody } from "../components/Card";
 
 export interface Feature {
   id: string | number;
@@ -28,9 +28,9 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
   subheading,
 }) => {
   const colClass = {
-    2: 'grid-cols-1 sm:grid-cols-2',
-    3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
-    4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+    2: "grid-cols-1 sm:grid-cols-2",
+    3: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+    4: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
   }[columns];
 
   return (
@@ -41,7 +41,9 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
             <h2 className="text-3xl font-bold text-textPrimary">{heading}</h2>
           )}
           {subheading && (
-            <p className="mt-3 text-textMuted max-w-2xl mx-auto">{subheading}</p>
+            <p className="mt-3 text-textMuted max-w-2xl mx-auto">
+              {subheading}
+            </p>
           )}
         </div>
       )}
@@ -59,7 +61,9 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
                 <h3 className="text-base font-semibold text-textPrimary">
                   {feature.title}
                 </h3>
-                <p className="mt-1 text-sm text-textMuted">{feature.description}</p>
+                <p className="mt-1 text-sm text-textMuted">
+                  {feature.description}
+                </p>
               </div>
             </CardBody>
           </Card>

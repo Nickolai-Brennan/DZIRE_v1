@@ -3,6 +3,7 @@
 Access token claims: user_id, email, role, is_vip, exp, type="access"
 Refresh token claims: sub (user_id), exp, type="refresh"
 """
+
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone

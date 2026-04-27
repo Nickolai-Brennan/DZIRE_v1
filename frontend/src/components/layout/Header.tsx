@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Search, Menu, X, User, ListMusic, LogOut } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
-import { usePlaylist } from '../../context/PlaylistContext';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Search, Menu, X, User, ListMusic, LogOut } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
+import { usePlaylist } from "../../context/PlaylistContext";
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const { isAuthenticated, user, logout } = useAuth();
   const { playlists } = usePlaylist();
   const navigate = useNavigate();
@@ -14,20 +14,20 @@ export const Header: React.FC = () => {
   const totalSavedItems = playlists.reduce((sum, p) => sum + p.items.length, 0);
 
   const navLinks = [
-    { to: '/positions', label: 'Positions' },
-    { to: '/reviews', label: 'Reviews' },
-    { to: '/dictionary', label: 'Dictionary' },
-    { to: '/dzire-dolls', label: 'DZIRE Dolls' },
-    { to: '/stories', label: 'Stories' },
-    { to: '/explore', label: 'Explore' },
-    { to: '/vip', label: 'VIP' },
+    { to: "/positions", label: "Positions" },
+    { to: "/reviews", label: "Reviews" },
+    { to: "/dictionary", label: "Dictionary" },
+    { to: "/dzire-dolls", label: "DZIRE Dolls" },
+    { to: "/stories", label: "Stories" },
+    { to: "/explore", label: "Explore" },
+    { to: "/vip", label: "VIP" },
   ];
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
-      setSearchQuery('');
+      setSearchQuery("");
     }
   };
 
@@ -58,25 +58,34 @@ export const Header: React.FC = () => {
           {/* Right Actions */}
           <div className="flex items-center gap-2">
             {/* Search */}
-            <form onSubmit={handleSearchSubmit} className="hidden sm:flex items-center gap-1">
+            <form
+              onSubmit={handleSearchSubmit}
+              className="hidden sm:flex items-center gap-1"
+            >
               <input
                 type="text"
                 value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search..."
                 className="w-36 bg-surfaceAlt border border-white/10 rounded-lg px-3 py-1.5 text-sm text-textPrimary placeholder:text-textMuted focus:outline-none focus:border-primary"
               />
-              <button type="submit" className="p-2 hover:bg-surface rounded-lg transition-colors">
+              <button
+                type="submit"
+                className="p-2 hover:bg-surface rounded-lg transition-colors"
+              >
                 <Search className="w-4 h-4 text-textMuted" />
               </button>
             </form>
 
             {/* Playlists */}
-            <Link to="/playlists" className="relative p-2 hover:bg-surface rounded-lg transition-colors">
+            <Link
+              to="/playlists"
+              className="relative p-2 hover:bg-surface rounded-lg transition-colors"
+            >
               <ListMusic className="w-5 h-5 text-textMuted" />
               {totalSavedItems > 0 && (
                 <span className="absolute -top-0.5 -right-0.5 bg-primary text-white text-xs rounded-full w-4 h-4 flex items-center justify-center font-bold">
-                  {totalSavedItems > 9 ? '9+' : totalSavedItems}
+                  {totalSavedItems > 9 ? "9+" : totalSavedItems}
                 </span>
               )}
             </Link>
@@ -84,16 +93,27 @@ export const Header: React.FC = () => {
             {/* Auth */}
             {isAuthenticated ? (
               <div className="flex items-center gap-1">
-                <Link to="/profile" className="flex items-center gap-2 p-2 hover:bg-surface rounded-lg transition-colors">
+                <Link
+                  to="/profile"
+                  className="flex items-center gap-2 p-2 hover:bg-surface rounded-lg transition-colors"
+                >
                   <User className="w-5 h-5 text-textMuted" />
-                  <span className="hidden sm:block text-sm text-textMuted">{user?.username}</span>
+                  <span className="hidden sm:block text-sm text-textMuted">
+                    {user?.username}
+                  </span>
                 </Link>
-                <button onClick={logout} className="p-2 hover:bg-surface rounded-lg transition-colors">
+                <button
+                  onClick={logout}
+                  className="p-2 hover:bg-surface rounded-lg transition-colors"
+                >
                   <LogOut className="w-4 h-4 text-textMuted" />
                 </button>
               </div>
             ) : (
-              <Link to="/login" className="text-sm text-primary hover:text-accent transition-colors font-medium px-3 py-1.5 rounded-lg border border-primary/30 hover:bg-primary/10">
+              <Link
+                to="/login"
+                className="text-sm text-primary hover:text-accent transition-colors font-medium px-3 py-1.5 rounded-lg border border-primary/30 hover:bg-primary/10"
+              >
                 Sign In
               </Link>
             )}
@@ -129,13 +149,37 @@ export const Header: React.FC = () => {
             <hr className="border-white/10" />
             {isAuthenticated ? (
               <>
-                <Link to="/profile" onClick={() => setMobileMenuOpen(false)} className="block text-textPrimary hover:text-primary transition-colors font-medium">Profile</Link>
-                <Link to="/playlists" onClick={() => setMobileMenuOpen(false)} className="block text-textPrimary hover:text-primary transition-colors font-medium">Playlists</Link>
+                <Link
+                  to="/profile"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-textPrimary hover:text-primary transition-colors font-medium"
+                >
+                  Profile
+                </Link>
+                <Link
+                  to="/playlists"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-textPrimary hover:text-primary transition-colors font-medium"
+                >
+                  Playlists
+                </Link>
               </>
             ) : (
               <>
-                <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="block text-textPrimary hover:text-primary transition-colors font-medium">Log In</Link>
-                <Link to="/signup" onClick={() => setMobileMenuOpen(false)} className="block text-textPrimary hover:text-primary transition-colors font-medium">Sign Up</Link>
+                <Link
+                  to="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-textPrimary hover:text-primary transition-colors font-medium"
+                >
+                  Log In
+                </Link>
+                <Link
+                  to="/signup"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-textPrimary hover:text-primary transition-colors font-medium"
+                >
+                  Sign Up
+                </Link>
               </>
             )}
           </nav>

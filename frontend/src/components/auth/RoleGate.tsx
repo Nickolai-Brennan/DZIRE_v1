@@ -12,8 +12,8 @@
  *     <VIPContent />
  *   </RoleGate>
  */
-import React from 'react';
-import { usePermissions } from '../../hooks/usePermissions';
+import React from "react";
+import { usePermissions } from "../../hooks/usePermissions";
 
 interface RoleGateProps {
   role: string;
@@ -21,7 +21,11 @@ interface RoleGateProps {
   children: React.ReactNode;
 }
 
-export const RoleGate: React.FC<RoleGateProps> = ({ role, fallback = null, children }) => {
+export const RoleGate: React.FC<RoleGateProps> = ({
+  role,
+  fallback = null,
+  children,
+}) => {
   const { hasRole, isAdmin } = usePermissions();
 
   // Admin can always see everything

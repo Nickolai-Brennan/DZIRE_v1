@@ -1,21 +1,22 @@
 """backend/app/auth/dependencies.py — FastAPI auth dependencies."""
+
 from __future__ import annotations
 
 import uuid
 
-from fastapi import Cookie, Depends, HTTPException, Header, status
+from fastapi import Cookie, Depends, Header, HTTPException, status
 from jose import JWTError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from .jwt import decode_token
-from .tokens import decode_token as decode_rich_token
 from ..core.database import get_db
 from ..models.user import User
-
+from .jwt import decode_token
+from .tokens import decode_token as decode_rich_token
 
 # ---------------------------------------------------------------------------
 # Legacy helpers (used by existing /auth/* routes)
 # ---------------------------------------------------------------------------
+
 
 async def get_current_user_id(
     authorization: str | None = Header(default=None),
@@ -68,6 +69,7 @@ async def get_refresh_token_subject(
 # ---------------------------------------------------------------------------
 # New dependencies — return full User object
 # ---------------------------------------------------------------------------
+
 
 async def get_current_user(
     authorization: str | None = Header(default=None),

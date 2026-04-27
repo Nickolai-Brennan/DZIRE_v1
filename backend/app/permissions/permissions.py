@@ -2,6 +2,7 @@
 
 Defines all permissions and the role → permission mapping.
 """
+
 from enum import Enum
 
 from .roles import Role
@@ -28,26 +29,36 @@ ALL_PERMISSIONS: frozenset[Permission] = frozenset(Permission)
 # Role → Permission mapping
 ROLE_PERMISSIONS: dict[str, frozenset[Permission]] = {
     Role.admin: ALL_PERMISSIONS,
-    Role.editor: frozenset({
-        Permission.create_post,
-        Permission.edit_post,
-        Permission.publish_post,
-    }),
-    Role.marketing: frozenset({
-        Permission.view_analytics,
-        Permission.manage_affiliates,
-        Permission.manage_sponsors,
-    }),
-    Role.sponsor_manager: frozenset({
-        Permission.manage_affiliates,
-        Permission.manage_sponsors,
-    }),
-    Role.analyst: frozenset({
-        Permission.view_analytics,
-    }),
-    Role.vip: frozenset({
-        Permission.view_vip_content,
-    }),
+    Role.editor: frozenset(
+        {
+            Permission.create_post,
+            Permission.edit_post,
+            Permission.publish_post,
+        }
+    ),
+    Role.marketing: frozenset(
+        {
+            Permission.view_analytics,
+            Permission.manage_affiliates,
+            Permission.manage_sponsors,
+        }
+    ),
+    Role.sponsor_manager: frozenset(
+        {
+            Permission.manage_affiliates,
+            Permission.manage_sponsors,
+        }
+    ),
+    Role.analyst: frozenset(
+        {
+            Permission.view_analytics,
+        }
+    ),
+    Role.vip: frozenset(
+        {
+            Permission.view_vip_content,
+        }
+    ),
     Role.member: frozenset(),
     Role.guest: frozenset(),
 }

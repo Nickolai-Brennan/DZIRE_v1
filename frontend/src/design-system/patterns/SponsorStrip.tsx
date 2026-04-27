@@ -4,7 +4,7 @@
  * Horizontal strip displaying sponsor logos or names.
  * Works as a subtle trust/social-proof bar on landing pages.
  */
-import React from 'react';
+import React from "react";
 
 export interface Sponsor {
   id: string | number;
@@ -22,7 +22,7 @@ export interface SponsorStripProps {
 
 export const SponsorStrip: React.FC<SponsorStripProps> = ({
   sponsors,
-  label = 'Our Partners',
+  label = "Our Partners",
 }) => {
   if (sponsors.length === 0) return null;
 

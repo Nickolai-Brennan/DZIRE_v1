@@ -3,9 +3,9 @@
  *
  * Displays a KPI metric with an optional icon, trend indicator, and label.
  */
-import React from 'react';
+import React from "react";
 
-export type TrendDirection = 'up' | 'down' | 'neutral';
+export type TrendDirection = "up" | "down" | "neutral";
 
 export interface StatCardProps {
   /** Primary metric value (e.g. "12,400") */
@@ -23,19 +23,39 @@ export interface StatCardProps {
 }
 
 const trendColors: Record<TrendDirection, string> = {
-  up: 'text-green-400',
-  down: 'text-red-400',
-  neutral: 'text-textMuted',
+  up: "text-green-400",
+  down: "text-red-400",
+  neutral: "text-textMuted",
 };
 
 const trendIcons: Record<TrendDirection, React.ReactNode> = {
   up: (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-3.5 w-3.5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <polyline points="18 15 12 9 6 15" />
     </svg>
   ),
   down: (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-3.5 w-3.5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <polyline points="6 9 12 15 18 9" />
     </svg>
   ),
@@ -48,15 +68,15 @@ export const StatCard: React.FC<StatCardProps> = ({
   description,
   icon,
   trend,
-  trendDirection = 'neutral',
-  className = '',
+  trendDirection = "neutral",
+  className = "",
 }) => {
   return (
     <div
       className={[
-        'bg-surface border border-white/8 rounded-2xl p-5 flex flex-col gap-3',
+        "bg-surface border border-white/8 rounded-2xl p-5 flex flex-col gap-3",
         className,
-      ].join(' ')}
+      ].join(" ")}
     >
       {/* Icon + trend row */}
       <div className="flex items-start justify-between">
@@ -68,9 +88,9 @@ export const StatCard: React.FC<StatCardProps> = ({
         {trend && (
           <span
             className={[
-              'ml-auto inline-flex items-center gap-0.5 text-xs font-medium',
+              "ml-auto inline-flex items-center gap-0.5 text-xs font-medium",
               trendColors[trendDirection],
-            ].join(' ')}
+            ].join(" ")}
           >
             {trendIcons[trendDirection]}
             {trend}
@@ -79,7 +99,9 @@ export const StatCard: React.FC<StatCardProps> = ({
       </div>
 
       {/* Value */}
-      <p className="text-3xl font-bold text-textPrimary leading-none">{value}</p>
+      <p className="text-3xl font-bold text-textPrimary leading-none">
+        {value}
+      </p>
 
       {/* Label */}
       <div>

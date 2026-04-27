@@ -100,7 +100,12 @@ export interface Article {
   slug: string;
   excerpt: string;
   category: string;
-  templateType: 'profile-spotlight' | 'longform-essay' | 'general' | 'review' | 'tips';
+  templateType:
+    | "profile-spotlight"
+    | "longform-essay"
+    | "general"
+    | "review"
+    | "tips";
   author: string;
   publishDate: string;
   readingTime: number;

@@ -1,4 +1,5 @@
 """backend/app/schemas/admin_auth.py — Pydantic v2 schemas for admin auth."""
+
 from datetime import datetime
 
 from pydantic import BaseModel

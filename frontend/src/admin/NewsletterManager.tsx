@@ -2,10 +2,10 @@
  * frontend/src/admin/NewsletterManager.tsx
  * Admin newsletter subscriber and campaign manager.
  */
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AdminLayout } from './AdminLayout';
-import { getAdminToken, isAdminAuthenticated } from '../lib/auth/token';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AdminLayout } from "./AdminLayout";
+import { getAdminToken, isAdminAuthenticated } from "../lib/auth/token";
 
 interface Subscriber {
   id: string;
@@ -24,11 +24,11 @@ export const NewsletterManager: React.FC = () => {
 
   useEffect(() => {
     if (!isAdminAuthenticated()) {
-      navigate('/admin/login', { replace: true });
+      navigate("/admin/login", { replace: true });
       return;
     }
     const token = getAdminToken();
-    fetch('/api/newsletter/subscribers', {
+    fetch("/api/newsletter/subscribers", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => (r.ok ? r.json() : []))
@@ -40,7 +40,9 @@ export const NewsletterManager: React.FC = () => {
   return (
     <AdminLayout title="Newsletter Manager">
       <div className="mb-4">
-        <p className="text-textMuted text-sm">{subscribers.length} subscribers</p>
+        <p className="text-textMuted text-sm">
+          {subscribers.length} subscribers
+        </p>
       </div>
 
       {loading && <p className="text-textMuted">Loading…</p>}
@@ -66,15 +68,25 @@ export const NewsletterManager: React.FC = () => {
               {subscribers.map((s) => (
                 <tr key={s.id}>
                   <td className="py-3 pr-4 text-textPrimary">{s.email}</td>
-                  <td className="py-3 pr-4 text-textMuted">{s.first_name ?? '—'}</td>
-                  <td className="py-3 pr-4 text-textMuted">{s.source ?? '—'}</td>
+                  <td className="py-3 pr-4 text-textMuted">
+                    {s.first_name ?? "—"}
+                  </td>
+                  <td className="py-3 pr-4 text-textMuted">
+                    {s.source ?? "—"}
+                  </td>
                   <td className="py-3 pr-4">
-                    <span className={`text-xs font-medium ${s.status === 'active' ? 'text-green-400' : 'text-textMuted'}`}>
+                    <span
+                      className={`text-xs font-medium ${s.status === "active" ? "text-green-400" : "text-textMuted"}`}
+                    >
                       {s.status}
                     </span>
                   </td>
-                  <td className="py-3 pr-4 text-textMuted">{s.is_vip ? '✓' : '—'}</td>
-                  <td className="py-3 text-textMuted">{new Date(s.created_at).toLocaleDateString()}</td>
+                  <td className="py-3 pr-4 text-textMuted">
+                    {s.is_vip ? "✓" : "—"}
+                  </td>
+                  <td className="py-3 text-textMuted">
+                    {new Date(s.created_at).toLocaleDateString()}
+                  </td>
                 </tr>
               ))}
             </tbody>

@@ -2,10 +2,10 @@
  * frontend/src/admin/VIPSubscriptionManager.tsx
  * Admin VIP subscription plans and subscriber manager.
  */
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AdminLayout } from './AdminLayout';
-import { getAdminToken, isAdminAuthenticated } from '../lib/auth/token';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AdminLayout } from "./AdminLayout";
+import { getAdminToken, isAdminAuthenticated } from "../lib/auth/token";
 
 interface VipPlan {
   id: string;
@@ -22,11 +22,11 @@ export const VIPSubscriptionManager: React.FC = () => {
 
   useEffect(() => {
     if (!isAdminAuthenticated()) {
-      navigate('/admin/login', { replace: true });
+      navigate("/admin/login", { replace: true });
       return;
     }
     const token = getAdminToken();
-    fetch('/api/vip/plans', {
+    fetch("/api/vip/plans", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => (r.ok ? r.json() : []))
@@ -45,13 +45,15 @@ export const VIPSubscriptionManager: React.FC = () => {
             <div className="p-5 bg-surfaceAlt rounded-xl border border-white/10">
               <p className="text-textMuted text-sm mb-1">Active Plans</p>
               <p className="text-3xl font-bold text-textPrimary">
-                {plans.filter((p) => p.status === 'active').length}
+                {plans.filter((p) => p.status === "active").length}
               </p>
             </div>
           </div>
 
           {plans.length === 0 && (
-            <p className="text-textMuted italic">No VIP plans configured yet.</p>
+            <p className="text-textMuted italic">
+              No VIP plans configured yet.
+            </p>
           )}
 
           {plans.length > 0 && (
@@ -70,8 +72,12 @@ export const VIPSubscriptionManager: React.FC = () => {
                     <tr key={p.id}>
                       <td className="py-3 pr-4 text-textPrimary">{p.name}</td>
                       <td className="py-3 pr-4 text-textMuted">${p.price}</td>
-                      <td className="py-3 pr-4 text-textMuted">{p.billing_interval}</td>
-                      <td className={`py-3 font-medium text-sm ${p.status === 'active' ? 'text-green-400' : 'text-textMuted'}`}>
+                      <td className="py-3 pr-4 text-textMuted">
+                        {p.billing_interval}
+                      </td>
+                      <td
+                        className={`py-3 font-medium text-sm ${p.status === "active" ? "text-green-400" : "text-textMuted"}`}
+                      >
                         {p.status}
                       </td>
                     </tr>

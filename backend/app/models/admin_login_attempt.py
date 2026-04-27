@@ -1,4 +1,5 @@
 """backend/app/models/admin_login_attempt.py — AdminLoginAttempt model."""
+
 from datetime import datetime
 
 from sqlalchemy import Boolean, DateTime, Integer, String, func

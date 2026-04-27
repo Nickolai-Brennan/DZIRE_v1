@@ -2,10 +2,10 @@
  * frontend/src/admin/KeywordTagReports.tsx
  * Admin keyword and tag reports page.
  */
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AdminLayout } from './AdminLayout';
-import { isAdminAuthenticated } from '../lib/auth/token';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AdminLayout } from "./AdminLayout";
+import { isAdminAuthenticated } from "../lib/auth/token";
 
 interface Tag {
   id: string;
@@ -20,10 +20,10 @@ export const KeywordTagReports: React.FC = () => {
 
   useEffect(() => {
     if (!isAdminAuthenticated()) {
-      navigate('/admin/login', { replace: true });
+      navigate("/admin/login", { replace: true });
       return;
     }
-    fetch('/api/tags')
+    fetch("/api/tags")
       .then((r) => (r.ok ? r.json() : []))
       .then((data: Tag[]) => setTags(data))
       .catch(() => setTags([]))
@@ -39,7 +39,9 @@ export const KeywordTagReports: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-5 bg-surfaceAlt rounded-xl border border-white/10">
               <p className="text-textMuted text-sm mb-1">Total Tags</p>
-              <p className="text-3xl font-bold text-textPrimary">{tags.length}</p>
+              <p className="text-3xl font-bold text-textPrimary">
+                {tags.length}
+              </p>
             </div>
           </div>
 

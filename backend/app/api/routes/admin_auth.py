@@ -5,6 +5,7 @@ Endpoints:
   POST /api/admin/logout  — no-op for MVP (JWT logout is client-side)
   GET  /api/admin/me      — return current admin user
 """
+
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -13,7 +14,8 @@ from ...core.config import get_settings
 from ...core.database import get_db
 from ...models.admin_login_attempt import AdminLoginAttempt
 from ...models.admin_user import AdminUser
-from ...schemas.admin_auth import AdminLoginRequest, AdminTokenResponse, AdminUserResponse
+from ...schemas.admin_auth import (AdminLoginRequest, AdminTokenResponse,
+                                   AdminUserResponse)
 from ...services.admin_service import authenticate_admin
 from ..deps import require_admin
 

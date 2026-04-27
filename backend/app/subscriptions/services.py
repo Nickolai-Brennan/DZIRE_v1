@@ -1,5 +1,7 @@
 """backend/app/subscriptions/services.py — VIP subscription business logic."""
+
 from __future__ import annotations
+
 from typing import Optional
 from uuid import UUID
 
@@ -40,9 +42,12 @@ async def subscribe(db: AsyncSession, data: VipSubscribeRequest) -> VipSubscript
     return sub
 
 
-async def get_user_subscription(db: AsyncSession, user_id: UUID) -> Optional[VipSubscription]:
+async def get_user_subscription(
+    db: AsyncSession, user_id: UUID
+) -> Optional[VipSubscription]:
     result = await db.execute(
-        select(VipSubscription)
-        .where(VipSubscription.user_id == user_id, VipSubscription.status == "active")
+        select(VipSubscription).where(
+            VipSubscription.user_id == user_id, VipSubscription.status == "active"
+        )
     )
     return result.scalar_one_or_none()

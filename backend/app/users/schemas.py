@@ -1,4 +1,5 @@
 """backend/app/users/schemas.py — Pydantic v2 schemas for user CRUD endpoints."""
+
 from __future__ import annotations
 
 import uuid

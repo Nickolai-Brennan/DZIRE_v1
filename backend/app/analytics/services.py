@@ -1,10 +1,11 @@
 """backend/app/analytics/services.py — Analytics business logic."""
+
 from __future__ import annotations
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from .models import AnalyticsEvent, PageView, ClickEvent
-from .schemas import AnalyticsEventCreate, PageViewCreate, ClickEventCreate
+from .models import AnalyticsEvent, ClickEvent, PageView
+from .schemas import AnalyticsEventCreate, ClickEventCreate, PageViewCreate
 
 
 async def record_event(db: AsyncSession, data: AnalyticsEventCreate) -> AnalyticsEvent:

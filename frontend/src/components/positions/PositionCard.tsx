@@ -1,19 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Eye, BookOpen } from 'lucide-react';
-import { ScorePill } from '../ui/ScorePill';
-import { track } from '../../utils/track';
-import type { Position } from '../../data/types';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Eye, BookOpen } from "lucide-react";
+import { ScorePill } from "../ui/ScorePill";
+import { track } from "../../utils/track";
+import type { Position } from "../../data/types";
 
 interface PositionCardProps {
   position: Position;
   onQuickView?: (position: Position) => void;
 }
 
-export const PositionCard: React.FC<PositionCardProps> = ({ position, onQuickView }) => {
+export const PositionCard: React.FC<PositionCardProps> = ({
+  position,
+  onQuickView,
+}) => {
   const handleQuickView = (e: React.MouseEvent) => {
     e.preventDefault();
-    track('position_popup_open', { positionId: position.id, positionTitle: position.title });
+    track("position_popup_open", {
+      positionId: position.id,
+      positionTitle: position.title,
+    });
     onQuickView?.(position);
   };
 
@@ -34,8 +40,12 @@ export const PositionCard: React.FC<PositionCardProps> = ({ position, onQuickVie
       </div>
 
       <div className="p-5 flex flex-col flex-1">
-        <h3 className="text-lg font-bold text-textPrimary mb-2">{position.title}</h3>
-        <p className="text-sm text-textMuted mb-4 line-clamp-2 flex-1">{position.description}</p>
+        <h3 className="text-lg font-bold text-textPrimary mb-2">
+          {position.title}
+        </h3>
+        <p className="text-sm text-textMuted mb-4 line-clamp-2 flex-1">
+          {position.description}
+        </p>
 
         <div className="grid grid-cols-2 gap-2 mb-4">
           <ScorePill label="Comfort" score={position.comfort} />
@@ -55,7 +65,9 @@ export const PositionCard: React.FC<PositionCardProps> = ({ position, onQuickVie
           <Link
             to={`/positions/${position.slug}`}
             className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-primary hover:bg-accent text-white text-sm transition-colors"
-            onClick={() => track('position_full_guide_click', { positionId: position.id })}
+            onClick={() =>
+              track("position_full_guide_click", { positionId: position.id })
+            }
           >
             <BookOpen className="w-4 h-4" />
             Full Guide

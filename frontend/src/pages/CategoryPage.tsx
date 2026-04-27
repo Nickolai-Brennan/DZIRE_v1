@@ -2,8 +2,8 @@
  * frontend/src/pages/CategoryPage.tsx
  * Public category listing — shows posts in a category by slug.
  */
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 
 interface Category {
   id: string;
@@ -18,7 +18,7 @@ export const CategoryPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/categories')
+    fetch("/api/categories")
       .then((r) => r.json())
       .then((cats: Category[]) => {
         const found = cats.find((c) => c.slug === slug) ?? null;
@@ -30,7 +30,10 @@ export const CategoryPage: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
-      <Link to="/blog" className="text-sm text-textMuted hover:text-primary mb-6 inline-block">
+      <Link
+        to="/blog"
+        className="text-sm text-textMuted hover:text-primary mb-6 inline-block"
+      >
         ← Back to Blog
       </Link>
       {loading && <p className="text-textMuted">Loading…</p>}
@@ -39,11 +42,15 @@ export const CategoryPage: React.FC = () => {
       )}
       {category && (
         <>
-          <h1 className="text-3xl font-bold text-textPrimary mb-3">{category.name}</h1>
+          <h1 className="text-3xl font-bold text-textPrimary mb-3">
+            {category.name}
+          </h1>
           {category.description && (
             <p className="text-textMuted mb-8">{category.description}</p>
           )}
-          <p className="text-textMuted italic">Posts in this category coming soon.</p>
+          <p className="text-textMuted italic">
+            Posts in this category coming soon.
+          </p>
         </>
       )}
     </div>
