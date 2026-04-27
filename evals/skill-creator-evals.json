@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "skill_name": "skill-creator",
+  "description": "Evals for the skill-creator skill — covers skill drafting, test case generation, and the eval/iterate loop.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "create-skill-from-scratch",
+      "prompt": "I want to create a skill that helps format commit messages in Conventional Commits style. Can you help me build it?",
+      "expected_output": "A complete SKILL.md with YAML frontmatter (name, description), a clear Purpose section, When To Use section with trigger phrases, Workflow steps, example output format, and at least 2 test cases offered for eval.",
+      "files": [],
+      "assertions": [
+        {"type": "contains", "value": "---"},
+        {"type": "contains", "value": "name:"},
+        {"type": "contains", "value": "description:"},
+        {"type": "contains", "value": "## Workflow"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "improve-existing-skill",
+      "prompt": "I have this skill but it doesn't trigger reliably. Can you improve the description to make it more likely to trigger? Here's the current SKILL.md: name: commit-formatter, description: Formats commit messages.",
+      "expected_output": "An improved description that is more detailed, includes specific trigger keywords and phrases (e.g., 'commit message', 'git commit', 'conventional commits'), and is more 'pushy' about when to use it — as per skill-creator guidance.",
+      "files": [],
+      "assertions": [
+        {"type": "contains", "value": "description:"},
+        {"type": "not_contains", "value": "description: Formats commit messages."}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "generate-eval-cases",
+      "prompt": "I've written a skill for generating SQL migration files from schema descriptions. Can you write 3 eval cases for it?",
+      "expected_output": "3 eval case objects in the correct JSON format with id, name, prompt (realistic user prompt), expected_output (specific and verifiable), and files array. Covers at least one happy path, one edge case, and one with unexpected input.",
+      "files": [],
+      "assertions": [
+        {"type": "contains", "value": "\"prompt\""},
+        {"type": "contains", "value": "\"expected_output\""},
+        {"type": "contains", "value": "\"id\""}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "skill-structure-review",
+      "prompt": "Review this skill and tell me what's missing or needs improvement.",
+      "expected_output": "A structured review identifying: missing frontmatter fields, thin or vague description, missing sections (When To Use, Workflow, Quality Checklist, References), and recommendations for improvement.",
+      "files": ["skills/metrics-definition-skill/SKILL.md"],
+      "assertions": []
+    }
+  ]
+}

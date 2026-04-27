@@ -11,6 +11,31 @@ Master list of reusable skills for the Project Agent Engine.
 
 ---
 
+## Active Skill Folders
+
+The following skills have a full folder with SKILL.md and supporting files in skills/:
+
+| Skill Folder | Category | Status |
+|---|---|---|
+| api-designer | build | Active |
+| backend-builder | build | Active |
+| database-designer | build | Active |
+| deployment-planner | deployment | Active |
+| documentation-generator | documentation | Active |
+| eval-runner | evaluation | Active |
+| frontend-builder | build | Active |
+| metrics-definition-skill | analytics | Active |
+| planning-agent-skill | planning | Active |
+| project-planner | planning | Active |
+| project-planning-skill | planning | Active |
+| skill-creator | meta | Active |
+| stack-verifier | verification | Active |
+| webapp-testing | testing | Active |
+
+> Skills below are **catalog entries** — documented and planned but do not yet have their own folder under skills/. To implement one, use skill-creator to scaffold the folder.
+
+---
+
 ## Planning Skills
 
 | Skill | Description |

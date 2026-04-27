@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "skill_name": "REPLACE_WITH_SKILL_NAME",
+  "description": "Eval template — replace skill_name, prompts, and expected_output",
+  "evals": [
+    {
+      "id": 1,
+      "name": "happy-path",
+      "prompt": "REPLACE: A realistic user prompt that exercises the core use case",
+      "expected_output": "REPLACE: Specific description of what a correct response looks like",
+      "files": [],
+      "assertions": [
+        {
+          "type": "contains",
+          "value": "REPLACE: key text that must appear in the output"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "edge-case",
+      "prompt": "REPLACE: A prompt that tests an edge case or unusual input",
+      "expected_output": "REPLACE: How the skill should handle this edge case",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 3,
+      "name": "invalid-input",
+      "prompt": "REPLACE: A prompt with missing or invalid input to test graceful handling",
+      "expected_output": "REPLACE: The skill should ask for clarification or explain what's missing",
+      "files": [],
+      "assertions": [
+        {
+          "type": "not_contains",
+          "value": "undefined"
+        }
+      ]
+    }
+  ]
+}
