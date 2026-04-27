@@ -1,3 +1,7 @@
+# Agents Rough Copy
+
+> Archive: This file is a rough draft captured at the start of the project.
+
 
 
 ## Agents

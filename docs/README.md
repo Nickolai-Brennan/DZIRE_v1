@@ -21,10 +21,12 @@ Welcome to the DZIRE_v1 documentation. Use this index to navigate all project do
 | [workflows.md](./workflows.md) | Workflow index and development loop |
 | [changelog.md](./changelog.md) | Build history and task log |
 | [agent-outputs.md](./agent-outputs.md) | Agent output logs and results |
-| [best_practices.md](./best_practices.md) | Project best practices |
+| [best-practices.md](./best-practices.md) | Project best practices |
 | [dev-verification-checklist.md](./dev-verification-checklist.md) | Dev verification checklist |
-| [prompt_library.md](./prompt_library.md) | Prompt library reference |
+| [prompt-library.md](./prompt-library.md) | Prompt library reference |
 | [workflow-multi-agent.md](./workflow-multi-agent.md) | Multi-agent workflow patterns |
+| [checklist.md](./checklist.md) | Build completion checklist |
+| [task-list.md](./task-list.md) | Task tracking list |
 
 ---
 
