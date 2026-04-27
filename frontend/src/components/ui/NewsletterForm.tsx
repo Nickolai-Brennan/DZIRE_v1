@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { Button } from './Button';
 import { track } from '../../utils/track';
 
-export const NewsletterForm: React.FC = () => {
+interface NewsletterFormProps {
+  onSubmitSuccess?: () => void;
+}
+
+export const NewsletterForm: React.FC<NewsletterFormProps> = ({ onSubmitSuccess }) => {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
@@ -10,6 +14,7 @@ export const NewsletterForm: React.FC = () => {
     e.preventDefault();
     track('newsletter_signup', { email });
     setSubmitted(true);
+    onSubmitSuccess?.();
     setTimeout(() => setSubmitted(false), 3000);
     setEmail('');
   };
