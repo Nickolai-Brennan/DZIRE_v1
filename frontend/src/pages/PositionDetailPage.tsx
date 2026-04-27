@@ -4,7 +4,10 @@ import { ArrowLeft } from 'lucide-react';
 import { mockPositions } from '../data/mockPositions';
 import { ScoreBar } from '../components/ui/ScoreBar';
 import { Badge } from '../components/ui/Badge';
+import { Card } from '../components/ui/Card';
 import { NewsletterForm } from '../components/ui/NewsletterForm';
+import { SaveToPlaylistButton } from '../components/ui/SaveToPlaylistButton';
+import { track } from '../utils/track';
 
 export const PositionDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -18,6 +21,10 @@ export const PositionDetailPage: React.FC = () => {
       </div>
     );
   }
+
+  const relatedPositions = mockPositions
+    .filter(p => position.relatedPositions.includes(p.id))
+    .slice(0, 3);
 
   return (
     <div className="min-h-screen">
@@ -41,6 +48,13 @@ export const PositionDetailPage: React.FC = () => {
         </div>
       </div>
 
+      {/* Save to Playlist */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 flex gap-3">
+        <SaveToPlaylistButton
+          item={{ id: position.id, type: 'position', title: position.title, slug: position.slug, image: position.image }}
+        />
+      </div>
+
       {/* Score Overview */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -50,11 +64,15 @@ export const PositionDetailPage: React.FC = () => {
             { label: 'Difficulty', score: position.difficulty },
             { label: 'Intimacy', score: position.intimacy },
           ].map((s) => (
-            <div key={s.label} className="bg-surface rounded-2xl p-5 border border-white/8 text-center">
+            <button
+              key={s.label}
+              onClick={() => track('attribute_click', { attribute: s.label, positionId: position.id })}
+              className="bg-surface rounded-2xl p-5 border border-white/8 text-center hover:border-primary/30 transition-colors cursor-pointer"
+            >
               <p className="text-xs text-textMuted uppercase tracking-wider mb-2">{s.label}</p>
               <p className="text-4xl font-black text-textPrimary">{s.score}</p>
               <p className="text-xs text-textMuted mt-1">out of 10</p>
-            </div>
+            </button>
           ))}
         </div>
       </div>
@@ -85,7 +103,11 @@ export const PositionDetailPage: React.FC = () => {
               <h2 className="text-xl font-bold text-textPrimary mb-4">Best For</h2>
               <div className="flex flex-wrap gap-2">
                 {position.keywords.map((kw) => (
-                  <Badge key={kw} variant="category">{kw}</Badge>
+                  <Link key={kw} to={`/tags/${kw}`}>
+                    <Badge key={kw} variant="category" className="cursor-pointer hover:border-primary/50">
+                      #{kw}
+                    </Badge>
+                  </Link>
                 ))}
               </div>
             </section>
@@ -136,6 +158,37 @@ export const PositionDetailPage: React.FC = () => {
                 <ScoreBar label="Intimacy" value={position.intimacy} />
               </div>
             </section>
+
+            {/* Try This Next */}
+            {relatedPositions.length > 0 && (
+              <section className="bg-surface rounded-2xl p-6 border border-white/8">
+                <h2 className="text-xl font-bold text-textPrimary mb-5">Try This Next</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {relatedPositions.map(related => (
+                    <div key={related.id} className="relative">
+                      <Link
+                        to={`/positions/${related.slug}`}
+                        onClick={() => track('related_position_click', { from: position.id, to: related.id })}
+                      >
+                        <Card hover className="overflow-hidden">
+                          <img src={related.image} alt={related.title} className="w-full aspect-video object-cover" />
+                          <div className="p-3">
+                            <p className="font-bold text-textPrimary text-sm">{related.title}</p>
+                          </div>
+                        </Card>
+                      </Link>
+                      <div className="absolute top-2 right-2">
+                        <SaveToPlaylistButton
+                          item={{ id: related.id, type: 'position', title: related.title, slug: related.slug, image: related.image }}
+                          label=""
+                          className="!p-1.5 !rounded-lg"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
           </div>
 
           {/* Sidebar */}
@@ -175,6 +228,15 @@ export const PositionDetailPage: React.FC = () => {
                 </div>
               </div>
             )}
+
+            {/* Save CTA */}
+            <div className="bg-surfaceAlt rounded-2xl p-5 border border-white/8 text-center">
+              <p className="text-sm font-bold text-textPrimary mb-3">Save this position</p>
+              <SaveToPlaylistButton
+                item={{ id: position.id, type: 'position', title: position.title, slug: position.slug, image: position.image }}
+                className="w-full justify-center"
+              />
+            </div>
 
             {/* Sponsor Placeholder */}
             <div className="bg-surfaceAlt rounded-2xl p-5 border border-white/8 text-center">

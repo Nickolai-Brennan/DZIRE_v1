@@ -1,9 +1,12 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, ExternalLink, ChevronDown, ChevronUp, Bookmark } from 'lucide-react';
 import { mockReviews } from '../data/mockReviews';
+import { mockPositions } from '../data/mockPositions';
 import { ScoreBar } from '../components/ui/ScoreBar';
 import { Badge } from '../components/ui/Badge';
+import { SaveToPlaylistButton } from '../components/ui/SaveToPlaylistButton';
+import { useFavorites } from '../context/FavoritesContext';
 import { track } from '../utils/track';
 
 const FAQItem: React.FC<{ question: string; answer: string }> = ({ question, answer }) => {
@@ -26,6 +29,7 @@ export const ReviewDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const review = mockReviews.find(r => r.slug === slug);
   const similar = mockReviews.filter(r => r.id !== review?.id).slice(0, 3);
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   if (!review) {
     return (
@@ -35,6 +39,9 @@ export const ReviewDetailPage: React.FC = () => {
       </div>
     );
   }
+
+  // Find positions that can be used with this product
+  const useWithPositions = mockPositions.slice(0, 3);
 
   const faqs = [
     { question: 'Is this product beginner-friendly?', answer: `With a beginners score of ${review.beginnerFriendly}/10, ${review.title} is ${review.beginnerFriendly >= 8 ? 'highly recommended for beginners' : 'better suited for intermediate users'}.` },
@@ -186,11 +193,21 @@ export const ReviewDetailPage: React.FC = () => {
                 href={review.affiliateUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => track('affiliate_click', { reviewId: review.id })}
-                className="block w-full py-3 bg-primary hover:bg-accent text-white font-bold rounded-xl transition-colors text-sm"
+                onClick={() => track('buy_now_click', { reviewId: review.id })}
+                className="block w-full py-3 bg-primary hover:bg-accent text-white font-bold rounded-xl transition-colors text-sm mb-3"
               >
-                Check Best Price →
+                Buy Now →
               </a>
+              <button
+                onClick={() => {
+                  toggleFavorite({ id: review.id, type: 'review', title: review.title, slug: review.slug, image: review.image });
+                  track('wishlist_add', { reviewId: review.id });
+                }}
+                className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border text-sm font-medium transition-colors ${isFavorite(review.id) ? 'border-primary/30 text-primary bg-primary/10' : 'border-white/10 text-textMuted hover:text-textPrimary'}`}
+              >
+                <Bookmark className="w-4 h-4" />
+                {isFavorite(review.id) ? 'Saved to Wishlist' : 'Save to Wishlist'}
+              </button>
             </div>
 
             {/* Overall Score Widget */}
@@ -198,6 +215,31 @@ export const ReviewDetailPage: React.FC = () => {
               <p className="text-xs text-textMuted uppercase tracking-wider mb-2">DZIRE Score</p>
               <p className="text-6xl font-black text-gold">{review.overallScore}</p>
               <p className="text-sm text-textMuted mt-1">/ 10 Overall</p>
+            </div>
+
+            {/* Use With These Positions */}
+            <div className="bg-surface rounded-2xl p-5 border border-white/8">
+              <h3 className="text-sm font-bold text-textPrimary uppercase tracking-wider mb-3">Use With These Positions</h3>
+              <div className="space-y-2">
+                {useWithPositions.map(pos => (
+                  <div key={pos.id} className="flex items-center gap-2">
+                    <Link to={`/positions/${pos.slug}`} className="flex-1 text-xs text-textMuted hover:text-primary transition-colors truncate">
+                      {pos.title}
+                    </Link>
+                    <SaveToPlaylistButton
+                      item={{
+                        id: `combo-${review.id}-${pos.id}`,
+                        type: 'position',
+                        title: `${review.title} + ${pos.title}`,
+                        slug: pos.slug,
+                        image: pos.image,
+                      }}
+                      label=""
+                      className="!p-1 !rounded-lg shrink-0"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
