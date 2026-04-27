@@ -63,14 +63,25 @@ instructions/root.md
 ## Backend Folder Structure
 
 ```
-backend/app/
-├── routes/    # Thin route handlers (APIRouter)
-├── services/  # Business logic
-├── models/    # SQLAlchemy ORM models
-├── schemas/   # Pydantic v2 request/response schemas
-├── auth/      # JWT creation, validation, refresh
-├── core/      # App config, DB session, middleware
-└── main.py    # App factory and router registration
+backend/
+├── app/
+│   ├── api/
+│   │   ├── deps.py          # require_admin FastAPI dependency
+│   │   └── routes/
+│   │       └── admin_auth.py  # Admin auth endpoints (/api/admin/*)
+│   ├── auth/      # JWT creation, validation, refresh
+│   ├── core/      # App config, DB session
+│   ├── models/    # SQLAlchemy ORM models
+│   ├── routes/    # Public route handlers
+│   ├── schemas/   # Pydantic v2 request/response schemas
+│   ├── seed/      # Dev-only seed scripts (dev_admin.py)
+│   ├── services/  # Business logic
+│   └── main.py    # App factory and router registration
+├── alembic/       # Alembic async migration runner
+│   └── versions/
+├── alembic.ini
+├── requirements.txt
+└── .env.example
 ```
 
 ## Database Folder Structure
