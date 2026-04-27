@@ -1,4 +1,4 @@
-import { PublicLayout } from '@/components/layout/PublicLayout';
+
 import { PageHero } from '@/components/layout/PageHero';
 import { SearchBar } from '@/components/forms/SearchBar';
 import { FilterChips } from '@/components/forms/FilterChips';
@@ -8,21 +8,22 @@ import { mockReviews } from '@/data/mockReviews';
 import { TROPHY_CATEGORIES } from '@/lib/constants';
 import { useFilters } from '@/hooks/useFilters';
 import { usePageTracking } from '@/hooks/usePageTracking';
-import type { Review } from '@/types/content';
+import type { Review } from '@/data/types';
 import { Trophy, ShieldCheck } from 'lucide-react';
 const CATS = ['Vibrators','Couples','Beginner Kits','Wands','Sets','Pulse'];
 export function ReviewsPage() {
   usePageTracking('reviews');
   const { query, setQuery, activeFilters, toggleFilter, filtered } = useFilters<Review>(
-    mockReviews, (r,q) => r.productName.toLowerCase().includes(q), (r,f) => f.includes(r.category)
+    mockReviews, (r,q) => r.title.toLowerCase().includes(q), (r,f) => f.includes(r.category)
   );
   return (
-    <PublicLayout>
+    
+  <>
       {/* Trophy Hall */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-12 pb-8">
         <div className="flex items-center gap-3 mb-6"><Trophy className="w-7 h-7 text-yellow-400"/><h2 className="text-3xl font-black text-white">DZIRE Trophy Hall of Fame</h2></div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
-          {TROPHY_CATEGORIES.map(cat=><TrophyCard key={cat} category={cat} review={mockReviews.find(r=>r.awardBadge===cat)}/>)}
+          {TROPHY_CATEGORIES.map(cat=><TrophyCard key={cat} category={cat} review={mockReviews.find(r=>r.isTrophy && r.trophyLabel===cat)}/>)}
         </div>
       </section>
       <PageHero eyebrow="Product Reviews" title="DZIRE Reviews" subtitle="In-depth, honest reviews of premium intimate wellness products."/>
@@ -46,6 +47,5 @@ export function ReviewsPage() {
           <a href="/contact" className="inline-block px-6 py-3 bg-rose-500 hover:bg-rose-400 text-white font-semibold rounded-lg transition-colors">Submit for Review</a>
         </div>
       </div>
-    </PublicLayout>
-  );
-}
+  </>
+);}

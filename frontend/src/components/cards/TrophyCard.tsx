@@ -1,6 +1,6 @@
 import { Trophy } from 'lucide-react';
-import type { Review } from '@/types/content';
-import { Link } from '@tanstack/react-router';
+import type { Review } from '@/data/types';
+import { Link } from 'react-router-dom';
 interface Props { category: string; review?: Review; }
 export function TrophyCard({ category, review }: Props) {
   return (
@@ -12,9 +12,9 @@ export function TrophyCard({ category, review }: Props) {
         <p className="text-xs text-yellow-400 uppercase tracking-widest font-semibold mb-1">{category}</p>
         {review ? (
           <>
-            <p className="text-white font-bold">{review.productName}</p>
+            <p className="text-white font-bold">{review.title}</p>
             <p className="text-xs text-white/40 mt-1">{review.category}</p>
-            <Link to="/reviews/$slug" params={{slug:review.slug}} className="mt-3 inline-block text-xs px-3 py-1.5 bg-rose-500 hover:bg-rose-400 text-white rounded-full transition-colors">Read Review</Link>
+            <Link to={`/reviews/${review.slug}`} className="mt-3 inline-block text-xs px-3 py-1.5 bg-rose-500 hover:bg-rose-400 text-white rounded-full transition-colors">Read Review</Link>
           </>
         ) : <p className="text-white/30 text-sm">Coming Soon</p>}
       </div>

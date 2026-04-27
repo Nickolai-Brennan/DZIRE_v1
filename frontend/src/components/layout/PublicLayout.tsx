@@ -1,14 +1,21 @@
+import React from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
-import { AdminFloatingButton } from '@/components/admin/AdminFloatingButton';
-interface Props { children: React.ReactNode; }
-export function PublicLayout({ children }: Props) {
+import { AdminButton } from './AdminButton';
+
+interface PublicLayoutProps {
+  children: React.ReactNode;
+}
+
+export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen flex flex-col bg-[#09090B]">
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1">
+        {children}
+      </main>
       <Footer />
-      <AdminFloatingButton />
+      <AdminButton />
     </div>
   );
-}
+};

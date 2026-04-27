@@ -1,4 +1,4 @@
-import { PublicLayout } from '@/components/layout/PublicLayout';
+
 import { track, EVENTS } from '@/lib/tracking';
 import { usePageTracking } from '@/hooks/usePageTracking';
 import { Lock, Star, Zap, Crown } from 'lucide-react';
@@ -11,7 +11,8 @@ const FAQS = [
 export function VipPage() {
   usePageTracking('vip');
   return (
-    <PublicLayout>
+    
+  <>
       <section className="max-w-3xl mx-auto px-4 sm:px-6 py-20 text-center">
         <Crown className="w-12 h-12 text-yellow-400 mx-auto mb-4"/>
         <p className="text-yellow-400 text-sm font-semibold uppercase tracking-widest mb-4">Exclusive Access</p>
@@ -41,6 +42,5 @@ export function VipPage() {
           ))}
         </div>
       </section>
-    </PublicLayout>
-  );
-}
+  </>
+);}

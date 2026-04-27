@@ -17,8 +17,8 @@ export function AdminSchedule() {
               {mockScheduleItems.filter(i=>i.status===status).map(item=>(
                 <div key={item.id} className="p-3 bg-white/5 rounded-lg">
                   <p className="text-sm text-white font-medium">{item.title}</p>
-                  <p className="text-xs text-rose-400 mt-1">{item.contentType}</p>
-                  <p className="text-xs text-white/30 mt-1">{new Date(item.scheduledAt).toLocaleString()}</p>
+                  <p className="text-xs text-rose-400 mt-1">{item.type}</p>
+                  <p className="text-xs text-white/30 mt-1">{item.date}</p>
                 </div>
               ))}
             </div>

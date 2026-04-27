@@ -8,7 +8,7 @@ const COLORS = ['#E11D48','#F5C451','#A1A1AA'];
 export function AdminSiteStats() {
   return (
     <AdminLayout title="Site Stats">
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">{mockAdminStats.slice(0,4).map(s=><StatCard key={s.label} label={s.label} value={s.value} change={s.change}/>)}</div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8"><StatCard label="Page Views" value={mockAdminStats.pageViews.toLocaleString()} change={12}/><StatCard label="Active Users" value={mockAdminStats.activeUsers.toLocaleString()} change={8}/><StatCard label="Newsletter" value={mockAdminStats.newsletterSignups.toLocaleString()} change={15}/><StatCard label="VIP Members" value={mockAdminStats.vipMembers.toLocaleString()} change={5}/></div>
       <div className="grid sm:grid-cols-3 gap-6 mb-8">
         <div className="sm:col-span-2 glass-card p-5">
           <h3 className="font-bold text-white mb-4">Top Pages</h3>

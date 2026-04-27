@@ -1,40 +1,80 @@
-import { useState } from 'react';
-import { Link } from '@tanstack/react-router';
-import { Menu, X, Flame } from 'lucide-react';
-import { NAV_LINKS } from '@/lib/constants';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Search, Menu, X } from 'lucide-react';
 
-export function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+export const Header: React.FC = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navLinks = [
+    { to: '/', label: 'Home' },
+    { to: '/positions', label: 'Positions' },
+    { to: '/reviews', label: 'Reviews' },
+    { to: '/dictionary', label: 'Dictionary' },
+    { to: '/dzire-dolls', label: 'DZIRE Dolls' },
+    { to: '/stories', label: 'Stories' },
+    { to: '/magazine', label: 'Magazine' },
+  ];
+
   return (
-    <header className="sticky top-0 z-50 bg-[#09090B]/90 backdrop-blur-md border-b border-white/8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-        <Link to="/" className="flex items-center gap-2 font-black text-xl text-white">
-          <Flame className="w-6 h-6 text-rose-500" />
-          <span>DZIRE</span>
-        </Link>
-        <nav className="hidden lg:flex items-center gap-6">
-          {NAV_LINKS.map(l => (
-            <Link key={l.href} to={l.href} className="text-sm text-white/60 hover:text-white transition-colors" activeProps={{className:'text-rose-400'}}>
-              {l.label}
+    <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-white/8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <Link to="/" className="flex items-center">
+            <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+              DZIRE
+            </span>
+          </Link>
+
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-textMuted hover:text-textPrimary transition-colors text-sm font-medium"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Right Actions */}
+          <div className="flex items-center gap-4">
+            <Link to="/search" className="p-2 hover:bg-surface rounded-lg transition-colors">
+              <Search className="w-5 h-5 text-textMuted" />
             </Link>
-          ))}
-        </nav>
-        <div className="flex items-center gap-3">
-          <Link to="/vip" className="hidden sm:block px-4 py-1.5 bg-rose-500 hover:bg-rose-400 text-white text-sm font-semibold rounded-full transition-colors">VIP</Link>
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden text-white/60 hover:text-white" aria-label="Toggle menu">
-            {mobileOpen ? <X className="w-6 h-6"/> : <Menu className="w-6 h-6"/>}
-          </button>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 hover:bg-surface rounded-lg transition-colors"
+            >
+              {mobileMenuOpen ? (
+                <X className="w-6 h-6 text-textMuted" />
+              ) : (
+                <Menu className="w-6 h-6 text-textMuted" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
-      {mobileOpen && (
-        <div className="lg:hidden bg-[#15151C] border-t border-white/8 px-4 py-4 space-y-2">
-          {NAV_LINKS.map(l => (
-            <Link key={l.href} to={l.href} onClick={() => setMobileOpen(false)}
-              className="block py-2 text-white/70 hover:text-white transition-colors">{l.label}</Link>
-          ))}
-          <Link to="/vip" onClick={() => setMobileOpen(false)} className="block mt-3 px-4 py-2 bg-rose-500 text-white text-center font-semibold rounded-lg">VIP Access</Link>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden border-t border-white/8 bg-surface">
+          <nav className="px-4 py-6 space-y-4">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-textPrimary hover:text-primary transition-colors font-medium"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
         </div>
       )}
     </header>
   );
-}
+};

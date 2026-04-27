@@ -1,4 +1,4 @@
-import { PublicLayout } from '@/components/layout/PublicLayout';
+
 import { PageHero } from '@/components/layout/PageHero';
 import { usePageTracking } from '@/hooks/usePageTracking';
 import { Star, BookOpen, Package, Megaphone, Link2, Shield, HelpCircle, Newspaper } from 'lucide-react';
@@ -15,7 +15,8 @@ const CARDS = [
 export function ContactPage() {
   usePageTracking('contact');
   return (
-    <PublicLayout>
+    
+  <>
       <PageHero eyebrow="Get in Touch" title="Contact & Collaborate" subtitle="Partner with DZIRE as a creator, sponsor, affiliate, or submit your content."/>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 pb-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -28,6 +29,5 @@ export function ContactPage() {
           ))}
         </div>
       </div>
-    </PublicLayout>
-  );
-}
+  </>
+);}

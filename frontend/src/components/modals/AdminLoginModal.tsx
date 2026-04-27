@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { X, Lock, AlertTriangle } from 'lucide-react';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate } from 'react-router-dom';
 interface Props { onClose: () => void; }
 export function AdminLoginModal({ onClose }: Props) {
   const { login, error } = useAdminAuth();
@@ -14,7 +14,7 @@ export function AdminLoginModal({ onClose }: Props) {
   }, [onClose]);
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (login(form.username, form.password)) { onClose(); navigate({ to: '/admin/dashboard' }); }
+    if (login(form.username, form.password)) { onClose(); navigate('/admin/dashboard'); }
   };
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Admin Login">

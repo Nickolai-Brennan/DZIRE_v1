@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
-import { useNavigate, Link } from '@tanstack/react-router';
+import { useNavigate, Link } from 'react-router-dom';
 import { Flame, Lock, AlertTriangle } from 'lucide-react';
 export function AdminLoginPage() {
   const { login, error } = useAdminAuth();
@@ -8,7 +8,7 @@ export function AdminLoginPage() {
   const [form, setForm] = useState({ username:'', password:'' });
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (login(form.username, form.password)) navigate({ to: '/admin/dashboard' });
+    if (login(form.username, form.password)) navigate('/admin/dashboard');
   };
   return (
     <div className="min-h-screen bg-[#09090B] flex items-center justify-center p-4">

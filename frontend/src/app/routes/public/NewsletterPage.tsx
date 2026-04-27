@@ -1,4 +1,4 @@
-import { PublicLayout } from '@/components/layout/PublicLayout';
+
 import { NewsletterForm } from '@/components/forms/NewsletterForm';
 import { usePageTracking } from '@/hooks/usePageTracking';
 import { Mail, Star, Zap, Lock } from 'lucide-react';
@@ -11,7 +11,8 @@ const BENEFITS = [
 export function NewsletterPage() {
   usePageTracking('newsletter');
   return (
-    <PublicLayout>
+    
+  <>
       <section className="max-w-3xl mx-auto px-4 sm:px-6 py-20 text-center">
         <p className="text-rose-500 text-sm font-semibold uppercase tracking-widest mb-4">Join the List</p>
         <h1 className="text-5xl font-black text-white mb-6">The DZIRE Newsletter</h1>
@@ -36,6 +37,5 @@ export function NewsletterPage() {
           <NewsletterForm compact/>
         </div>
       </section>
-    </PublicLayout>
-  );
-}
+  </>
+);}

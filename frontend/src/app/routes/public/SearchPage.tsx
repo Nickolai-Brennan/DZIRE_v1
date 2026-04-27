@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { PublicLayout } from '@/components/layout/PublicLayout';
+
 import { SearchBar } from '@/components/forms/SearchBar';
 import { FilterChips } from '@/components/forms/FilterChips';
 import { PositionCard } from '@/components/cards/PositionCard';
@@ -21,11 +21,11 @@ export function SearchPage() {
   const toggle = (f: string) => setActiveFilters(p => p.includes(f) ? p.filter(x=>x!==f) : [...p,f]);
   const lq = query.toLowerCase();
   const posResults = lq ? mockPositions.filter(p => p.title.toLowerCase().includes(lq)) : [];
-  const revResults = lq ? mockReviews.filter(r => r.productName.toLowerCase().includes(lq)) : [];
+  const revResults = lq ? mockReviews.filter(r => r.title.toLowerCase().includes(lq)) : [];
   const dollResults = lq ? mockDolls.filter(d => d.name.toLowerCase().includes(lq)) : [];
   const hasResults = posResults.length+revResults.length+dollResults.length > 0;
   return (
-    <PublicLayout>
+    
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
         <h1 className="text-4xl font-black text-white mb-8 text-center">Search DZIRE</h1>
         <SearchBar value={query} onChange={handleSearch} placeholder="Search positions, reviews, creators..." className="mb-4"/>
@@ -60,6 +60,6 @@ export function SearchPage() {
           <NewsletterForm compact/>
         </div>
       </div>
-    </PublicLayout>
+    
   );
 }

@@ -1,7 +1,6 @@
-import { Link } from '@tanstack/react-router';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, BarChart2, TrendingUp, Search, Tag, Mail, Users, Globe, PieChart, Calendar, PenLine, FileText, DollarSign, Star, Settings, Flame, LogOut } from 'lucide-react';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
-import { useNavigate } from '@tanstack/react-router';
 const ICON_MAP: Record<string, React.ReactNode> = {
   LayoutDashboard:<LayoutDashboard className="w-4 h-4"/>, BarChart2:<BarChart2 className="w-4 h-4"/>,
   TrendingUp:<TrendingUp className="w-4 h-4"/>, Search:<Search className="w-4 h-4"/>,
@@ -15,7 +14,7 @@ import { ADMIN_ROUTES } from '@/lib/constants';
 export function AdminSidebar({ collapsed=false }: { collapsed?: boolean }) {
   const { logout } = useAdminAuth();
   const navigate = useNavigate();
-  const handleLogout = () => { logout(); navigate({ to: '/admin/login' }); };
+  const handleLogout = () => { logout(); navigate('/admin/login'); };
   return (
     <aside className={`h-screen sticky top-0 bg-[#15151C] border-r border-white/8 flex flex-col transition-all ${collapsed?'w-16':'w-56'}`}>
       <div className="flex items-center gap-2 px-4 py-5 border-b border-white/8">
@@ -24,11 +23,10 @@ export function AdminSidebar({ collapsed=false }: { collapsed?: boolean }) {
       </div>
       <nav className="flex-1 overflow-y-auto py-4 px-2 space-y-1">
         {ADMIN_ROUTES.map(r => (
-          <Link key={r.href} to={r.href}
-            className="flex items-center gap-3 px-3 py-2 rounded-lg text-white/50 hover:text-white hover:bg-white/5 transition-colors text-sm"
-            activeProps={{className:'flex items-center gap-3 px-3 py-2 rounded-lg text-white bg-rose-500/20 text-sm'}}>
+          <NavLink key={r.href} to={r.href}
+            className={({ isActive }) => `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors text-sm ${isActive ? 'text-white bg-rose-500/20' : 'text-white/50 hover:text-white hover:bg-white/5'}`}>
             {ICON_MAP[r.icon]}{!collapsed && <span>{r.label}</span>}
-          </Link>
+          </NavLink>
         ))}
       </nav>
       <div className="p-4 border-t border-white/8">

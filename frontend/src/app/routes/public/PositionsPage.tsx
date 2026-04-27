@@ -1,4 +1,4 @@
-import { PublicLayout } from '@/components/layout/PublicLayout';
+
 import { PageHero } from '@/components/layout/PageHero';
 import { SearchBar } from '@/components/forms/SearchBar';
 import { FilterChips } from '@/components/forms/FilterChips';
@@ -14,13 +14,14 @@ export function PositionsPage() {
   usePageTracking('positions');
   const { query, setQuery, activeFilters, toggleFilter, filtered } = useFilters<Position>(
     mockPositions,
-    (p,q) => p.title.toLowerCase().includes(q) || p.shortDescription.toLowerCase().includes(q) || p.tags.some(t=>t.toLowerCase().includes(q)),
+    (p,q) => p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q) || p.keywords.some(t=>t.toLowerCase().includes(q)),
     (p,f) => f.includes(p.category)
   );
   const handleQuery = (v: string) => { setQuery(v); if(v) track(EVENTS.SEARCH_QUERY,{query:v,page:'positions'}); };
   const handleFilter = (f: string) => { toggleFilter(f); track(EVENTS.FILTER_USED,{filter:f,page:'positions'}); };
   return (
-    <PublicLayout>
+    
+  <>
       <PageHero eyebrow="DZIRE Guides" title="Position Archive" subtitle="Explore our curated collection of intimate position guides with detailed scoring and compatibility insights."/>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
         <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -37,6 +38,5 @@ export function PositionsPage() {
           <NewsletterForm compact/>
         </div>
       </div>
-    </PublicLayout>
-  );
-}
+  </>
+);}

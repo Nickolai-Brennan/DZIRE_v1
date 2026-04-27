@@ -1,4 +1,4 @@
-import { PublicLayout } from '@/components/layout/PublicLayout';
+
 import { NewsletterForm } from '@/components/forms/NewsletterForm';
 import { DollCard } from '@/components/cards/DollCard';
 import { PositionCard } from '@/components/cards/PositionCard';
@@ -8,18 +8,19 @@ import { StoryCard } from '@/components/cards/StoryCard';
 import { mockDolls } from '@/data/mockDolls';
 import { mockPositions } from '@/data/mockPositions';
 import { mockReviews } from '@/data/mockReviews';
-import { mockDictionaryTerms } from '@/data/mockDictionary';
+import { mockDictionary } from '@/data/mockDictionary';
 import { mockStories } from '@/data/mockStories';
 import { TROPHY_CATEGORIES } from '@/lib/constants';
 import { track, EVENTS } from '@/lib/tracking';
-import { Link } from '@tanstack/react-router';
+import { Link } from 'react-router-dom';
 import { usePageTracking } from '@/hooks/usePageTracking';
 import { Trophy } from 'lucide-react';
 export function HomePage() {
   usePageTracking('homepage');
-  const trophyWinners = TROPHY_CATEGORIES.map(cat => ({ cat, review: mockReviews.find(r => r.awardBadge === cat) }));
+  const trophyWinners = TROPHY_CATEGORIES.map(cat => ({ cat, review: mockReviews.find(r => r.isTrophy && r.trophyLabel ? r.trophyLabel : undefined === cat) }));
   return (
-    <PublicLayout>
+    
+  <>
       {/* Hero */}
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden px-4">
         <div className="absolute inset-0 bg-gradient-to-b from-[#1D1D26]/40 to-[#09090B]"/>
@@ -70,7 +71,7 @@ export function HomePage() {
           <Link to="/dictionary" className="text-rose-400 hover:text-rose-300 text-sm font-semibold">Browse All Terms →</Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {mockDictionaryTerms.slice(0,3).map(t=><DictionaryTermCard key={t.id} term={t}/>)}
+          {mockDictionary.slice(0,3).map(t=><DictionaryTermCard key={t.id} term={t}/>)}
         </div>
       </section>
       {/* Latest Stories */}
@@ -98,6 +99,5 @@ export function HomePage() {
           <Link to="/vip" onClick={()=>track(EVENTS.VIP_CTA_CLICK,{source:'homepage'})} className="inline-block px-10 py-4 bg-yellow-400 hover:bg-yellow-300 text-black font-black rounded-full text-lg transition-all hover:scale-105">Join VIP Now</Link>
         </div>
       </section>
-    </PublicLayout>
-  );
-}
+  </>
+);}

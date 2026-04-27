@@ -1,5 +1,5 @@
 import { Bell, Search, Plus } from 'lucide-react';
-import { Link } from '@tanstack/react-router';
+import { Link } from 'react-router-dom';
 interface Props { title: string; }
 export function AdminTopbar({ title }: Props) {
   return (

@@ -1,10 +1,10 @@
-import { PublicLayout } from '@/components/layout/PublicLayout';
+
 import { PageHero } from '@/components/layout/PageHero';
 import { SearchBar } from '@/components/forms/SearchBar';
 import { FilterChips } from '@/components/forms/FilterChips';
 import { DictionaryTermCard } from '@/components/cards/DictionaryTermCard';
 import { NewsletterForm } from '@/components/forms/NewsletterForm';
-import { mockDictionaryTerms } from '@/data/mockDictionary';
+import { mockDictionary } from '@/data/mockDictionary';
 import { useFilters } from '@/hooks/useFilters';
 import { usePageTracking } from '@/hooks/usePageTracking';
 import type { DictionaryTerm } from '@/types/content';
@@ -13,11 +13,12 @@ const CATS = ['Emotional Wellness','Lifestyle','Psychology','Safety & Respect','
 export function DictionaryPage() {
   usePageTracking('dictionary');
   const { query, setQuery, activeFilters, toggleFilter, filtered } = useFilters<DictionaryTerm>(
-    mockDictionaryTerms, (t,q) => t.term.toLowerCase().includes(q) || t.shortDefinition.toLowerCase().includes(q),
+    mockDictionary, (t,q) => t.term.toLowerCase().includes(q) || t.shortDef.toLowerCase().includes(q),
     (t,f) => f.includes(t.category)
   );
   return (
-    <PublicLayout>
+    
+  <>
       <PageHero eyebrow="DZIRE Dictionary" title="Know the Language" subtitle="A curated guide to the vocabulary of adult wellness, intimacy, and lifestyle."/>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
         <SearchBar value={query} onChange={setQuery} placeholder="Search terms..." className="mb-6"/>
@@ -34,6 +35,5 @@ export function DictionaryPage() {
           <NewsletterForm compact/>
         </div>
       </div>
-    </PublicLayout>
-  );
-}
+  </>
+);}

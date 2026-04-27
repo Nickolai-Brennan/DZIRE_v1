@@ -1,33 +1,72 @@
-import type { AdminStat, SeoReport, KeywordReport, NewsletterSubscriber, ScheduleItem } from '@/types/admin';
-export const mockAdminStats: AdminStat[] = [
-  { label:'Total Page Views',value:'124,832',change:12.4 },
-  { label:'Active Users',value:'8,241',change:8.1 },
-  { label:'Newsletter Signups',value:'3,109',change:24.3 },
-  { label:'VIP Members',value:'412',change:5.2 },
-  { label:'Affiliate Clicks',value:'9,847',change:18.7 },
-  { label:'Sponsor Clicks',value:'4,213',change:-2.1 },
-  { label:'Ad Impressions',value:'287,400',change:6.8 },
-  { label:'Doll Profile Views',value:'18,320',change:44.5 },
+import type { AdminStats } from './types';
+
+export const mockAdminStats: AdminStats = {
+  pageViews: 156789,
+  activeUsers: 8432,
+  newsletterSignups: 3421,
+  vipMembers: 234,
+  affiliateClicks: 1876,
+  sponsorClicks: 945,
+  topContent: [
+    { title: 'Magic Wand Review', views: 12453, type: 'review' },
+    { title: 'Classic Missionary Guide', views: 9821, type: 'position' },
+    { title: 'Aftercare Definition', views: 7654, type: 'dictionary' },
+    { title: 'Luna Starr Profile', views: 6543, type: 'doll' },
+    { title: 'Modern Desire Essay', views: 5432, type: 'article' },
+  ],
+  recentActivity: [
+    { action: 'New newsletter signup', timestamp: '2 minutes ago' },
+    { action: 'VIP membership purchased', timestamp: '15 minutes ago' },
+    { action: 'Affiliate click: Magic Wand', timestamp: '23 minutes ago' },
+    { action: 'New article view: 12,453rd', timestamp: '45 minutes ago' },
+    { action: 'Position guide opened', timestamp: '1 hour ago' },
+  ],
+};
+
+export const mockMonetization = {
+  affiliatePartners: [
+    { name: 'Lovehoney', category: 'Toys', clicks: 876, conversions: 45, revenue: 2340.50 },
+    { name: 'Magic Wand', category: 'Premium', clicks: 543, conversions: 38, revenue: 3654.00 },
+    { name: 'LELO', category: 'Luxury', clicks: 234, conversions: 18, revenue: 2890.00 },
+  ],
+  sponsorships: [
+    { name: 'Luna Starr Featured Placement', type: 'Creator Spotlight', status: 'active', monthlyRate: 1500 },
+    { name: 'Scarlett Rain Content Series', type: 'Editorial', status: 'active', monthlyRate: 1200 },
+    { name: 'Phoenix Vale Wellness Column', type: 'Column', status: 'active', monthlyRate: 1000 },
+  ],
+};
+
+export const mockScheduleItems = [
+  { id: 1, title: 'Magic Wand Deep Dive', type: 'Review', date: '2024-02-01', status: 'scheduled', platform: 'Site' },
+  { id: 2, title: 'Top Beginner Positions', type: 'Guide', date: '2024-02-03', status: 'draft', platform: 'Site' },
+  { id: 3, title: 'Luna Starr Interview', type: 'Feature', date: '2024-02-05', status: 'scheduled', platform: 'Site' },
+  { id: 4, title: 'Newsletter: Feb Edition', type: 'Newsletter', date: '2024-02-07', status: 'draft', platform: 'Email' },
+  { id: 5, title: 'Valentine\'s Gift Guide', type: 'Roundup', date: '2024-02-10', status: 'scheduled', platform: 'Site' },
+  { id: 6, title: 'Instagram: New Position Drop', type: 'Social', date: '2024-02-12', status: 'draft', platform: 'Instagram' },
 ];
-export const mockSeoReports: SeoReport[] = [
-  { id:'1',pageTitle:'Classic Connection — Position Guide',metaDescription:'Learn the Classic Connection intimate position.',slug:'/positions/classic-connection',targetKeyword:'intimate positions guide',seoScore:87,warnings:['Meta description slightly long']},
-  { id:'2',pageTitle:'Luxe Vibrance Pro Review',metaDescription:'Read our in-depth review of the Luxe Vibrance Pro.',slug:'/reviews/luxe-vibrance-pro',targetKeyword:'luxury vibrator review',seoScore:72,warnings:['Missing alt text','Short meta description']},
-  { id:'3',pageTitle:'DZIRE Dolls — Creator Discovery',metaDescription:"Discover DZIRE's curated creator spotlight.",slug:'/dzire-dolls',targetKeyword:'adult lifestyle creators',seoScore:91,warnings:[]},
+
+export const mockKeywordReports = [
+  { keyword: 'best intimate positions', rank: 3, volume: 12400, change: 2 },
+  { keyword: 'sex toy reviews 2024', rank: 7, volume: 9800, change: -1 },
+  { keyword: 'beginner intimacy guide', rank: 5, volume: 7200, change: 3 },
+  { keyword: 'luxury vibrator review', rank: 2, volume: 6100, change: 1 },
+  { keyword: 'adult lifestyle publication', rank: 11, volume: 4500, change: -2 },
+  { keyword: 'DZIRE magazine', rank: 1, volume: 3200, change: 0 },
 ];
-export const mockKeywordReports: KeywordReport[] = [
-  { id:'1',keyword:'intimate positions',cluster:'Positions',usage:47,ranking:12,suggestions:['beginner intimate positions','couples positions guide']},
-  { id:'2',keyword:'luxury vibrator',cluster:'Reviews',usage:23,ranking:8,suggestions:['best luxury vibrators 2025']},
-  { id:'3',keyword:'intimacy definition',cluster:'Dictionary',usage:38,ranking:5,suggestions:['what is intimacy','types of intimacy']},
+
+export const mockNewsletterSubscribers = [
+  { email: 'user1@example.com', status: 'active', tier: 'free', signedUp: '2024-01-05', opens: 14 },
+  { email: 'user2@example.com', status: 'active', tier: 'vip', signedUp: '2024-01-08', opens: 22 },
+  { email: 'user3@example.com', status: 'unsubscribed', tier: 'free', signedUp: '2023-12-20', opens: 3 },
+  { email: 'user4@example.com', status: 'active', tier: 'free', signedUp: '2024-01-12', opens: 9 },
+  { email: 'user5@example.com', status: 'active', tier: 'vip', signedUp: '2024-01-18', opens: 31 },
 ];
-export const mockNewsletterSubscribers: NewsletterSubscriber[] = [
-  { id:'1',firstName:'Alex',email:'alex@example.com',interests:['Positions','Reviews'],signupSource:'Homepage Hero',status:'active',joinedAt:'2024-11-01'},
-  { id:'2',firstName:'Jordan',email:'jordan@example.com',interests:['Stories','DZIRE Dolls'],signupSource:'Newsletter Page',status:'active',joinedAt:'2024-11-15'},
-  { id:'3',firstName:'Riley',email:'riley@example.com',interests:['VIP','Reviews'],signupSource:'Review Page CTA',status:'active',joinedAt:'2024-12-01'},
-  { id:'4',firstName:'Morgan',email:'morgan@example.com',interests:['Dictionary'],signupSource:'Homepage Hero',status:'unsubscribed',joinedAt:'2024-10-20'},
-];
-export const mockScheduleItems: ScheduleItem[] = [
-  { id:'1',title:'Gravity Shift Position Guide',contentType:'position guide',scheduledAt:'2025-01-15T10:00:00Z',status:'scheduled',author:'DZIRE Editorial'},
-  { id:'2',title:'Obsidian Wand Review Update',contentType:'review',scheduledAt:'2025-01-18T14:00:00Z',status:'scheduled',author:'DZIRE Editorial'},
-  { id:'3',title:'Aria Luxe January Feature',contentType:'dzire doll spotlight',scheduledAt:'2025-01-20T09:00:00Z',status:'draft',author:'Admin'},
-  { id:'4',title:'January Newsletter',contentType:'newsletter',scheduledAt:'2025-01-22T08:00:00Z',status:'scheduled',author:'Admin'},
+
+export const mockSeoReports = [
+  { page: '/positions', impressions: 23450, clicks: 1234, ctr: 5.3, avgPosition: 4.2 },
+  { page: '/reviews', impressions: 18200, clicks: 987, ctr: 5.4, avgPosition: 5.1 },
+  { page: '/dictionary', impressions: 14300, clicks: 756, ctr: 5.3, avgPosition: 6.3 },
+  { page: '/dzire-dolls', impressions: 9800, clicks: 432, ctr: 4.4, avgPosition: 7.8 },
+  { page: '/stories', impressions: 7600, clicks: 345, ctr: 4.5, avgPosition: 8.2 },
+  { page: '/', impressions: 31200, clicks: 2100, ctr: 6.7, avgPosition: 3.1 },
 ];

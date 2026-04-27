@@ -1,4 +1,4 @@
-import { PublicLayout } from '@/components/layout/PublicLayout';
+
 import { PageHero } from '@/components/layout/PageHero';
 import { FilterChips } from '@/components/forms/FilterChips';
 import { StoryCard } from '@/components/cards/StoryCard';
@@ -6,7 +6,7 @@ import { NewsletterForm } from '@/components/forms/NewsletterForm';
 import { mockStories } from '@/data/mockStories';
 import { useFilters } from '@/hooks/useFilters';
 import { usePageTracking } from '@/hooks/usePageTracking';
-import type { Story } from '@/types/content';
+import type { Story } from '@/data/types';
 const CATS = ['Romantic Fiction','Literary Erotica','Contemporary Fiction'];
 export function StoriesPage() {
   usePageTracking('stories');
@@ -14,7 +14,8 @@ export function StoriesPage() {
     mockStories, () => true, (s,f) => f.includes(s.category)
   );
   return (
-    <PublicLayout>
+    
+  <>
       <PageHero eyebrow="DZIRE Fiction" title="Stories" subtitle="Original adult fiction — romantic, literary, and beautifully written."/>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
         <FilterChips options={CATS} active={activeFilters} onToggle={toggleFilter}/>
@@ -31,6 +32,5 @@ export function StoriesPage() {
           <NewsletterForm compact/>
         </div>
       </div>
-    </PublicLayout>
-  );
-}
+  </>
+);}
