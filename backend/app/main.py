@@ -41,4 +41,4 @@ async def on_startup() -> None:
             async with AsyncSessionLocal() as db:
                 await seed_dev_admin(db)
         except Exception as exc:  # noqa: BLE001
-            logger.warning("Dev seed skipped (DB may not be ready): %s", exc)
+            logger.warning("Dev seed skipped (DB may not be ready): %s: %s", type(exc).__name__, exc)

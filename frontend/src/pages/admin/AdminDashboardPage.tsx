@@ -18,7 +18,11 @@ export const AdminDashboardPage: React.FC = () => {
       navigate('/admin/login', { replace: true });
       return;
     }
-    const token = getAdminToken()!;
+    const token = getAdminToken();
+    if (!token) {
+      navigate('/admin/login', { replace: true });
+      return;
+    }
     adminMe(token)
       .then((user) => setUsername(user.username))
       .catch(() => {

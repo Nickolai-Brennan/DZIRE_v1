@@ -22,10 +22,12 @@ export function isAdminAuthenticated(): boolean {
   const token = getAdminToken();
   if (!token) return false;
   try {
+    const parts = token.split('.');
+    if (parts.length !== 3) return false;
     // Decode payload without verifying signature (verification is server-side)
-    const payload = JSON.parse(atob(token.split('.')[1]));
+    const payload = JSON.parse(atob(parts[1]));
     const now = Math.floor(Date.now() / 1000);
-    return payload.exp > now;
+    return typeof payload.exp === 'number' && payload.exp > now;
   } catch {
     return false;
   }

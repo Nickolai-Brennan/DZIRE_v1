@@ -14,7 +14,10 @@ export const AdminButton: React.FC = () => {
       aria-label="Admin login"
     >
       <Shield className="w-6 h-6 text-textMuted group-hover:text-primary transition-colors" />
-      <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 text-xs text-textMuted opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap bg-surface border border-white/10 px-2 py-1 rounded pointer-events-none">
+      <span
+        aria-hidden="true"
+        className="absolute right-full mr-2 top-1/2 -translate-y-1/2 text-xs text-textMuted opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap bg-surface border border-white/10 px-2 py-1 rounded pointer-events-none"
+      >
         Admin
       </span>
     </Link>
