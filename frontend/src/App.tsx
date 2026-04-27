@@ -49,6 +49,10 @@ import { PlaylistProvider } from './context/PlaylistContext';
 import { AuthProvider } from './context/AuthContext';
 import { FavoritesProvider } from './context/FavoritesContext';
 import { ChatbotWidget } from './components/chatbot/ChatbotWidget';
+// Step 7 auth pages
+import { ForgotPasswordPage } from './auth/ForgotPasswordPage';
+import { ResetPasswordPage } from './auth/ResetPasswordPage';
+import { ProtectedRoute } from './components/auth/ProtectedRoute';
 
 function App() {
   return (
@@ -104,9 +108,15 @@ function App() {
                       <Route path="/explore" element={<ExplorePage />} />
                       <Route path="/signup" element={<SignupPage />} />
                       <Route path="/login" element={<LoginPage />} />
+                      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                      <Route path="/reset-password" element={<ResetPasswordPage />} />
                       <Route path="/onboarding" element={<OnboardingPage />} />
                       <Route path="/quiz" element={<QuizPage />} />
-                      <Route path="/profile" element={<ProfilePage />} />
+                      <Route path="/profile" element={
+                        <ProtectedRoute>
+                          <ProfilePage />
+                        </ProtectedRoute>
+                      } />
                       <Route path="/playlists" element={<PlaylistsPage />} />
                       <Route path="/playlists/:id" element={<PlaylistDetailPage />} />
                       <Route path="/tags/:tag" element={<TagResultsPage />} />

@@ -6,7 +6,7 @@ import { track } from '../utils/track';
 
 export const SignupPage: React.FC = () => {
   const [email, setEmail] = useState('');
-  const [displayName, setDisplayName] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -15,7 +15,7 @@ export const SignupPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !displayName || !password) {
+    if (!email || !username || !password) {
       setError('Please fill in all fields.');
       return;
     }
@@ -23,7 +23,7 @@ export const SignupPage: React.FC = () => {
     setError('');
     try {
       track('signup_start', { email });
-      await signup(email, displayName, password);
+      await signup(email, username, password);
       track('signup_complete', { email });
       navigate('/onboarding');
     } catch {
@@ -49,12 +49,12 @@ export const SignupPage: React.FC = () => {
           )}
 
           <div>
-            <label className="block text-sm font-medium text-textMuted mb-2">Display Name</label>
+            <label className="block text-sm font-medium text-textMuted mb-2">Username</label>
             <input
               type="text"
-              value={displayName}
-              onChange={e => setDisplayName(e.target.value)}
-              placeholder="Your name"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              placeholder="your_username"
               className="w-full bg-surfaceAlt border border-white/10 rounded-xl px-4 py-3 text-textPrimary placeholder:text-textMuted focus:outline-none focus:border-primary"
             />
           </div>
