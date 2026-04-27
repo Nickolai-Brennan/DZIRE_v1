@@ -8,7 +8,18 @@ Welcome to the DZIRE_v1 documentation. Use this index to navigate all project do
 
 | File | Description |
 |------|-------------|
+| [project-overview.md](./project-overview.md) | Project purpose, features, and stack summary |
+| [architecture.md](./architecture.md) | System layers, data flow, folder structure |
+| [setup.md](./setup.md) | Local development setup guide |
 | [stack.md](./stack.md) | Locked stack decisions and domain ownership |
+| [frontend.md](./frontend.md) | Frontend structure, routes, and API client |
+| [backend.md](./backend.md) | Backend structure, auth, and endpoints |
+| [database.md](./database.md) | Database schema, migrations, and seeds |
+| [api.md](./api.md) | API route reference |
+| [agents.md](./agents.md) | Agent map and execution order |
+| [skills.md](./skills.md) | Skill index and trigger descriptions |
+| [workflows.md](./workflows.md) | Workflow index and development loop |
+| [changelog.md](./changelog.md) | Build history and task log |
 | [agent-outputs.md](./agent-outputs.md) | Agent output logs and results |
 | [best_practices.md](./best_practices.md) | Project best practices |
 | [dev-verification-checklist.md](./dev-verification-checklist.md) | Dev verification checklist |
