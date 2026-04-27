@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "skill_name": "deployment-planner",
+  "description": "Evals for the deployment-planner skill — covers Dockerfile generation, CI/CD workflow creation, and deployment checklists.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "generate-dockerfile",
+      "prompt": "Write a Dockerfile for the DZIRE_v1 backend FastAPI app.",
+      "expected_output": "A valid Dockerfile using python:3.11-slim base image, copying requirements.txt and installing deps, running as a non-root user, exposing port 8000, and starting with uvicorn. Includes a HEALTHCHECK instruction.",
+      "files": ["config/stack.config.json"],
+      "assertions": [
+        {"type": "contains", "value": "FROM python:3.11"},
+        {"type": "contains", "value": "EXPOSE 8000"},
+        {"type": "contains", "value": "uvicorn"},
+        {"type": "contains", "value": "HEALTHCHECK"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "generate-github-actions-workflow",
+      "prompt": "Create a GitHub Actions CI/CD workflow that runs tests and deploys the app on push to main.",
+      "expected_output": "A valid .github/workflows/deploy.yml with jobs for test (pytest + vitest) and deploy. Uses matrix strategy for test steps, and includes Vercel and Render deployment steps. Secrets referenced via ${{ secrets.* }}.",
+      "files": [],
+      "assertions": [
+        {"type": "contains", "value": "on:"},
+        {"type": "contains", "value": "jobs:"},
+        {"type": "contains", "value": "pytest"},
+        {"type": "contains", "value": "secrets."}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "deployment-checklist",
+      "prompt": "Generate a deployment checklist for going to production for the first time.",
+      "expected_output": "A markdown checklist with at least 8 items covering: env vars set in provider dashboards, Docker build passes, DB migrations run, test suite passes, frontend builds, preview URL tested, domains configured, and deployment documented.",
+      "files": ["config/env.example"],
+      "assertions": [
+        {"type": "contains", "value": "- [ ]"},
+        {"type": "contains", "value": "migrations"},
+        {"type": "contains", "value": "env"}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "render-service-config",
+      "prompt": "What Render settings should I use to deploy the FastAPI backend?",
+      "expected_output": "Configuration guidance for Render: Environment=Docker, Branch=main, Port=8000, Health check path=/health, with notes on environment variable setup and the deploy trigger.",
+      "files": [],
+      "assertions": [
+        {"type": "contains", "value": "Render"},
+        {"type": "contains", "value": "8000"},
+        {"type": "contains", "value": "/health"}
+      ]
+    }
+  ]
+}

@@ -1,10 +1,46 @@
 ---
 name: webapp-testing
-description: Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.
+description: Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs. Use when the user asks to test a web app, verify UI behavior, capture screenshots, automate browser interactions, or debug frontend issues.
+category: testing
+version: v1.0
+inputs:
+  - running web application URL or server command
+  - test scenario description
+outputs:
+  - Playwright test script
+  - screenshots
+  - browser console logs
+  - pass/fail report
 license: Complete terms in LICENSE.txt
 ---
 
 # Web Application Testing
+
+## Purpose
+Automate browser interactions, verify frontend functionality, capture screenshots, and debug UI behavior for local web applications using Playwright.
+
+## When To Use
+Use this skill when the user asks to:
+- Test a web application's UI or user flows
+- Verify that a page renders correctly
+- Capture screenshots of the application
+- Debug frontend JavaScript errors
+- Automate browser interactions (clicks, form fills, navigation)
+- Check browser console logs for errors
+
+## Inputs
+- A running web application (or server start command)
+- Description of what to test or verify
+- Target URL (defaults to `localhost`)
+
+## Workflow
+1. Determine whether the app is static HTML or a dynamic server-based app
+2. Start the server if needed using `scripts/with_server.py`
+3. Write a Playwright script targeting the correct URL
+4. Wait for `networkidle` before inspecting or interacting
+5. Execute test actions and capture output (screenshots, logs, assertions)
+6. Report results with pass/fail and relevant screenshots
+
 
 To test local web applications, write native Python Playwright scripts.
 
@@ -94,3 +130,15 @@ with sync_playwright() as p:
   - `element_discovery.py` - Discovering buttons, links, and inputs on a page
   - `static_html_automation.py` - Using file:// URLs for local HTML
   - `console_logging.py` - Capturing console logs during automation
+
+## Quality Checklist
+- [ ] Server started (or confirmed running) before script execution
+- [ ] `page.wait_for_load_state('networkidle')` called on dynamic apps
+- [ ] Selectors identified from inspection before executing actions
+- [ ] Screenshots saved to `/tmp/` for review
+- [ ] Browser closed after test completes
+- [ ] Results documented with pass/fail status
+
+## References
+- [Playwright docs](https://playwright.dev/python/docs/intro)
+- [`scripts/with_server.py`](scripts/with_server.py) — server lifecycle helper

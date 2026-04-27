@@ -1,0 +1,42 @@
+{
+  "version": "1.0",
+  "skill_name": "eval-runner",
+  "description": "Evals for the eval-runner skill — covers eval case authoring, running evals, and reporting pass/fail results.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "write-evals-for-skill",
+      "prompt": "Write eval cases for the frontend-builder skill.",
+      "expected_output": "A JSON eval file with at least 3 cases targeting frontend-builder. Each case has a realistic prompt, specific expected_output description, and covers at least one happy path (add a React page), one component creation case, and one API integration case.",
+      "files": ["skills/frontend-builder/SKILL.md"],
+      "assertions": [
+        {"type": "contains", "value": "\"skill_name\": \"frontend-builder\""},
+        {"type": "contains", "value": "\"prompt\""},
+        {"type": "contains", "value": "\"expected_output\""}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "run-eval-and-report",
+      "prompt": "Run the eval cases for the database-designer skill and report the results.",
+      "expected_output": "A pass/fail report listing each eval case by id and name, with a pass/fail status and brief notes explaining why each case passed or failed. At least one case should be evaluated.",
+      "files": ["evals/database-evals.json"],
+      "assertions": [
+        {"type": "contains", "value": "pass"},
+        {"type": "contains", "value": "fail"}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "add-assertions-to-eval",
+      "prompt": "Add assertions to this eval case: id=1, prompt='Create a users table with email and password fields', expected_output='SQL DDL for users table with id, email, password_hash, created_at, updated_at columns'",
+      "expected_output": "The eval case augmented with an assertions array containing at least 2 assertion objects (type + value), such as contains 'CREATE TABLE users', contains 'created_at', not_contains 'TODO'.",
+      "files": [],
+      "assertions": [
+        {"type": "contains", "value": "\"assertions\""},
+        {"type": "contains", "value": "\"type\""},
+        {"type": "contains", "value": "\"value\""}
+      ]
+    }
+  ]
+}
