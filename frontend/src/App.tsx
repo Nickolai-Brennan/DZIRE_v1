@@ -1,6 +1,24 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { PublicLayout } from './components/layout/PublicLayout';
 import { HomePage } from './pages/HomePage';
+import { BlogIndexPage } from './pages/BlogIndexPage';
+import { BlogPostPage } from './pages/BlogPostPage';
+import { CategoryPage } from './pages/CategoryPage';
+import { SponsorPage } from './pages/SponsorPage';
+import { AffiliatePage } from './pages/AffiliatePage';
+import { VIPSubscribePage } from './pages/VIPSubscribePage';
+import { ContentManager } from './admin/ContentManager';
+import { PostEditor } from './admin/PostEditor';
+import { SEOReports } from './admin/SEOReports';
+import { KeywordTagReports } from './admin/KeywordTagReports';
+import { MarketingDashboard } from './admin/MarketingDashboard';
+import { AdvertisingDashboard } from './admin/AdvertisingDashboard';
+import { TrafficAnalytics } from './admin/TrafficAnalytics';
+import { SocialMediaStats } from './admin/SocialMediaStats';
+import { AffiliateManager } from './admin/AffiliateManager';
+import { SponsorManager } from './admin/SponsorManager';
+import { NewsletterManager } from './admin/NewsletterManager';
+import { VIPSubscriptionManager } from './admin/VIPSubscriptionManager';
 import { PositionsPage } from './pages/PositionsPage';
 import { PositionDetailPage } from './pages/PositionDetailPage';
 import { ReviewsPage } from './pages/ReviewsPage';
@@ -42,6 +60,18 @@ function App() {
               {/* Admin routes — rendered outside PublicLayout (no header/footer/adminbutton) */}
               <Route path="/admin/login" element={<AdminLoginPage />} />
               <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+              <Route path="/admin/content" element={<ContentManager />} />
+              <Route path="/admin/editor" element={<PostEditor />} />
+              <Route path="/admin/seo" element={<SEOReports />} />
+              <Route path="/admin/keywords" element={<KeywordTagReports />} />
+              <Route path="/admin/analytics" element={<TrafficAnalytics />} />
+              <Route path="/admin/marketing" element={<MarketingDashboard />} />
+              <Route path="/admin/advertising" element={<AdvertisingDashboard />} />
+              <Route path="/admin/social" element={<SocialMediaStats />} />
+              <Route path="/admin/affiliates" element={<AffiliateManager />} />
+              <Route path="/admin/sponsors" element={<SponsorManager />} />
+              <Route path="/admin/newsletter" element={<NewsletterManager />} />
+              <Route path="/admin/vip" element={<VIPSubscriptionManager />} />
 
               {/* Public routes */}
               <Route
@@ -50,6 +80,12 @@ function App() {
                   <PublicLayout>
                     <Routes>
                       <Route path="/" element={<HomePage />} />
+                      <Route path="/blog" element={<BlogIndexPage />} />
+                      <Route path="/blog/:slug" element={<BlogPostPage />} />
+                      <Route path="/category/:slug" element={<CategoryPage />} />
+                      <Route path="/sponsors" element={<SponsorPage />} />
+                      <Route path="/affiliates" element={<AffiliatePage />} />
+                      <Route path="/vip-subscribe" element={<VIPSubscribePage />} />
                       <Route path="/positions" element={<PositionsPage />} />
                       <Route path="/positions/:slug" element={<PositionDetailPage />} />
                       <Route path="/reviews" element={<ReviewsPage />} />
