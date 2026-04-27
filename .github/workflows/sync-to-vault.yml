@@ -1,0 +1,99 @@
+name: Sync to __Vault
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Copies skills, agents, workflows, and instructions into
+# https://github.com/Nickolai-Brennan/__Vault under the path DZIRE_v1/
+#
+# Required repository secret:
+#   VAULT_TOKEN  — a GitHub Personal Access Token with `repo` scope for __Vault
+# ──────────────────────────────────────────────────────────────────────────────
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - "skills/**"
+      - "agents/**"
+      - "workflows/**"
+      - "instructions/**"
+      - ".github/agents/**"
+      - ".github/workflows/**"
+      - ".github/instructions/**"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    name: Sync assets to __Vault
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      # ── Checkout DZIRE_v1 ──────────────────────────────────────────────────
+      - name: Checkout DZIRE_v1
+        uses: actions/checkout@v4
+        with:
+          path: source
+
+      # ── Checkout __Vault ──────────────────────────────────────────────────
+      - name: Checkout __Vault
+        uses: actions/checkout@v4
+        with:
+          repository: Nickolai-Brennan/__Vault
+          token: ${{ secrets.VAULT_TOKEN }}
+          path: vault
+
+      # ── Copy assets ───────────────────────────────────────────────────────
+      - name: Sync skills
+        run: |
+          mkdir -p vault/DZIRE_v1/skills
+          rsync -av --delete source/skills/ vault/DZIRE_v1/skills/
+
+      - name: Sync agents (root)
+        run: |
+          mkdir -p vault/DZIRE_v1/agents
+          rsync -av --delete source/agents/ vault/DZIRE_v1/agents/
+
+      - name: Sync agents (.github)
+        run: |
+          mkdir -p vault/DZIRE_v1/.github/agents
+          rsync -av --delete source/.github/agents/ vault/DZIRE_v1/.github/agents/
+
+      - name: Sync workflows (root)
+        run: |
+          mkdir -p vault/DZIRE_v1/workflows
+          rsync -av --delete source/workflows/ vault/DZIRE_v1/workflows/
+
+      - name: Sync workflows (.github) — exclude this sync workflow
+        run: |
+          mkdir -p vault/DZIRE_v1/.github/workflows
+          rsync -av --delete \
+            --exclude="sync-to-vault.yml" \
+            source/.github/workflows/ vault/DZIRE_v1/.github/workflows/
+
+      - name: Sync instructions (root)
+        run: |
+          mkdir -p vault/DZIRE_v1/instructions
+          rsync -av --delete source/instructions/ vault/DZIRE_v1/instructions/
+
+      - name: Sync instructions (.github)
+        run: |
+          mkdir -p vault/DZIRE_v1/.github/instructions
+          rsync -av --delete source/.github/instructions/ vault/DZIRE_v1/.github/instructions/
+
+      # ── Commit and push ───────────────────────────────────────────────────
+      - name: Commit and push to __Vault
+        working-directory: vault
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add DZIRE_v1/
+          if git diff --cached --quiet; then
+            echo "Nothing changed — skipping commit."
+          else
+            COMMIT_SHA="${{ github.sha }}"
+            git commit -m "sync: DZIRE_v1 assets from ${COMMIT_SHA:0:7}"
+            git push
+          fi
