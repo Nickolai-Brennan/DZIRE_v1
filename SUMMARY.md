@@ -69,36 +69,53 @@ Successfully built the **DZIRE Frontend** - a premium dark-mode adult lifestyle 
 ✅ **Mobile First** - Fully responsive design
 ✅ **Accessibility** - Semantic HTML structure
 
-## Design System
+## Design System (Step 6 — Complete ✅)
 
-### Color Palette
-- Background: `#09090B` (deep black)
-- Surface: `#15151C` (charcoal)
-- Primary: `#E11D48` (rose-red)
-- Gold: `#F5C451` (trophy gold)
-- Text: `#F8FAFC` (near white)
+### `frontend/src/design-system/`
 
-### Visual Style
-- Dark luxury aesthetic
-- Glass-morphism cards
-- Subtle gradients
-- Premium magazine feel
-- Smooth hover transitions
+| Layer | Files | Description |
+|-------|-------|-------------|
+| **Tokens** | `colors`, `typography`, `spacing`, `radii`, `shadows`, `z-index`, `breakpoints` | Immutable brand values |
+| **Components** | `Button` (8 variants), `Card` (6 variants), `Badge` (9 variants), `FormField`, `Modal`, `DataTable`, `StatCard` | Reusable UI primitives |
+| **Layouts** | `PublicLayout`, `AdminLayout`, `ArticleLayout`, `DashboardLayout`, `LandingPageLayout` | Page-level shells |
+| **Patterns** | `HeroSection`, `BlogCardGrid`, `FeatureGrid`, `SponsorStrip` | Composed page sections |
+
+### Quick Import
+
+```ts
+import { colors, Button, Card, PublicLayout, HeroSection } from '@/design-system';
+```
+
+### Docs added in Step 6
+- `docs/brand-guidelines.md`
+- `docs/design-system.md`
+- `docs/ui-components.md`
+- `docs/social-media-style-guide.md`
+- `docs/admin-dashboard-style.md`
+
+---
 
 ## Project Structure
 ```
 frontend/
 ├── src/
+│   ├── design-system/   # ← NEW Step 6 design system
+│   │   ├── tokens/      # Design tokens (colors, typography, spacing, …)
+│   │   ├── components/  # Button, Card, Badge, FormField, Modal, DataTable, StatCard
+│   │   ├── layouts/     # PublicLayout, AdminLayout, ArticleLayout, DashboardLayout, LandingPageLayout
+│   │   ├── patterns/    # HeroSection, BlogCardGrid, FeatureGrid, SponsorStrip
+│   │   └── README.md
 │   ├── components/
-│   │   ├── ui/ (10 components)
+│   │   ├── ui/ (10+ components)
 │   │   └── layout/ (4 components)
-│   ├── pages/ (10 pages)
+│   ├── pages/ (15+ pages)
 │   ├── data/ (9 mock data files + types)
 │   ├── utils/ (tracking utility)
 │   ├── App.tsx (routing)
 │   ├── main.tsx
 │   └── index.css (Tailwind v4)
 ├── public/
+│   └── brand/           # ← NEW Step 6 brand assets placeholder
 ├── dist/ (production build)
 ├── README.md (comprehensive docs)
 ├── PROJECT_STATUS.md

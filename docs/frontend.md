@@ -11,6 +11,12 @@
 
 ```
 frontend/src/
+├── design-system/       # ← Centralised design system (Step 6)
+│   ├── tokens/          # colors.ts, typography.ts, spacing.ts, radii.ts, shadows.ts, z-index.ts, breakpoints.ts
+│   ├── components/      # Button, Card, Badge, FormField, Modal, DataTable, StatCard
+│   ├── layouts/         # PublicLayout, AdminLayout, ArticleLayout, DashboardLayout, LandingPageLayout
+│   ├── patterns/        # HeroSection, BlogCardGrid, FeatureGrid, SponsorStrip
+│   └── README.md
 ├── components/
 │   ├── layout/      # Header, Footer, PublicLayout, AdminButton (dev-only)
 │   ├── ui/          # Shared UI primitives (Button, Card, Badge, etc.)
@@ -32,6 +38,16 @@ frontend/src/
 ├── utils/           # Utility/helper functions
 └── assets/          # Static images and SVGs
 ```
+
+## Design System
+
+The design system lives in `frontend/src/design-system/`. Import from the barrel:
+
+```ts
+import { colors, spacing, Button, Card, PublicLayout, HeroSection } from '@/design-system';
+```
+
+See [`frontend/src/design-system/README.md`](../frontend/src/design-system/README.md) and [`docs/design-system.md`](./design-system.md) for the full API reference.
 
 ## Routes
 

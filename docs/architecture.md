@@ -98,7 +98,13 @@ database/
 
 ```
 frontend/src/
-├── components/  # Reusable UI components
+├── design-system/       # ← NEW (Step 6) — centralised design system
+│   ├── tokens/          # Design tokens: colors, typography, spacing, radii, shadows, z-index, breakpoints
+│   ├── components/      # Primitive UI components (Button, Card, Badge, FormField, Modal, DataTable, StatCard)
+│   ├── layouts/         # Page layout shells (PublicLayout, AdminLayout, ArticleLayout, DashboardLayout, LandingPageLayout)
+│   ├── patterns/        # Composed sections (HeroSection, BlogCardGrid, FeatureGrid, SponsorStrip)
+│   └── README.md        # Usage guide with import examples
+├── components/  # Reusable UI components (legacy + domain-specific)
 ├── pages/       # Route-level page components
 ├── services/    # API client functions
 ├── data/        # Mock data (replaced by services/ as API is built)
