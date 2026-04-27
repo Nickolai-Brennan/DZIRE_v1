@@ -1,12 +1,3 @@
----
-name: seo-agent
-description: Audit posts, keywords, tags, metadata, visibility, and content quality. Generate SEO reports and improvement recommendations.
-version: v1.0
-category: audit
-skills:
-  - seo-auditor
----
-
 # SEO Agent
 
 ## Purpose

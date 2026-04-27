@@ -1,13 +1,3 @@
----
-name: cms-agent
-description: Build CMS models, routes, editor workflows, and content templates for DZIRE_v1.
-version: v1.0
-category: build
-skills:
-  - cms-builder
-  - seo-auditor
----
-
 # CMS Agent
 
 ## Purpose

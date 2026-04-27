@@ -1,14 +1,3 @@
----
-name: monetization-agent
-description: Manage affiliates, sponsors, ads, VIP subscriptions, newsletter, and revenue tracking for DZIRE_v1.
-version: v1.0
-category: monetization
-skills:
-  - affiliate-manager
-  - newsletter-manager
-  - vip-subscription-builder
----
-
 # Monetization Agent
 
 ## Purpose

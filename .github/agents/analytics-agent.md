@@ -1,10 +1,3 @@
----
-name: analytics-agent
-description: Track traffic, clicks, referrers, UTM data, and dashboard metrics for DZIRE_v1.
-version: v1.0
-category: analytics
----
-
 # Analytics Agent
 
 ## Purpose

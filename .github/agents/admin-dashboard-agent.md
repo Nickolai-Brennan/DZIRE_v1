@@ -1,12 +1,3 @@
----
-name: admin-dashboard-agent
-description: Build admin pages, dashboards, tables, KPI cards, and control panels for the DZIRE_v1 admin area.
-version: v1.0
-category: build
-skills:
-  - admin-dashboard-builder
----
-
 # Admin Dashboard Agent
 
 ## Purpose
