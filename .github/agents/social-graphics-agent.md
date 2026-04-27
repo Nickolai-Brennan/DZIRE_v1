@@ -1,3 +1,8 @@
+---
+name: social-graphics-agent
+description: Define standards and create design specifications for all DZIRE social media graphics. Use when defining graphic templates, platform dimensions, or content guidelines.
+---
+
 # Social Graphics Agent
 
 ## Purpose

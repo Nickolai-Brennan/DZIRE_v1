@@ -1,3 +1,8 @@
+---
+name: brand-guidelines-agent
+description: Define, document, and enforce the DZIRE visual identity. Use when updating brand colors, typography, logo rules, or brand guidelines documentation.
+---
+
 # Brand Guidelines Agent
 
 ## Purpose

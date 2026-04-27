@@ -1,3 +1,8 @@
+---
+name: ui-component-agent
+description: Create, maintain, and document all reusable UI components in the DZIRE design system. Use when building buttons, cards, forms, tables, modals, or any UI primitive.
+---
+
 # UI Component Agent
 
 ## Purpose

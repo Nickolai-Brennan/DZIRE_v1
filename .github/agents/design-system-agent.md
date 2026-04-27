@@ -1,3 +1,8 @@
+---
+name: design-system-agent
+description: Build, maintain, and evolve the DZIRE design token system and UI component library. Use when adding tokens, updating components, or enforcing design consistency.
+---
+
 # Design System Agent
 
 ## Purpose
