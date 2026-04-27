@@ -1,0 +1,76 @@
+name: Markdown Format & Fix
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - '**/*.md'
+  pull_request:
+    paths:
+      - '**/*.md'
+
+jobs:
+  markdown:
+    name: Lint and fix Markdown
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install markdownlint-cli and Prettier
+        run: npm install --global markdownlint-cli prettier@^3
+
+      # ── Auto-fix with Prettier ─────────────────────────────────────────────
+      - name: Format Markdown with Prettier
+        run: prettier --write "**/*.md" --ignore-path .gitignore
+        continue-on-error: true
+
+      # ── Lint with markdownlint (report only, non-blocking) ────────────────
+      - name: Lint Markdown with markdownlint
+        run: |
+          CONFIG_FLAG=""
+          if [ -f ".markdownlint.json" ]; then
+            CONFIG_FLAG="--config .markdownlint.json"
+          fi
+          markdownlint "**/*.md" \
+            --ignore node_modules \
+            --ignore ".git/**" \
+            $CONFIG_FLAG
+        continue-on-error: true
+
+      # ── Commit auto-fixes (push only) ─────────────────────────────────────
+      - name: Commit Markdown fixes
+        if: github.event_name == 'push'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "**/*.md" 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Markdown is already clean — nothing to commit."
+          else
+            git commit -m "docs: auto-fix Markdown formatting [skip ci]"
+            git push
+          fi
+
+      # ── Annotate PR with lint results ─────────────────────────────────────
+      - name: Annotate PR with markdownlint results
+        if: github.event_name == 'pull_request'
+        run: |
+          markdownlint "**/*.md" \
+            --ignore node_modules \
+            --ignore ".git/**" \
+            --dot \
+            || true
