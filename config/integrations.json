@@ -1,0 +1,15 @@
+{
+  "vercel": {
+    "project_id": null,
+    "team_id": null,
+    "deploy_hook": null
+  },
+  "render": {
+    "service_id": null,
+    "api_key": null
+  },
+  "motherduck": {
+    "token": null,
+    "database": "dzire_v1"
+  }
+}
