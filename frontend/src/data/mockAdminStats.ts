@@ -1,27 +1,6 @@
-import type { MagazineIssue } from './types';
+import type { AdminStats } from './types';
 
-export const mockMagazine: MagazineIssue[] = [
-  {
-    id: 'mag-1',
-    title: 'New Year, New Desire',
-    slug: 'new-year-new-desire',
-    issueNumber: 1,
-    coverDate: 'January 2024',
-    articles: ['art-1', 'art-2', 'art-3'],
-    coverImage: 'https://placehold.co/800x1000/09090B/F8FAFC?text=Issue+01',
-  },
-  {
-    id: 'mag-2',
-    title: 'The Pleasure Issue',
-    slug: 'the-pleasure-issue',
-    issueNumber: 2,
-    coverDate: 'February 2024',
-    articles: ['art-4', 'art-5'],
-    coverImage: 'https://placehold.co/800x1000/09090B/F8FAFC?text=Issue+02',
-  },
-];
-
-export const mockAdminStats = {
+export const mockAdminStats: AdminStats = {
   pageViews: 156789,
   activeUsers: 8432,
   newsletterSignups: 3421,

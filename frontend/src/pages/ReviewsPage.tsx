@@ -14,7 +14,7 @@ const TROPHY_AWARDS = [
   { id: "Editor's Favorite", label: "Editor's Favorite" },
 ];
 
-const CATEGORY_FILTERS = ['All', 'Vibrators', 'Couples', 'Clitoral', 'Wearables', 'Couples'];
+const CATEGORY_FILTERS = ['All', 'Vibrators', 'Couples', 'Clitoral', 'Wearables'];
 
 export const ReviewsPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('All');
