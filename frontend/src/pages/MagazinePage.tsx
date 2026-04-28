@@ -11,7 +11,7 @@ import {
   ArticleCard,
   ArticleGrid,
 } from "../design-system/layouts/MagazineLayout";
-import { Badge } from "../components/Badge";
+import { Badge } from "../components/ui/Badge";
 
 // Mock data
 const HERO_ARTICLE = {

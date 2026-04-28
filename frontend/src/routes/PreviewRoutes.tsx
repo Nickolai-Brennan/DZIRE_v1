@@ -5,7 +5,7 @@
  */
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { MagazineLayoutPreview } from "../../components/previews/MagazineLayoutPreview";
+import { MagazineLayoutPreview } from "../components/previews/MagazineLayoutPreview";
 
 export const PreviewRoutes: React.FC = () => {
   return (

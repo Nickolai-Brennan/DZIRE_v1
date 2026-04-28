@@ -26,6 +26,13 @@ import { PublishingQueuePage } from "./admin/PublishingQueuePage";
 import { SocialIntegrationsPage } from "./admin/SocialIntegrationsPage";
 import { SocialMetricsPage } from "./admin/SocialMetricsPage";
 import { SocialSizeChartPage } from "./admin/SocialSizeChartPage";
+import { GeographicStatsPage } from "./admin/GeographicStatsPage";
+import { AgeRangeStatsPage } from "./admin/AgeRangeStatsPage";
+import { SearchRankingsPage } from "./admin/SearchRankingsPage";
+import { MonetizationPage } from "./admin/MonetizationPage";
+import { PostTemplatesPage } from "./admin/PostTemplatesPage";
+import { DzireDollsAdminPage } from "./admin/DzireDollsAdminPage";
+import { SettingsPage } from "./admin/SettingsPage";
 import { PositionsPage } from "./pages/PositionsPage";
 import { PositionDetailPage } from "./pages/PositionDetailPage";
 import { ReviewsPage } from "./pages/ReviewsPage";
@@ -50,6 +57,8 @@ import { ProfilePage } from "./pages/ProfilePage";
 import { PlaylistsPage } from "./pages/PlaylistsPage";
 import { PlaylistDetailPage } from "./pages/PlaylistDetailPage";
 import { TagResultsPage } from "./pages/TagResultsPage";
+import { ArticlesPage } from "./pages/ArticlesPage";
+import { ArticleDetailPage } from "./pages/ArticleDetailPage";
 import { AdminLoginPage } from "./pages/admin/AdminLoginPage";
 import { AdminDashboardPage } from "./pages/admin/AdminDashboardPage";
 import { PlaylistProvider } from "./context/PlaylistContext";
@@ -120,6 +129,13 @@ function App() {
                 path="/admin/social-size-chart"
                 element={<SocialSizeChartPage />}
               />
+              <Route path="/admin/geographic" element={<GeographicStatsPage />} />
+              <Route path="/admin/age-range" element={<AgeRangeStatsPage />} />
+              <Route path="/admin/search-rankings" element={<SearchRankingsPage />} />
+              <Route path="/admin/monetization" element={<MonetizationPage />} />
+              <Route path="/admin/post-templates" element={<PostTemplatesPage />} />
+              <Route path="/admin/dolls" element={<DzireDollsAdminPage />} />
+              <Route path="/admin/settings" element={<SettingsPage />} />
 
               {/* Public routes */}
               <Route
@@ -170,6 +186,11 @@ function App() {
                       <Route path="/vip" element={<VipPage />} />
                       <Route path="/contact" element={<ContactPage />} />
                       <Route path="/search" element={<SearchPage />} />
+                      <Route path="/articles" element={<ArticlesPage />} />
+                      <Route
+                        path="/articles/:slug"
+                        element={<ArticleDetailPage />}
+                      />
                       <Route path="/explore" element={<ExplorePage />} />
                       <Route path="/signup" element={<SignupPage />} />
                       <Route path="/login" element={<LoginPage />} />

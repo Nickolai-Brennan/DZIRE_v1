@@ -11,7 +11,7 @@ import {
   ArticleCard,
   ArticleGrid,
 } from "../../design-system/layouts/MagazineLayout";
-import { Badge } from "../Badge";
+import { Badge } from "../ui/Badge";
 
 const SAMPLE_IMAGE =
   "https://images.unsplash.com/photo-1532634726644-8a5282143e5a?w=800&h=600&fit=crop";

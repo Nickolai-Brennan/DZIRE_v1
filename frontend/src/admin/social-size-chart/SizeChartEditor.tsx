@@ -3,7 +3,7 @@
  * Modal form for creating or editing a social media size chart spec.
  */
 import React, { useEffect, useState } from "react";
-import { SizeChartRow } from "./PlatformSizeTable";
+import type { SizeChartRow } from "./PlatformSizeTable";
 
 interface SizeChartEditorProps {
   row: SizeChartRow | null;
