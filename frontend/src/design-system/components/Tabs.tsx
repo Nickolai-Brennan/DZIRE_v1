@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 interface Tab {
   id: string;
@@ -12,14 +12,21 @@ interface TabsProps {
   className?: string;
 }
 
-export const Tabs: React.FC<TabsProps> = ({ tabs, defaultTab, className = '' }) => {
-  const [active, setActive] = useState(defaultTab ?? tabs[0]?.id ?? '');
+export const Tabs: React.FC<TabsProps> = ({
+  tabs,
+  defaultTab,
+  className = "",
+}) => {
+  const [active, setActive] = useState(defaultTab ?? tabs[0]?.id ?? "");
 
   const activeTab = tabs.find((t) => t.id === active);
 
   return (
     <div className={className}>
-      <div role="tablist" className="flex border-b border-white/10 overflow-x-auto">
+      <div
+        role="tablist"
+        className="flex border-b border-white/10 overflow-x-auto"
+      >
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -31,8 +38,8 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultTab, className = '' }) 
             onClick={() => setActive(tab.id)}
             className={`flex-shrink-0 px-5 py-3 text-sm font-medium transition-colors border-b-2 -mb-px ${
               active === tab.id
-                ? 'text-primary border-primary'
-                : 'text-textMuted border-transparent hover:text-textPrimary hover:border-white/20'
+                ? "text-primary border-primary"
+                : "text-textMuted border-transparent hover:text-textPrimary hover:border-white/20"
             }`}
           >
             {tab.label}

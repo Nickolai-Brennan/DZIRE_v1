@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface EmptyStateProps {
   title: string;
@@ -13,7 +13,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   description,
   action,
   icon,
-  className = '',
+  className = "",
 }) => {
   return (
     <div
@@ -21,7 +21,9 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
     >
       {icon && <div className="mb-4 text-textMuted opacity-60">{icon}</div>}
       <h3 className="text-xl font-bold text-textPrimary mb-2">{title}</h3>
-      {description && <p className="text-textMuted mb-6 max-w-md text-sm">{description}</p>}
+      {description && (
+        <p className="text-textMuted mb-6 max-w-md text-sm">{description}</p>
+      )}
       {action && <div>{action}</div>}
     </div>
   );

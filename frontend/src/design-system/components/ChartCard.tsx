@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface ChartCardProps {
   title: string;
@@ -13,14 +13,18 @@ export const ChartCard: React.FC<ChartCardProps> = ({
   subtitle,
   children,
   action,
-  className = '',
+  className = "",
 }) => {
   return (
-    <div className={`bg-surface rounded-2xl border border-white/8 p-6 ${className}`}>
+    <div
+      className={`bg-surface rounded-2xl border border-white/8 p-6 ${className}`}
+    >
       <div className="flex items-start justify-between mb-6">
         <div>
           <h3 className="text-base font-semibold text-textPrimary">{title}</h3>
-          {subtitle && <p className="text-sm text-textMuted mt-0.5">{subtitle}</p>}
+          {subtitle && (
+            <p className="text-sm text-textMuted mt-0.5">{subtitle}</p>
+          )}
         </div>
         {action && <div>{action}</div>}
       </div>

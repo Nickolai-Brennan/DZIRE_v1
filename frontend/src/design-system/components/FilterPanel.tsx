@@ -1,5 +1,5 @@
-import React from 'react';
-import { X } from 'lucide-react';
+import React from "react";
+import { X } from "lucide-react";
 
 interface FilterOption {
   label: string;
@@ -25,12 +25,14 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
   selected,
   onChange,
   onClear,
-  className = '',
+  className = "",
 }) => {
   const hasFilters = Object.values(selected).some((v) => v.length > 0);
 
   return (
-    <aside className={`bg-surface rounded-xl border border-white/8 p-5 space-y-5 ${className}`}>
+    <aside
+      className={`bg-surface rounded-xl border border-white/8 p-5 space-y-5 ${className}`}
+    >
       <div className="flex items-center justify-between">
         <span className="text-sm font-semibold text-textPrimary">Filters</span>
         {hasFilters && onClear && (
@@ -60,8 +62,8 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
                   onClick={() => onChange(group.id, opt.value)}
                   className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
                     isActive
-                      ? 'bg-primary text-white'
-                      : 'bg-surfaceAlt text-textMuted border border-white/10 hover:border-primary/40 hover:text-textPrimary'
+                      ? "bg-primary text-white"
+                      : "bg-surfaceAlt text-textMuted border border-white/10 hover:border-primary/40 hover:text-textPrimary"
                   }`}
                 >
                   {opt.label}

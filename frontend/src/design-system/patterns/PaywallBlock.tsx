@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface PaywallBlockProps {
   title?: string;
@@ -12,14 +12,14 @@ interface PaywallBlockProps {
 }
 
 export const PaywallBlock: React.FC<PaywallBlockProps> = ({
-  title = 'This content is for VIP members only',
-  subtitle = 'Unlock premium articles, exclusive guides, and member-only perks.',
-  planName = 'VIP Membership',
+  title = "This content is for VIP members only",
+  subtitle = "Unlock premium articles, exclusive guides, and member-only perks.",
+  planName = "VIP Membership",
   planPrice,
   features = [],
-  ctaLabel = 'Upgrade to VIP',
+  ctaLabel = "Upgrade to VIP",
   onUpgrade,
-  className = '',
+  className = "",
 }) => {
   return (
     <div
@@ -33,7 +33,9 @@ export const PaywallBlock: React.FC<PaywallBlockProps> = ({
           VIP EXCLUSIVE
         </span>
 
-        <h2 className="text-2xl font-extrabold text-textPrimary mb-3">{title}</h2>
+        <h2 className="text-2xl font-extrabold text-textPrimary mb-3">
+          {title}
+        </h2>
         <p className="text-textMuted mb-8 max-w-md">{subtitle}</p>
 
         {features.length > 0 && (
@@ -50,7 +52,9 @@ export const PaywallBlock: React.FC<PaywallBlockProps> = ({
         <div className="mb-6">
           <div className="text-sm text-textMuted">{planName}</div>
           {planPrice && (
-            <div className="text-3xl font-extrabold text-textPrimary">{planPrice}</div>
+            <div className="text-3xl font-extrabold text-textPrimary">
+              {planPrice}
+            </div>
           )}
         </div>
 

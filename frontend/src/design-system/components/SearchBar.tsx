@@ -1,5 +1,5 @@
-import React from 'react';
-import { Search } from 'lucide-react';
+import React from "react";
+import { Search } from "lucide-react";
 
 interface SearchBarProps {
   placeholder?: string;
@@ -9,10 +9,10 @@ interface SearchBarProps {
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
-  placeholder = 'Search…',
+  placeholder = "Search…",
   value,
   onChange,
-  className = '',
+  className = "",
 }) => {
   return (
     <div className={`relative ${className}`}>

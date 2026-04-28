@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 interface SocialEmbed {
   id: string;
-  platform: 'twitter' | 'instagram' | 'tiktok' | 'youtube' | 'other';
+  platform: "twitter" | "instagram" | "tiktok" | "youtube" | "other";
   embedUrl?: string;
   thumbnailUrl?: string;
   caption?: string;
@@ -16,30 +16,32 @@ interface SocialEmbedWallProps {
   className?: string;
 }
 
-const platformLabel: Record<SocialEmbed['platform'], string> = {
-  twitter: '𝕏',
-  instagram: 'IG',
-  tiktok: 'TT',
-  youtube: 'YT',
-  other: '◈',
+const platformLabel: Record<SocialEmbed["platform"], string> = {
+  twitter: "𝕏",
+  instagram: "IG",
+  tiktok: "TT",
+  youtube: "YT",
+  other: "◈",
 };
 
 export const SocialEmbedWall: React.FC<SocialEmbedWallProps> = ({
   embeds,
   columns = 3,
   title,
-  className = '',
+  className = "",
 }) => {
   const colClass = {
-    2: 'sm:grid-cols-2',
-    3: 'sm:grid-cols-2 lg:grid-cols-3',
-    4: 'sm:grid-cols-2 lg:grid-cols-4',
+    2: "sm:grid-cols-2",
+    3: "sm:grid-cols-2 lg:grid-cols-3",
+    4: "sm:grid-cols-2 lg:grid-cols-4",
   }[columns];
 
   return (
     <section className={`py-12 px-4 ${className}`}>
       {title && (
-        <h2 className="text-2xl font-bold text-textPrimary mb-6 text-center">{title}</h2>
+        <h2 className="text-2xl font-bold text-textPrimary mb-6 text-center">
+          {title}
+        </h2>
       )}
 
       <div className={`max-w-7xl mx-auto grid grid-cols-1 ${colClass} gap-5`}>
@@ -58,17 +60,27 @@ export const SocialEmbedWall: React.FC<SocialEmbedWallProps> = ({
               </div>
             ) : (
               <div className="aspect-square bg-surfaceAlt flex items-center justify-center">
-                <span className="text-4xl text-textMuted">{platformLabel[embed.platform]}</span>
+                <span className="text-4xl text-textMuted">
+                  {platformLabel[embed.platform]}
+                </span>
               </div>
             )}
 
             <div className="p-4">
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-bold text-primary uppercase">{embed.platform}</span>
-                {embed.author && <span className="text-xs text-textMuted">@{embed.author}</span>}
+                <span className="text-xs font-bold text-primary uppercase">
+                  {embed.platform}
+                </span>
+                {embed.author && (
+                  <span className="text-xs text-textMuted">
+                    @{embed.author}
+                  </span>
+                )}
               </div>
               {embed.caption && (
-                <p className="text-sm text-textMuted line-clamp-2">{embed.caption}</p>
+                <p className="text-sm text-textMuted line-clamp-2">
+                  {embed.caption}
+                </p>
               )}
               {embed.embedUrl && (
                 <a

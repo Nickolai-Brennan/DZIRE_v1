@@ -181,7 +181,7 @@ export const SettingsPage: React.FC = () => {
               <label className={labelClass}>New Password</label>
               <div className="relative">
                 <input
-                type={showNewPassword ? "text" : "password"}
+                  type={showNewPassword ? "text" : "password"}
                   className={inputClass + " pr-10"}
                   placeholder="Enter new password"
                 />

@@ -140,7 +140,10 @@ export const MonetizationPage: React.FC = () => {
                 borderRadius: 12,
                 color: "#F8FAFC",
               }}
-              formatter={(v) => [`$${typeof v === "number" ? v.toLocaleString() : v}`, "Revenue"]}
+              formatter={(v) => [
+                `$${typeof v === "number" ? v.toLocaleString() : v}`,
+                "Revenue",
+              ]}
             />
             <Line
               type="monotone"

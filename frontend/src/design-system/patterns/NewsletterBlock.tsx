@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 interface NewsletterBlockProps {
   title?: string;
@@ -10,14 +10,14 @@ interface NewsletterBlockProps {
 }
 
 export const NewsletterBlock: React.FC<NewsletterBlockProps> = ({
-  title = 'Stay in the loop',
-  subtitle = 'Get the latest articles, guides, and exclusive content delivered to your inbox.',
-  placeholder = 'Enter your email',
-  buttonLabel = 'Subscribe',
+  title = "Stay in the loop",
+  subtitle = "Get the latest articles, guides, and exclusive content delivered to your inbox.",
+  placeholder = "Enter your email",
+  buttonLabel = "Subscribe",
   onSubmit,
-  className = '',
+  className = "",
 }) => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -25,19 +25,26 @@ export const NewsletterBlock: React.FC<NewsletterBlockProps> = ({
     if (!email) return;
     onSubmit?.(email);
     setSubmitted(true);
-    setEmail('');
+    setEmail("");
   };
 
   return (
     <section className={`py-16 px-4 ${className}`}>
       <div className="max-w-xl mx-auto text-center bg-surface rounded-2xl border border-white/8 p-10">
-        <h2 className="text-3xl font-extrabold text-textPrimary mb-3">{title}</h2>
+        <h2 className="text-3xl font-extrabold text-textPrimary mb-3">
+          {title}
+        </h2>
         <p className="text-textMuted mb-8">{subtitle}</p>
 
         {submitted ? (
-          <p className="text-green-400 font-medium">You're on the list — thanks!</p>
+          <p className="text-green-400 font-medium">
+            You're on the list — thanks!
+          </p>
         ) : (
-          <form onSubmit={handleSubmit} className="flex gap-3 flex-col sm:flex-row">
+          <form
+            onSubmit={handleSubmit}
+            className="flex gap-3 flex-col sm:flex-row"
+          >
             <input
               type="email"
               required

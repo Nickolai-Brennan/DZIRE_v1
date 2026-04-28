@@ -150,11 +150,10 @@ export const AgeRangeStatsPage: React.FC = () => {
                   borderRadius: 12,
                   color: "#F8FAFC",
                 }}
-                formatter={(
-                  v,
-                  _name,
-                  props,
-                ) => [`${v?.toLocaleString() ?? v} users`, (props.payload as { range?: string })?.range ?? ""]}
+                formatter={(v, _name, props) => [
+                  `${v?.toLocaleString() ?? v} users`,
+                  (props.payload as { range?: string })?.range ?? "",
+                ]}
               />
               <Legend />
             </PieChart>
