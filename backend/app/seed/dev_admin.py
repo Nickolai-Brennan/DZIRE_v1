@@ -5,6 +5,7 @@ WARNING: This creates a TEMPORARY admin account for local development.
          TODO: Change admin credentials before production.
          This seed only runs when ENV=development AND SEED_DEV_ADMIN=true.
 """
+
 import asyncio
 import logging
 
@@ -12,8 +13,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..core.config import get_settings
 from ..core.database import AsyncSessionLocal
-from ..services.admin_service import get_admin_by_username, get_or_create_role, hash_password
 from ..models.admin_user import AdminUser
+from ..services.admin_service import (get_admin_by_username,
+                                      get_or_create_role, hash_password)
 
 logger = logging.getLogger(__name__)
 

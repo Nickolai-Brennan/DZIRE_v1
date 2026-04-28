@@ -1,21 +1,36 @@
-import React from 'react';
+/**
+ * Design System — PublicLayout
+ *
+ * Standard public-facing layout with Header and Footer.
+ * Delegates to the existing Header/Footer in components/layout/.
+ */
+import React from "react";
+import { Header } from "../../components/layout/Header";
+import { Footer } from "../../components/layout/Footer";
 
-interface PublicLayoutProps {
+export interface PublicLayoutProps {
   children: React.ReactNode;
-  header?: React.ReactNode;
-  footer?: React.ReactNode;
+  /** Remove max-width container (useful for full-bleed hero pages) */
+  fluid?: boolean;
 }
 
-/**
- * PublicLayout — shell for all public-facing pages.
- * Pass a custom header/footer or drop in the app's existing Header/Footer components.
- */
-export const PublicLayout: React.FC<PublicLayoutProps> = ({ children, header, footer }) => {
+export const PublicLayout: React.FC<PublicLayoutProps> = ({
+  children,
+  fluid = false,
+}) => {
   return (
     <div className="min-h-screen flex flex-col bg-background text-textPrimary">
-      {header && <header className="sticky top-0 z-20 bg-background/80 backdrop-blur-sm border-b border-white/8">{header}</header>}
-      <main className="flex-1">{children}</main>
-      {footer && <footer className="border-t border-white/8">{footer}</footer>}
+      <Header />
+      <main
+        className={
+          fluid
+            ? "flex-1"
+            : "flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
+        }
+      >
+        {children}
+      </main>
+      <Footer />
     </div>
   );
 };

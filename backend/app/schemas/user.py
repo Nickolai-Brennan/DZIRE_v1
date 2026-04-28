@@ -1,4 +1,5 @@
 """backend/app/schemas/user.py — Pydantic v2 schemas for user endpoints."""
+
 import uuid
 from datetime import datetime
 

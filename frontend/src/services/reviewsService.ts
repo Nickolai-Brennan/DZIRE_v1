@@ -3,7 +3,7 @@
  * Reviews API service.
  */
 
-import { apiFetch } from './api';
+import { apiFetch } from "./api";
 
 export interface Review {
   id: string;
@@ -17,7 +17,7 @@ export interface Review {
 }
 
 export async function listReviews(): Promise<Review[]> {
-  return apiFetch<Review[]>('/api/v1/reviews');
+  return apiFetch<Review[]>("/api/v1/reviews");
 }
 
 export async function getReview(slug: string): Promise<Review> {

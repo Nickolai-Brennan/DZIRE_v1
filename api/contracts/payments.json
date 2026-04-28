@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "module": "payments",
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/api/payments/create-checkout-session",
+      "description": "Create a Stripe Checkout session for a subscription",
+      "request": {
+        "price_id": "string",
+        "user_id": "uuid",
+        "success_url": "string|null",
+        "cancel_url": "string|null"
+      },
+      "response": {
+        "session_id": "string",
+        "url": "string"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/payments/methods",
+      "description": "List saved payment methods for a user",
+      "query": { "user_id": "uuid" },
+      "response": "PaymentMethod[]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/payments/history",
+      "description": "List payment history for a user",
+      "query": { "user_id": "uuid" },
+      "response": "Payment[]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/payments/webhook",
+      "description": "Stripe webhook endpoint (signature verified)",
+      "headers": { "stripe-signature": "string" },
+      "response": { "received": true }
+    }
+  ],
+  "stripe_events_handled": [
+    "checkout.session.completed",
+    "invoice.payment_succeeded",
+    "invoice.payment_failed",
+    "customer.subscription.created",
+    "customer.subscription.updated",
+    "customer.subscription.deleted"
+  ]
+}

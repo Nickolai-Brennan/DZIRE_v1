@@ -3,6 +3,7 @@
 WARNING: The dev seed creates a temporary admin/admin account for local
 development only.  TODO: Change admin credentials before production.
 """
+
 from datetime import datetime
 
 from sqlalchemy import Boolean, DateTime, ForeignKey, Integer, String, func
@@ -15,7 +16,9 @@ class AdminUser(Base):
     __tablename__ = "admin_users"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    username: Mapped[str] = mapped_column(String(64), unique=True, nullable=False, index=True)
+    username: Mapped[str] = mapped_column(
+        String(64), unique=True, nullable=False, index=True
+    )
     password_hash: Mapped[str] = mapped_column(String(256), nullable=False)
     role_id: Mapped[int] = mapped_column(
         Integer, ForeignKey("admin_roles.id"), nullable=False

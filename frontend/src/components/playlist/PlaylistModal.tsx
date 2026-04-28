@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Modal } from '../ui/Modal';
-import { Button } from '../ui/Button';
-import { usePlaylist } from '../../context/PlaylistContext';
-import type { PlaylistItem } from '../../context/PlaylistContext';
-import { BookmarkCheck, Plus } from 'lucide-react';
+import React, { useState } from "react";
+import { Modal } from "../ui/Modal";
+import { Button } from "../ui/Button";
+import { usePlaylist } from "../../context/PlaylistContext";
+import type { PlaylistItem } from "../../context/PlaylistContext";
+import { BookmarkCheck, Plus } from "lucide-react";
 
 interface PlaylistModalProps {
   isOpen: boolean;
@@ -11,9 +11,14 @@ interface PlaylistModalProps {
   item: PlaylistItem;
 }
 
-export const PlaylistModal: React.FC<PlaylistModalProps> = ({ isOpen, onClose, item }) => {
-  const { playlists, createPlaylist, saveToPlaylist, isInAnyPlaylist } = usePlaylist();
-  const [newName, setNewName] = useState('');
+export const PlaylistModal: React.FC<PlaylistModalProps> = ({
+  isOpen,
+  onClose,
+  item,
+}) => {
+  const { playlists, createPlaylist, saveToPlaylist, isInAnyPlaylist } =
+    usePlaylist();
+  const [newName, setNewName] = useState("");
   const [showCreate, setShowCreate] = useState(false);
   const [saved, setSaved] = useState<string | null>(null);
 
@@ -31,7 +36,7 @@ export const PlaylistModal: React.FC<PlaylistModalProps> = ({ isOpen, onClose, i
     const playlist = createPlaylist(newName.trim());
     saveToPlaylist(playlist.id, item);
     setSaved(playlist.id);
-    setNewName('');
+    setNewName("");
     setShowCreate(false);
     setTimeout(() => {
       setSaved(null);
@@ -51,7 +56,10 @@ export const PlaylistModal: React.FC<PlaylistModalProps> = ({ isOpen, onClose, i
           </div>
         )}
 
-        <p className="text-sm text-textMuted">Choose a playlist to save <strong className="text-textPrimary">"{item.title}"</strong></p>
+        <p className="text-sm text-textMuted">
+          Choose a playlist to save{" "}
+          <strong className="text-textPrimary">"{item.title}"</strong>
+        </p>
 
         <div className="space-y-2 max-h-60 overflow-y-auto">
           {playlists.map((playlist) => (
@@ -62,8 +70,12 @@ export const PlaylistModal: React.FC<PlaylistModalProps> = ({ isOpen, onClose, i
               className="w-full flex items-center justify-between p-3 rounded-xl bg-surfaceAlt hover:bg-surface border border-white/8 transition-colors text-left"
             >
               <div>
-                <p className="text-sm font-medium text-textPrimary">{playlist.name}</p>
-                <p className="text-xs text-textMuted">{playlist.items.length} items</p>
+                <p className="text-sm font-medium text-textPrimary">
+                  {playlist.name}
+                </p>
+                <p className="text-xs text-textMuted">
+                  {playlist.items.length} items
+                </p>
               </div>
               {saved === playlist.id && (
                 <BookmarkCheck className="w-4 h-4 text-primary" />
@@ -78,13 +90,17 @@ export const PlaylistModal: React.FC<PlaylistModalProps> = ({ isOpen, onClose, i
               autoFocus
               type="text"
               value={newName}
-              onChange={e => setNewName(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && handleCreate()}
+              onChange={(e) => setNewName(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleCreate()}
               placeholder="Playlist name..."
               className="flex-1 bg-surfaceAlt border border-white/10 rounded-xl px-3 py-2 text-sm text-textPrimary placeholder:text-textMuted focus:outline-none focus:border-primary"
             />
-            <Button variant="primary" onClick={handleCreate}>Create</Button>
-            <Button variant="secondary" onClick={() => setShowCreate(false)}>Cancel</Button>
+            <Button variant="primary" onClick={handleCreate}>
+              Create
+            </Button>
+            <Button variant="secondary" onClick={() => setShowCreate(false)}>
+              Cancel
+            </Button>
           </div>
         ) : (
           <button

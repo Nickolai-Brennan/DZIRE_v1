@@ -1,57 +1,113 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
+import {
+  login as apiLogin,
+  logout as apiLogout,
+  register as apiRegister,
+  getMe,
+  refreshTokens,
+  type CurrentUser,
+  type LoginPayload,
+  type RegisterPayload,
+} from "../services/authService";
+import { setAccessToken } from "../services/api";
 
-export interface User {
-  id: string;
-  email: string;
-  displayName: string;
-  isVip: boolean;
-  interests: string[];
-}
+export type { CurrentUser as User };
 
 interface AuthContextValue {
-  user: User | null;
+  user: CurrentUser | null;
   isAuthenticated: boolean;
   isVip: boolean;
-  login: (email: string, _password: string) => Promise<void>;
-  signup: (email: string, displayName: string, _password: string) => Promise<void>;
-  logout: () => void;
+  isLoading: boolean;
+  login: (email: string, password: string) => Promise<void>;
+  signup: (
+    email: string,
+    username: string,
+    password: string,
+    firstName?: string,
+    lastName?: string,
+  ) => Promise<void>;
+  logout: () => Promise<void>;
   upgradeToVip: () => void;
+  refreshUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [user, setUser] = useState<CurrentUser | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const login = useCallback(async (email: string, _password: string) => {
-    // Mock: accept any credentials
-    const mockUser: User = {
-      id: `user-${Date.now()}`,
-      email,
-      displayName: email.split('@')[0],
-      isVip: false,
-      interests: [],
-    };
-    setUser(mockUser);
+  // On mount, try to restore session via refresh token cookie
+  useEffect(() => {
+    (async () => {
+      try {
+        await refreshTokens();
+        const me = await getMe();
+        setUser(me);
+      } catch {
+        // No valid session — that's OK
+        setUser(null);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
   }, []);
 
-  const signup = useCallback(async (email: string, displayName: string, _password: string) => {
-    const mockUser: User = {
-      id: `user-${Date.now()}`,
-      email,
-      displayName,
-      isVip: false,
-      interests: [],
-    };
-    setUser(mockUser);
+  const login = useCallback(async (email: string, password: string) => {
+    await apiLogin({ email, password } as LoginPayload);
+    const me = await getMe();
+    setUser(me);
   }, []);
 
-  const logout = useCallback(() => {
-    setUser(null);
+  const signup = useCallback(
+    async (
+      email: string,
+      username: string,
+      password: string,
+      firstName?: string,
+      lastName?: string,
+    ) => {
+      const payload: RegisterPayload = {
+        email,
+        username,
+        password,
+        first_name: firstName,
+        last_name: lastName,
+      };
+      const me = await apiRegister(payload);
+      setUser(me);
+    },
+    [],
+  );
+
+  const logout = useCallback(async () => {
+    try {
+      await apiLogout();
+    } finally {
+      setUser(null);
+      setAccessToken(null);
+    }
   }, []);
 
   const upgradeToVip = useCallback(() => {
-    setUser(prev => prev ? { ...prev, isVip: true } : prev);
+    setUser((prev) => (prev ? { ...prev, is_vip: true } : prev));
+  }, []);
+
+  const refreshUser = useCallback(async () => {
+    try {
+      const me = await getMe();
+      setUser(me);
+    } catch {
+      setUser(null);
+    }
   }, []);
 
   return (
@@ -59,11 +115,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       value={{
         user,
         isAuthenticated: user !== null,
-        isVip: user?.isVip ?? false,
+        isVip: user?.is_vip ?? false,
+        isLoading,
         login,
         signup,
         logout,
         upgradeToVip,
+        refreshUser,
       }}
     >
       {children}
@@ -73,6 +131,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
 export function useAuth(): AuthContextValue {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error('useAuth must be used inside AuthProvider');
+  if (!ctx) throw new Error("useAuth must be used inside AuthProvider");
   return ctx;
 }

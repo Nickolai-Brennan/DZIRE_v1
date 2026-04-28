@@ -1,13 +1,15 @@
 """backend/app/sponsors/routes.py — Sponsor API routes (admin-protected)."""
+
 from __future__ import annotations
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from ..core.database import get_db
 from ..admin.permissions import require_role_sponsor
+from ..core.database import get_db
 from . import services
-from .schemas import SponsorCreate, SponsorRead, SponsorCampaignCreate, SponsorCampaignRead
+from .schemas import (SponsorCampaignCreate, SponsorCampaignRead,
+                      SponsorCreate, SponsorRead)
 
 router = APIRouter(prefix="/api/sponsors", tags=["sponsors"])
 

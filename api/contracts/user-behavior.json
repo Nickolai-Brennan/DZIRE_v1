@@ -1,0 +1,59 @@
+{
+  "title": "User Behavior API Contract",
+  "version": "1.0.0",
+  "step": 9,
+  "base_path": "/api/behavior",
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/api/behavior/events",
+      "description": "Track a user behavior event",
+      "body": "BehaviorEventCreate",
+      "response": "BehaviorEventRead"
+    },
+    {
+      "method": "GET",
+      "path": "/api/behavior/preferences/{user_id}",
+      "description": "Get user preferences",
+      "response": "PreferenceRead"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/behavior/preferences/{user_id}",
+      "description": "Update or create user preferences",
+      "body": "PreferenceUpdate",
+      "response": "PreferenceRead"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/behavior/history/{user_id}",
+      "description": "Clear all behavior history for a user (privacy control)",
+      "response": "{deleted: integer}"
+    }
+  ],
+  "schemas": {
+    "BehaviorEventCreate": {
+      "user_id": "uuid | null",
+      "session_id": "string | null",
+      "event_type": "post_view | post_click | tag_click | category_click | search | save_post | share_post | newsletter_click | affiliate_click | vip_click | time_on_page | scroll_depth",
+      "content_id": "uuid | null",
+      "content_type": "string | null",
+      "category": "string | null",
+      "tags": "string[] | null",
+      "duration_seconds": "integer | null",
+      "scroll_depth": "float | null",
+      "source": "string | null",
+      "metadata": "object | null"
+    },
+    "PreferenceRead": {
+      "id": "uuid",
+      "user_id": "uuid",
+      "favorite_categories": "string[] | null",
+      "favorite_tags": "string[] | null",
+      "preferred_content_types": "string[] | null",
+      "blocked_tags": "string[] | null",
+      "vip_interest_score": "float",
+      "personalization_enabled": "boolean"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "module": "billing",
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/billing/invoices",
+      "description": "List invoices for a user",
+      "query": { "user_id": "uuid" },
+      "response": "Invoice[]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/billing/portal",
+      "description": "Create a Stripe customer portal session",
+      "request": {
+        "user_id": "uuid",
+        "return_url": "string|null"
+      },
+      "response": { "url": "string" }
+    }
+  ]
+}

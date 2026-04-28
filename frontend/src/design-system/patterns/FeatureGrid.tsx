@@ -1,66 +1,72 @@
-import React from 'react';
+/**
+ * Design System — FeatureGrid Pattern
+ *
+ * Displays a grid of feature/benefit cards, each with an icon, title, and description.
+ */
+import React from "react";
+import { Card, CardBody } from "../components/Card";
 
-interface Feature {
-  icon?: React.ReactNode;
+export interface Feature {
+  id: string | number;
   title: string;
   description: string;
+  icon?: React.ReactNode;
 }
 
-interface FeatureGridProps {
+export interface FeatureGridProps {
   features: Feature[];
   columns?: 2 | 3 | 4;
-  eyebrow?: string;
-  title?: string;
-  subtitle?: string;
-  className?: string;
+  /** Optional heading displayed above the grid */
+  heading?: string;
+  subheading?: string;
 }
 
 export const FeatureGrid: React.FC<FeatureGridProps> = ({
   features,
   columns = 3,
-  eyebrow,
-  title,
-  subtitle,
-  className = '',
+  heading,
+  subheading,
 }) => {
   const colClass = {
-    2: 'sm:grid-cols-2',
-    3: 'sm:grid-cols-2 lg:grid-cols-3',
-    4: 'sm:grid-cols-2 lg:grid-cols-4',
+    2: "grid-cols-1 sm:grid-cols-2",
+    3: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+    4: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
   }[columns];
 
   return (
-    <section className={`py-16 px-4 ${className}`}>
-      {(eyebrow ?? title ?? subtitle) && (
-        <div className="max-w-3xl mx-auto text-center mb-12">
-          {eyebrow && (
-            <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">
-              {eyebrow}
+    <section className="w-full py-16 px-4 sm:px-6">
+      {(heading || subheading) && (
+        <div className="text-center mb-12">
+          {heading && (
+            <h2 className="text-3xl font-bold text-textPrimary">{heading}</h2>
+          )}
+          {subheading && (
+            <p className="mt-3 text-textMuted max-w-2xl mx-auto">
+              {subheading}
             </p>
           )}
-          {title && (
-            <h2 className="text-4xl font-extrabold text-textPrimary mb-4">{title}</h2>
-          )}
-          {subtitle && <p className="text-textMuted text-lg">{subtitle}</p>}
         </div>
       )}
 
-      <div className={`max-w-7xl mx-auto grid grid-cols-1 ${colClass} gap-6`}>
-        {features.map((feature, i) => (
-          <div
-            key={i}
-            className="bg-surface rounded-2xl border border-white/8 p-6 flex flex-col gap-4"
-          >
-            {feature.icon && (
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-                {feature.icon}
+      <div className={`grid ${colClass} gap-6 max-w-7xl mx-auto`}>
+        {features.map((feature) => (
+          <Card key={feature.id} variant="glass">
+            <CardBody className="flex flex-col gap-4">
+              {feature.icon && (
+                <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  {feature.icon}
+                </div>
+              )}
+              <div>
+                <h3 className="text-base font-semibold text-textPrimary">
+                  {feature.title}
+                </h3>
+                <p className="mt-1 text-sm text-textMuted">
+                  {feature.description}
+                </p>
               </div>
-            )}
-            <div>
-              <h3 className="text-base font-semibold text-textPrimary mb-1">{feature.title}</h3>
-              <p className="text-sm text-textMuted leading-relaxed">{feature.description}</p>
-            </div>
-          </div>
+            </CardBody>
+          </Card>
         ))}
       </div>
     </section>

@@ -1,0 +1,84 @@
+name: Sync to __Vault
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'skills/**'
+      - 'agents/**'
+      - 'instructions/**'
+      - 'workflows/**'
+      - '.github/agents/**'
+      - '.github/instructions/**'
+      - '.github/workflows/templates/**'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    name: Sync skills, agents, instructions & workflows to __Vault
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout DZIRE_v1
+        uses: actions/checkout@v4
+        with:
+          path: source
+
+      - name: Checkout __Vault
+        uses: actions/checkout@v4
+        with:
+          repository: Nickolai-Brennan/__Vault
+          token: ${{ secrets.VAULT_PAT }}
+          path: vault
+
+      # ── skills ────────────────────────────────────────────────────
+      - name: Sync skills
+        run: |
+          rsync -av --delete source/skills/ vault/skills/
+
+      # ── agents ────────────────────────────────────────────────────
+      - name: Sync agents (repo root)
+        run: |
+          mkdir -p vault/agents
+          rsync -av --delete source/agents/ vault/agents/
+
+      - name: Sync .github/agents
+        run: |
+          mkdir -p vault/.github/agents
+          rsync -av --delete source/.github/agents/ vault/.github/agents/
+
+      # ── instructions ──────────────────────────────────────────────
+      - name: Sync instructions (repo root)
+        run: |
+          mkdir -p vault/instructions
+          rsync -av --delete source/instructions/ vault/instructions/
+
+      - name: Sync .github/instructions
+        run: |
+          mkdir -p vault/.github/instructions
+          rsync -av --delete source/.github/instructions/ vault/.github/instructions/
+
+      # ── workflows ─────────────────────────────────────────────────
+      - name: Sync workflows (repo root)
+        run: |
+          mkdir -p vault/workflows
+          rsync -av --delete source/workflows/ vault/workflows/
+
+      - name: Sync .github/workflows/templates
+        run: |
+          mkdir -p vault/.github/workflows/templates
+          rsync -av --delete source/.github/workflows/templates/ vault/.github/workflows/templates/
+
+      # ── commit & push ─────────────────────────────────────────────
+      - name: Commit and push to __Vault
+        working-directory: vault
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          if git diff --cached --quiet; then
+            echo "Nothing to sync — __Vault is already up to date."
+          else
+            git commit -m "sync: update from DZIRE_v1 ($(date -u '+%Y-%m-%d %H:%M UTC'))"
+            git push
+          fi

@@ -1,13 +1,15 @@
 """backend/app/newsletter/routes.py — Newsletter API routes."""
+
 from __future__ import annotations
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from ..core.database import get_db
 from ..admin.permissions import require_role_marketing
+from ..core.database import get_db
 from . import services
-from .schemas import SubscribeRequest, SubscriberRead, CampaignCreate, CampaignRead
+from .schemas import (CampaignCreate, CampaignRead, SubscribeRequest,
+                      SubscriberRead)
 
 router = APIRouter(prefix="/api/newsletter", tags=["newsletter"])
 

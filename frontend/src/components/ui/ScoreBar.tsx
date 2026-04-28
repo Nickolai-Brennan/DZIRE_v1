@@ -1,18 +1,23 @@
-import React from 'react';
+import React from "react";
 
 interface ScoreBarProps {
   label: string;
   value: number;
   max?: number;
-  color?: 'primary' | 'gold' | 'green';
+  color?: "primary" | "gold" | "green";
 }
 
-export const ScoreBar: React.FC<ScoreBarProps> = ({ label, value, max = 10, color = 'primary' }) => {
+export const ScoreBar: React.FC<ScoreBarProps> = ({
+  label,
+  value,
+  max = 10,
+  color = "primary",
+}) => {
   const pct = Math.round((value / max) * 100);
   const colorClasses = {
-    primary: 'bg-primary',
-    gold: 'bg-gold',
-    green: 'bg-green-500',
+    primary: "bg-primary",
+    gold: "bg-gold",
+    green: "bg-green-500",
   };
 
   return (
@@ -24,7 +29,9 @@ export const ScoreBar: React.FC<ScoreBarProps> = ({ label, value, max = 10, colo
           style={{ width: `${pct}%` }}
         />
       </div>
-      <span className="text-sm font-bold text-textPrimary w-8 text-right">{value}</span>
+      <span className="text-sm font-bold text-textPrimary w-8 text-right">
+        {value}
+      </span>
     </div>
   );
 };

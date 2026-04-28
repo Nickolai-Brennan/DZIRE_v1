@@ -2,10 +2,10 @@
  * frontend/src/admin/SEOReports.tsx
  * Admin SEO reports dashboard.
  */
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AdminLayout } from './AdminLayout';
-import { getAdminToken, isAdminAuthenticated } from '../lib/auth/token';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AdminLayout } from "./AdminLayout";
+import { getAdminToken, isAdminAuthenticated } from "../lib/auth/token";
 
 interface SEOReport {
   id: string;
@@ -21,17 +21,17 @@ interface SEOReport {
 }
 
 const scoreBadge = (score: number) => {
-  if (score >= 90) return 'bg-green-500/20 text-green-400';
-  if (score >= 75) return 'bg-blue-500/20 text-blue-400';
-  if (score >= 60) return 'bg-yellow-500/20 text-yellow-400';
-  return 'bg-red-500/20 text-red-400';
+  if (score >= 90) return "bg-green-500/20 text-green-400";
+  if (score >= 75) return "bg-blue-500/20 text-blue-400";
+  if (score >= 60) return "bg-yellow-500/20 text-yellow-400";
+  return "bg-red-500/20 text-red-400";
 };
 
 const scoreLabel = (score: number) => {
-  if (score >= 90) return 'Excellent';
-  if (score >= 75) return 'Good';
-  if (score >= 60) return 'Needs Work';
-  return 'Poor';
+  if (score >= 90) return "Excellent";
+  if (score >= 75) return "Good";
+  if (score >= 60) return "Needs Work";
+  return "Poor";
 };
 
 export const SEOReports: React.FC = () => {
@@ -41,11 +41,11 @@ export const SEOReports: React.FC = () => {
 
   useEffect(() => {
     if (!isAdminAuthenticated()) {
-      navigate('/admin/login', { replace: true });
+      navigate("/admin/login", { replace: true });
       return;
     }
     const token = getAdminToken();
-    fetch('/api/admin/seo', {
+    fetch("/api/admin/seo", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => (r.ok ? r.json() : { reports: [] }))
@@ -78,16 +78,28 @@ export const SEOReports: React.FC = () => {
             <tbody className="divide-y divide-white/5">
               {reports.map((r) => (
                 <tr key={r.id}>
-                  <td className="py-3 pr-4 text-textMuted font-mono text-xs">{r.post_id.slice(0, 8)}…</td>
+                  <td className="py-3 pr-4 text-textMuted font-mono text-xs">
+                    {r.post_id.slice(0, 8)}…
+                  </td>
                   <td className="py-3 pr-4">
-                    <span className={`px-2 py-0.5 rounded text-xs font-medium ${scoreBadge(r.seo_score)}`}>
+                    <span
+                      className={`px-2 py-0.5 rounded text-xs font-medium ${scoreBadge(r.seo_score)}`}
+                    >
                       {r.seo_score} — {scoreLabel(r.seo_score)}
                     </span>
                   </td>
-                  <td className="py-3 pr-4 text-textMuted">{r.word_count ?? '—'}</td>
-                  <td className="py-3 pr-4 text-textMuted">{r.title_length ?? '—'}</td>
-                  <td className="py-3 pr-4 text-textMuted">{r.keyword_count ?? '—'}</td>
-                  <td className="py-3 text-textMuted">{new Date(r.created_at).toLocaleDateString()}</td>
+                  <td className="py-3 pr-4 text-textMuted">
+                    {r.word_count ?? "—"}
+                  </td>
+                  <td className="py-3 pr-4 text-textMuted">
+                    {r.title_length ?? "—"}
+                  </td>
+                  <td className="py-3 pr-4 text-textMuted">
+                    {r.keyword_count ?? "—"}
+                  </td>
+                  <td className="py-3 text-textMuted">
+                    {new Date(r.created_at).toLocaleDateString()}
+                  </td>
                 </tr>
               ))}
             </tbody>

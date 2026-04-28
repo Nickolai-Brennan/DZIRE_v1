@@ -1,4 +1,5 @@
 """backend/app/core/config.py — App settings loaded from environment."""
+
 import os
 from functools import lru_cache
 
@@ -20,9 +21,7 @@ class Settings:
     access_token_expire_minutes: int = int(
         os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "60")
     )
-    refresh_token_expire_days: int = int(
-        os.getenv("REFRESH_TOKEN_EXPIRE_DAYS", "30")
-    )
+    refresh_token_expire_days: int = int(os.getenv("REFRESH_TOKEN_EXPIRE_DAYS", "30"))
 
     # CORS
     allowed_origins: list[str] = os.getenv(
@@ -32,6 +31,16 @@ class Settings:
     # Dev seed — only active when env == "development"
     # TODO: Change admin credentials before production.
     seed_dev_admin: bool = os.getenv("SEED_DEV_ADMIN", "true").lower() == "true"
+
+    # Stripe (test mode)
+    stripe_secret_key: str = os.getenv("STRIPE_SECRET_KEY", "")
+    stripe_publishable_key: str = os.getenv("STRIPE_PUBLISHABLE_KEY", "")
+    stripe_webhook_secret: str = os.getenv("STRIPE_WEBHOOK_SECRET", "")
+    stripe_price_id_vip_monthly: str = os.getenv("STRIPE_PRICE_ID_VIP_MONTHLY", "")
+    stripe_price_id_vip_yearly: str = os.getenv("STRIPE_PRICE_ID_VIP_YEARLY", "")
+
+    # Frontend URL (used for Stripe redirect URLs)
+    frontend_url: str = os.getenv("FRONTEND_URL", "http://localhost:5173")
 
     @property
     def is_development(self) -> bool:

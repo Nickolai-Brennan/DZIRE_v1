@@ -1,12 +1,18 @@
 /**
- * DZIRE Design System — Patterns Barrel
+ * Design System — Patterns Barrel Export
+ *
+ * @example
+ * import { HeroSection, BlogCardGrid } from '@/design-system/patterns';
  */
 
-export { BlogCardGrid } from './BlogCardGrid';
-export { HeroSection } from './HeroSection';
-export { FeatureGrid } from './FeatureGrid';
-export { PricingBlock } from './PricingBlock';
-export { SponsorStrip } from './SponsorStrip';
-export { NewsletterBlock } from './NewsletterBlock';
-export { SocialEmbedWall } from './SocialEmbedWall';
-export { PaywallBlock } from './PaywallBlock';
+export { BlogCardGrid } from "./BlogCardGrid";
+export type { BlogCardGridProps, BlogPost } from "./BlogCardGrid";
+
+export { HeroSection } from "./HeroSection";
+export type { HeroSectionProps } from "./HeroSection";
+
+export { FeatureGrid } from "./FeatureGrid";
+export type { FeatureGridProps, Feature } from "./FeatureGrid";
+
+export { SponsorStrip } from "./SponsorStrip";
+export type { SponsorStripProps, Sponsor } from "./SponsorStrip";

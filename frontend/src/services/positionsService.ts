@@ -3,7 +3,7 @@
  * Positions API service.
  */
 
-import { apiFetch } from './api';
+import { apiFetch } from "./api";
 
 export interface Position {
   id: string;
@@ -20,7 +20,7 @@ export interface Position {
 }
 
 export async function listPositions(): Promise<Position[]> {
-  return apiFetch<Position[]>('/api/v1/positions');
+  return apiFetch<Position[]>("/api/v1/positions");
 }
 
 export async function getPosition(slug: string): Promise<Position> {

@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
-import { Button } from './Button';
-import { track } from '../../utils/track';
+import React, { useState } from "react";
+import { Button } from "./Button";
+import { track } from "../../utils/track";
 
 interface NewsletterFormProps {
   onSubmitSuccess?: () => void;
 }
 
-export const NewsletterForm: React.FC<NewsletterFormProps> = ({ onSubmitSuccess }) => {
-  const [email, setEmail] = useState('');
+export const NewsletterForm: React.FC<NewsletterFormProps> = ({
+  onSubmitSuccess,
+}) => {
+  const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    track('newsletter_signup', { email });
+    track("newsletter_signup", { email });
     setSubmitted(true);
     onSubmitSuccess?.();
     setTimeout(() => setSubmitted(false), 3000);
-    setEmail('');
+    setEmail("");
   };
 
   return (
@@ -31,7 +33,7 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({ onSubmitSuccess 
           className="flex-1 px-6 py-4 bg-surface border border-white/10 rounded-xl text-textPrimary placeholder:text-textMuted focus:outline-none focus:border-primary/50"
         />
         <Button type="submit" variant="primary" className="sm:w-auto">
-          {submitted ? '✓ Subscribed!' : 'Subscribe'}
+          {submitted ? "✓ Subscribed!" : "Subscribe"}
         </Button>
       </div>
       <p className="text-sm text-textMuted mt-4 text-center">

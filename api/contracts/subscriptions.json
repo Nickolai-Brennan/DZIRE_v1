@@ -1,0 +1,40 @@
+{
+  "version": "1.0",
+  "module": "subscriptions",
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/subscriptions/plans",
+      "description": "List active subscription plans",
+      "response": "VipPlan[]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/subscriptions/subscribe",
+      "description": "Create Stripe Checkout session for a plan (Checkout redirect flow)",
+      "request": { "price_id": "string", "user_id": "uuid" },
+      "response": { "session_id": "string", "url": "string" }
+    },
+    {
+      "method": "POST",
+      "path": "/api/subscriptions/cancel",
+      "description": "Cancel active subscription for a user",
+      "query": { "user_id": "uuid" },
+      "response": { "status": "canceled" }
+    },
+    {
+      "method": "POST",
+      "path": "/api/subscriptions/upgrade",
+      "description": "Upgrade to a higher-tier plan via Checkout redirect",
+      "request": { "price_id": "string", "user_id": "uuid" },
+      "response": { "session_id": "string", "url": "string" }
+    },
+    {
+      "method": "POST",
+      "path": "/api/subscriptions/downgrade",
+      "description": "Downgrade to a lower-tier plan via Checkout redirect",
+      "request": { "price_id": "string", "user_id": "uuid" },
+      "response": { "session_id": "string", "url": "string" }
+    }
+  ]
+}

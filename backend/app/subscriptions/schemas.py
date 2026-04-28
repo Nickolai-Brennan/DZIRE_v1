@@ -1,5 +1,7 @@
 """backend/app/subscriptions/schemas.py — Pydantic v2 schemas for VIP subscriptions."""
+
 from __future__ import annotations
+
 from datetime import datetime
 from typing import Optional
 from uuid import UUID

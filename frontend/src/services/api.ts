@@ -4,7 +4,7 @@
  * Access token is stored in memory — never in localStorage.
  */
 
-const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
 
 let accessToken: string | null = null;
 
@@ -22,21 +22,21 @@ interface RequestOptions extends RequestInit {
 
 export async function apiFetch<T>(
   path: string,
-  options: RequestOptions = {}
+  options: RequestOptions = {},
 ): Promise<T> {
   const { requiresAuth = false, headers = {}, ...rest } = options;
 
   const mergedHeaders: Record<string, string> = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
     ...(headers as Record<string, string>),
   };
 
   if (requiresAuth && accessToken) {
-    mergedHeaders['Authorization'] = `Bearer ${accessToken}`;
+    mergedHeaders["Authorization"] = `Bearer ${accessToken}`;
   }
 
   const response = await fetch(`${API_BASE}${path}`, {
-    credentials: 'include', // send HttpOnly refresh token cookie
+    credentials: "include", // send HttpOnly refresh token cookie
     headers: mergedHeaders,
     ...rest,
   });
@@ -45,9 +45,9 @@ export async function apiFetch<T>(
     // Attempt silent token refresh
     const refreshed = await tryRefresh();
     if (refreshed) {
-      mergedHeaders['Authorization'] = `Bearer ${accessToken}`;
+      mergedHeaders["Authorization"] = `Bearer ${accessToken}`;
       const retryResponse = await fetch(`${API_BASE}${path}`, {
-        credentials: 'include',
+        credentials: "include",
         headers: mergedHeaders,
         ...rest,
       });
@@ -69,8 +69,8 @@ export async function apiFetch<T>(
 async function tryRefresh(): Promise<boolean> {
   try {
     const res = await fetch(`${API_BASE}/auth/refresh`, {
-      method: 'POST',
-      credentials: 'include',
+      method: "POST",
+      credentials: "include",
     });
     if (!res.ok) return false;
     const data = await res.json();

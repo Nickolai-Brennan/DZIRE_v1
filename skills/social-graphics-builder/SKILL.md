@@ -1,86 +1,74 @@
 ---
 name: social-graphics-builder
-description: Create specifications and design templates for DZIRE social media graphics. Use when defining social graphic standards, canvas sizes, or content templates.
-category: documentation
+description: Define, document, and extend social media graphic templates and design rules for the DZIRE brand. Use when the user asks about social asset specs, post templates, or platform-specific design rules.
+category: design
 version: v1.0
 inputs:
   - user request
   - docs/social-media-style-guide.md
-  - docs/brand-guidelines.md
+  - brand color tokens
+  - logo assets in frontend/public/brand/
 outputs:
-  - Updated social media style guide
-  - Graphic specification tables
-  - Caption and hashtag templates
+  - Updated docs/social-media-style-guide.md
+  - New platform dimension entries
+  - Graphic template specifications
 ---
 
 # Social Graphics Builder Skill
 
 ## Purpose
 
-Define and maintain the DZIRE social media graphic standards — dimensions, color usage, typography, CTA rules, and content templates for each platform.
+Create and maintain social media graphic standards and templates for the DZIRE brand across all target platforms.
 
 ## When To Use
 
 Use this skill when the user asks to:
-- Define graphic templates for Instagram, X, TikTok, YouTube, or Facebook
-- Update platform dimension requirements
-- Create caption/hashtag templates
-- Define sponsored or VIP social graphic rules
-- Update social media style guidelines
+- Add a new platform to the social media style guide
+- Define a new graphic template type
+- Update existing post dimensions or rules
+- Create content guidelines for a specific channel (Instagram, TikTok, YouTube, etc.)
+- Audit social assets against brand standards
 
 ## Inputs
 
-- User request (platform, graphic type, content)
-- `docs/social-media-style-guide.md` — current social standards
-- `docs/brand-guidelines.md` — brand color, type, and logo rules
-- `frontend/public/brand/` — logo asset reference
+- User request
+- `docs/social-media-style-guide.md`
+- `frontend/src/design-system/tokens/colors.ts` (brand palette)
+- `frontend/public/brand/` (logo files)
+- Platform technical specs (provided by user or found via web search)
 
 ## Workflow
 
-1. Identify the platform and graphic type.
-2. Look up current dimensions and rules in `docs/social-media-style-guide.md`.
-3. Define or update the template specification (dimensions, zones, colors, fonts).
-4. Document the template in `docs/social-media-style-guide.md`.
-5. Provide a caption template if appropriate.
+1. Read `docs/social-media-style-guide.md`.
+2. Identify the template or platform to add/update.
+3. Specify: dimensions, safe zones, typography sizes, color constraints, logo placement, CTA rules.
+4. Update the style guide document.
+5. Add ASCII/text wireframes for new templates where helpful.
+6. Note platform-specific restrictions (e.g., Facebook's 20% text rule).
 
-## Graphic Spec Template
+## Template Spec Format
 
 ```markdown
-### [Graphic Type] — [Platform]
-
-**Dimensions:** [W × H px]
-**Format:** [PNG / JPEG]
-**Background:** [Color / Image + overlay]
-**Headline:** [Font, size, weight, color]
-**Body copy:** [Font, size, color]
-**Logo:** [Position, size]
-**CTA:** [Button / text, position]
-**Disclosure:** [Sponsored label if needed]
-**Safe zones:** [Margins to stay within]
+### [Template Name] ([Width] × [Height])
+- Background: [color or image rule]
+- Logo: [position, size]
+- Headline: [font, size, max characters]
+- Sub-copy: [font, size, max lines]
+- CTA: [button style, copy rule]
+- Safe zone: [margin from edge]
 ```
-
-## Platform Dimension Reference
-
-| Platform             | Format          | Dimensions    |
-|----------------------|-----------------|---------------|
-| Instagram Post       | Square          | 1080 × 1080   |
-| Instagram Story      | Vertical        | 1080 × 1920   |
-| X / Twitter Post     | Landscape       | 1600 × 900    |
-| Facebook Post        | Landscape       | 1200 × 630    |
-| YouTube Thumbnail    | Landscape       | 1280 × 720    |
-| TikTok Cover         | Vertical        | 1080 × 1920   |
 
 ## Quality Checklist
 
-- [ ] Logo watermark included at correct position and size
-- [ ] One CTA per graphic
-- [ ] Brand colors only (no off-brand colors)
-- [ ] Sponsored content has disclosure label
-- [ ] Text meets 4.5:1 contrast minimum
-- [ ] Dimensions documented correctly
+- [ ] Platform name and exact pixel dimensions
+- [ ] Safe zone margins for all edges
+- [ ] Logo placement, size, and minimum size rules
+- [ ] Maximum text-coverage percentage (if platform restricts)
+- [ ] Color palette limited to approved brand colors
+- [ ] File format and max size recommendation
 
-## References
+## Reference
 
 - [`docs/social-media-style-guide.md`](../../docs/social-media-style-guide.md)
 - [`docs/brand-guidelines.md`](../../docs/brand-guidelines.md)
-- [`frontend/public/brand/README.md`](../../frontend/public/brand/README.md)
+- [`.github/agents/social-graphics-agent.md`](../../.github/agents/social-graphics-agent.md)

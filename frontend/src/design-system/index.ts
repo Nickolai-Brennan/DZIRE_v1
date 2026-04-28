@@ -1,21 +1,30 @@
 /**
- * DZIRE Design System — Main Barrel
+ * Design System — Root Barrel Export
  *
- * Import anything from the design system via this single entry point:
+ * One import path for the entire design system.
  *
- *   import { Button, Card, colors, spacing, PublicLayout, HeroSection } from '@/design-system';
+ * @example
+ * // Tokens
+ * import { colors, spacing } from '@/design-system';
  *
- * (Requires `"paths": { "@/*": ["./src/*"] }` in tsconfig — or use relative imports.)
+ * // Components
+ * import { Button, Card, Badge } from '@/design-system';
+ *
+ * // Layouts
+ * import { PublicLayout } from '@/design-system';
+ *
+ * // Patterns
+ * import { HeroSection } from '@/design-system';
  */
 
 // Tokens
-export * from './tokens';
+export * from "./tokens";
 
 // Components
-export * from './components';
+export * from "./components";
 
 // Layouts
-export * from './layouts';
+export * from "./layouts";
 
 // Patterns
-export * from './patterns';
+export * from "./patterns";

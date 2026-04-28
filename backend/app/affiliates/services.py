@@ -1,5 +1,7 @@
 """backend/app/affiliates/services.py — Affiliate business logic."""
+
 from __future__ import annotations
+
 from typing import Optional
 from uuid import UUID
 
@@ -23,7 +25,9 @@ async def create_affiliate(db: AsyncSession, data: AffiliateCreate) -> Affiliate
     return aff
 
 
-async def list_links(db: AsyncSession, affiliate_id: Optional[UUID] = None) -> list[AffiliateLink]:
+async def list_links(
+    db: AsyncSession, affiliate_id: Optional[UUID] = None
+) -> list[AffiliateLink]:
     query = select(AffiliateLink)
     if affiliate_id:
         query = query.where(AffiliateLink.affiliate_id == affiliate_id)

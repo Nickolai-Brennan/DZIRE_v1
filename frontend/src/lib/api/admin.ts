@@ -3,7 +3,7 @@
  * Admin API client — login and /me endpoints.
  */
 
-const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
 
 export interface AdminLoginResponse {
   access_token: string;
@@ -21,16 +21,16 @@ export interface AdminUser {
 
 export async function adminLogin(
   username: string,
-  password: string
+  password: string,
 ): Promise<AdminLoginResponse> {
   const res = await fetch(`${API_BASE}/api/admin/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password }),
   });
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));
-    throw new Error(data?.detail ?? 'Login failed');
+    throw new Error(data?.detail ?? "Login failed");
   }
   return res.json();
 }
@@ -40,14 +40,14 @@ export async function adminMe(token: string): Promise<AdminUser> {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!res.ok) {
-    throw new Error('Unauthorized');
+    throw new Error("Unauthorized");
   }
   return res.json();
 }
 
 export async function adminLogout(token: string): Promise<void> {
   await fetch(`${API_BASE}/api/admin/logout`, {
-    method: 'POST',
+    method: "POST",
     headers: { Authorization: `Bearer ${token}` },
   });
 }

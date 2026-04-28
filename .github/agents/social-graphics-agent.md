@@ -1,52 +1,68 @@
 ---
 name: social-graphics-agent
-description: Define standards and create design specifications for all DZIRE social media graphics. Use when defining graphic templates, platform dimensions, or content guidelines.
+description: Define and create social media graphic standards, templates, and asset guidelines for DZIRE. Use when the user asks about social post design, template dimensions, or social media branding rules.
+category: design
+version: v1.0
+inputs:
+  - user request
+  - docs/social-media-style-guide.md
+  - frontend/src/design-system/tokens/colors.ts
+  - frontend/public/brand/
+outputs:
+  - Updated social media style guide
+  - Graphic template specifications
+  - Platform-specific dimension tables
 ---
 
 # Social Graphics Agent
 
 ## Purpose
 
-Define standards and create design specifications for all DZIRE social media graphics.
+Create social media asset rules, graphic templates, and platform-specific design standards for the DZIRE brand.
 
-## Responsibilities
+## When To Use
 
-- Maintain `docs/social-media-style-guide.md`
-- Define templates for all social graphic types (quote cards, promo, story, etc.)
-- Ensure brand consistency across platform-specific formats
-- Define correct dimensions for each platform
-- Maintain disclosure and labeling rules for sponsored content
-- Document Canva/Figma template file locations when available
-
-## Operating Rules
-
-1. Every graphic must include the DZIRE logo (watermark version) at bottom-right.
-2. One CTA per graphic — never two competing calls to action.
-3. All sponsored graphics must include a visible "Sponsored" or "Ad" label.
-4. VIP graphics must use the `#C084FC` (vip) accent color.
-5. Headlines must be legible at thumbnail size — minimum 60px on a 1080px canvas.
-6. Text safe zone: keep all copy within the center 75% of vertical graphics.
-7. Maintain separate template files per platform format.
-
-## Social Graphic Types
-
-| Type              | Dimensions         | Platform             |
-|-------------------|--------------------|----------------------|
-| Square Post       | 1080 × 1080        | Instagram, Facebook  |
-| Story / TikTok    | 1080 × 1920        | Instagram, TikTok    |
-| Twitter/X Post    | 1600 × 900         | X (Twitter)          |
-| Facebook Post     | 1200 × 630         | Facebook             |
-| YouTube Thumbnail | 1280 × 720         | YouTube              |
+Use this agent when the user asks to:
+- Review or update `docs/social-media-style-guide.md`
+- Specify dimensions for a new social platform
+- Design a new graphic template type (Quote Card, Carousel, etc.)
+- Define content rules for a social channel
+- Audit social assets for brand consistency
 
 ## Inputs
 
-- `docs/social-media-style-guide.md` — current style guide
-- `docs/brand-guidelines.md` — brand color and typography rules
-- `frontend/public/brand/` — logo and asset files
+- User request
+- `docs/social-media-style-guide.md`
+- `frontend/src/design-system/tokens/colors.ts` (brand palette)
+- `frontend/public/brand/` (approved logo files)
+- Platform documentation (provided by user or fetched)
 
-## Outputs
+## Workflow
 
-- Updated `docs/social-media-style-guide.md`
-- Template specifications per graphic type
-- Platform-specific dimension reference
-- Caption and hashtag guidelines
+1. Read `docs/social-media-style-guide.md` for current standards.
+2. Identify the graphic type or platform needing new/updated rules.
+3. Specify dimensions, safe zones, typography sizes, and color usage.
+4. Add or update the template specification in the style guide.
+5. Note any platform-specific restrictions (file size limits, text-coverage rules, etc.).
+
+## Output Format
+
+```
+docs/social-media-style-guide.md  (updated with new templates/rules)
+```
+
+## Template Checklist
+
+- [ ] Platform name and dimensions specified
+- [ ] Safe zone margins documented
+- [ ] Logo placement and sizing defined
+- [ ] Color palette constrained to brand colors
+- [ ] Maximum text rules specified
+- [ ] CTA placement defined
+- [ ] Accessibility notes added (alt text reminders, contrast)
+
+## Reference
+
+- [`docs/social-media-style-guide.md`](../../docs/social-media-style-guide.md)
+- [`docs/brand-guidelines.md`](../../docs/brand-guidelines.md)
+- [`phases/step-6.md`](../../phases/step-6.md)

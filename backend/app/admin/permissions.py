@@ -1,5 +1,7 @@
 """backend/app/admin/permissions.py — Role-based access control for admin endpoints."""
+
 from __future__ import annotations
+
 from typing import Callable
 
 from fastapi import Depends, HTTPException, status
@@ -17,6 +19,7 @@ def _role_checker(allowed_roles: list[str]) -> Callable:
                 detail=f"Role '{role_name}' is not authorized for this endpoint.",
             )
         return admin
+
     return check
 
 
@@ -26,4 +29,6 @@ require_role_content = _role_checker(["admin", "editor"])
 require_role_marketing = _role_checker(["admin", "marketing"])
 require_role_sponsor = _role_checker(["admin", "sponsor_manager"])
 require_role_analyst = _role_checker(["admin", "marketing", "analyst"])
-require_role_any_admin = _role_checker(["admin", "editor", "marketing", "sponsor_manager", "analyst", "viewer"])
+require_role_any_admin = _role_checker(
+    ["admin", "editor", "marketing", "sponsor_manager", "analyst", "viewer"]
+)

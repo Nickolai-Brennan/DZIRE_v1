@@ -1,5 +1,7 @@
 """backend/app/affiliates/schemas.py — Pydantic v2 schemas for affiliates."""
+
 from __future__ import annotations
+
 from datetime import datetime
 from typing import Optional
 from uuid import UUID
@@ -47,6 +49,56 @@ class AffiliateLinkRead(AffiliateLinkBase):
     click_count: int
     conversion_count: int
     estimated_revenue: float
+    created_at: datetime
+
+    model_config = {"from_attributes": True}
+
+
+# ---------------------------------------------------------------------------
+# Tracking
+# ---------------------------------------------------------------------------
+
+
+class AffiliateClickCreate(BaseModel):
+    affiliate_id: Optional[UUID] = None
+    post_id: Optional[UUID] = None
+    user_id: Optional[UUID] = None
+    session_id: Optional[str] = None
+    utm_source: Optional[str] = None
+    utm_medium: Optional[str] = None
+    utm_campaign: Optional[str] = None
+    referrer: Optional[str] = None
+
+
+class AffiliateClickRead(BaseModel):
+    id: UUID
+    affiliate_id: Optional[UUID] = None
+    click_id: str
+    session_id: Optional[str] = None
+    utm_source: Optional[str] = None
+    utm_medium: Optional[str] = None
+    utm_campaign: Optional[str] = None
+    referrer: Optional[str] = None
+    created_at: datetime
+
+    model_config = {"from_attributes": True}
+
+
+class AffiliateConversionCreate(BaseModel):
+    session_id: Optional[str] = None
+    click_id: Optional[UUID] = None
+    order_id: Optional[str] = None
+    amount: float
+    commission_rate: float = 0.10
+
+
+class AffiliateConversionRead(BaseModel):
+    id: UUID
+    affiliate_click_id: Optional[UUID] = None
+    order_id: Optional[str] = None
+    amount: float
+    commission: float
+    status: str
     created_at: datetime
 
     model_config = {"from_attributes": True}

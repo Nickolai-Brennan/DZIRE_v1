@@ -1,4 +1,5 @@
 """backend/app/auth/jwt.py — JWT creation and validation."""
+
 from datetime import datetime, timedelta, timezone
 
 from jose import JWTError, jwt

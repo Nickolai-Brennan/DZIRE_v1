@@ -2,16 +2,16 @@
  * frontend/src/pages/admin/AdminLoginPage.tsx
  * Admin login form with dev warning banner.
  */
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Shield, AlertTriangle } from 'lucide-react';
-import { adminLogin } from '../../lib/api/admin';
-import { setAdminToken } from '../../lib/auth/token';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Shield, AlertTriangle } from "lucide-react";
+import { adminLogin } from "../../lib/api/admin";
+import { setAdminToken } from "../../lib/auth/token";
 
 export const AdminLoginPage: React.FC = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -22,9 +22,9 @@ export const AdminLoginPage: React.FC = () => {
     try {
       const data = await adminLogin(username, password);
       setAdminToken(data.access_token);
-      navigate('/admin/dashboard');
+      navigate("/admin/dashboard");
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Login failed');
+      setError(err instanceof Error ? err.message : "Login failed");
     } finally {
       setLoading(false);
     }
@@ -38,8 +38,8 @@ export const AdminLoginPage: React.FC = () => {
           <div className="flex items-start gap-3 rounded-lg border border-yellow-500/40 bg-yellow-500/10 p-4 text-yellow-400 text-sm">
             <AlertTriangle className="w-5 h-5 mt-0.5 shrink-0" />
             <span>
-              <strong>Development only:</strong> Temporary admin credentials in use.{' '}
-              <strong>Change before production.</strong>
+              <strong>Development only:</strong> Temporary admin credentials in
+              use. <strong>Change before production.</strong>
             </span>
           </div>
         )}
@@ -47,7 +47,9 @@ export const AdminLoginPage: React.FC = () => {
         <div className="rounded-xl border border-white/10 bg-surfaceAlt p-8 shadow-2xl">
           <div className="flex items-center gap-3 mb-8">
             <Shield className="w-7 h-7 text-primary" />
-            <h1 className="text-xl font-semibold text-textPrimary">Admin Login</h1>
+            <h1 className="text-xl font-semibold text-textPrimary">
+              Admin Login
+            </h1>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -89,22 +91,20 @@ export const AdminLoginPage: React.FC = () => {
               />
             </div>
 
-            {error && (
-              <p className="text-sm text-red-400">{error}</p>
-            )}
+            {error && <p className="text-sm text-red-400">{error}</p>}
 
             <button
               type="submit"
               disabled={loading}
               className="w-full rounded-lg bg-primary py-2.5 text-sm font-medium text-white hover:bg-primary/90 disabled:opacity-50 transition-colors"
             >
-              {loading ? 'Signing in…' : 'Sign in'}
+              {loading ? "Signing in…" : "Sign in"}
             </button>
           </form>
 
           <p className="mt-5 text-center text-xs text-textMuted">
             {/* Forgot password — placeholder for MVP */}
-            Forgot password?{' '}
+            Forgot password?{" "}
             <span className="text-primary/70 cursor-not-allowed">
               Contact your administrator
             </span>

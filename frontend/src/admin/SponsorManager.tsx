@@ -2,10 +2,10 @@
  * frontend/src/admin/SponsorManager.tsx
  * Admin sponsor and campaign manager.
  */
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AdminLayout } from './AdminLayout';
-import { getAdminToken, isAdminAuthenticated } from '../lib/auth/token';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AdminLayout } from "./AdminLayout";
+import { getAdminToken, isAdminAuthenticated } from "../lib/auth/token";
 
 interface Sponsor {
   id: string;
@@ -23,11 +23,11 @@ export const SponsorManager: React.FC = () => {
 
   useEffect(() => {
     if (!isAdminAuthenticated()) {
-      navigate('/admin/login', { replace: true });
+      navigate("/admin/login", { replace: true });
       return;
     }
     const token = getAdminToken();
-    fetch('/api/sponsors', {
+    fetch("/api/sponsors", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => (r.ok ? r.json() : []))
@@ -37,7 +37,11 @@ export const SponsorManager: React.FC = () => {
   }, [navigate]);
 
   const statusColor = (status: string) =>
-    status === 'active' ? 'text-green-400' : status === 'pending' ? 'text-yellow-400' : 'text-textMuted';
+    status === "active"
+      ? "text-green-400"
+      : status === "pending"
+        ? "text-yellow-400"
+        : "text-textMuted";
 
   return (
     <AdminLayout title="Sponsor Manager">
@@ -62,15 +66,26 @@ export const SponsorManager: React.FC = () => {
               {sponsors.map((s) => (
                 <tr key={s.id}>
                   <td className="py-3 pr-4 text-textPrimary">{s.name}</td>
-                  <td className="py-3 pr-4 text-textMuted">{s.contact_email ?? s.contact_name ?? '—'}</td>
+                  <td className="py-3 pr-4 text-textMuted">
+                    {s.contact_email ?? s.contact_name ?? "—"}
+                  </td>
                   <td className="py-3 pr-4 text-textMuted">
                     {s.website ? (
-                      <a href={s.website} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-xs">
+                      <a
+                        href={s.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline text-xs"
+                      >
                         {s.website}
                       </a>
-                    ) : '—'}
+                    ) : (
+                      "—"
+                    )}
                   </td>
-                  <td className={`py-3 font-medium ${statusColor(s.status)}`}>{s.status}</td>
+                  <td className={`py-3 font-medium ${statusColor(s.status)}`}>
+                    {s.status}
+                  </td>
                 </tr>
               ))}
             </tbody>

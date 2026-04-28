@@ -1,85 +1,73 @@
 ---
 name: design-system-builder
-description: Build and maintain design tokens, UI components, layouts, and patterns in the DZIRE design system. Use when adding tokens, components, layouts, or patterns.
+description: Scaffold, build, and extend the DZIRE design system. Use when the user asks to create tokens, components, layouts, or patterns.
 category: build
 version: v1.0
 inputs:
   - user request
-  - phases/step-6.md
   - existing design-system structure
+  - brand palette and typography specs
 outputs:
   - Token files
-  - React component files
+  - Component files
   - Layout files
   - Pattern files
-  - Updated barrel exports
+  - Barrel index.ts exports
 ---
 
 # Design System Builder Skill
 
 ## Purpose
 
-Build and maintain the DZIRE design system: tokens, components, layouts, and patterns. Ensures consistency with the brand and enforces TypeScript/Tailwind conventions.
+Build and extend the centralized DZIRE design system, from raw token definitions to composed UI patterns.
 
 ## When To Use
 
 Use this skill when the user asks to:
-- Add or update a design token (color, spacing, shadow, etc.)
-- Create a new UI component
-- Add a layout shell
-- Add a compound content pattern
-- Update the design system documentation
+- Scaffold the full `frontend/src/design-system/` folder structure
+- Add a new token category
+- Create a new UI component, layout, or pattern
+- Update existing tokens or components to match new brand specs
+- Export new components from barrel files
 
 ## Inputs
 
-- User request (component/token name and requirements)
-- `phases/step-6.md` — design spec
-- `frontend/src/design-system/` — existing structure
-- `frontend/src/index.css` — Tailwind theme tokens
+- User request
+- `frontend/src/design-system/` structure (current state)
+- `frontend/src/index.css` (Tailwind theme variables)
+- `phases/step-6.md` (specification)
+- Stack: React 19, Vite, TypeScript, Tailwind CSS v4
 
 ## Workflow
 
-1. Identify whether the change is a token, component, layout, or pattern.
-2. Create the file in the correct subdirectory.
-3. Export from the correct `index.ts` barrel.
-4. Run `cd frontend && npx tsc -b --noEmit` to verify TypeScript.
-5. Update the relevant doc in `docs/` (design-system.md or ui-components.md).
-
-## Token Rules
-
-- All token files export a `const` object with `as const`.
-- No duplicate values — reference existing tokens in new tokens where possible.
-- Token names must match the Tailwind `@theme` CSS variable names where applicable.
-
-## Component Rules
-
-- Functional React components with TypeScript interfaces for all props.
-- Tailwind CSS v4 utility classes only — no inline styles.
-- Default `type="button"` on all buttons.
-- Accessible: ARIA attributes, visible focus rings, disabled states.
-- `className` passthrough on all components.
+1. Identify target sub-folder: `tokens/`, `components/`, `layouts/`, or `patterns/`.
+2. Create or update the `.ts` / `.tsx` file.
+3. Follow the existing prop/variant/export pattern.
+4. Update the sub-folder `index.ts` barrel export.
+5. Run `npm run build` inside `frontend/` to verify compilation.
+6. Update `docs/design-system.md` if the public API changes.
 
 ## Output Format
 
 ```
 frontend/src/design-system/
-├── tokens/[name].ts          # New token file
-├── components/[Name].tsx     # New component
-├── layouts/[Name].tsx        # New layout
-├── patterns/[Name].tsx       # New pattern
-└── [sub]/index.ts            # Updated barrel
+├── tokens/[token].ts + index.ts
+├── components/[Component].tsx + index.ts
+├── layouts/[Layout].tsx + index.ts
+└── patterns/[Pattern].tsx + index.ts
 ```
 
 ## Quality Checklist
 
-- [ ] TypeScript compiles with `noUnusedLocals` and `noUnusedParameters`
-- [ ] Component exported from its barrel `index.ts`
-- [ ] Accessible attributes added where required
-- [ ] Documented in `docs/design-system.md` or `docs/ui-components.md`
+- [ ] TypeScript types for all props and exports
+- [ ] Tailwind utility classes only (no inline styles)
+- [ ] `focus-visible` ring on interactive elements
+- [ ] Barrel export updated
+- [ ] Build passes without TypeScript errors
 
-## References
+## Reference
 
-- [`docs/design-system.md`](../../docs/design-system.md)
-- [`docs/brand-guidelines.md`](../../docs/brand-guidelines.md)
-- [`phases/step-6.md`](../../phases/step-6.md)
 - [`frontend/src/design-system/README.md`](../../frontend/src/design-system/README.md)
+- [`docs/design-system.md`](../../docs/design-system.md)
+- [`phases/step-6.md`](../../phases/step-6.md)
+- [`.github/agents/design-system-agent.md`](../../.github/agents/design-system-agent.md)

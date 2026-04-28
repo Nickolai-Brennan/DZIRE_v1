@@ -1,5 +1,6 @@
 /**
- * DZIRE Design System — Breakpoint Tokens
+ * Design System — Breakpoint Tokens
+ * Mobile-first breakpoints aligned with Tailwind CSS defaults.
  */
 
 export const breakpoints = {

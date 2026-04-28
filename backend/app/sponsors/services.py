@@ -1,11 +1,12 @@
 """backend/app/sponsors/services.py — Sponsor business logic."""
+
 from __future__ import annotations
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from .models import Sponsor, SponsorCampaign
-from .schemas import SponsorCreate, SponsorCampaignCreate
+from .schemas import SponsorCampaignCreate, SponsorCreate
 
 
 async def list_sponsors(db: AsyncSession) -> list[Sponsor]:
@@ -22,11 +23,15 @@ async def create_sponsor(db: AsyncSession, data: SponsorCreate) -> Sponsor:
 
 
 async def list_campaigns(db: AsyncSession) -> list[SponsorCampaign]:
-    result = await db.execute(select(SponsorCampaign).order_by(SponsorCampaign.created_at.desc()))
+    result = await db.execute(
+        select(SponsorCampaign).order_by(SponsorCampaign.created_at.desc())
+    )
     return list(result.scalars().all())
 
 
-async def create_campaign(db: AsyncSession, data: SponsorCampaignCreate) -> SponsorCampaign:
+async def create_campaign(
+    db: AsyncSession, data: SponsorCampaignCreate
+) -> SponsorCampaign:
     campaign = SponsorCampaign(**data.model_dump())
     db.add(campaign)
     await db.commit()

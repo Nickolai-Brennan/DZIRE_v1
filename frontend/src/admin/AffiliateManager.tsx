@@ -2,10 +2,10 @@
  * frontend/src/admin/AffiliateManager.tsx
  * Admin affiliate partner and link manager.
  */
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AdminLayout } from './AdminLayout';
-import { getAdminToken, isAdminAuthenticated } from '../lib/auth/token';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AdminLayout } from "./AdminLayout";
+import { getAdminToken, isAdminAuthenticated } from "../lib/auth/token";
 
 interface Affiliate {
   id: string;
@@ -24,11 +24,11 @@ export const AffiliateManager: React.FC = () => {
 
   useEffect(() => {
     if (!isAdminAuthenticated()) {
-      navigate('/admin/login', { replace: true });
+      navigate("/admin/login", { replace: true });
       return;
     }
     const token = getAdminToken();
-    fetch('/api/affiliates', {
+    fetch("/api/affiliates", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => (r.ok ? r.json() : []))
@@ -38,7 +38,11 @@ export const AffiliateManager: React.FC = () => {
   }, [navigate]);
 
   const statusColor = (status: string) =>
-    status === 'active' ? 'text-green-400' : status === 'pending' ? 'text-yellow-400' : 'text-textMuted';
+    status === "active"
+      ? "text-green-400"
+      : status === "pending"
+        ? "text-yellow-400"
+        : "text-textMuted";
 
   return (
     <AdminLayout title="Affiliate Manager">
@@ -64,12 +68,20 @@ export const AffiliateManager: React.FC = () => {
               {affiliates.map((a) => (
                 <tr key={a.id}>
                   <td className="py-3 pr-4 text-textPrimary">{a.name}</td>
-                  <td className="py-3 pr-4 text-textMuted">{a.network ?? '—'}</td>
                   <td className="py-3 pr-4 text-textMuted">
-                    {a.commission_rate != null ? `${(a.commission_rate * 100).toFixed(1)}%` : '—'}
+                    {a.network ?? "—"}
                   </td>
-                  <td className="py-3 pr-4 text-textMuted">{a.contact_email ?? '—'}</td>
-                  <td className={`py-3 font-medium ${statusColor(a.status)}`}>{a.status}</td>
+                  <td className="py-3 pr-4 text-textMuted">
+                    {a.commission_rate != null
+                      ? `${(a.commission_rate * 100).toFixed(1)}%`
+                      : "—"}
+                  </td>
+                  <td className="py-3 pr-4 text-textMuted">
+                    {a.contact_email ?? "—"}
+                  </td>
+                  <td className={`py-3 font-medium ${statusColor(a.status)}`}>
+                    {a.status}
+                  </td>
                 </tr>
               ))}
             </tbody>

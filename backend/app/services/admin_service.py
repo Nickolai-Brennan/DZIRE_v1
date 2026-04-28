@@ -1,4 +1,5 @@
 """backend/app/services/admin_service.py — Admin user business logic."""
+
 from passlib.context import CryptContext
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -18,16 +19,12 @@ def verify_password(plain: str, hashed: str) -> bool:
 
 
 async def get_admin_by_username(db: AsyncSession, username: str) -> AdminUser | None:
-    result = await db.execute(
-        select(AdminUser).where(AdminUser.username == username)
-    )
+    result = await db.execute(select(AdminUser).where(AdminUser.username == username))
     return result.scalar_one_or_none()
 
 
 async def get_admin_by_id(db: AsyncSession, admin_id: int) -> AdminUser | None:
-    result = await db.execute(
-        select(AdminUser).where(AdminUser.id == admin_id)
-    )
+    result = await db.execute(select(AdminUser).where(AdminUser.id == admin_id))
     return result.scalar_one_or_none()
 
 

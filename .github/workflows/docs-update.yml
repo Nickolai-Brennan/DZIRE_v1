@@ -1,0 +1,107 @@
+name: Docs Update
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'frontend/**'
+      - 'backend/**'
+      - 'api/**'
+      - 'database/**'
+      - 'docs/**'
+      - '*.md'
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+      - master
+
+jobs:
+  update-docs:
+    name: Update Documentation
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Update SUMMARY.md with changed files
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.sha }}"
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            CHANGED_FILES=$(git show --name-only --format="" HEAD 2>/dev/null || echo "")
+          else
+            CHANGED_FILES=$(git diff --name-only "$BEFORE" "$AFTER" 2>/dev/null || echo "")
+          fi
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No changed files detected — skipping SUMMARY update."
+            exit 0
+          fi
+
+          TIMESTAMP=$(date -u '+%Y-%m-%d %H:%M UTC')
+          BRANCH="${GITHUB_REF_NAME}"
+          RUN_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+          # Append an auto-generated update entry to SUMMARY.md
+          cat >> SUMMARY.md <<EOF
+
+          ## Docs Auto-Update — ${TIMESTAMP}
+
+          **Trigger:** \`${GITHUB_EVENT_NAME}\` on \`${BRANCH}\`
+          **Run:** [#${{ github.run_number }}](${RUN_URL})
+
+          ### Files changed in this push
+
+          \`\`\`
+          ${CHANGED_FILES}
+          \`\`\`
+          EOF
+
+      - name: Validate frontend TypeScript
+        working-directory: frontend
+        run: npx tsc --noEmit
+        continue-on-error: true
+
+      - name: Generate backend route summary
+        run: python3 scripts/generate-routes.py
+
+      - name: Commit documentation updates
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add SUMMARY.md docs/backend-routes.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No documentation changes to commit."
+          else
+            git commit -m "docs: auto-update after ${{ github.event_name }} [skip ci]"
+            git push
+          fi

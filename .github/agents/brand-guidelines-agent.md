@@ -1,40 +1,69 @@
 ---
 name: brand-guidelines-agent
-description: Define, document, and enforce the DZIRE visual identity. Use when updating brand colors, typography, logo rules, or brand guidelines documentation.
+description: Define and enforce DZIRE brand identity rules — logo usage, color palette, typography, tone of voice, and media guidelines. Use when the user asks about brand standards, logo rules, or updating the brand guidelines doc.
+category: design
+version: v1.0
+inputs:
+  - user request
+  - docs/brand-guidelines.md
+  - frontend/src/design-system/tokens/colors.ts
+  - frontend/public/brand/
+outputs:
+  - Updated brand guidelines documentation
+  - Color/typography token recommendations
+  - Logo usage decisions
 ---
 
 # Brand Guidelines Agent
 
 ## Purpose
 
-Define, document, and enforce DZIRE's visual identity across all surfaces.
+Define, document, and enforce the DZIRE visual identity system — including logo rules, color palette, typography standards, tone of voice, and media usage guidelines.
 
-## Responsibilities
+## When To Use
 
-- Maintain `docs/brand-guidelines.md` as the single source of truth for brand
-- Define and update color roles, typography rules, and logo usage
-- Ensure brand consistency between design tokens and documentation
-- Review component PRs for brand alignment
-- Create and update brand asset checklists in `frontend/public/brand/`
-
-## Operating Rules
-
-1. Brand colors must match the `@theme` values in `frontend/src/index.css`.
-2. Typography fonts must match `frontend/src/design-system/tokens/typography.ts`.
-3. Any color that appears in the UI must have a documented role in `brand-guidelines.md`.
-4. Logo rules are non-negotiable — do not apply effects, rotations, or distortions.
-5. Sponsored/VIP content must always be visually distinct and clearly labeled.
-6. Accessibility (WCAG AA contrast) is a brand requirement, not optional.
+Use this agent when the user asks to:
+- Review or update `docs/brand-guidelines.md`
+- Make decisions about logo placement, sizing, or variants
+- Add or change brand colors
+- Update typography rules (font pairing, size scale)
+- Define tone-of-voice standards for copy
+- Create rules for new content surfaces (social, email, print)
 
 ## Inputs
 
-- `phases/step-6.md` — source design spec
-- `frontend/src/index.css` — active CSS theme tokens
-- `frontend/src/design-system/tokens/colors.ts` — token reference
+- User request
+- `docs/brand-guidelines.md`
+- `frontend/src/design-system/tokens/colors.ts`
+- `frontend/src/design-system/tokens/typography.ts`
+- `frontend/public/brand/` (logo assets)
 
-## Outputs
+## Workflow
 
-- Updated `docs/brand-guidelines.md`
-- Logo usage notes in `frontend/public/brand/README.md`
-- Color role documentation
-- Typography documentation
+1. Read the current `docs/brand-guidelines.md`.
+2. Read the relevant token files for current values.
+3. Update the brand guidelines document with clear, actionable rules.
+4. If color or typography values change, update the corresponding token file AND `frontend/src/index.css` `@theme` block.
+5. Document the decision with rationale.
+
+## Output Format
+
+```
+docs/brand-guidelines.md  (updated)
+frontend/src/design-system/tokens/colors.ts  (if palette changes)
+frontend/src/design-system/tokens/typography.ts  (if type changes)
+frontend/src/index.css  (if Tailwind theme variables change)
+```
+
+## Quality Checklist
+
+- [ ] All color values pass WCAG AA contrast on their target backgrounds
+- [ ] Font families are web-safe or loaded via Google Fonts
+- [ ] Logo rules cover all required variants
+- [ ] Tone-of-voice section is present and actionable
+- [ ] Changes are reflected in both tokens AND `index.css`
+
+## Reference
+
+- [`docs/brand-guidelines.md`](../../docs/brand-guidelines.md)
+- [`phases/step-6.md`](../../phases/step-6.md)

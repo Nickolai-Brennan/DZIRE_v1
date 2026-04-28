@@ -1,5 +1,7 @@
 """backend/app/cms/seo.py — SEO scoring logic for CMS posts."""
+
 from __future__ import annotations
+
 from typing import Optional
 
 

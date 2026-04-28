@@ -1,53 +1,69 @@
-import React from 'react';
+/**
+ * Design System — SponsorStrip Pattern
+ *
+ * Horizontal strip displaying sponsor logos or names.
+ * Works as a subtle trust/social-proof bar on landing pages.
+ */
+import React from "react";
 
-interface Sponsor {
-  id: string;
+export interface Sponsor {
+  id: string | number;
   name: string;
+  /** Logo image URL */
   logoUrl?: string;
-  url?: string;
+  /** Link to sponsor website */
+  href?: string;
 }
 
-interface SponsorStripProps {
+export interface SponsorStripProps {
   sponsors: Sponsor[];
   label?: string;
-  className?: string;
 }
 
 export const SponsorStrip: React.FC<SponsorStripProps> = ({
   sponsors,
-  label = 'Proudly supported by',
-  className = '',
+  label = "Our Partners",
 }) => {
-  return (
-    <section className={`py-10 px-4 border-y border-white/8 bg-surfaceAlt ${className}`}>
-      <div className="max-w-5xl mx-auto">
-        {label && (
-          <p className="text-xs font-semibold text-textMuted uppercase tracking-widest text-center mb-6">
-            {label}
-          </p>
-        )}
+  if (sponsors.length === 0) return null;
 
+  return (
+    <section
+      className="w-full border-y border-white/8 bg-surfaceAlt py-8 px-4 sm:px-6"
+      aria-label={label}
+    >
+      <div className="max-w-7xl mx-auto">
+        <p className="text-center text-xs font-semibold uppercase tracking-widest text-textSubtle mb-6">
+          {label}
+        </p>
         <div className="flex flex-wrap items-center justify-center gap-8">
-          {sponsors.map((sponsor) => (
-            <a
-              key={sponsor.id}
-              href={sponsor.url ?? '#'}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={sponsor.name}
-              className="opacity-60 hover:opacity-100 transition-opacity"
-            >
-              {sponsor.logoUrl ? (
-                <img
-                  src={sponsor.logoUrl}
-                  alt={sponsor.name}
-                  className="h-8 object-contain grayscale hover:grayscale-0 transition-all"
-                />
-              ) : (
-                <span className="text-textMuted font-semibold text-sm">{sponsor.name}</span>
-              )}
-            </a>
-          ))}
+          {sponsors.map((sponsor) => {
+            const inner = sponsor.logoUrl ? (
+              <img
+                src={sponsor.logoUrl}
+                alt={sponsor.name}
+                className="h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
+                loading="lazy"
+              />
+            ) : (
+              <span className="text-sm font-semibold text-textMuted hover:text-textPrimary transition-colors">
+                {sponsor.name}
+              </span>
+            );
+
+            return sponsor.href ? (
+              <a
+                key={sponsor.id}
+                href={sponsor.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={sponsor.name}
+              >
+                {inner}
+              </a>
+            ) : (
+              <div key={sponsor.id}>{inner}</div>
+            );
+          })}
         </div>
       </div>
     </section>

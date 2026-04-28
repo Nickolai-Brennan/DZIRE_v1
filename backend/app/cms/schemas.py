@@ -1,13 +1,15 @@
 """backend/app/cms/schemas.py — Pydantic v2 schemas for CMS."""
+
 from __future__ import annotations
+
 from datetime import datetime
 from typing import Optional
 from uuid import UUID
 
 from pydantic import BaseModel
 
-
 # ── Category ────────────────────────────────────────────────────────────────
+
 
 class CategoryBase(BaseModel):
     name: str
@@ -29,6 +31,7 @@ class CategoryRead(CategoryBase):
 
 # ── Tag ─────────────────────────────────────────────────────────────────────
 
+
 class TagBase(BaseModel):
     name: str
     slug: str
@@ -46,6 +49,7 @@ class TagRead(TagBase):
 
 
 # ── Author ──────────────────────────────────────────────────────────────────
+
 
 class AuthorBase(BaseModel):
     name: str
@@ -67,6 +71,7 @@ class AuthorRead(AuthorBase):
 
 
 # ── Post ─────────────────────────────────────────────────────────────────────
+
 
 class PostBase(BaseModel):
     title: str
@@ -126,6 +131,7 @@ class PostRead(PostBase):
 
 # ── Media ────────────────────────────────────────────────────────────────────
 
+
 class MediaRead(BaseModel):
     id: UUID
     filename: str
@@ -139,6 +145,7 @@ class MediaRead(BaseModel):
 
 
 # ── Social Embed ─────────────────────────────────────────────────────────────
+
 
 class SocialEmbedBase(BaseModel):
     platform: str

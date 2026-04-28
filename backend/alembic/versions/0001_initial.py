@@ -1,11 +1,12 @@
 """Initial schema — users, admin_roles, admin_users, admin_login_attempts.
 
 Revision ID: 0001_initial
-Revises: 
+Revises:
 Create Date: 2026-04-27 07:22:19
 """
-from alembic import op
+
 import sqlalchemy as sa
+from alembic import op
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers
@@ -46,9 +47,7 @@ def upgrade() -> None:
     # admin_roles
     op.create_table(
         "admin_roles",
-        sa.Column(
-            "id", sa.Integer(), primary_key=True, autoincrement=True
-        ),
+        sa.Column("id", sa.Integer(), primary_key=True, autoincrement=True),
         sa.Column("name", sa.String(64), nullable=False),
         sa.Column(
             "created_at",
@@ -66,9 +65,7 @@ def upgrade() -> None:
     # admin_users
     op.create_table(
         "admin_users",
-        sa.Column(
-            "id", sa.Integer(), primary_key=True, autoincrement=True
-        ),
+        sa.Column("id", sa.Integer(), primary_key=True, autoincrement=True),
         sa.Column("username", sa.String(64), nullable=False),
         sa.Column("password_hash", sa.String(256), nullable=False),
         sa.Column(
@@ -97,9 +94,7 @@ def upgrade() -> None:
     # admin_login_attempts
     op.create_table(
         "admin_login_attempts",
-        sa.Column(
-            "id", sa.Integer(), primary_key=True, autoincrement=True
-        ),
+        sa.Column("id", sa.Integer(), primary_key=True, autoincrement=True),
         sa.Column("username", sa.String(64), nullable=False),
         sa.Column("ip", sa.String(45), nullable=True),
         sa.Column("success", sa.Boolean(), nullable=False, server_default="false"),

@@ -1,5 +1,7 @@
 """backend/app/cms/routes.py — Public CMS API routes."""
+
 from __future__ import annotations
+
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
@@ -7,13 +9,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..core.database import get_db
 from . import services
-from .schemas import (
-    CategoryCreate, CategoryRead,
-    TagCreate, TagRead,
-    PostRead,
-    MediaRead,
-    SocialEmbedCreate, SocialEmbedRead,
-)
+from .schemas import (CategoryCreate, CategoryRead, MediaRead, PostRead,
+                      SocialEmbedCreate, SocialEmbedRead, TagCreate, TagRead)
 
 router = APIRouter(prefix="/api", tags=["cms"])
 
@@ -32,7 +29,9 @@ async def list_posts(
 async def get_post(slug: str, db: AsyncSession = Depends(get_db)) -> PostRead:
     post = await services.get_post_by_slug(db, slug)
     if not post:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Post not found"
+        )
     return PostRead.model_validate(post)
 
 

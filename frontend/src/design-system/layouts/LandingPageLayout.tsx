@@ -1,30 +1,31 @@
-import React from 'react';
+/**
+ * Design System — LandingPageLayout
+ *
+ * Minimal, full-width layout for marketing / landing pages.
+ * No container constraints — each section is responsible for its own width.
+ */
+import React from "react";
+import { Header } from "../../components/layout/Header";
+import { Footer } from "../../components/layout/Footer";
 
-interface LandingPageLayoutProps {
+export interface LandingPageLayoutProps {
   children: React.ReactNode;
-  header?: React.ReactNode;
-  footer?: React.ReactNode;
+  /** Hide the shared Header (useful for custom branded headers) */
+  hideHeader?: boolean;
+  /** Hide the shared Footer */
+  hideFooter?: boolean;
 }
 
-/**
- * LandingPageLayout — full-width section-based layout for marketing/landing pages.
- */
 export const LandingPageLayout: React.FC<LandingPageLayoutProps> = ({
   children,
-  header,
-  footer,
+  hideHeader = false,
+  hideFooter = false,
 }) => {
   return (
     <div className="min-h-screen flex flex-col bg-background text-textPrimary overflow-x-hidden">
-      {header && (
-        <header className="sticky top-0 z-20 bg-background/80 backdrop-blur-sm border-b border-white/8">
-          {header}
-        </header>
-      )}
-      <main className="flex-1 flex flex-col">{children}</main>
-      {footer && (
-        <footer className="border-t border-white/8 bg-surfaceAlt">{footer}</footer>
-      )}
+      {!hideHeader && <Header />}
+      <main className="flex-1">{children}</main>
+      {!hideFooter && <Footer />}
     </div>
   );
 };

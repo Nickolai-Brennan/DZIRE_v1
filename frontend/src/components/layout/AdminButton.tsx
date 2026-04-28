@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Shield } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Shield } from "lucide-react";
 
 export const AdminButton: React.FC = () => {
   // Only render in development builds

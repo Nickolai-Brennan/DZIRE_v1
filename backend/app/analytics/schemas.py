@@ -1,5 +1,7 @@
 """backend/app/analytics/schemas.py — Pydantic v2 schemas for analytics."""
+
 from __future__ import annotations
+
 from datetime import datetime
 from typing import Optional
 from uuid import UUID
