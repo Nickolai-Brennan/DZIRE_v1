@@ -1,0 +1,83 @@
+{
+  "title": "Recommendations API Contract",
+  "version": "1.0.0",
+  "step": 9,
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/recommendations/related/{content_id}",
+      "description": "Get related posts for a given content item",
+      "query_params": ["limit"],
+      "response": "array of RecommendationRead"
+    },
+    {
+      "method": "GET",
+      "path": "/api/recommendations/trending",
+      "description": "Get trending posts by engagement",
+      "query_params": ["days", "limit"],
+      "response": "array of RecommendationRead"
+    },
+    {
+      "method": "GET",
+      "path": "/api/recommendations/for-you/{user_id}",
+      "description": "Get personalized recommendations for a user",
+      "query_params": ["limit"],
+      "response": "array of RecommendationRead"
+    },
+    {
+      "method": "GET",
+      "path": "/api/saved-posts",
+      "description": "List saved posts for a user",
+      "query_params": ["user_id", "collection_name"],
+      "response": "array of SavedPostRead"
+    },
+    {
+      "method": "POST",
+      "path": "/api/saved-posts/add",
+      "description": "Save a post to a collection",
+      "body": "SavedPostCreate",
+      "response": "SavedPostRead"
+    },
+    {
+      "method": "POST",
+      "path": "/api/saved-posts/remove",
+      "description": "Remove a saved post",
+      "body": "SavedPostRemove",
+      "response": "{status: removed}"
+    },
+    {
+      "method": "GET",
+      "path": "/api/saved-posts/collections",
+      "description": "List collection names for a user",
+      "query_params": ["user_id"],
+      "response": "array of string"
+    }
+  ],
+  "schemas": {
+    "RecommendationRead": {
+      "id": "uuid",
+      "user_id": "uuid | null",
+      "content_id": "uuid",
+      "content_type": "string",
+      "recommendation_type": "related | trending | recommended_for_you | continue_reading | popular_in_category | more_from_author",
+      "score": "float",
+      "reason": "string | null",
+      "shown_at": "datetime | null",
+      "clicked_at": "datetime | null",
+      "dismissed_at": "datetime | null",
+      "created_at": "datetime"
+    },
+    "SavedPostCreate": {
+      "user_id": "uuid",
+      "post_id": "uuid",
+      "collection_name": "string"
+    },
+    "SavedPostRead": {
+      "id": "uuid",
+      "user_id": "uuid",
+      "post_id": "uuid",
+      "collection_name": "string",
+      "created_at": "datetime"
+    }
+  }
+}

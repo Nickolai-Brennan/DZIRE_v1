@@ -1,0 +1,100 @@
+{
+  "title": "Search API Contract",
+  "version": "1.0.0",
+  "step": 9,
+  "base_path": "/api/search",
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/search",
+      "description": "Basic keyword search across the search index",
+      "query_params": ["q", "content_type", "category", "sort_by", "is_vip_only", "skip", "limit"],
+      "response": "SearchResponse"
+    },
+    {
+      "method": "POST",
+      "path": "/api/search/advanced",
+      "description": "Advanced search with date range and extra filters",
+      "body": "AdvancedSearchRequest",
+      "response": "SearchResponse"
+    },
+    {
+      "method": "GET",
+      "path": "/api/search/suggestions",
+      "description": "Autocomplete query suggestions",
+      "query_params": ["q", "limit"],
+      "response": "array of string"
+    },
+    {
+      "method": "GET",
+      "path": "/api/search/trending",
+      "description": "Trending search queries",
+      "query_params": ["days", "limit"],
+      "response": "array of {query, count}"
+    },
+    {
+      "method": "GET",
+      "path": "/api/search/tags",
+      "description": "List searchable tags",
+      "query_params": ["q"],
+      "response": "array of string"
+    },
+    {
+      "method": "GET",
+      "path": "/api/search/categories",
+      "description": "List searchable categories",
+      "query_params": ["q"],
+      "response": "array of string"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/search-analytics",
+      "description": "Admin search analytics dashboard data",
+      "auth": "admin",
+      "response": "SearchAnalytics"
+    }
+  ],
+  "schemas": {
+    "SearchRequest": {
+      "query": "string",
+      "content_type": "string | null",
+      "category": "string | null",
+      "tags": "string[] | null",
+      "author": "string | null",
+      "is_vip_only": "boolean | null",
+      "sort_by": "relevance | newest | oldest | most_viewed | most_clicked",
+      "skip": "integer",
+      "limit": "integer"
+    },
+    "SearchResultItem": {
+      "id": "uuid",
+      "content_id": "uuid",
+      "content_type": "string",
+      "title": "string",
+      "slug": "string",
+      "excerpt": "string | null",
+      "category": "string | null",
+      "tags": "string[] | null",
+      "author": "string | null",
+      "is_vip_only": "boolean",
+      "published_at": "datetime | null",
+      "ranking_score": "float | null"
+    },
+    "SearchResponse": {
+      "query": "string",
+      "total": "integer",
+      "items": "array of SearchResultItem",
+      "skip": "integer",
+      "limit": "integer"
+    },
+    "SearchAnalytics": {
+      "top_queries": "array of {query, count}",
+      "zero_result_queries": "array of {query, count}",
+      "most_clicked_results": "array of {content_id, count}",
+      "popular_tags": "array of {tag, count}",
+      "popular_categories": "array of {category, count}",
+      "total_searches_7d": "integer",
+      "total_searches_30d": "integer"
+    }
+  }
+}
