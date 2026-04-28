@@ -129,11 +129,23 @@ function App() {
                 path="/admin/social-size-chart"
                 element={<SocialSizeChartPage />}
               />
-              <Route path="/admin/geographic" element={<GeographicStatsPage />} />
+              <Route
+                path="/admin/geographic"
+                element={<GeographicStatsPage />}
+              />
               <Route path="/admin/age-range" element={<AgeRangeStatsPage />} />
-              <Route path="/admin/search-rankings" element={<SearchRankingsPage />} />
-              <Route path="/admin/monetization" element={<MonetizationPage />} />
-              <Route path="/admin/post-templates" element={<PostTemplatesPage />} />
+              <Route
+                path="/admin/search-rankings"
+                element={<SearchRankingsPage />}
+              />
+              <Route
+                path="/admin/monetization"
+                element={<MonetizationPage />}
+              />
+              <Route
+                path="/admin/post-templates"
+                element={<PostTemplatesPage />}
+              />
               <Route path="/admin/dolls" element={<DzireDollsAdminPage />} />
               <Route path="/admin/settings" element={<SettingsPage />} />
 

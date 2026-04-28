@@ -69,9 +69,10 @@ const TEMPLATE_BODY: Record<
         The Architecture of Digital Desire
       </h2>
       <p className="text-textMuted leading-relaxed">
-        Desire is not simply physical. It is anticipatory, narrative, contextual.
-        Digital platforms understood this intuitively. The profile, the swipe, the
-        message — each is a carefully designed ritual of imagination.
+        Desire is not simply physical. It is anticipatory, narrative,
+        contextual. Digital platforms understood this intuitively. The profile,
+        the swipe, the message — each is a carefully designed ritual of
+        imagination.
       </p>
       <blockquote className="border-l-4 border-gold pl-6 py-2">
         <p className="text-lg text-textPrimary italic font-medium">
@@ -122,7 +123,10 @@ const TEMPLATE_BODY: Record<
           body: "Shift from evaluating your body aesthetically to appreciating it functionally. What can it feel? What connections can it create? That shift is transformative.",
         },
       ].map((s) => (
-        <div key={s.n} className="bg-surface rounded-2xl p-6 border border-white/8">
+        <div
+          key={s.n}
+          className="bg-surface rounded-2xl p-6 border border-white/8"
+        >
           <div className="flex items-center gap-3 mb-3">
             <span className="w-8 h-8 rounded-full bg-primary/20 text-primary font-black flex items-center justify-center text-sm">
               {s.n}
@@ -141,12 +145,27 @@ const TEMPLATE_BODY: Record<
         What to Look for First
       </h2>
       {[
-        { label: "Material Safety", desc: "Body-safe silicone, ABS plastic, or stainless steel. Avoid porous materials that can harbor bacteria." },
-        { label: "Motor Strength", desc: "More expensive doesn't always mean stronger. Look for reviews that mention consistent intensity without overheating." },
-        { label: "Ease of Cleaning", desc: "Waterproof or submersible toys are far easier to keep clean. Look for USB-rechargeable models." },
-        { label: "Beginner vs Advanced", desc: "Start simple. A single-function wand or bullet vibrator is a better first purchase than a multi-function device." },
+        {
+          label: "Material Safety",
+          desc: "Body-safe silicone, ABS plastic, or stainless steel. Avoid porous materials that can harbor bacteria.",
+        },
+        {
+          label: "Motor Strength",
+          desc: "More expensive doesn't always mean stronger. Look for reviews that mention consistent intensity without overheating.",
+        },
+        {
+          label: "Ease of Cleaning",
+          desc: "Waterproof or submersible toys are far easier to keep clean. Look for USB-rechargeable models.",
+        },
+        {
+          label: "Beginner vs Advanced",
+          desc: "Start simple. A single-function wand or bullet vibrator is a better first purchase than a multi-function device.",
+        },
       ].map((item) => (
-        <div key={item.label} className="flex gap-4 bg-surface rounded-xl p-5 border border-white/8">
+        <div
+          key={item.label}
+          className="flex gap-4 bg-surface rounded-xl p-5 border border-white/8"
+        >
           <span className="text-primary mt-0.5">•</span>
           <div>
             <p className="font-bold text-textPrimary mb-1">{item.label}</p>
@@ -156,9 +175,10 @@ const TEMPLATE_BODY: Record<
       ))}
       <div className="bg-surfaceAlt rounded-2xl p-4 border border-white/8">
         <p className="text-xs text-textMuted italic">
-          Sponsor Disclosure: Some product links in this guide are affiliate links.
-          DZIRE may receive a commission if you purchase through these links.
-          All recommendations are based on independent research and editorial judgment.
+          Sponsor Disclosure: Some product links in this guide are affiliate
+          links. DZIRE may receive a commission if you purchase through these
+          links. All recommendations are based on independent research and
+          editorial judgment.
         </p>
       </div>
     </div>
@@ -192,7 +212,10 @@ const TEMPLATE_BODY: Record<
           '"What makes you feel most comfortable and safe?"',
           '"What would you love more of? Less of?"',
         ].map((prompt) => (
-          <div key={prompt} className="flex gap-3 bg-surface rounded-xl p-4 border border-white/8">
+          <div
+            key={prompt}
+            className="flex gap-3 bg-surface rounded-xl p-4 border border-white/8"
+          >
             <span className="text-primary mt-0.5">→</span>
             <p className="text-textPrimary italic text-sm">{prompt}</p>
           </div>
@@ -216,7 +239,9 @@ export const ArticleDetailPage: React.FC = () => {
   if (!article) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-4">
-        <h1 className="text-3xl font-bold text-textPrimary">Article Not Found</h1>
+        <h1 className="text-3xl font-bold text-textPrimary">
+          Article Not Found
+        </h1>
         <Link to="/articles" className="text-primary hover:underline">
           Back to Articles
         </Link>
@@ -243,7 +268,8 @@ export const ArticleDetailPage: React.FC = () => {
     track("article_share_click", { articleSlug: slug });
   };
 
-  const bodyRenderer = TEMPLATE_BODY[article.templateType] ?? TEMPLATE_BODY.general;
+  const bodyRenderer =
+    TEMPLATE_BODY[article.templateType] ?? TEMPLATE_BODY.general;
 
   return (
     <div className="min-h-screen">
@@ -334,7 +360,11 @@ export const ArticleDetailPage: React.FC = () => {
 
             {/* Newsletter CTA in article */}
             <div className="mt-10">
-              <NewsletterForm onSubmitSuccess={() => track("newsletter_signup_from_article", { articleSlug: slug })} />
+              <NewsletterForm
+                onSubmitSuccess={() =>
+                  track("newsletter_signup_from_article", { articleSlug: slug })
+                }
+              />
             </div>
 
             {/* Sponsor block */}
@@ -352,7 +382,9 @@ export const ArticleDetailPage: React.FC = () => {
           <div className="space-y-6">
             {/* CTA */}
             <div className="bg-surface rounded-2xl p-5 border border-primary/20 text-center">
-              <p className="font-bold text-textPrimary mb-2">{article.ctaLabel}</p>
+              <p className="font-bold text-textPrimary mb-2">
+                {article.ctaLabel}
+              </p>
               <Link
                 to="/articles"
                 onClick={() =>

@@ -95,8 +95,9 @@ def get_provider(platform: str) -> BaseProvider:
     Falls back to MockProvider if the platform is unknown or has no real
     credentials configured.
     """
-    from . import (bluesky, discord, facebook, instagram,  # noqa: PLC0415
-                   mastodon, reddit, threads, tiktok, x_twitter, youtube)
+    from . import instagram  # noqa: PLC0415
+    from . import (bluesky, discord, facebook, mastodon, reddit, threads,
+                   tiktok, x_twitter, youtube)
 
     _registry: dict[str, BaseProvider] = {
         "x": x_twitter.XTwitterProvider(),

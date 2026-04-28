@@ -30,8 +30,7 @@ const SAMPLE_ARTICLES = [
     image:
       "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
     title: "Building Engaged Communities Online",
-    excerpt:
-      "Strategies for fostering genuine connections with your audience.",
+    excerpt: "Strategies for fostering genuine connections with your audience.",
     category: "INSIGHTS",
     author: "James Wilson",
     date: "Nov 10, 2024",
@@ -83,9 +82,7 @@ export const MagazineLayoutPreview: React.FC = () => {
                   category="FEATURED"
                   author="Editorial Team"
                   date="Today"
-                  onClick={() =>
-                    console.log("Hero card clicked")
-                  }
+                  onClick={() => console.log("Hero card clicked")}
                 />
               </div>
             }
@@ -180,9 +177,7 @@ export const MagazineLayoutPreview: React.FC = () => {
                 <ArticleCard
                   key={idx}
                   {...article}
-                  onClick={() =>
-                    console.log("Clicked:", article.title)
-                  }
+                  onClick={() => console.log("Clicked:", article.title)}
                 />
               ))}
             </ArticleGrid>
@@ -198,9 +193,7 @@ export const MagazineLayoutPreview: React.FC = () => {
                   key={idx}
                   {...article}
                   featured={true}
-                  onClick={() =>
-                    console.log("Clicked:", article.title)
-                  }
+                  onClick={() => console.log("Clicked:", article.title)}
                 />
               ))}
             </ArticleGrid>
@@ -338,7 +331,7 @@ export const MagazineLayoutPreview: React.FC = () => {
   ];
 
   const activePreview = previewSections.find(
-    (section) => section.id === activeSection
+    (section) => section.id === activeSection,
   );
 
   return (

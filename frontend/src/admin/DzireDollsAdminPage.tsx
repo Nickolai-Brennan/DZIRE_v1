@@ -42,7 +42,9 @@ export const DzireDollsAdminPage: React.FC = () => {
       {/* Summary Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         <div className="bg-surface rounded-2xl p-5 border border-white/8 text-center">
-          <p className="text-3xl font-black text-textPrimary">{mockDolls.length}</p>
+          <p className="text-3xl font-black text-textPrimary">
+            {mockDolls.length}
+          </p>
           <p className="text-xs text-textMuted mt-1">Total Dolls</p>
         </div>
         <div className="bg-surface rounded-2xl p-5 border border-white/8 text-center">

@@ -229,7 +229,9 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   return (
     <div onClick={onClick} className={baseClass}>
       {/* Image Container */}
-      <div className={`relative w-full ${imageHeight} overflow-hidden rounded-lg`}>
+      <div
+        className={`relative w-full ${imageHeight} overflow-hidden rounded-lg`}
+      >
         <img
           src={image}
           alt={title}
@@ -257,7 +259,9 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 
         {/* Excerpt */}
         {excerpt && (
-          <p className={`text-textSecondary line-clamp-2 ${featured ? "text-sm" : "text-xs"}`}>
+          <p
+            className={`text-textSecondary line-clamp-2 ${featured ? "text-sm" : "text-xs"}`}
+          >
             {excerpt}
           </p>
         )}
@@ -306,10 +310,7 @@ export const ArticleGrid: React.FC<ArticleGridProps> = ({
           ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
           : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4";
 
-  const gapClass =
-    gap === "sm" ? "gap-4" : gap === "lg" ? "gap-8" : "gap-6";
+  const gapClass = gap === "sm" ? "gap-4" : gap === "lg" ? "gap-8" : "gap-6";
 
-  return (
-    <div className={`grid ${colClass} ${gapClass}`}>{children}</div>
-  );
+  return <div className={`grid ${colClass} ${gapClass}`}>{children}</div>;
 };

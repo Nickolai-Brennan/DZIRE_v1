@@ -36,13 +36,14 @@ export const ArticlesPage: React.FC = () => {
         a.title.toLowerCase().includes(search.toLowerCase()) ||
         a.excerpt.toLowerCase().includes(search.toLowerCase()) ||
         a.tags.some((t) => t.toLowerCase().includes(search.toLowerCase()));
-      const matchFilter =
-        activeFilter === "All" || a.category === activeFilter;
+      const matchFilter = activeFilter === "All" || a.category === activeFilter;
       return matchSearch && matchFilter;
     });
   }, [search, activeFilter]);
 
-  const featured = mockArticles.find((a) => a.templateType === "longform-essay") ?? mockArticles[0];
+  const featured =
+    mockArticles.find((a) => a.templateType === "longform-essay") ??
+    mockArticles[0];
   const rest = filtered.filter((a) => a.id !== featured.id);
 
   return (
@@ -89,7 +90,10 @@ export const ArticlesPage: React.FC = () => {
             <Link
               to={`/articles/${featured.slug}`}
               onClick={() =>
-                track("article_card_click", { articleId: featured.id, featured: true })
+                track("article_card_click", {
+                  articleId: featured.id,
+                  featured: true,
+                })
               }
               className="block group"
             >

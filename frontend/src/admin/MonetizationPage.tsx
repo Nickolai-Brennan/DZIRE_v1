@@ -38,14 +38,44 @@ const affiliateClicks = [
   { name: "Doc Johnson", clicks: 142 },
 ];
 
-const totalAffiliate = mockMonetization.affiliatePartners.reduce((s, p) => s + p.revenue, 0);
-const totalSponsor = mockMonetization.sponsorships.reduce((s, sp) => s + sp.monthlyRate, 0);
+const totalAffiliate = mockMonetization.affiliatePartners.reduce(
+  (s, p) => s + p.revenue,
+  0,
+);
+const totalSponsor = mockMonetization.sponsorships.reduce(
+  (s, sp) => s + sp.monthlyRate,
+  0,
+);
 
 const METRIC_CARDS = [
-  { label: "Affiliate Revenue (MTD)", value: `$${totalAffiliate.toLocaleString()}`, icon: Link2, color: "text-primary", bg: "bg-primary/10" },
-  { label: "Sponsorship Revenue", value: `$${totalSponsor.toLocaleString()}`, icon: Building2, color: "text-blue-400", bg: "bg-blue-500/10" },
-  { label: "VIP Revenue", value: "$2,340", icon: Crown, color: "text-gold", bg: "bg-gold/10" },
-  { label: "Ad Impressions", value: "184,200", icon: BarChart2, color: "text-purple-400", bg: "bg-purple-500/10" },
+  {
+    label: "Affiliate Revenue (MTD)",
+    value: `$${totalAffiliate.toLocaleString()}`,
+    icon: Link2,
+    color: "text-primary",
+    bg: "bg-primary/10",
+  },
+  {
+    label: "Sponsorship Revenue",
+    value: `$${totalSponsor.toLocaleString()}`,
+    icon: Building2,
+    color: "text-blue-400",
+    bg: "bg-blue-500/10",
+  },
+  {
+    label: "VIP Revenue",
+    value: "$2,340",
+    icon: Crown,
+    color: "text-gold",
+    bg: "bg-gold/10",
+  },
+  {
+    label: "Ad Impressions",
+    value: "184,200",
+    icon: BarChart2,
+    color: "text-purple-400",
+    bg: "bg-purple-500/10",
+  },
 ];
 
 export const MonetizationPage: React.FC = () => {
@@ -62,8 +92,13 @@ export const MonetizationPage: React.FC = () => {
       {/* Metric Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {METRIC_CARDS.map((card) => (
-          <div key={card.label} className="bg-surface rounded-2xl p-5 border border-white/8">
-            <div className={`w-9 h-9 rounded-xl ${card.bg} flex items-center justify-center mb-3`}>
+          <div
+            key={card.label}
+            className="bg-surface rounded-2xl p-5 border border-white/8"
+          >
+            <div
+              className={`w-9 h-9 rounded-xl ${card.bg} flex items-center justify-center mb-3`}
+            >
               <card.icon className={`w-5 h-5 ${card.color}`} />
             </div>
             <p className="text-2xl font-black text-textPrimary">{card.value}</p>
@@ -76,25 +111,73 @@ export const MonetizationPage: React.FC = () => {
       <div className="bg-surface rounded-2xl p-6 border border-white/8 mb-8">
         <div className="flex items-center gap-2 mb-5">
           <DollarSign className="w-5 h-5 text-gold" />
-          <h2 className="text-lg font-bold text-textPrimary">Revenue by Channel — Last 6 Months</h2>
+          <h2 className="text-lg font-bold text-textPrimary">
+            Revenue by Channel — Last 6 Months
+          </h2>
         </div>
         <ResponsiveContainer width="100%" height={260}>
           <LineChart data={revenueTimeline}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-            <XAxis dataKey="month" tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={false} tickLine={false} />
-            <YAxis tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="rgba(255,255,255,0.05)"
+            />
+            <XAxis
+              dataKey="month"
+              tick={{ fill: "#94A3B8", fontSize: 12 }}
+              axisLine={false}
+              tickLine={false}
+            />
+            <YAxis
+              tick={{ fill: "#94A3B8", fontSize: 12 }}
+              axisLine={false}
+              tickLine={false}
+              tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
+            />
             <Tooltip
-              contentStyle={{ backgroundColor: "#15151C", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, color: "#F8FAFC" }}
+              contentStyle={{
+                backgroundColor: "#15151C",
+                border: "1px solid rgba(255,255,255,0.1)",
+                borderRadius: 12,
+                color: "#F8FAFC",
+              }}
               formatter={(v: number) => [`$${v.toLocaleString()}`, "Revenue"]}
             />
-            <Line type="monotone" dataKey="affiliate" stroke="#E11D48" strokeWidth={2} name="Affiliate" dot={{ r: 4, fill: "#E11D48" }} />
-            <Line type="monotone" dataKey="sponsorship" stroke="#60A5FA" strokeWidth={2} name="Sponsorship" dot={{ r: 4, fill: "#60A5FA" }} />
-            <Line type="monotone" dataKey="vip" stroke="#F5C451" strokeWidth={2} name="VIP" dot={{ r: 4, fill: "#F5C451" }} />
+            <Line
+              type="monotone"
+              dataKey="affiliate"
+              stroke="#E11D48"
+              strokeWidth={2}
+              name="Affiliate"
+              dot={{ r: 4, fill: "#E11D48" }}
+            />
+            <Line
+              type="monotone"
+              dataKey="sponsorship"
+              stroke="#60A5FA"
+              strokeWidth={2}
+              name="Sponsorship"
+              dot={{ r: 4, fill: "#60A5FA" }}
+            />
+            <Line
+              type="monotone"
+              dataKey="vip"
+              stroke="#F5C451"
+              strokeWidth={2}
+              name="VIP"
+              dot={{ r: 4, fill: "#F5C451" }}
+            />
           </LineChart>
         </ResponsiveContainer>
         <div className="flex gap-6 mt-4 justify-center">
-          {[{ color: "bg-primary", label: "Affiliate" }, { color: "bg-blue-400", label: "Sponsorship" }, { color: "bg-gold", label: "VIP" }].map((l) => (
-            <div key={l.label} className="flex items-center gap-1.5 text-xs text-textMuted">
+          {[
+            { color: "bg-primary", label: "Affiliate" },
+            { color: "bg-blue-400", label: "Sponsorship" },
+            { color: "bg-gold", label: "VIP" },
+          ].map((l) => (
+            <div
+              key={l.label}
+              className="flex items-center gap-1.5 text-xs text-textMuted"
+            >
               <div className={`w-3 h-1.5 rounded-full ${l.color}`} />
               {l.label}
             </div>
@@ -106,7 +189,9 @@ export const MonetizationPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Affiliate Partners Table */}
         <div className="bg-surface rounded-2xl p-6 border border-white/8">
-          <h2 className="text-lg font-bold text-textPrimary mb-5">Affiliate Partners</h2>
+          <h2 className="text-lg font-bold text-textPrimary mb-5">
+            Affiliate Partners
+          </h2>
           <table className="w-full text-sm">
             <thead>
               <tr className="text-left text-textMuted text-xs uppercase tracking-wider">
@@ -120,11 +205,17 @@ export const MonetizationPage: React.FC = () => {
             <tbody className="divide-y divide-white/5">
               {mockMonetization.affiliatePartners.map((p) => (
                 <tr key={p.name}>
-                  <td className="py-3 text-textPrimary font-medium">{p.name}</td>
+                  <td className="py-3 text-textPrimary font-medium">
+                    {p.name}
+                  </td>
                   <td className="py-3 text-textMuted">{p.category}</td>
                   <td className="py-3 text-right text-textMuted">{p.clicks}</td>
-                  <td className="py-3 text-right text-textMuted">{p.conversions}</td>
-                  <td className="py-3 text-right text-gold font-bold">${p.revenue.toLocaleString()}</td>
+                  <td className="py-3 text-right text-textMuted">
+                    {p.conversions}
+                  </td>
+                  <td className="py-3 text-right text-gold font-bold">
+                    ${p.revenue.toLocaleString()}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -133,16 +224,40 @@ export const MonetizationPage: React.FC = () => {
 
         {/* Affiliate Clicks Bar Chart */}
         <div className="bg-surface rounded-2xl p-6 border border-white/8">
-          <h2 className="text-lg font-bold text-textPrimary mb-5">Affiliate Clicks by Partner</h2>
+          <h2 className="text-lg font-bold text-textPrimary mb-5">
+            Affiliate Clicks by Partner
+          </h2>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={affiliateClicks}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-              <XAxis dataKey="name" tick={{ fill: "#94A3B8", fontSize: 11 }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={false} tickLine={false} />
-              <Tooltip
-                contentStyle={{ backgroundColor: "#15151C", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, color: "#F8FAFC" }}
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="rgba(255,255,255,0.05)"
               />
-              <Bar dataKey="clicks" fill="#E11D48" radius={[6, 6, 0, 0]} name="Clicks" />
+              <XAxis
+                dataKey="name"
+                tick={{ fill: "#94A3B8", fontSize: 11 }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <YAxis
+                tick={{ fill: "#94A3B8", fontSize: 12 }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "#15151C",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  borderRadius: 12,
+                  color: "#F8FAFC",
+                }}
+              />
+              <Bar
+                dataKey="clicks"
+                fill="#E11D48"
+                radius={[6, 6, 0, 0]}
+                name="Clicks"
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -150,7 +265,9 @@ export const MonetizationPage: React.FC = () => {
 
       {/* Sponsorships Table */}
       <div className="bg-surface rounded-2xl p-6 border border-white/8">
-        <h2 className="text-lg font-bold text-textPrimary mb-5">Active Sponsorships</h2>
+        <h2 className="text-lg font-bold text-textPrimary mb-5">
+          Active Sponsorships
+        </h2>
         <table className="w-full text-sm">
           <thead>
             <tr className="text-left text-textMuted text-xs uppercase tracking-wider">
@@ -166,11 +283,15 @@ export const MonetizationPage: React.FC = () => {
                 <td className="py-3 text-textPrimary font-medium">{sp.name}</td>
                 <td className="py-3 text-textMuted">{sp.type}</td>
                 <td className="py-3">
-                  <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${sp.status === "active" ? "bg-green-500/20 text-green-400" : "bg-yellow-500/20 text-yellow-400"}`}>
+                  <span
+                    className={`px-2 py-0.5 rounded-full text-xs font-medium ${sp.status === "active" ? "bg-green-500/20 text-green-400" : "bg-yellow-500/20 text-yellow-400"}`}
+                  >
                     {sp.status}
                   </span>
                 </td>
-                <td className="py-3 text-right text-gold font-bold">${sp.monthlyRate.toLocaleString()}/mo</td>
+                <td className="py-3 text-right text-gold font-bold">
+                  ${sp.monthlyRate.toLocaleString()}/mo
+                </td>
               </tr>
             ))}
           </tbody>

@@ -165,7 +165,10 @@ export const AdminDashboardPage: React.FC = () => {
                   <stop offset="95%" stopColor="#60A5FA" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="rgba(255,255,255,0.05)"
+              />
               <XAxis
                 dataKey="day"
                 tick={{ fill: "#94A3B8", fontSize: 12 }}
@@ -326,7 +329,9 @@ export const AdminDashboardPage: React.FC = () => {
                 className="w-12 h-12 rounded-full object-cover shrink-0"
               />
               <div>
-                <p className="font-bold text-textPrimary text-sm">{doll.name}</p>
+                <p className="font-bold text-textPrimary text-sm">
+                  {doll.name}
+                </p>
                 <p className="text-xs text-textMuted">{doll.tagline}</p>
                 {doll.isSponsored && (
                   <span className="text-xs text-gold">● Sponsored</span>
