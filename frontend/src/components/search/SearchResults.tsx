@@ -43,7 +43,10 @@ export const SearchResults: React.FC<SearchResultsProps> = ({
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="bg-surface rounded-2xl border border-white/8 h-48 animate-pulse" />
+          <div
+            key={i}
+            className="bg-surface rounded-2xl border border-white/8 h-48 animate-pulse"
+          />
         ))}
       </div>
     );
@@ -55,7 +58,9 @@ export const SearchResults: React.FC<SearchResultsProps> = ({
     return (
       <div className="text-center py-16 text-textMuted">
         <p className="text-2xl font-bold mb-2">No results found</p>
-        <p className="text-sm">Try a different search term or browse by category.</p>
+        <p className="text-sm">
+          Try a different search term or browse by category.
+        </p>
       </div>
     );
   }
@@ -70,13 +75,17 @@ export const SearchResults: React.FC<SearchResultsProps> = ({
                 {item.content_type}
               </Badge>
               {item.category && (
-                <span className="ml-2 text-xs text-textMuted">{item.category}</span>
+                <span className="ml-2 text-xs text-textMuted">
+                  {item.category}
+                </span>
               )}
               <h3 className="text-base font-bold text-textPrimary mt-2 mb-2 line-clamp-2">
                 {item.title}
               </h3>
               {item.excerpt && (
-                <p className="text-sm text-textMuted line-clamp-2">{item.excerpt}</p>
+                <p className="text-sm text-textMuted line-clamp-2">
+                  {item.excerpt}
+                </p>
               )}
               {item.tags && item.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1 mt-3">

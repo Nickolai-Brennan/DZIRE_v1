@@ -84,9 +84,7 @@ async def upsert_user_preferences(
     return prefs
 
 
-async def clear_behavior_history(
-    db: AsyncSession, user_id: uuid.UUID
-) -> int:
+async def clear_behavior_history(db: AsyncSession, user_id: uuid.UUID) -> int:
     """Delete all behavior events for a user. Returns count deleted."""
     result = await db.execute(
         select(UserBehaviorEvent).where(UserBehaviorEvent.user_id == user_id)

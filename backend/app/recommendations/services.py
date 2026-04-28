@@ -11,8 +11,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..search.models import SearchIndex
 from .models import Recommendation, SavedPost
-from .scoring import compute_recommendation_score
 from .schemas import RecommendationRead, SavedPostCreate, SavedPostRead
+from .scoring import compute_recommendation_score
 
 
 async def get_related_posts(
@@ -201,8 +201,6 @@ async def list_collections(db: AsyncSession, user_id: uuid.UUID) -> list[str]:
     from sqlalchemy import distinct
 
     result = await db.execute(
-        select(distinct(SavedPost.collection_name)).where(
-            SavedPost.user_id == user_id
-        )
+        select(distinct(SavedPost.collection_name)).where(SavedPost.user_id == user_id)
     )
     return [row[0] for row in result.fetchall()]

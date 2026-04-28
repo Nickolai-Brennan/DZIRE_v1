@@ -12,7 +12,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from .models import SearchIndex, SearchQueryLog
 from .ranking import compute_ranking_score
 from .schemas import (AdvancedSearchRequest, SearchAnalytics, SearchRequest,
-                      SearchResultItem, SearchResponse)
+                      SearchResponse, SearchResultItem)
 
 
 async def search(
@@ -46,10 +46,13 @@ async def search(
         tags_lower = [t.lower() for t in (entry.tags or [])]
         cat_lower = (entry.category or "").lower()
 
-        if q not in title_lower and q not in (entry.body_text or "").lower() and \
-                q not in (entry.excerpt or "").lower() and \
-                not any(q in t for t in tags_lower) and \
-                q not in cat_lower:
+        if (
+            q not in title_lower
+            and q not in (entry.body_text or "").lower()
+            and q not in (entry.excerpt or "").lower()
+            and not any(q in t for t in tags_lower)
+            and q not in cat_lower
+        ):
             continue
 
         score = compute_ranking_score(
@@ -68,12 +71,14 @@ async def search(
         scored.sort(key=lambda x: x[1], reverse=True)
     elif req.sort_by == "newest":
         scored.sort(
-            key=lambda x: x[0].published_at or datetime.min.replace(tzinfo=timezone.utc),
+            key=lambda x: x[0].published_at
+            or datetime.min.replace(tzinfo=timezone.utc),
             reverse=True,
         )
     elif req.sort_by == "oldest":
         scored.sort(
-            key=lambda x: x[0].published_at or datetime.min.replace(tzinfo=timezone.utc),
+            key=lambda x: x[0].published_at
+            or datetime.min.replace(tzinfo=timezone.utc),
         )
     elif req.sort_by == "most_viewed":
         scored.sort(key=lambda x: x[0].view_count, reverse=True)
@@ -201,7 +206,9 @@ async def get_search_analytics(db: AsyncSession) -> SearchAnalytics:
         .order_by(desc("cnt"))
         .limit(10)
     )
-    zero_result_queries = [{"query": r.query, "count": r.cnt} for r in zero_q.fetchall()]
+    zero_result_queries = [
+        {"query": r.query, "count": r.cnt} for r in zero_q.fetchall()
+    ]
 
     count_7d_result = await db.execute(
         select(func.count(SearchQueryLog.id)).where(

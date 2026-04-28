@@ -27,9 +27,13 @@ async function fetchSearch(params: URLSearchParams): Promise<SearchResponse> {
 export const SearchPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
-  const [contentType, setContentType] = useState(searchParams.get("content_type") ?? "");
+  const [contentType, setContentType] = useState(
+    searchParams.get("content_type") ?? "",
+  );
   const [category, setCategory] = useState(searchParams.get("category") ?? "");
-  const [sortBy, setSortBy] = useState(searchParams.get("sort_by") ?? "relevance");
+  const [sortBy, setSortBy] = useState(
+    searchParams.get("sort_by") ?? "relevance",
+  );
   const [isVipOnly, setIsVipOnly] = useState<boolean | null>(null);
   const [results, setResults] = useState<SearchResultItem[]>([]);
   const [total, setTotal] = useState(0);
@@ -76,7 +80,9 @@ export const SearchPage: React.FC = () => {
     <div className="min-h-screen">
       {/* Hero */}
       <div className="bg-gradient-to-b from-surfaceAlt to-background py-16 px-4 text-center mb-8">
-        <p className="text-primary text-sm uppercase tracking-widest mb-3">Search</p>
+        <p className="text-primary text-sm uppercase tracking-widest mb-3">
+          Search
+        </p>
         <h1 className="text-4xl md:text-6xl font-black text-textPrimary mb-6">
           Find Anything
         </h1>
@@ -149,7 +155,9 @@ export const SearchPage: React.FC = () => {
             {!query && (
               <div className="text-center py-16 text-textMuted">
                 <p className="text-xl mb-2">Start typing to search</p>
-                <p className="text-sm">Search posts, reviews, stories, and more.</p>
+                <p className="text-sm">
+                  Search posts, reviews, stories, and more.
+                </p>
               </div>
             )}
             <SearchResults items={results} loading={loading} query={query} />

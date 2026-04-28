@@ -30,7 +30,10 @@ export const RecommendedPosts: React.FC<RecommendedPostsProps> = ({
       <h2 className="text-xl font-bold text-textPrimary mb-4">{title}</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map((item) => (
-          <Link key={item.content_id} to={`/magazine/${item.slug ?? item.content_id}`}>
+          <Link
+            key={item.content_id}
+            to={`/magazine/${item.slug ?? item.content_id}`}
+          >
             <Card hover className="p-4">
               <p className="text-xs text-primary uppercase tracking-widest mb-1">
                 {item.recommendation_type.replace(/_/g, " ")}

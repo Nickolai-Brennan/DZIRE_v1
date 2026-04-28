@@ -4,9 +4,27 @@ import { SearchBar } from "../components/search/SearchBar";
 import { TrendingNow } from "../components/recommendations/TrendingNow";
 
 const TRENDING_MOCK = [
-  { content_id: "1", content_type: "post", title: "Best Wellness Routines", slug: "best-wellness-routines", score: 120 },
-  { content_id: "2", content_type: "post", title: "Top Fashion Trends", slug: "top-fashion-trends", score: 95 },
-  { content_id: "3", content_type: "post", title: "Beauty Secrets Revealed", slug: "beauty-secrets-revealed", score: 80 },
+  {
+    content_id: "1",
+    content_type: "post",
+    title: "Best Wellness Routines",
+    slug: "best-wellness-routines",
+    score: 120,
+  },
+  {
+    content_id: "2",
+    content_type: "post",
+    title: "Top Fashion Trends",
+    slug: "top-fashion-trends",
+    score: 95,
+  },
+  {
+    content_id: "3",
+    content_type: "post",
+    title: "Beauty Secrets Revealed",
+    slug: "beauty-secrets-revealed",
+    score: 80,
+  },
 ];
 
 export const SearchResultsPage: React.FC = () => {
@@ -25,7 +43,9 @@ export const SearchResultsPage: React.FC = () => {
   return (
     <div className="min-h-screen">
       <div className="bg-gradient-to-b from-surfaceAlt to-background py-20 px-4 text-center">
-        <p className="text-primary text-sm uppercase tracking-widest mb-3">Discover</p>
+        <p className="text-primary text-sm uppercase tracking-widest mb-3">
+          Discover
+        </p>
         <h1 className="text-4xl md:text-6xl font-black text-textPrimary mb-6">
           Find Anything
         </h1>

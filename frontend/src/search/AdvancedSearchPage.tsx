@@ -5,7 +5,13 @@ import { CategoryFilter } from "../components/search/CategoryFilter";
 import { TagFilter } from "../components/search/TagFilter";
 import { SortSelector } from "../components/search/SortSelector";
 
-const SAMPLE_CATEGORIES = ["Health", "Fashion", "Beauty", "Lifestyle", "Reviews"];
+const SAMPLE_CATEGORIES = [
+  "Health",
+  "Fashion",
+  "Beauty",
+  "Lifestyle",
+  "Reviews",
+];
 const SAMPLE_TAGS = ["wellness", "style", "skincare", "fitness", "vip"];
 
 export const AdvancedSearchPage: React.FC = () => {
@@ -34,7 +40,9 @@ export const AdvancedSearchPage: React.FC = () => {
 
   return (
     <div className="min-h-screen max-w-4xl mx-auto px-4 py-16">
-      <h1 className="text-3xl font-black text-textPrimary mb-8">Advanced Search</h1>
+      <h1 className="text-3xl font-black text-textPrimary mb-8">
+        Advanced Search
+      </h1>
 
       <div className="space-y-6">
         <div>
@@ -64,7 +72,11 @@ export const AdvancedSearchPage: React.FC = () => {
           <label className="text-sm font-semibold text-textPrimary block mb-2">
             Tags
           </label>
-          <TagFilter tags={SAMPLE_TAGS} activeTags={activeTags} onToggle={toggleTag} />
+          <TagFilter
+            tags={SAMPLE_TAGS}
+            activeTags={activeTags}
+            onToggle={toggleTag}
+          />
         </div>
 
         <div className="grid grid-cols-2 gap-4">

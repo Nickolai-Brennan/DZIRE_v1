@@ -72,6 +72,7 @@ async def search_tags(
     db: AsyncSession = Depends(get_db),
 ) -> list[str]:
     from sqlalchemy import select
+
     from ..cms.models import CmsTag
 
     stmt = select(CmsTag.name)
@@ -87,6 +88,7 @@ async def search_categories(
     db: AsyncSession = Depends(get_db),
 ) -> list[str]:
     from sqlalchemy import select
+
     from ..cms.models import CmsCategory
 
     stmt = select(CmsCategory.name)

@@ -23,7 +23,9 @@ class Recommendation(Base):
         UUID(as_uuid=True), nullable=True
     )
     content_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=False)
-    content_type: Mapped[str] = mapped_column(String(64), nullable=False, default="post")
+    content_type: Mapped[str] = mapped_column(
+        String(64), nullable=False, default="post"
+    )
     recommendation_type: Mapped[str] = mapped_column(
         String(64), nullable=False
     )  # related, trending, recommended_for_you, continue_reading, popular_in_category, more_from_author

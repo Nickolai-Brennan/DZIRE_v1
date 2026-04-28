@@ -126,8 +126,6 @@ async def update_preferences(
 
 
 @router.delete("/history/{user_id}", status_code=200)
-async def clear_history(
-    user_id: UUID, db: AsyncSession = Depends(get_db)
-) -> dict:
+async def clear_history(user_id: UUID, db: AsyncSession = Depends(get_db)) -> dict:
     count = await services.clear_behavior_history(db, user_id)
     return {"deleted": count}

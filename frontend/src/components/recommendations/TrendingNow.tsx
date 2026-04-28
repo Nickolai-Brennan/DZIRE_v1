@@ -30,7 +30,10 @@ export const TrendingNow: React.FC<TrendingNowProps> = ({
       </div>
       <div className="space-y-2">
         {items.map((item, idx) => (
-          <Link key={item.content_id} to={`/magazine/${item.slug ?? item.content_id}`}>
+          <Link
+            key={item.content_id}
+            to={`/magazine/${item.slug ?? item.content_id}`}
+          >
             <Card hover className="p-3 flex items-center gap-3">
               <span className="text-2xl font-black text-primary/40 w-6 shrink-0">
                 {idx + 1}

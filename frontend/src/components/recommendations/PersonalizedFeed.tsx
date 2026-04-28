@@ -27,9 +27,14 @@ export const PersonalizedFeed: React.FC<PersonalizedFeedProps> = ({
 }) => {
   if (loading) {
     return (
-      <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ${className}`}>
+      <div
+        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ${className}`}
+      >
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="bg-surface rounded-2xl border border-white/8 h-40 animate-pulse" />
+          <div
+            key={i}
+            className="bg-surface rounded-2xl border border-white/8 h-40 animate-pulse"
+          />
         ))}
       </div>
     );
@@ -45,9 +50,14 @@ export const PersonalizedFeed: React.FC<PersonalizedFeedProps> = ({
   }
 
   return (
-    <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ${className}`}>
+    <div
+      className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ${className}`}
+    >
       {items.map((item) => (
-        <Link key={item.content_id} to={`/magazine/${item.slug ?? item.content_id}`}>
+        <Link
+          key={item.content_id}
+          to={`/magazine/${item.slug ?? item.content_id}`}
+        >
           <Card hover className="p-5 h-full">
             {item.category && (
               <Badge variant="category" className="mb-2">
@@ -58,7 +68,9 @@ export const PersonalizedFeed: React.FC<PersonalizedFeedProps> = ({
               {item.title ?? item.content_id}
             </h3>
             {item.excerpt && (
-              <p className="text-sm text-textMuted line-clamp-2">{item.excerpt}</p>
+              <p className="text-sm text-textMuted line-clamp-2">
+                {item.excerpt}
+              </p>
             )}
             {item.reason && (
               <p className="text-xs text-primary mt-2">{item.reason}</p>

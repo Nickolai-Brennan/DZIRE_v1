@@ -10,7 +10,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..core.database import get_db
 from . import services
-from .schemas import RecommendationRead, SavedPostCreate, SavedPostRead, SavedPostRemove
+from .schemas import (RecommendationRead, SavedPostCreate, SavedPostRead,
+                      SavedPostRemove)
 
 router = APIRouter(prefix="/api/recommendations", tags=["recommendations"])
 saved_router = APIRouter(prefix="/api/saved-posts", tags=["saved-posts"])

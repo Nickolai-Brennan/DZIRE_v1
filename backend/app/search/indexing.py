@@ -71,9 +71,7 @@ async def index_post(db: AsyncSession, post: CmsPost) -> SearchIndex:
 
 async def rebuild_index(db: AsyncSession) -> int:
     """Rebuild the full search index from all published CMS posts."""
-    result = await db.execute(
-        select(CmsPost).where(CmsPost.status == "published")
-    )
+    result = await db.execute(select(CmsPost).where(CmsPost.status == "published"))
     posts = result.scalars().all()
     count = 0
     for post in posts:
