@@ -2,16 +2,31 @@
 
 from __future__ import annotations
 
+from uuid import UUID
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..admin.permissions import require_role_any_admin
+from ..core.config import get_settings
 from ..core.database import get_db
+from ..payments import services as payment_services
+from ..payments.schemas import CheckoutSessionRequest, CheckoutSessionResponse
 from . import services
 from .schemas import (VipPlanCreate, VipPlanRead, VipSubscribeRequest,
                       VipSubscriptionRead)
 
 router = APIRouter(prefix="/api/vip", tags=["vip"])
+
+# Step 8 canonical subscription router (mirrors /api/vip for spec compliance)
+sub_router = APIRouter(prefix="/api/subscriptions", tags=["subscriptions"])
+
+settings = get_settings()
+
+
+# ---------------------------------------------------------------------------
+# Legacy /api/vip routes (preserved for backward compatibility)
+# ---------------------------------------------------------------------------
 
 
 @router.get("/plans", response_model=list[VipPlanRead])
@@ -42,3 +57,97 @@ async def subscribe(
         )
     sub = await services.subscribe(db, body)
     return VipSubscriptionRead.model_validate(sub)
+
+
+# ---------------------------------------------------------------------------
+# Step 8 /api/subscriptions routes
+# ---------------------------------------------------------------------------
+
+
+@sub_router.get("/plans", response_model=list[VipPlanRead])
+async def sub_list_plans(
+    db: AsyncSession = Depends(get_db),
+) -> list[VipPlanRead]:
+    plans = await services.list_plans(db)
+    return [VipPlanRead.model_validate(p) for p in plans]
+
+
+@sub_router.post("/subscribe", response_model=CheckoutSessionResponse, status_code=201)
+async def sub_subscribe(
+    body: CheckoutSessionRequest,
+    db: AsyncSession = Depends(get_db),
+) -> CheckoutSessionResponse:
+    """Create a Stripe Checkout session for a subscription plan."""
+    try:
+        result = await payment_services.create_checkout_session(
+            db,
+            user_id=body.user_id,
+            email="user@example.com",
+            data=body,
+        )
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_502_BAD_GATEWAY,
+            detail=f"Stripe error: {exc}",
+        )
+    return CheckoutSessionResponse(**result)
+
+
+@sub_router.post("/cancel", status_code=200)
+async def sub_cancel(
+    user_id: UUID,
+    db: AsyncSession = Depends(get_db),
+) -> dict:
+    """Cancel the active subscription for a user."""
+    sub = await services.get_user_subscription(db, user_id)
+    if not sub:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="No active subscription found.",
+        )
+    sub.status = "canceled"
+    await db.commit()
+    await services.set_user_vip(db, user_id, False)
+    return {"status": "canceled"}
+
+
+@sub_router.post("/upgrade", response_model=CheckoutSessionResponse, status_code=201)
+async def sub_upgrade(
+    body: CheckoutSessionRequest,
+    db: AsyncSession = Depends(get_db),
+) -> CheckoutSessionResponse:
+    """Create a Stripe Checkout session for an upgraded plan."""
+    try:
+        result = await payment_services.create_checkout_session(
+            db,
+            user_id=body.user_id,
+            email="user@example.com",
+            data=body,
+        )
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_502_BAD_GATEWAY,
+            detail=f"Stripe error: {exc}",
+        )
+    return CheckoutSessionResponse(**result)
+
+
+@sub_router.post("/downgrade", response_model=CheckoutSessionResponse, status_code=201)
+async def sub_downgrade(
+    body: CheckoutSessionRequest,
+    db: AsyncSession = Depends(get_db),
+) -> CheckoutSessionResponse:
+    """Create a Stripe Checkout session for a downgraded plan."""
+    try:
+        result = await payment_services.create_checkout_session(
+            db,
+            user_id=body.user_id,
+            email="user@example.com",
+            data=body,
+        )
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_502_BAD_GATEWAY,
+            detail=f"Stripe error: {exc}",
+        )
+    return CheckoutSessionResponse(**result)
