@@ -65,7 +65,9 @@ export const InvoiceTable: React.FC<InvoiceTableProps> = ({ invoices }) => {
               <td className="px-4 py-3 text-textMuted uppercase">
                 {inv.currency}
               </td>
-              <td className={`px-4 py-3 font-medium ${statusColor(inv.status)}`}>
+              <td
+                className={`px-4 py-3 font-medium ${statusColor(inv.status)}`}
+              >
                 {inv.status}
               </td>
               <td className="px-4 py-3 flex gap-3">

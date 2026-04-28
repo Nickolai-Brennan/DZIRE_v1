@@ -11,8 +11,8 @@ from . import services
 from .attribution import attribute_conversion
 from .schemas import (AffiliateClickCreate, AffiliateClickRead,
                       AffiliateConversionCreate, AffiliateConversionRead,
-                      AffiliateCreate, AffiliateLinkCreate,
-                      AffiliateLinkRead, AffiliateRead)
+                      AffiliateCreate, AffiliateLinkCreate, AffiliateLinkRead,
+                      AffiliateRead)
 from .tracking import AffiliateClick
 
 router = APIRouter(prefix="/api/affiliates", tags=["affiliates"])

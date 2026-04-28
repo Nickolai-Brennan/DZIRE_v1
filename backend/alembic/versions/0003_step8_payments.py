@@ -27,7 +27,9 @@ def upgrade() -> None:
             primary_key=True,
             server_default=sa.text("gen_random_uuid()"),
         ),
-        sa.Column("user_id", postgresql.UUID(as_uuid=True), nullable=False, unique=True),
+        sa.Column(
+            "user_id", postgresql.UUID(as_uuid=True), nullable=False, unique=True
+        ),
         sa.Column("provider", sa.String(32), nullable=False, server_default="stripe"),
         sa.Column("provider_customer_id", sa.Text(), nullable=False, unique=True),
         sa.Column("email", sa.Text(), nullable=True),
@@ -38,9 +40,7 @@ def upgrade() -> None:
             nullable=False,
         ),
     )
-    op.create_index(
-        "ix_stripe_customers_user_id", "stripe_customers", ["user_id"]
-    )
+    op.create_index("ix_stripe_customers_user_id", "stripe_customers", ["user_id"])
 
     # ------------------------------------------------------------------
     # payments
@@ -56,15 +56,9 @@ def upgrade() -> None:
         sa.Column("user_id", postgresql.UUID(as_uuid=True), nullable=True),
         sa.Column("customer_id", postgresql.UUID(as_uuid=True), nullable=True),
         sa.Column("provider_payment_id", sa.Text(), nullable=True),
-        sa.Column(
-            "amount", sa.Numeric(12, 2), nullable=False, server_default="0"
-        ),
-        sa.Column(
-            "currency", sa.String(8), nullable=False, server_default="usd"
-        ),
-        sa.Column(
-            "status", sa.String(32), nullable=False, server_default="pending"
-        ),
+        sa.Column("amount", sa.Numeric(12, 2), nullable=False, server_default="0"),
+        sa.Column("currency", sa.String(8), nullable=False, server_default="usd"),
+        sa.Column("status", sa.String(32), nullable=False, server_default="pending"),
         sa.Column("payment_method", sa.Text(), nullable=True),
         sa.Column("description", sa.Text(), nullable=True),
         sa.Column(
@@ -88,12 +82,8 @@ def upgrade() -> None:
             server_default=sa.text("gen_random_uuid()"),
         ),
         sa.Column("user_id", postgresql.UUID(as_uuid=True), nullable=False),
-        sa.Column(
-            "provider_payment_method_id", sa.Text(), nullable=False
-        ),
-        sa.Column(
-            "type", sa.String(32), nullable=False, server_default="card"
-        ),
+        sa.Column("provider_payment_method_id", sa.Text(), nullable=False),
+        sa.Column("type", sa.String(32), nullable=False, server_default="card"),
         sa.Column("last4", sa.String(4), nullable=True),
         sa.Column("brand", sa.String(32), nullable=True),
         sa.Column("exp_month", sa.Integer(), nullable=True),
@@ -111,9 +101,7 @@ def upgrade() -> None:
             nullable=False,
         ),
     )
-    op.create_index(
-        "ix_payment_methods_user_id", "payment_methods", ["user_id"]
-    )
+    op.create_index("ix_payment_methods_user_id", "payment_methods", ["user_id"])
 
     # ------------------------------------------------------------------
     # invoices
@@ -127,9 +115,7 @@ def upgrade() -> None:
             server_default=sa.text("gen_random_uuid()"),
         ),
         sa.Column("user_id", postgresql.UUID(as_uuid=True), nullable=False),
-        sa.Column(
-            "provider_invoice_id", sa.Text(), nullable=True, unique=True
-        ),
+        sa.Column("provider_invoice_id", sa.Text(), nullable=True, unique=True),
         sa.Column(
             "amount_due",
             sa.Numeric(12, 2),
@@ -142,12 +128,8 @@ def upgrade() -> None:
             nullable=False,
             server_default="0",
         ),
-        sa.Column(
-            "currency", sa.String(8), nullable=False, server_default="usd"
-        ),
-        sa.Column(
-            "status", sa.String(32), nullable=False, server_default="open"
-        ),
+        sa.Column("currency", sa.String(8), nullable=False, server_default="usd"),
+        sa.Column("status", sa.String(32), nullable=False, server_default="open"),
         sa.Column("invoice_url", sa.Text(), nullable=True),
         sa.Column("pdf_url", sa.Text(), nullable=True),
         sa.Column("period_start", sa.DateTime(timezone=True), nullable=True),
@@ -175,12 +157,8 @@ def upgrade() -> None:
         sa.Column("type", sa.String(32), nullable=False),
         sa.Column("source_id", sa.Text(), nullable=True),
         sa.Column("user_id", postgresql.UUID(as_uuid=True), nullable=True),
-        sa.Column(
-            "amount", sa.Numeric(12, 2), nullable=False, server_default="0"
-        ),
-        sa.Column(
-            "currency", sa.String(8), nullable=False, server_default="usd"
-        ),
+        sa.Column("amount", sa.Numeric(12, 2), nullable=False, server_default="0"),
+        sa.Column("currency", sa.String(8), nullable=False, server_default="usd"),
         sa.Column(
             "status",
             sa.String(32),
@@ -247,9 +225,7 @@ def upgrade() -> None:
             nullable=True,
         ),
         sa.Column("order_id", sa.Text(), nullable=True),
-        sa.Column(
-            "amount", sa.Numeric(12, 2), nullable=False, server_default="0"
-        ),
+        sa.Column("amount", sa.Numeric(12, 2), nullable=False, server_default="0"),
         sa.Column(
             "commission",
             sa.Numeric(12, 2),
@@ -283,9 +259,7 @@ def upgrade() -> None:
         ),
         sa.Column("affiliate_id", postgresql.UUID(as_uuid=True), nullable=False),
         sa.Column("amount", sa.Numeric(12, 2), nullable=False),
-        sa.Column(
-            "currency", sa.String(8), nullable=False, server_default="usd"
-        ),
+        sa.Column("currency", sa.String(8), nullable=False, server_default="usd"),
         sa.Column(
             "status",
             sa.String(32),
@@ -317,16 +291,10 @@ def upgrade() -> None:
         ),
         sa.Column("sponsor_id", postgresql.UUID(as_uuid=True), nullable=False),
         sa.Column("campaign_id", postgresql.UUID(as_uuid=True), nullable=True),
-        sa.Column(
-            "impressions", sa.Integer(), nullable=False, server_default="0"
-        ),
-        sa.Column(
-            "clicks", sa.Integer(), nullable=False, server_default="0"
-        ),
+        sa.Column("impressions", sa.Integer(), nullable=False, server_default="0"),
+        sa.Column("clicks", sa.Integer(), nullable=False, server_default="0"),
         sa.Column("ctr", sa.Numeric(5, 4), nullable=True),
-        sa.Column(
-            "revenue", sa.Numeric(12, 2), nullable=False, server_default="0"
-        ),
+        sa.Column("revenue", sa.Numeric(12, 2), nullable=False, server_default="0"),
         sa.Column("period_start", sa.Date(), nullable=True),
         sa.Column("period_end", sa.Date(), nullable=True),
         sa.Column("notes", sa.Text(), nullable=True),

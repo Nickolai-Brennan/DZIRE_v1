@@ -6,7 +6,6 @@ from typing import Optional
 from uuid import UUID
 
 import stripe as stripe_sdk
-
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -101,9 +100,7 @@ async def create_checkout_session(
 # ---------------------------------------------------------------------------
 
 
-async def list_payment_methods(
-    db: AsyncSession, user_id: UUID
-) -> list[PaymentMethod]:
+async def list_payment_methods(db: AsyncSession, user_id: UUID) -> list[PaymentMethod]:
     result = await db.execute(
         select(PaymentMethod)
         .where(PaymentMethod.user_id == user_id)

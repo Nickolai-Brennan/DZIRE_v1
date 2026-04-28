@@ -28,9 +28,7 @@ class RevenueEvent(Base):
     )
     amount: Mapped[float] = mapped_column(Numeric(12, 2), nullable=False, default=0)
     currency: Mapped[str] = mapped_column(String(8), nullable=False, default="usd")
-    status: Mapped[str] = mapped_column(
-        String(32), nullable=False, default="completed"
-    )
+    status: Mapped[str] = mapped_column(String(32), nullable=False, default="completed")
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )

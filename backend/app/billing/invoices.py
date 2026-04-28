@@ -20,9 +20,13 @@ class Invoice(Base):
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
     user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=False)
-    provider_invoice_id: Mapped[Optional[str]] = mapped_column(Text, nullable=True, unique=True)
+    provider_invoice_id: Mapped[Optional[str]] = mapped_column(
+        Text, nullable=True, unique=True
+    )
     amount_due: Mapped[float] = mapped_column(Numeric(12, 2), nullable=False, default=0)
-    amount_paid: Mapped[float] = mapped_column(Numeric(12, 2), nullable=False, default=0)
+    amount_paid: Mapped[float] = mapped_column(
+        Numeric(12, 2), nullable=False, default=0
+    )
     currency: Mapped[str] = mapped_column(String(8), nullable=False, default="usd")
     status: Mapped[str] = mapped_column(String(32), nullable=False, default="open")
     invoice_url: Mapped[Optional[str]] = mapped_column(Text, nullable=True)

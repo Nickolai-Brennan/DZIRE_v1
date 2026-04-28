@@ -35,7 +35,10 @@ export const AffiliateWidget: React.FC<AffiliateWidgetProps> = ({
       session_id: sessionStorage.getItem("session_id"),
     });
     if (navigator.sendBeacon) {
-      navigator.sendBeacon("/api/affiliates/track", new Blob([payload], { type: "application/json" }));
+      navigator.sendBeacon(
+        "/api/affiliates/track",
+        new Blob([payload], { type: "application/json" }),
+      );
     } else {
       // Fallback: fire-and-forget fetch (non-blocking)
       fetch("/api/affiliates/track", {

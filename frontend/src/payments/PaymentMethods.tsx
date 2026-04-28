@@ -29,7 +29,8 @@ export const PaymentMethods: React.FC = () => {
       .finally(() => setLoading(false));
   }, [userId]);
 
-  if (loading) return <p className="text-textMuted">Loading payment methods…</p>;
+  if (loading)
+    return <p className="text-textMuted">Loading payment methods…</p>;
 
   if (methods.length === 0) {
     return (

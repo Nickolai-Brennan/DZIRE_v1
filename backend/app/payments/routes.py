@@ -17,7 +17,9 @@ from .schemas import (CheckoutSessionRequest, CheckoutSessionResponse,
 router = APIRouter(prefix="/api/payments", tags=["payments"])
 
 
-@router.post("/create-checkout-session", response_model=CheckoutSessionResponse, status_code=201)
+@router.post(
+    "/create-checkout-session", response_model=CheckoutSessionResponse, status_code=201
+)
 async def create_checkout_session(
     body: CheckoutSessionRequest,
     db: AsyncSession = Depends(get_db),

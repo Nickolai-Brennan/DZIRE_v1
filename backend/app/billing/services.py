@@ -73,6 +73,7 @@ async def create_portal_session(
 ) -> Optional[str]:
     """Create a Stripe customer portal session and return the URL."""
     from ..payments.models import StripeCustomer as SC
+
     result = await db.execute(select(SC).where(SC.user_id == user_id))
     customer = result.scalar_one_or_none()
     if not customer:

@@ -65,18 +65,16 @@ async def get_subscription_by_provider_id(
     return result.scalar_one_or_none()
 
 
-async def set_user_vip(
-    db: AsyncSession, user_id: UUID, is_vip: bool
-) -> None:
+async def set_user_vip(db: AsyncSession, user_id: UUID, is_vip: bool) -> None:
     """Toggle the is_vip flag on the users table."""
     import logging
+
     _logger = logging.getLogger(__name__)
     try:
-        from ..users.models import User  # avoid circular import at module level
+        from ..users.models import \
+            User  # avoid circular import at module level
 
-        await db.execute(
-            update(User).where(User.id == user_id).values(is_vip=is_vip)
-        )
+        await db.execute(update(User).where(User.id == user_id).values(is_vip=is_vip))
         await db.commit()
     except Exception:  # noqa: BLE001
         _logger.exception(

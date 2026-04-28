@@ -24,10 +24,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..core.config import get_settings
 from ..core.database import AsyncSessionLocal
+from ..revenue.services import record_revenue_event
 from ..subscriptions import services as sub_services
 from ..subscriptions.schemas import VipSubscribeRequest
 from . import services as payment_services
-from ..revenue.services import record_revenue_event
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/payments", tags=["payments-webhook"])
@@ -48,9 +48,7 @@ async def stripe_webhook(request: Request) -> dict:
         )
 
     try:
-        event = stripe_sdk.Webhook.construct_event(
-            payload, sig_header, webhook_secret
-        )
+        event = stripe_sdk.Webhook.construct_event(payload, sig_header, webhook_secret)
     except stripe_sdk.error.SignatureVerificationError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -158,9 +156,7 @@ async def _handle_invoice_succeeded(db: AsyncSession, obj: dict) -> None:
     provider_customer_id = obj.get("customer")
 
     customer = (
-        await payment_services.get_customer_by_provider_id(
-            db, provider_customer_id
-        )
+        await payment_services.get_customer_by_provider_id(db, provider_customer_id)
         if provider_customer_id
         else None
     )
@@ -220,9 +216,7 @@ async def _handle_subscription_updated(db: AsyncSession, obj: dict) -> None:
     provider_customer_id = obj.get("customer")
 
     customer = (
-        await payment_services.get_customer_by_provider_id(
-            db, provider_customer_id
-        )
+        await payment_services.get_customer_by_provider_id(db, provider_customer_id)
         if provider_customer_id
         else None
     )
@@ -249,9 +243,7 @@ async def _handle_subscription_deleted(db: AsyncSession, obj: dict) -> None:
     provider_subscription_id = obj.get("id")
 
     customer = (
-        await payment_services.get_customer_by_provider_id(
-            db, provider_customer_id
-        )
+        await payment_services.get_customer_by_provider_id(db, provider_customer_id)
         if provider_customer_id
         else None
     )

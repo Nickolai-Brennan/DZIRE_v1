@@ -54,9 +54,7 @@ class AffiliateConversion(Base):
     order_id: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     amount: Mapped[float] = mapped_column(Numeric(12, 2), nullable=False, default=0)
     commission: Mapped[float] = mapped_column(Numeric(12, 2), nullable=False, default=0)
-    status: Mapped[str] = mapped_column(
-        String(32), nullable=False, default="pending"
-    )
+    status: Mapped[str] = mapped_column(String(32), nullable=False, default="pending")
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )

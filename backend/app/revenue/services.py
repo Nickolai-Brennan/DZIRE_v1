@@ -81,13 +81,9 @@ async def get_summary(db: AsyncSession) -> RevenueSummary:
     )
 
 
-async def get_analytics(
-    db: AsyncSession, limit: int = 100
-) -> RevenueAnalytics:
+async def get_analytics(db: AsyncSession, limit: int = 100) -> RevenueAnalytics:
     result = await db.execute(
-        select(RevenueEvent)
-        .order_by(RevenueEvent.created_at.desc())
-        .limit(limit)
+        select(RevenueEvent).order_by(RevenueEvent.created_at.desc()).limit(limit)
     )
     events = list(result.scalars().all())
     summary = await get_summary(db)

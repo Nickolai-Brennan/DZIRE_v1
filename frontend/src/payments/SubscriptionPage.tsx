@@ -22,7 +22,9 @@ export const SubscriptionPage: React.FC = () => {
   useEffect(() => {
     fetch("/api/subscriptions/plans")
       .then((r) => (r.ok ? r.json() : []))
-      .then((data: Plan[]) => setPlans(data.filter((p) => p.status === "active")))
+      .then((data: Plan[]) =>
+        setPlans(data.filter((p) => p.status === "active")),
+      )
       .catch(() => setPlans([]))
       .finally(() => setLoading(false));
   }, []);
@@ -55,13 +57,9 @@ export const SubscriptionPage: React.FC = () => {
         </p>
       </div>
 
-      {loading && (
-        <p className="text-center text-textMuted">Loading plans…</p>
-      )}
+      {loading && <p className="text-center text-textMuted">Loading plans…</p>}
 
-      {!loading && (
-        <PricingTable plans={plans} onSubscribe={handleSubscribe} />
-      )}
+      {!loading && <PricingTable plans={plans} onSubscribe={handleSubscribe} />}
     </div>
   );
 };

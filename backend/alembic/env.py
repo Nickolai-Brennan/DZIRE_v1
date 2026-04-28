@@ -13,8 +13,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 # Import all models so Alembic autogenerate can detect them
 from app.core.database import Base  # noqa: E402
-from app.models import (admin_login_attempt, admin_role,  # noqa: E402, F401
-                        admin_user, user)
+from app.models import admin_role  # noqa: E402, F401
+from app.models import admin_login_attempt, admin_user, user
 
 # Alembic Config object
 config = context.config
