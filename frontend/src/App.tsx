@@ -64,6 +64,8 @@ import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import { SubscriptionPage } from "./payments/SubscriptionPage";
 import { BillingPage } from "./payments/BillingPage";
 import { CheckoutPage } from "./payments/CheckoutPage";
+// Preview routes
+import PreviewRoutes from "./routes/PreviewRoutes";
 
 function App() {
   return (
@@ -72,6 +74,9 @@ function App() {
         <FavoritesProvider>
           <Router>
             <Routes>
+              {/* Preview routes */}
+              <Route path="/previews/*" element={<PreviewRoutes />} />
+
               {/* Admin routes — rendered outside PublicLayout (no header/footer/adminbutton) */}
               <Route path="/admin/login" element={<AdminLoginPage />} />
               <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
