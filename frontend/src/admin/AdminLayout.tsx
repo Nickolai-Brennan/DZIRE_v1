@@ -25,6 +25,11 @@ import {
   Plug,
   BarChart2,
   Ruler,
+  Users,
+  DollarSign,
+  Layout,
+  Heart,
+  Settings,
 } from "lucide-react";
 import { adminLogout } from "../lib/api/admin";
 import { clearAdminToken, getAdminToken } from "../lib/auth/token";
@@ -62,6 +67,13 @@ const NAV_ITEMS = [
   },
   { label: "Social Metrics", path: "/admin/social-metrics", icon: BarChart2 },
   { label: "Size Chart", path: "/admin/social-size-chart", icon: Ruler },
+  { label: "Geographic Stats", path: "/admin/geographic", icon: BarChart2 },
+  { label: "Age Range Stats", path: "/admin/age-range", icon: Users },
+  { label: "Search Rankings", path: "/admin/search-rankings", icon: Search },
+  { label: "Monetization", path: "/admin/monetization", icon: DollarSign },
+  { label: "Post Templates", path: "/admin/post-templates", icon: Layout },
+  { label: "DZIRE Dolls", path: "/admin/dolls", icon: Heart },
+  { label: "Settings", path: "/admin/settings", icon: Settings },
 ];
 
 interface AdminLayoutProps {

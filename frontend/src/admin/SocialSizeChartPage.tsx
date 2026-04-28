@@ -8,8 +8,8 @@ import { PlatformFilter } from "./social-size-chart/PlatformFilter";
 import { AssetTypeFilter } from "./social-size-chart/AssetTypeFilter";
 import {
   PlatformSizeTable,
-  SizeChartRow,
 } from "./social-size-chart/PlatformSizeTable";
+import type { SizeChartRow } from "./social-size-chart/PlatformSizeTable";
 import { SizeChartEditor } from "./social-size-chart/SizeChartEditor";
 
 // Seed data — all platforms
