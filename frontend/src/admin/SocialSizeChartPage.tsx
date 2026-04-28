@@ -34,7 +34,7 @@ const SEED_DATA: SizeChartRow[] = [
 
   // TikTok
   { id: "tt-1", platform: "TikTok", asset_type: "Vertical Video", recommended_width: 1080, recommended_height: 1920, aspect_ratio: "9:16", caption_limit: 2200, hashtag_limit: 30, safe_zone_notes: "Keep text and key visuals in center 1080x1420. Avoid bottom 400px (UI overlay).", file_type: "MP4/MOV", max_file_size: "287.6MB", last_verified_at: "2025-01-01", status: "active" },
-  { id: "tt-2", platform: "TikTok", asset_type: "Profile", recommended_width: 20, recommended_height: 20, aspect_ratio: "1:1", safe_zone_notes: "Minimum 20x20, recommended 200x200 for quality. Displayed as circle.", file_type: "JPG/PNG/GIF", last_verified_at: "2025-01-01", status: "active" },
+  { id: "tt-2", platform: "TikTok", asset_type: "Profile", recommended_width: 200, recommended_height: 200, aspect_ratio: "1:1", safe_zone_notes: "Minimum 20x20, recommended 200x200 for quality. Displayed as circle.", file_type: "JPG/PNG/GIF", last_verified_at: "2025-01-01", status: "active" },
   { id: "tt-3", platform: "TikTok", asset_type: "Story", recommended_width: 1080, recommended_height: 1920, aspect_ratio: "9:16", file_type: "MP4/MOV", max_file_size: "50MB", last_verified_at: "2025-01-01", status: "active" },
 
   // YouTube
