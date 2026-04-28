@@ -9,3 +9,5 @@ pydantic[email]>=2.0.0
 pydantic-settings>=2.0.0
 python-dotenv>=1.0.0
 stripe>=9.0.0
+apscheduler>=3.10.0
+cryptography>=42.0.0

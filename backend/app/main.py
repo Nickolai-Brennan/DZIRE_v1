@@ -33,6 +33,12 @@ from .subscriptions.routes import router as subscriptions_router
 from .subscriptions.routes import sub_router as subscriptions_sub_router
 from .user_behavior.routes import router as user_behavior_router
 from .users.routes import router as users_router
+# Step 10 routers
+from .content_calendar.routes import router as content_calendar_router
+from .campaigns.routes import router as campaigns_router
+from .social_integrations.routes import router as social_router
+from .social_integrations.routes import size_chart_router as social_size_chart_router
+from .social_integrations.scheduler import start_scheduler, stop_scheduler
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
@@ -78,6 +84,12 @@ app.include_router(recommendations_router)
 app.include_router(saved_posts_router)
 app.include_router(user_behavior_router)
 
+# Step 10 routers
+app.include_router(content_calendar_router)
+app.include_router(campaigns_router)
+app.include_router(social_router)
+app.include_router(social_size_chart_router)
+
 
 @app.get("/health")
 async def health() -> dict:
@@ -97,3 +109,10 @@ async def on_startup() -> None:
                 type(exc).__name__,
                 exc,
             )
+    start_scheduler()
+
+
+@app.on_event("shutdown")
+async def on_shutdown() -> None:
+    """Gracefully stop background jobs."""
+    stop_scheduler()
