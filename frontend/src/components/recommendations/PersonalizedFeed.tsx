@@ -39,7 +39,7 @@ export const PersonalizedFeed: React.FC<PersonalizedFeedProps> = ({
     return (
       <div className={`text-center py-12 text-textMuted ${className}`}>
         <p className="text-lg mb-1">Your feed is empty</p>
-        <p className="text-sm">Read and save posts to personalise your feed.</p>
+        <p className="text-sm">Read and save posts to personalize your feed.</p>
       </div>
     );
   }

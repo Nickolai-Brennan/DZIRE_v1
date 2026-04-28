@@ -147,15 +147,16 @@ async def get_recommended_for_user(
 
 async def add_saved_post(db: AsyncSession, body: SavedPostCreate) -> SavedPost:
     # Check duplicate
-    existing = await db.execute(
+    existing_result = await db.execute(
         select(SavedPost).where(
             SavedPost.user_id == body.user_id,
             SavedPost.post_id == body.post_id,
             SavedPost.collection_name == body.collection_name,
         )
     )
-    if existing.scalar_one_or_none():
-        return existing.scalar_one_or_none()  # type: ignore[return-value]
+    existing = existing_result.scalar_one_or_none()
+    if existing:
+        return existing
 
     saved = SavedPost(
         user_id=body.user_id,

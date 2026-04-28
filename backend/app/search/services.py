@@ -36,7 +36,10 @@ async def search(
     result = await db.execute(stmt)
     all_entries = result.scalars().all()
 
-    # In-process ranking / scoring (simple ILIKE simulation for portability)
+    # In-process ranking / scoring.
+    # NOTE: This loads all matching index entries into Python for scoring. For large
+    # datasets, migrate to PostgreSQL full-text search (tsvector/tsquery) or add
+    # database-level ILIKE filtering in `stmt` before executing.
     scored: list[tuple[SearchIndex, float]] = []
     for entry in all_entries:
         title_lower = (entry.title or "").lower()
