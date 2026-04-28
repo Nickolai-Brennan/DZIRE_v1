@@ -20,7 +20,13 @@ from .routes.auth import router as auth_router
 from .seed.dev_admin import seed_dev_admin
 from .sponsors.routes import router as sponsors_router
 from .subscriptions.routes import router as subscriptions_router
+from .subscriptions.routes import sub_router as subscriptions_sub_router
 from .users.routes import router as users_router
+# Step 8 routers
+from .payments.routes import router as payments_router
+from .payments.webhooks import router as payments_webhook_router
+from .billing.routes import router as billing_router
+from .revenue.routes import router as revenue_router
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
@@ -47,10 +53,17 @@ app.include_router(affiliates_router)
 app.include_router(sponsors_router)
 app.include_router(newsletter_router)
 app.include_router(subscriptions_router)
+app.include_router(subscriptions_sub_router)
 
 # Step 7 routers
 app.include_router(auth_v2_router)
 app.include_router(users_router)
+
+# Step 8 routers
+app.include_router(payments_router)
+app.include_router(payments_webhook_router)
+app.include_router(billing_router)
+app.include_router(revenue_router)
 
 
 @app.get("/health")

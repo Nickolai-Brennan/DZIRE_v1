@@ -53,6 +53,10 @@ import { ChatbotWidget } from "./components/chatbot/ChatbotWidget";
 import { ForgotPasswordPage } from "./auth/ForgotPasswordPage";
 import { ResetPasswordPage } from "./auth/ResetPasswordPage";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
+// Step 8 payment pages
+import { SubscriptionPage } from "./payments/SubscriptionPage";
+import { BillingPage } from "./payments/BillingPage";
+import { CheckoutPage } from "./payments/CheckoutPage";
 
 function App() {
   return (
@@ -156,6 +160,17 @@ function App() {
                         element={<PlaylistDetailPage />}
                       />
                       <Route path="/tags/:tag" element={<TagResultsPage />} />
+                      {/* Step 8 payment routes */}
+                      <Route path="/subscribe" element={<SubscriptionPage />} />
+                      <Route
+                        path="/billing"
+                        element={
+                          <ProtectedRoute>
+                            <BillingPage />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route path="/checkout" element={<CheckoutPage />} />
                       <Route
                         path="*"
                         element={
