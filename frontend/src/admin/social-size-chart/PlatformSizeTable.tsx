@@ -30,7 +30,7 @@ export interface PlatformSizeTableProps {
   onToggleStatus: (row: SizeChartRow) => void;
 }
 
-const STATUS_COLORS: Record<string, string> = {
+const STATUS_COLORS: Record<SizeChartRow["status"], string> = {
   active: "bg-green-500/20 text-green-400",
   outdated: "bg-yellow-500/20 text-yellow-400",
   deprecated: "bg-red-500/20 text-red-400",
@@ -72,7 +72,7 @@ export const PlatformSizeTable: React.FC<PlatformSizeTableProps> = ({
               <td className="py-3 pr-3 text-textMuted">{row.aspect_ratio ?? "—"}</td>
               <td className="py-3 pr-3 text-textMuted">{row.text_limit ?? "—"}</td>
               <td className="py-3 pr-3">
-                <span className={`px-2 py-0.5 rounded text-xs font-medium ${STATUS_COLORS[row.status] ?? "bg-white/10 text-textMuted"}`}>
+                <span className={`px-2 py-0.5 rounded text-xs font-medium ${STATUS_COLORS[row.status]}`}>
                   {row.status}
                 </span>
               </td>
