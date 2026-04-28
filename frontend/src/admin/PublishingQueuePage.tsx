@@ -96,15 +96,6 @@ const STATUSES: QueueStatus[] = [
   "failed",
 ];
 
-const STATUS_COLORS: Record<QueueStatus, string> = {
-  draft: "bg-yellow-500/20 text-yellow-400",
-  scheduled: "bg-blue-500/20 text-blue-400",
-  ready: "bg-cyan-500/20 text-cyan-400",
-  publishing: "bg-orange-500/20 text-orange-400",
-  published: "bg-green-500/20 text-green-400",
-  failed: "bg-red-500/20 text-red-400",
-};
-
 const STATUS_HEADER_COLORS: Record<QueueStatus, string> = {
   draft: "text-yellow-400",
   scheduled: "text-blue-400",

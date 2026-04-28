@@ -5,29 +5,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Settings,
   Globe,
   Shield,
   Bell,
   Plug,
-  Mail,
   Eye,
   EyeOff,
   CheckCircle,
 } from "lucide-react";
 import { AdminLayout } from "./AdminLayout";
 import { isAdminAuthenticated } from "../lib/auth/token";
-
-const SECTION_ICONS: Record<
-  string,
-  React.ComponentType<{ className?: string }>
-> = {
-  site: Globe,
-  security: Shield,
-  notifications: Bell,
-  integrations: Plug,
-  email: Mail,
-};
 
 export const SettingsPage: React.FC = () => {
   const navigate = useNavigate();
@@ -194,7 +181,7 @@ export const SettingsPage: React.FC = () => {
               <label className={labelClass}>New Password</label>
               <div className="relative">
                 <input
-                  type={showPassword ? "text" : "password"}
+                type={showNewPassword ? "text" : "password"}
                   className={inputClass + " pr-10"}
                   placeholder="Enter new password"
                 />

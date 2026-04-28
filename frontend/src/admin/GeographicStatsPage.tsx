@@ -140,7 +140,7 @@ export const GeographicStatsPage: React.FC = () => {
                   borderRadius: 12,
                   color: "#F8FAFC",
                 }}
-                formatter={(v: number) => [`${v}%`, "Conversion Rate"]}
+                formatter={(v) => [`${v ?? ""}%`, "Conversion Rate"]}
               />
               <Bar
                 dataKey="rate"

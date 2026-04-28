@@ -1,167 +1,166 @@
-# UI Components Reference — DZIRE
+# DZIRE UI Components Reference
 
-Complete API reference for all design-system components.
+All components live in `frontend/src/design-system/components/`.
 
 ---
 
 ## Button
 
-**Import:** `import { Button } from '@/design-system/components';`
+**Variants:** `primary` · `secondary` · `accent` · `ghost` · `outline` · `danger` · `vip` · `sponsor`  
+**Sizes:** `sm` · `md` · `lg`
 
-### Props
+Usage rules:
+- `primary` — main conversion action (Subscribe, Publish, Save)
+- `accent` — promotional action (Explore, Learn More)
+- `vip` — subscription/membership actions
+- `sponsor` — sponsor/affiliate CTAs
+- `danger` — destructive actions only (Delete, Remove)
+- `ghost` — secondary navigation, inline actions
+- `outline` — lower-priority actions alongside a primary
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `'primary' \| 'secondary' \| 'accent' \| 'ghost' \| 'outline' \| 'danger' \| 'vip' \| 'sponsor'` | `'primary'` | Visual style |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size preset |
-| `block` | `boolean` | `false` | Full-width block |
-| `loading` | `boolean` | `false` | Spinner + disabled |
-| `leftIcon` | `ReactNode` | `undefined` | Icon before label |
-| `rightIcon` | `ReactNode` | `undefined` | Icon after label |
-
-Inherits all native `<button>` attributes.
-
-### Variant Usage
-
-| Variant | When to use |
-|---------|-------------|
-| `primary` | Main page action |
-| `secondary` | Supporting action |
-| `accent` | Promotional, high-attention CTA |
-| `ghost` | Low-emphasis navigation |
-| `outline` | Lower-priority action alongside a primary |
-| `danger` | Destructive action (delete, revoke) |
-| `vip` | Subscription / upgrade action |
-| `sponsor` | Sponsor/affiliate action |
+Accessibility:
+- Default `type="button"` prevents accidental form submit.
+- `disabled` prop adds `opacity-50` and `cursor-not-allowed`.
+- Visible focus ring via `focus-visible:ring-2`.
 
 ---
 
 ## Card
 
-**Import:** `import { Card, CardHeader, CardBody, CardFooter } from '@/design-system/components';`
+A surface container for grouping related content.
 
-### Props
+Props: `hover`, `glow` (primary/gold/vip), `padding` (none/sm/md/lg)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `'default' \| 'glass' \| 'elevated' \| 'outline' \| 'vip' \| 'sponsor'` | `'default'` | Visual style |
-| `interactive` | `boolean` | `false` | Adds hover + pointer + focus ring |
-| `onClick` | `MouseEventHandler` | `undefined` | Click handler |
-
-### Sub-components
-
-- `CardHeader` — top section with bottom border
-- `CardBody` — main content area with padding
-- `CardFooter` — bottom section with top border
+Variants in practice:
+- **Article Card** — `hover` + image + metadata
+- **Stat Card** — use the `StatCard` component instead
+- **VIP Card** — `glow="vip"`
+- **Sponsor Card** — `glow="gold"`
 
 ---
 
 ## Badge
 
-**Import:** `import { Badge } from '@/design-system/components';`
+Inline status/label chip with 10 variants.
 
-### Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | see below | `'default'` | Visual style |
-| `size` | `'sm' \| 'md'` | `'md'` | Size preset |
-
-Variants: `default · category · success · warning · danger · info · vip · sponsor · trophy`
-
----
-
-## FormField
-
-**Import:** `import { FormField, inputBaseClasses } from '@/design-system/components';`
-
-### Props
-
-| Prop | Type | Required | Description |
-|------|------|----------|-------------|
-| `id` | `string` | ✓ | Wired to `htmlFor` and child `id` |
-| `label` | `string` | ✓ | Field label |
-| `hint` | `string` | | Helper text |
-| `error` | `string` | | Error message (shown in red) |
-| `required` | `boolean` | | Shows `*` and `aria-required` |
-
-### `inputBaseClasses`
-
-Exported string of Tailwind classes for consistent `<input>`, `<textarea>`, `<select>` styling. Apply directly:
-
-```tsx
-<input className={inputBaseClasses} type="text" />
-```
+| Variant   | Color          | Use                           |
+|-----------|----------------|-------------------------------|
+| default   | Gray           | General labels                |
+| primary   | Rose           | Active state, highlight       |
+| category  | Rose           | Content category              |
+| success   | Green          | Published, completed, live    |
+| warning   | Amber          | Draft, pending, review needed |
+| danger    | Red            | Error, blocked, failed        |
+| info      | Blue           | Note, informational           |
+| vip       | Purple         | VIP member content            |
+| sponsor   | Amber-yellow   | Sponsored content             |
+| gold      | Gold           | Trophy, award, top performer  |
 
 ---
 
 ## Modal
 
-**Import:** `import { Modal } from '@/design-system/components';`
+Full-screen overlay dialog with escape-to-close.
 
-### Props
+Props: `isOpen`, `onClose`, `title?`, `size` (sm/md/lg/xl)
 
-| Prop | Type | Required | Description |
-|------|------|----------|-------------|
-| `open` | `boolean` | ✓ | Controlled open state |
-| `onClose` | `() => void` | ✓ | Called on Escape, backdrop click, or close button |
-| `title` | `string` | | Optional header title |
-| `size` | `'sm' \| 'md' \| 'lg' \| 'xl' \| 'full'` | | Max-width preset (`'md'` default) |
-| `footer` | `ReactNode` | | Action buttons rendered in footer bar |
-
-### Accessibility
-
-- Uses `role="dialog"`, `aria-modal="true"`, `aria-labelledby`.
-- Auto-focuses dialog on open.
-- Locks body scroll.
-- Closes on Escape keydown.
+Accessibility: `role="dialog"`, `aria-modal="true"`, `aria-label`, focus trap not included (add via `focus-trap-react` if required).
 
 ---
 
-## DataTable
+## Tabs
 
-**Import:** `import { DataTable } from '@/design-system/components';`
+Horizontal tab navigation with ARIA support.
 
-Generic component typed `DataTable<T>`.
+Props: `tabs` (array of `{ id, label, content }`), `defaultTab?`
 
-### Props
+Each tab has `role="tab"`, `aria-selected`, and its panel has `role="tabpanel"` with matching `aria-labelledby`.
 
-| Prop | Type | Required | Description |
-|------|------|----------|-------------|
-| `columns` | `ColumnDef<T>[]` | ✓ | Column definitions |
-| `data` | `T[]` | ✓ | Row data array |
-| `rowKey` | `(row: T, idx: number) => string \| number` | ✓ | Unique key per row |
-| `striped` | `boolean` | | Alternating row shading |
-| `emptyState` | `ReactNode` | | Shown when `data` is empty |
-| `caption` | `string` | | Screen-reader table caption |
+---
 
-### ColumnDef<T>
+## Table / DataTable
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `key` | `string` | Maps to `T` property or custom id |
-| `header` | `ReactNode` | Column heading |
-| `render` | `(row: T, idx: number) => ReactNode` | Custom cell renderer |
-| `align` | `'left' \| 'center' \| 'right'` | Text alignment |
-| `cellClassName` | `string` | Extra classes for `<td>` |
+`Table` — generic typed data table.  
+`DataTable` — `Table` with an empty-state fallback.
+
+```ts
+columns: Array<{ key: keyof T; header: string; render?: (value, row) => ReactNode }>
+```
+
+Use `DataTable` for all data-heavy admin pages. Use `Table` directly when you handle empty state yourself.
 
 ---
 
 ## StatCard
 
-**Import:** `import { StatCard } from '@/design-system/components';`
+KPI metric card with optional trend indicator.
 
-### Props
+Props: `label`, `value`, `trend?` (number, % change), `trendLabel?`, `icon?`
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `value` | `string \| number` | Main metric value |
-| `label` | `string` | Metric name |
-| `description` | `string` | Optional sub-label |
-| `icon` | `ReactNode` | Optional icon (displayed in a colored pill) |
-| `trend` | `string` | Trend text, e.g. `"+4.2%"` |
-| `trendDirection` | `'up' \| 'down' \| 'neutral'` | Controls trend color + arrow |
+Use in 2-col or 4-col `DashboardLayout.kpiRow` grids.
 
 ---
 
-_Last updated: Step 6 implementation_
+## ChartCard
+
+Container for chart visualizations.
+
+Props: `title`, `subtitle?`, `action?` (e.g., export button), `children`
+
+Wrap any Recharts or other chart component in `ChartCard`.
+
+---
+
+## FormField
+
+Unified form input with label, validation, and hint text.
+
+Input types: `text` · `email` · `password` · `number` · `url` · `tel` · `search` · `textarea`
+
+- Pass `error` to show red border + error message (`role="alert"`).
+- Pass `hint` for instructional text shown when no error.
+- `required` adds a `*` marker beside the label.
+
+---
+
+## SearchBar
+
+Search input with prepended search icon.
+
+Use at the top of lists, data tables, and content feeds. Wire `value` + `onChange` directly to a filter state.
+
+---
+
+## FilterPanel
+
+Multi-group filter UI with clear-all.
+
+Props: `groups` (array of filter groups with options), `selected` (Record of group→selected values), `onChange`, `onClear?`
+
+Place in a sidebar or drawer on data-heavy pages.
+
+---
+
+## EmptyState
+
+Zero-state display for lists and dashboards.
+
+Props: `title`, `description?`, `action?` (CTA button), `icon?`
+
+Use when a query returns 0 results, or when a section has no data yet.
+
+---
+
+## Existing UI Components
+
+The following components also exist in `frontend/src/components/ui/` and are used directly by app pages.  
+Prefer the design-system versions for new work; the existing ones remain for backward compatibility.
+
+| Existing component | Design-system equivalent |
+|--------------------|--------------------------|
+| `Button.tsx`       | `design-system/components/Button.tsx` (more variants) |
+| `Card.tsx`         | `design-system/components/Card.tsx` (more options)     |
+| `Badge.tsx`        | `design-system/components/Badge.tsx` (more variants)   |
+| `Modal.tsx`        | `design-system/components/Modal.tsx` (size prop added) |
+| `SearchBar.tsx`    | `design-system/components/SearchBar.tsx`               |
+| `EmptyState.tsx`   | `design-system/components/EmptyState.tsx` (icon prop)  |

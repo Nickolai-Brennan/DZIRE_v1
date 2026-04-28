@@ -130,7 +130,10 @@ export const AgeRangeStatsPage: React.FC = () => {
                 outerRadius={100}
                 dataKey="users"
                 nameKey="range"
-                label={({ range, pct }) => `${range}: ${pct}%`}
+                label={(props) => {
+                  const d = props as unknown as { range: string; pct: number };
+                  return `${d.range}: ${d.pct}%`;
+                }}
                 labelLine={false}
               >
                 {ageRangeData.map((entry, index) => (
@@ -148,10 +151,10 @@ export const AgeRangeStatsPage: React.FC = () => {
                   color: "#F8FAFC",
                 }}
                 formatter={(
-                  v: number,
-                  _name: string,
-                  props: { payload: { range: string } },
-                ) => [`${v.toLocaleString()} users`, props.payload.range]}
+                  v,
+                  _name,
+                  props,
+                ) => [`${v?.toLocaleString() ?? v} users`, (props.payload as { range?: string })?.range ?? ""]}
               />
               <Legend />
             </PieChart>
@@ -188,7 +191,7 @@ export const AgeRangeStatsPage: React.FC = () => {
                   borderRadius: 12,
                   color: "#F8FAFC",
                 }}
-                formatter={(v: number) => [`${v}%`, "Conversion Rate"]}
+                formatter={(v) => [`${v ?? ""}%`, "Conversion Rate"]}
               />
               <Bar
                 dataKey="rate"

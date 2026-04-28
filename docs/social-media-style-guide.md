@@ -1,145 +1,109 @@
-# Social Media Style Guide — DZIRE
+# DZIRE Social Media Style Guide
 
-## Overview
+## Brand Presence
 
-This guide defines the visual standards, dimensions, and content rules for all DZIRE social media graphics.
-
----
-
-## 1. Social Graphic Types
-
-| Type | Purpose |
-|------|---------|
-| Quote Card | Share editorial quotes or statistics |
-| Article Promo | Announce new content with title + image |
-| New Post Announcement | Alert followers to fresh content |
-| VIP Promo | Promote premium membership benefits |
-| Sponsor Promo | Showcase sponsor/affiliate partnerships |
-| Newsletter Signup | Drive newsletter subscriptions |
-| Stat Graphic | Highlight a key metric or milestone |
-| Carousel Slide | Multi-panel story or listicle |
-| Story Graphic | Full-screen vertical story format |
+DZIRE publishes on Instagram, X (Twitter), Facebook, YouTube, and TikTok. All social content must reflect the brand personality: **bold, modern, editorial, data-aware, premium**.
 
 ---
 
-## 2. Platform Dimensions
+## Graphic Types
 
-| Platform | Format | Dimensions |
-|----------|--------|------------|
-| Instagram | Square post | 1080 × 1080 px |
-| Instagram | Story / Reel | 1080 × 1920 px |
-| X / Twitter | Post image | 1600 × 900 px |
-| Facebook | Post image | 1200 × 630 px |
-| YouTube | Thumbnail | 1280 × 720 px |
-| TikTok | Cover | 1080 × 1920 px |
-| LinkedIn | Post image | 1200 × 628 px |
-| Pinterest | Pin | 1000 × 1500 px |
-
----
-
-## 3. Design Rules
-
-### Branding
-- Place the DZIRE logo in the top-left or bottom-right corner.
-- Maintain clear space (logo height) around the logo at all times.
-- Use `logo-dark.svg` on all dark-background graphics (default).
-- Use `logo-light.svg` only on white/light background materials.
-
-### Color Usage
-- Primary background: `#09090B` (background) or `#15151C` (surface).
-- Headline text: `#F8FAFC` (textPrimary).
-- Accent highlights: `#E11D48` (primary) or `#F5C451` (gold).
-- VIP content: use `#C084FC` (vip) accents and borders.
-- Sponsor content: use `#FACC15` (sponsor) badge.
-
-### Typography
-- Headlines: **Barlow Condensed Bold**, 40–72 px depending on format.
-- Sub-copy: **Inter Regular**, 16–24 px.
-- Call-to-action text: **Inter SemiBold**, 18–22 px.
-- Keep text area to no more than 60% of the graphic surface.
-
-### CTA (Call-to-Action)
-- Include exactly **one** primary CTA per graphic.
-- CTA examples: "Read Now", "Subscribe", "Go VIP", "Shop Now".
-- Use a rounded rectangle button element styled in `#E11D48`.
-
-### Imagery
-- Use high-contrast photography (avoid busy backgrounds).
-- Apply a dark overlay (`rgba(0,0,0,0.55)`) over images for legibility.
-- Avoid explicit imagery; keep all visuals sponsor-safe.
-- Add branded watermark on editorial photography.
+| Type                    | When to use                                         |
+|-------------------------|-----------------------------------------------------|
+| Quote Card              | Highlight compelling quotes from articles            |
+| Article Promo           | Promote new or featured articles                    |
+| New Post Announcement   | Alert followers to fresh content                    |
+| VIP Promo               | Drive VIP subscription conversions                  |
+| Sponsor Promo           | Showcase sponsor campaigns                          |
+| Newsletter Signup       | Grow email list via social                          |
+| Stat Graphic            | Share platform milestones or data points            |
+| Carousel Slide          | Multi-slide educational or listicle content         |
+| Story Graphic           | Story-format vertical content                       |
 
 ---
 
-## 4. Post Templates
+## Platform Dimensions
 
-### Article Promo (1080 × 1080)
-
-```
-┌─────────────────────────────────┐
-│  [DZIRE logo]           [tag]   │
-│                                 │
-│  [Article feature image]        │
-│  ─────────────────────────────  │
-│  ARTICLE HEADLINE               │
-│  Author name · Read time        │
-│  [Read Now →]                   │
-└─────────────────────────────────┘
-```
-
-### Stat Graphic (1080 × 1080)
-
-```
-┌─────────────────────────────────┐
-│  [DZIRE logo]                   │
-│                                 │
-│         [LARGE NUMBER]          │
-│         metric label            │
-│                                 │
-│  Short supporting context line  │
-│  dzire.com                      │
-└─────────────────────────────────┘
-```
-
-### Story / Reel (1080 × 1920)
-
-```
-┌──────────────┐
-│ [DZIRE logo] │
-│              │
-│  [Hero image │
-│   or color   │
-│   block]     │
-│              │
-│  HEADLINE    │
-│  Sub-copy    │
-│              │
-│  [CTA button]│
-│              │
-│  @dzire      │
-└──────────────┘
-```
+| Platform             | Format          | Dimensions    |
+|----------------------|-----------------|---------------|
+| Instagram Post       | Square          | 1080 × 1080   |
+| Instagram Story      | Vertical        | 1080 × 1920   |
+| X / Twitter Post     | Landscape       | 1600 × 900    |
+| Facebook Post        | Landscape       | 1200 × 630    |
+| YouTube Thumbnail    | Landscape       | 1280 × 720    |
+| TikTok Cover         | Vertical        | 1080 × 1920   |
+| LinkedIn Post        | Landscape       | 1200 × 627    |
 
 ---
 
-## 5. Brand Consistency Rules
+## Design Rules
 
-1. Only use approved brand colors — never introduce new colors in social graphics.
-2. Never use more than two typefaces in a single graphic.
-3. Maintain a minimum safe zone of **80px** from the edge on Story formats (UI chrome obscures edges).
-4. Clearly label sponsored content with a `Sponsored` badge (`#FACC15` background, `#000` text).
-5. Use consistent icon style (Lucide React line icons, 2px stroke) if icons are included.
-6. Proofread all copy before publishing; brand name is always styled as **DZIRE** (all caps).
-
----
-
-## 6. Content Guidelines
-
-- Headlines: max 8 words for maximum impact.
-- Sub-copy: max 2 lines, 15 words each.
-- URL / handle: always include `@dzire` or `dzire.com` in footer zone.
-- Hashtags: listed in caption (not on the graphic) — 5–10 relevant tags.
+1. **Logo placement** — bottom-right corner, watermark version, at ~8% of graphic width.
+2. **Headlines** — use Barlow Condensed, bold weight, 60–80px for 1080px wide graphics.
+3. **One clear CTA** — one action per graphic (Read, Subscribe, Watch, Shop).
+4. **Color consistency** — use brand colors only; avoid off-brand gradients.
+5. **Templates** — maintain reusable Figma/Canva templates per format.
+6. **Background** — use `#09090B` (background) or brand imagery with dark overlay.
+7. **Contrast** — text must meet WCAG AA (4.5:1 minimum on body, 3:1 on large text).
 
 ---
 
-_Last updated: Step 6 implementation_
+## Color Application for Social
+
+| Element       | Color                  |
+|---------------|------------------------|
+| Background    | `#09090B` or brand img |
+| Headline text | `#F8FAFC` (textPrimary) |
+| Body text     | `#A1A1AA` (textMuted)  |
+| CTA button    | `#E11D48` (primary)    |
+| VIP badge     | `#C084FC` (vip)        |
+| Sponsor badge | `#FACC15` (sponsor)    |
+| Gold accent   | `#F5C451` (gold)       |
+
+---
+
+## Typography for Social
+
+| Role          | Font             | Weight | Size (1080px canvas) |
+|---------------|------------------|--------|----------------------|
+| Headline      | Barlow Condensed | 700    | 60–80px              |
+| Sub-headline  | Barlow Condensed | 600    | 36–48px              |
+| Body copy     | Inter            | 400    | 24–28px              |
+| CTA label     | Inter            | 600    | 24px                 |
+| Badge / label | Inter            | 700    | 16–18px uppercase    |
+
+---
+
+## Sponsored Content Rules
+
+- All sponsored graphics must include a **"Sponsored"** or **"Ad"** label, minimum 14px, top-left corner.
+- Use the `#FACC15` sponsor color badge.
+- Keep sponsor branding visible but secondary to DZIRE branding.
+- Disclose affiliate links in caption copy (e.g., `#ad`, `#sponsored`).
+
+---
+
+## VIP Social Content
+
+- Use `#C084FC` (vip) as the accent color.
+- Include a "VIP" badge in the corner.
+- Keep messaging exclusive and benefit-driven (e.g., "For VIP members only").
+
+---
+
+## Social Caption Rules
+
+- Hook in the first line (visible before "more").
+- Include the CTA above the fold.
+- Hashtags: 5–10 per post, placed at the end or in a comment.
+- Emojis: sparingly, max 3 per caption.
+- Always include a link in bio reference for Instagram.
+
+---
+
+## Story / Vertical Format Rules
+
+- Text safe zone: keep all text within the center 75% of the frame.
+- Avoid placing critical content within 150px of top or bottom (platform UI overlap).
+- Use full-bleed imagery with dark overlay for readability.
+- Include a swipe-up or link sticker CTA.
