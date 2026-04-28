@@ -43,7 +43,11 @@ export const PlatformSizeTable: React.FC<PlatformSizeTableProps> = ({
   onToggleStatus,
 }) => {
   if (rows.length === 0) {
-    return <p className="text-textMuted italic mt-4">No specs match the current filter.</p>;
+    return (
+      <p className="text-textMuted italic mt-4">
+        No specs match the current filter.
+      </p>
+    );
   }
 
   return (
@@ -51,28 +55,50 @@ export const PlatformSizeTable: React.FC<PlatformSizeTableProps> = ({
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-white/10 text-textMuted text-left">
-            <th className="pb-3 pr-3 font-medium whitespace-nowrap">Platform</th>
-            <th className="pb-3 pr-3 font-medium whitespace-nowrap">Asset Type</th>
+            <th className="pb-3 pr-3 font-medium whitespace-nowrap">
+              Platform
+            </th>
+            <th className="pb-3 pr-3 font-medium whitespace-nowrap">
+              Asset Type
+            </th>
             <th className="pb-3 pr-3 font-medium whitespace-nowrap">Width</th>
             <th className="pb-3 pr-3 font-medium whitespace-nowrap">Height</th>
             <th className="pb-3 pr-3 font-medium whitespace-nowrap">Ratio</th>
-            <th className="pb-3 pr-3 font-medium whitespace-nowrap">Text Limit</th>
+            <th className="pb-3 pr-3 font-medium whitespace-nowrap">
+              Text Limit
+            </th>
             <th className="pb-3 pr-3 font-medium whitespace-nowrap">Status</th>
-            <th className="pb-3 pr-3 font-medium whitespace-nowrap">Last Verified</th>
+            <th className="pb-3 pr-3 font-medium whitespace-nowrap">
+              Last Verified
+            </th>
             <th className="pb-3 font-medium whitespace-nowrap">Actions</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-white/5">
           {rows.map((row) => (
             <tr key={row.id} className="hover:bg-white/3 transition-colors">
-              <td className="py-3 pr-3 text-textPrimary font-medium whitespace-nowrap">{row.platform}</td>
-              <td className="py-3 pr-3 text-textMuted whitespace-nowrap">{row.asset_type}</td>
-              <td className="py-3 pr-3 text-textMuted">{row.recommended_width}</td>
-              <td className="py-3 pr-3 text-textMuted">{row.recommended_height}</td>
-              <td className="py-3 pr-3 text-textMuted">{row.aspect_ratio ?? "—"}</td>
-              <td className="py-3 pr-3 text-textMuted">{row.text_limit ?? "—"}</td>
+              <td className="py-3 pr-3 text-textPrimary font-medium whitespace-nowrap">
+                {row.platform}
+              </td>
+              <td className="py-3 pr-3 text-textMuted whitespace-nowrap">
+                {row.asset_type}
+              </td>
+              <td className="py-3 pr-3 text-textMuted">
+                {row.recommended_width}
+              </td>
+              <td className="py-3 pr-3 text-textMuted">
+                {row.recommended_height}
+              </td>
+              <td className="py-3 pr-3 text-textMuted">
+                {row.aspect_ratio ?? "—"}
+              </td>
+              <td className="py-3 pr-3 text-textMuted">
+                {row.text_limit ?? "—"}
+              </td>
               <td className="py-3 pr-3">
-                <span className={`px-2 py-0.5 rounded text-xs font-medium ${STATUS_COLORS[row.status]}`}>
+                <span
+                  className={`px-2 py-0.5 rounded text-xs font-medium ${STATUS_COLORS[row.status]}`}
+                >
                   {row.status}
                 </span>
               </td>

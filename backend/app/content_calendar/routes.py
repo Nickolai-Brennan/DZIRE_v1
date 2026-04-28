@@ -9,14 +9,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..core.database import get_db
 from . import services
-from .schemas import (
-    ContentCalendarCreate,
-    ContentCalendarRead,
-    ContentCalendarUpdate,
-    PublishPayload,
-    SchedulePayload,
-    StatusPayload,
-)
+from .schemas import (ContentCalendarCreate, ContentCalendarRead,
+                      ContentCalendarUpdate, PublishPayload, SchedulePayload,
+                      StatusPayload)
 
 router = APIRouter(prefix="/api/content-calendar", tags=["content-calendar"])
 
@@ -31,7 +26,9 @@ async def list_items(
     return [ContentCalendarRead.model_validate(i) for i in items]
 
 
-@router.post("", response_model=ContentCalendarRead, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "", response_model=ContentCalendarRead, status_code=status.HTTP_201_CREATED
+)
 async def create_item(
     payload: ContentCalendarCreate, db: AsyncSession = Depends(get_db)
 ) -> ContentCalendarRead:
@@ -40,10 +37,14 @@ async def create_item(
 
 
 @router.get("/{item_id}", response_model=ContentCalendarRead)
-async def get_item(item_id: UUID, db: AsyncSession = Depends(get_db)) -> ContentCalendarRead:
+async def get_item(
+    item_id: UUID, db: AsyncSession = Depends(get_db)
+) -> ContentCalendarRead:
     item = await services.get_item(db, item_id)
     if not item:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Item not found"
+        )
     return ContentCalendarRead.model_validate(item)
 
 
@@ -53,7 +54,9 @@ async def update_item(
 ) -> ContentCalendarRead:
     item = await services.update_item(db, item_id, payload)
     if not item:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Item not found"
+        )
     return ContentCalendarRead.model_validate(item)
 
 
@@ -61,7 +64,9 @@ async def update_item(
 async def delete_item(item_id: UUID, db: AsyncSession = Depends(get_db)) -> None:
     deleted = await services.delete_item(db, item_id)
     if not deleted:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Item not found"
+        )
 
 
 @router.post("/schedule", response_model=ContentCalendarRead)
@@ -70,7 +75,9 @@ async def schedule_item(
 ) -> ContentCalendarRead:
     item = await services.schedule_item(db, payload.item_id, payload.scheduled_at)
     if not item:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Item not found"
+        )
     return ContentCalendarRead.model_validate(item)
 
 
@@ -80,7 +87,9 @@ async def publish_item(
 ) -> ContentCalendarRead:
     item = await services.publish_item(db, payload.item_id)
     if not item:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Item not found"
+        )
     return ContentCalendarRead.model_validate(item)
 
 
@@ -90,5 +99,7 @@ async def set_status(
 ) -> ContentCalendarRead:
     item = await services.set_status(db, payload.item_id, payload.status)
     if not item:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Item not found"
+        )
     return ContentCalendarRead.model_validate(item)

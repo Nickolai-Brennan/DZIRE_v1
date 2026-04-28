@@ -43,7 +43,9 @@ class MockProvider(BaseProvider):
     platform = "mock"
 
     async def connect_account(self, credentials: dict) -> dict:
-        logger.info("[MockProvider] connect_account called with keys: %s", list(credentials))
+        logger.info(
+            "[MockProvider] connect_account called with keys: %s", list(credentials)
+        )
         return {"status": "connected", "platform": self.platform}
 
     async def validate_credentials(self, credentials: dict) -> bool:
@@ -51,15 +53,27 @@ class MockProvider(BaseProvider):
         return True
 
     async def schedule_post(self, post: Any, scheduled_at: Any) -> dict:
-        logger.info("[MockProvider] schedule_post post_id=%s", getattr(post, "id", None))
-        return {"status": "scheduled", "platform": self.platform, "post_id": str(getattr(post, "id", ""))}
+        logger.info(
+            "[MockProvider] schedule_post post_id=%s", getattr(post, "id", None)
+        )
+        return {
+            "status": "scheduled",
+            "platform": self.platform,
+            "post_id": str(getattr(post, "id", "")),
+        }
 
     async def publish_post(self, post: Any) -> dict:
         logger.info("[MockProvider] publish_post post_id=%s", getattr(post, "id", None))
-        return {"status": "published", "platform": self.platform, "post_id": str(getattr(post, "id", ""))}
+        return {
+            "status": "published",
+            "platform": self.platform,
+            "post_id": str(getattr(post, "id", "")),
+        }
 
     async def fetch_metrics(self, post: Any) -> dict:
-        logger.info("[MockProvider] fetch_metrics post_id=%s", getattr(post, "id", None))
+        logger.info(
+            "[MockProvider] fetch_metrics post_id=%s", getattr(post, "id", None)
+        )
         return {
             "platform": self.platform,
             "post_id": str(getattr(post, "id", "")),
@@ -81,18 +95,8 @@ def get_provider(platform: str) -> BaseProvider:
     Falls back to MockProvider if the platform is unknown or has no real
     credentials configured.
     """
-    from . import (  # noqa: PLC0415
-        bluesky,
-        discord,
-        facebook,
-        instagram,
-        mastodon,
-        reddit,
-        threads,
-        tiktok,
-        x_twitter,
-        youtube,
-    )
+    from . import (bluesky, discord, facebook, instagram,  # noqa: PLC0415
+                   mastodon, reddit, threads, tiktok, x_twitter, youtube)
 
     _registry: dict[str, BaseProvider] = {
         "x": x_twitter.XTwitterProvider(),

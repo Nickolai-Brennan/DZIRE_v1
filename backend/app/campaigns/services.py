@@ -22,9 +22,7 @@ async def list_campaigns(
 
 
 async def get_campaign(db: AsyncSession, campaign_id: UUID) -> Optional[Campaign]:
-    result = await db.execute(
-        select(Campaign).where(Campaign.id == campaign_id)
-    )
+    result = await db.execute(select(Campaign).where(Campaign.id == campaign_id))
     return result.scalar_one_or_none()
 
 

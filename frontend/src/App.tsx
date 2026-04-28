@@ -90,13 +90,31 @@ function App() {
               <Route path="/admin/sponsors" element={<SponsorManager />} />
               <Route path="/admin/newsletter" element={<NewsletterManager />} />
               <Route path="/admin/vip" element={<VIPSubscriptionManager />} />
-              <Route path="/admin/content-calendar" element={<ContentCalendarPage />} />
-              <Route path="/admin/social-scheduler" element={<SocialSchedulerPage />} />
+              <Route
+                path="/admin/content-calendar"
+                element={<ContentCalendarPage />}
+              />
+              <Route
+                path="/admin/social-scheduler"
+                element={<SocialSchedulerPage />}
+              />
               <Route path="/admin/campaigns" element={<CampaignsPage />} />
-              <Route path="/admin/publishing-queue" element={<PublishingQueuePage />} />
-              <Route path="/admin/social-integrations" element={<SocialIntegrationsPage />} />
-              <Route path="/admin/social-metrics" element={<SocialMetricsPage />} />
-              <Route path="/admin/social-size-chart" element={<SocialSizeChartPage />} />
+              <Route
+                path="/admin/publishing-queue"
+                element={<PublishingQueuePage />}
+              />
+              <Route
+                path="/admin/social-integrations"
+                element={<SocialIntegrationsPage />}
+              />
+              <Route
+                path="/admin/social-metrics"
+                element={<SocialMetricsPage />}
+              />
+              <Route
+                path="/admin/social-size-chart"
+                element={<SocialSizeChartPage />}
+              />
 
               {/* Public routes */}
               <Route

@@ -29,20 +29,28 @@ class InstagramProvider(BaseProvider):
 
     async def schedule_post(self, post: Any, scheduled_at: Any) -> dict:
         # TODO: Create a media container then schedule via POST /{ig-user-id}/media
-        logger.info("[Instagram] schedule_post post_id=%s — mock", getattr(post, "id", None))
+        logger.info(
+            "[Instagram] schedule_post post_id=%s — mock", getattr(post, "id", None)
+        )
         return {"status": "scheduled", "platform": self.platform}
 
     async def publish_post(self, post: Any) -> dict:
         # TODO: POST /{ig-user-id}/media (create container) then POST /{ig-user-id}/media_publish
-        logger.info("[Instagram] publish_post post_id=%s — mock", getattr(post, "id", None))
+        logger.info(
+            "[Instagram] publish_post post_id=%s — mock", getattr(post, "id", None)
+        )
         return {"status": "published", "platform": self.platform}
 
     async def fetch_metrics(self, post: Any) -> dict:
         # TODO: GET /{ig-media-id}/insights?metric=impressions,reach,likes,comments,shares
-        logger.info("[Instagram] fetch_metrics post_id=%s — mock", getattr(post, "id", None))
+        logger.info(
+            "[Instagram] fetch_metrics post_id=%s — mock", getattr(post, "id", None)
+        )
         return {"impressions": 0, "clicks": 0, "likes": 0, "comments": 0, "shares": 0}
 
     async def handle_webhook(self, payload: dict) -> dict:
         # TODO: Verify hub.challenge and process Instagram webhook change events
-        logger.info("[Instagram] handle_webhook event=%s — mock", payload.get("event_type"))
+        logger.info(
+            "[Instagram] handle_webhook event=%s — mock", payload.get("event_type")
+        )
         return {"received": True, "platform": self.platform}

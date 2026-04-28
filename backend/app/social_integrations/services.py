@@ -10,14 +10,9 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from .models import SocialAccount, SocialPost, SocialSizeChart
-from .schemas import (
-    SocialAccountCreate,
-    SocialAccountUpdate,
-    SocialPostCreate,
-    SocialPostUpdate,
-    SocialSizeChartCreate,
-)
-
+from .schemas import (SocialAccountCreate, SocialAccountUpdate,
+                      SocialPostCreate, SocialPostUpdate,
+                      SocialSizeChartCreate)
 
 # ── SocialAccount ─────────────────────────────────────────────────────────────
 
@@ -87,9 +82,7 @@ async def list_posts(
 
 
 async def get_post(db: AsyncSession, post_id: UUID) -> Optional[SocialPost]:
-    result = await db.execute(
-        select(SocialPost).where(SocialPost.id == post_id)
-    )
+    result = await db.execute(select(SocialPost).where(SocialPost.id == post_id))
     return result.scalar_one_or_none()
 
 

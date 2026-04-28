@@ -25,12 +25,8 @@ class Campaign(Base):
     start_date: Mapped[Optional[date]] = mapped_column(Date, nullable=True)
     end_date: Mapped[Optional[date]] = mapped_column(Date, nullable=True)
     status: Mapped[str] = mapped_column(String(40), nullable=False, default="draft")
-    budget: Mapped[Optional[float]] = mapped_column(
-        Numeric(12, 2), nullable=True
-    )
-    target_platforms: Mapped[Optional[list]] = mapped_column(
-        ARRAY(Text), nullable=True
-    )
+    budget: Mapped[Optional[float]] = mapped_column(Numeric(12, 2), nullable=True)
+    target_platforms: Mapped[Optional[list]] = mapped_column(ARRAY(Text), nullable=True)
     primary_cta: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False

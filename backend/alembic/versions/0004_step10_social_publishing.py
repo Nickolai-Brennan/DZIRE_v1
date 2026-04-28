@@ -53,8 +53,12 @@ def upgrade() -> None:
         ),
     )
     op.create_index("ix_content_calendar_status", "content_calendar", ["status"])
-    op.create_index("ix_content_calendar_scheduled_at", "content_calendar", ["scheduled_at"])
-    op.create_index("ix_content_calendar_campaign_id", "content_calendar", ["campaign_id"])
+    op.create_index(
+        "ix_content_calendar_scheduled_at", "content_calendar", ["scheduled_at"]
+    )
+    op.create_index(
+        "ix_content_calendar_campaign_id", "content_calendar", ["campaign_id"]
+    )
     op.create_index("ix_content_calendar_platform", "content_calendar", ["platform"])
 
     # ------------------------------------------------------------------

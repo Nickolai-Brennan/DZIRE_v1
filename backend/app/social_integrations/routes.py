@@ -9,22 +9,16 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..core.database import get_db
 from . import services
-from .schemas import (
-    PublishPostPayload,
-    SchedulePostPayload,
-    SocialAccountCreate,
-    SocialAccountRead,
-    SocialAccountUpdate,
-    SocialPostCreate,
-    SocialPostRead,
-    SocialPostUpdate,
-    SocialSizeChartCreate,
-    SocialSizeChartRead,
-    WebhookPayload,
-)
+from .schemas import (PublishPostPayload, SchedulePostPayload,
+                      SocialAccountCreate, SocialAccountRead,
+                      SocialAccountUpdate, SocialPostCreate, SocialPostRead,
+                      SocialPostUpdate, SocialSizeChartCreate,
+                      SocialSizeChartRead, WebhookPayload)
 
 router = APIRouter(prefix="/api/social", tags=["social"])
-size_chart_router = APIRouter(prefix="/api/social-size-chart", tags=["social-size-chart"])
+size_chart_router = APIRouter(
+    prefix="/api/social-size-chart", tags=["social-size-chart"]
+)
 
 
 # ── Accounts ──────────────────────────────────────────────────────────────────
@@ -40,7 +34,9 @@ async def list_accounts(
     return [SocialAccountRead.model_validate(a) for a in accounts]
 
 
-@router.post("/accounts", response_model=SocialAccountRead, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/accounts", response_model=SocialAccountRead, status_code=status.HTTP_201_CREATED
+)
 async def create_account(
     payload: SocialAccountCreate, db: AsyncSession = Depends(get_db)
 ) -> SocialAccountRead:
@@ -54,7 +50,9 @@ async def get_account(
 ) -> SocialAccountRead:
     account = await services.get_account(db, account_id)
     if not account:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Account not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Account not found"
+        )
     return SocialAccountRead.model_validate(account)
 
 
@@ -64,17 +62,19 @@ async def update_account(
 ) -> SocialAccountRead:
     account = await services.update_account(db, account_id, payload)
     if not account:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Account not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Account not found"
+        )
     return SocialAccountRead.model_validate(account)
 
 
 @router.delete("/accounts/{account_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_account(
-    account_id: UUID, db: AsyncSession = Depends(get_db)
-) -> None:
+async def delete_account(account_id: UUID, db: AsyncSession = Depends(get_db)) -> None:
     deleted = await services.delete_account(db, account_id)
     if not deleted:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Account not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Account not found"
+        )
 
 
 # ── Posts ─────────────────────────────────────────────────────────────────────
@@ -90,7 +90,9 @@ async def list_posts(
     return [SocialPostRead.model_validate(p) for p in posts]
 
 
-@router.post("/posts", response_model=SocialPostRead, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/posts", response_model=SocialPostRead, status_code=status.HTTP_201_CREATED
+)
 async def create_post(
     payload: SocialPostCreate, db: AsyncSession = Depends(get_db)
 ) -> SocialPostRead:
@@ -102,7 +104,9 @@ async def create_post(
 async def get_post(post_id: UUID, db: AsyncSession = Depends(get_db)) -> SocialPostRead:
     post = await services.get_post(db, post_id)
     if not post:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Post not found"
+        )
     return SocialPostRead.model_validate(post)
 
 
@@ -112,7 +116,9 @@ async def update_post(
 ) -> SocialPostRead:
     post = await services.update_post(db, post_id, payload)
     if not post:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Post not found"
+        )
     return SocialPostRead.model_validate(post)
 
 
@@ -120,7 +126,9 @@ async def update_post(
 async def delete_post(post_id: UUID, db: AsyncSession = Depends(get_db)) -> None:
     deleted = await services.delete_post(db, post_id)
     if not deleted:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Post not found"
+        )
 
 
 @router.post("/posts/schedule", response_model=SocialPostRead)
@@ -129,7 +137,9 @@ async def schedule_post(
 ) -> SocialPostRead:
     post = await services.schedule_post(db, payload.post_id, payload.scheduled_at)
     if not post:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Post not found"
+        )
     return SocialPostRead.model_validate(post)
 
 
@@ -139,7 +149,9 @@ async def publish_post(
 ) -> SocialPostRead:
     post = await services.publish_post(db, payload.post_id)
     if not post:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Post not found"
+        )
     return SocialPostRead.model_validate(post)
 
 
@@ -147,6 +159,7 @@ async def publish_post(
 async def get_aggregate_metrics(db: AsyncSession = Depends(get_db)) -> dict:
     """Return platform-level aggregated metrics across all posts."""
     from sqlalchemy import func, select
+
     from .models import SocialPost
 
     result = await db.execute(
@@ -194,7 +207,9 @@ async def list_size_charts(
     return [SocialSizeChartRead.model_validate(e) for e in entries]
 
 
-@size_chart_router.post("", response_model=SocialSizeChartRead, status_code=status.HTTP_201_CREATED)
+@size_chart_router.post(
+    "", response_model=SocialSizeChartRead, status_code=status.HTTP_201_CREATED
+)
 async def create_size_chart(
     payload: SocialSizeChartCreate, db: AsyncSession = Depends(get_db)
 ) -> SocialSizeChartRead:

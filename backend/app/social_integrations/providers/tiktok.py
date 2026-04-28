@@ -29,20 +29,28 @@ class TikTokProvider(BaseProvider):
 
     async def schedule_post(self, post: Any, scheduled_at: Any) -> dict:
         # TODO: POST /v2/post/publish/video/init/ with scheduled_publish_time
-        logger.info("[TikTok] schedule_post post_id=%s — mock", getattr(post, "id", None))
+        logger.info(
+            "[TikTok] schedule_post post_id=%s — mock", getattr(post, "id", None)
+        )
         return {"status": "scheduled", "platform": self.platform}
 
     async def publish_post(self, post: Any) -> dict:
         # TODO: POST /v2/post/publish/video/init/ then confirm with /complete/
-        logger.info("[TikTok] publish_post post_id=%s — mock", getattr(post, "id", None))
+        logger.info(
+            "[TikTok] publish_post post_id=%s — mock", getattr(post, "id", None)
+        )
         return {"status": "published", "platform": self.platform}
 
     async def fetch_metrics(self, post: Any) -> dict:
         # TODO: GET /v2/video/query/?fields=view_count,like_count,comment_count,share_count
-        logger.info("[TikTok] fetch_metrics post_id=%s — mock", getattr(post, "id", None))
+        logger.info(
+            "[TikTok] fetch_metrics post_id=%s — mock", getattr(post, "id", None)
+        )
         return {"impressions": 0, "clicks": 0, "likes": 0, "comments": 0, "shares": 0}
 
     async def handle_webhook(self, payload: dict) -> dict:
         # TODO: Verify webhook signature and process video/comment events
-        logger.info("[TikTok] handle_webhook event=%s — mock", payload.get("event_type"))
+        logger.info(
+            "[TikTok] handle_webhook event=%s — mock", payload.get("event_type")
+        )
         return {"received": True, "platform": self.platform}

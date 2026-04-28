@@ -29,20 +29,28 @@ class FacebookProvider(BaseProvider):
 
     async def schedule_post(self, post: Any, scheduled_at: Any) -> dict:
         # TODO: POST /{page-id}/feed with published=false and scheduled_publish_time (Unix ts)
-        logger.info("[Facebook] schedule_post post_id=%s — mock", getattr(post, "id", None))
+        logger.info(
+            "[Facebook] schedule_post post_id=%s — mock", getattr(post, "id", None)
+        )
         return {"status": "scheduled", "platform": self.platform}
 
     async def publish_post(self, post: Any) -> dict:
         # TODO: POST /{page-id}/feed with message=post.caption and link/photos
-        logger.info("[Facebook] publish_post post_id=%s — mock", getattr(post, "id", None))
+        logger.info(
+            "[Facebook] publish_post post_id=%s — mock", getattr(post, "id", None)
+        )
         return {"status": "published", "platform": self.platform}
 
     async def fetch_metrics(self, post: Any) -> dict:
         # TODO: GET /{post-id}/insights?metric=post_impressions,post_clicks,post_reactions_by_type_total
-        logger.info("[Facebook] fetch_metrics post_id=%s — mock", getattr(post, "id", None))
+        logger.info(
+            "[Facebook] fetch_metrics post_id=%s — mock", getattr(post, "id", None)
+        )
         return {"impressions": 0, "clicks": 0, "likes": 0, "comments": 0, "shares": 0}
 
     async def handle_webhook(self, payload: dict) -> dict:
         # TODO: Verify hub.verify_token and process page subscription events
-        logger.info("[Facebook] handle_webhook event=%s — mock", payload.get("event_type"))
+        logger.info(
+            "[Facebook] handle_webhook event=%s — mock", payload.get("event_type")
+        )
         return {"received": True, "platform": self.platform}

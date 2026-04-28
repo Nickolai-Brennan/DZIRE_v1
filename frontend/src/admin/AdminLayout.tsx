@@ -43,11 +43,23 @@ const NAV_ITEMS = [
   { label: "Sponsors", path: "/admin/sponsors", icon: Building2 },
   { label: "Newsletter", path: "/admin/newsletter", icon: Mail },
   { label: "VIP", path: "/admin/vip", icon: Crown },
-  { label: "Content Calendar", path: "/admin/content-calendar", icon: Calendar },
+  {
+    label: "Content Calendar",
+    path: "/admin/content-calendar",
+    icon: Calendar,
+  },
   { label: "Social Scheduler", path: "/admin/social-scheduler", icon: Clock },
   { label: "Campaigns", path: "/admin/campaigns", icon: Target },
-  { label: "Publishing Queue", path: "/admin/publishing-queue", icon: ListChecks },
-  { label: "Social Integrations", path: "/admin/social-integrations", icon: Plug },
+  {
+    label: "Publishing Queue",
+    path: "/admin/publishing-queue",
+    icon: ListChecks,
+  },
+  {
+    label: "Social Integrations",
+    path: "/admin/social-integrations",
+    icon: Plug,
+  },
   { label: "Social Metrics", path: "/admin/social-metrics", icon: BarChart2 },
   { label: "Size Chart", path: "/admin/social-size-chart", icon: Ruler },
 ];

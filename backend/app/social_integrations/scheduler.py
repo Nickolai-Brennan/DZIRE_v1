@@ -16,7 +16,9 @@ logger = logging.getLogger(__name__)
 _scheduler: AsyncIOScheduler | None = None
 
 
-async def publish_due_posts(db_factory: Callable[[], AbstractAsyncContextManager[AsyncSession]]) -> None:
+async def publish_due_posts(
+    db_factory: Callable[[], AbstractAsyncContextManager[AsyncSession]],
+) -> None:
     """Query social_posts due for publishing and dispatch each to its provider."""
     from .models import SocialPost
     from .providers import get_provider
@@ -47,7 +49,9 @@ async def publish_due_posts(db_factory: Callable[[], AbstractAsyncContextManager
         await db.commit()
 
 
-def start_scheduler(db_factory: Callable[[], AbstractAsyncContextManager[AsyncSession]] | None = None) -> None:
+def start_scheduler(
+    db_factory: Callable[[], AbstractAsyncContextManager[AsyncSession]] | None = None,
+) -> None:
     """Start the APScheduler background scheduler."""
     global _scheduler  # noqa: PLW0603
 

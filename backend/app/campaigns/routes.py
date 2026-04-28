@@ -38,7 +38,9 @@ async def get_campaign(
 ) -> CampaignRead:
     campaign = await services.get_campaign(db, campaign_id)
     if not campaign:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Campaign not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Campaign not found"
+        )
     return CampaignRead.model_validate(campaign)
 
 
@@ -48,7 +50,9 @@ async def update_campaign(
 ) -> CampaignRead:
     campaign = await services.update_campaign(db, campaign_id, payload)
     if not campaign:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Campaign not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Campaign not found"
+        )
     return CampaignRead.model_validate(campaign)
 
 
@@ -58,7 +62,9 @@ async def delete_campaign(
 ) -> None:
     deleted = await services.delete_campaign(db, campaign_id)
     if not deleted:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Campaign not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Campaign not found"
+        )
 
 
 @router.get("/{campaign_id}/calendar")
@@ -67,6 +73,7 @@ async def get_campaign_calendar(
 ) -> dict:
     """Return all content calendar items linked to this campaign."""
     from sqlalchemy import select
+
     from ..content_calendar.models import ContentCalendarItem
 
     result = await db.execute(
@@ -84,6 +91,7 @@ async def get_campaign_metrics(
 ) -> dict:
     """Return aggregated social metrics for all posts in this campaign."""
     from sqlalchemy import func, select
+
     from ..social_integrations.models import SocialPost
 
     result = await db.execute(

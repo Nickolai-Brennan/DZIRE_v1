@@ -29,14 +29,21 @@ const EMPTY_ROW: SizeChartRow = {
   status: "active",
 };
 
-export const SizeChartEditor: React.FC<SizeChartEditorProps> = ({ row, onSave, onCancel }) => {
+export const SizeChartEditor: React.FC<SizeChartEditorProps> = ({
+  row,
+  onSave,
+  onCancel,
+}) => {
   const [form, setForm] = useState<SizeChartRow>(EMPTY_ROW);
 
   useEffect(() => {
     setForm(row ?? { ...EMPTY_ROW, id: crypto.randomUUID() });
   }, [row]);
 
-  const set = <K extends keyof SizeChartRow>(key: K, value: SizeChartRow[K]) => {
+  const set = <K extends keyof SizeChartRow>(
+    key: K,
+    value: SizeChartRow[K],
+  ) => {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -97,7 +104,9 @@ export const SizeChartEditor: React.FC<SizeChartEditorProps> = ({ row, onSave, o
                 min={1}
                 className={inputClass}
                 value={form.recommended_width || ""}
-                onChange={(e) => set("recommended_width", Number(e.target.value))}
+                onChange={(e) =>
+                  set("recommended_width", Number(e.target.value))
+                }
               />
             </div>
             <div>
@@ -108,7 +117,9 @@ export const SizeChartEditor: React.FC<SizeChartEditorProps> = ({ row, onSave, o
                 min={1}
                 className={inputClass}
                 value={form.recommended_height || ""}
-                onChange={(e) => set("recommended_height", Number(e.target.value))}
+                onChange={(e) =>
+                  set("recommended_height", Number(e.target.value))
+                }
               />
             </div>
             <div>
@@ -130,7 +141,12 @@ export const SizeChartEditor: React.FC<SizeChartEditorProps> = ({ row, onSave, o
                 min={0}
                 className={inputClass}
                 value={form.text_limit ?? ""}
-                onChange={(e) => set("text_limit", e.target.value ? Number(e.target.value) : undefined)}
+                onChange={(e) =>
+                  set(
+                    "text_limit",
+                    e.target.value ? Number(e.target.value) : undefined,
+                  )
+                }
               />
             </div>
             <div>
@@ -140,7 +156,12 @@ export const SizeChartEditor: React.FC<SizeChartEditorProps> = ({ row, onSave, o
                 min={0}
                 className={inputClass}
                 value={form.caption_limit ?? ""}
-                onChange={(e) => set("caption_limit", e.target.value ? Number(e.target.value) : undefined)}
+                onChange={(e) =>
+                  set(
+                    "caption_limit",
+                    e.target.value ? Number(e.target.value) : undefined,
+                  )
+                }
               />
             </div>
             <div>
@@ -150,7 +171,12 @@ export const SizeChartEditor: React.FC<SizeChartEditorProps> = ({ row, onSave, o
                 min={0}
                 className={inputClass}
                 value={form.hashtag_limit ?? ""}
-                onChange={(e) => set("hashtag_limit", e.target.value ? Number(e.target.value) : undefined)}
+                onChange={(e) =>
+                  set(
+                    "hashtag_limit",
+                    e.target.value ? Number(e.target.value) : undefined,
+                  )
+                }
               />
             </div>
           </div>
@@ -213,7 +239,9 @@ export const SizeChartEditor: React.FC<SizeChartEditorProps> = ({ row, onSave, o
             <select
               className={inputClass}
               value={form.status}
-              onChange={(e) => set("status", e.target.value as SizeChartRow["status"])}
+              onChange={(e) =>
+                set("status", e.target.value as SizeChartRow["status"])
+              }
             >
               <option value="active">Active</option>
               <option value="outdated">Outdated</option>

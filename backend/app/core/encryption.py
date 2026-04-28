@@ -42,7 +42,7 @@ def decrypt_token(ciphertext: str) -> str:
     Handles legacy ``UNENCRYPTED:`` prefixed values transparently.
     """
     if ciphertext.startswith("UNENCRYPTED:"):
-        return ciphertext[len("UNENCRYPTED:"):]
+        return ciphertext[len("UNENCRYPTED:") :]
 
     fernet = _get_fernet()
     if fernet is None:

@@ -15,9 +15,21 @@ interface PlatformIntegration {
 
 const INITIAL_PLATFORMS: PlatformIntegration[] = [
   { id: "x_twitter", name: "X / Twitter", icon: "𝕏", connected: false },
-  { id: "instagram", name: "Instagram", icon: "📸", connected: true, username: "@dzire_official" },
+  {
+    id: "instagram",
+    name: "Instagram",
+    icon: "📸",
+    connected: true,
+    username: "@dzire_official",
+  },
   { id: "facebook", name: "Facebook", icon: "📘", connected: false },
-  { id: "tiktok", name: "TikTok", icon: "🎵", connected: true, username: "@dzire" },
+  {
+    id: "tiktok",
+    name: "TikTok",
+    icon: "🎵",
+    connected: true,
+    username: "@dzire",
+  },
   { id: "youtube", name: "YouTube", icon: "▶️", connected: false },
   { id: "reddit", name: "Reddit", icon: "🤖", connected: false },
   { id: "bluesky", name: "Bluesky", icon: "🦋", connected: false },
@@ -27,13 +39,20 @@ const INITIAL_PLATFORMS: PlatformIntegration[] = [
 ];
 
 export const SocialIntegrationsPage: React.FC = () => {
-  const [platforms, setPlatforms] = useState<PlatformIntegration[]>(INITIAL_PLATFORMS);
+  const [platforms, setPlatforms] =
+    useState<PlatformIntegration[]>(INITIAL_PLATFORMS);
 
   const toggleConnect = (id: string) => {
     setPlatforms((prev) =>
       prev.map((p) =>
-        p.id === id ? { ...p, connected: !p.connected, username: !p.connected ? `@dzire_${p.id}` : undefined } : p
-      )
+        p.id === id
+          ? {
+              ...p,
+              connected: !p.connected,
+              username: !p.connected ? `@dzire_${p.id}` : undefined,
+            }
+          : p,
+      ),
     );
   };
 
@@ -52,7 +71,9 @@ export const SocialIntegrationsPage: React.FC = () => {
             <div className="flex items-center gap-3 mb-4">
               <span className="text-2xl">{platform.icon}</span>
               <div>
-                <p className="text-sm font-medium text-textPrimary">{platform.name}</p>
+                <p className="text-sm font-medium text-textPrimary">
+                  {platform.name}
+                </p>
                 {platform.connected && platform.username && (
                   <p className="text-xs text-textMuted">{platform.username}</p>
                 )}

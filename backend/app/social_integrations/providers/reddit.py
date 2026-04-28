@@ -29,20 +29,28 @@ class RedditProvider(BaseProvider):
 
     async def schedule_post(self, post: Any, scheduled_at: Any) -> dict:
         # TODO: Reddit doesn't natively schedule; use internal queue and publish at scheduled_at
-        logger.info("[Reddit] schedule_post post_id=%s — mock", getattr(post, "id", None))
+        logger.info(
+            "[Reddit] schedule_post post_id=%s — mock", getattr(post, "id", None)
+        )
         return {"status": "scheduled", "platform": self.platform}
 
     async def publish_post(self, post: Any) -> dict:
         # TODO: POST /api/submit with kind="self"|"link", sr=subreddit, title, text/url
-        logger.info("[Reddit] publish_post post_id=%s — mock", getattr(post, "id", None))
+        logger.info(
+            "[Reddit] publish_post post_id=%s — mock", getattr(post, "id", None)
+        )
         return {"status": "published", "platform": self.platform}
 
     async def fetch_metrics(self, post: Any) -> dict:
         # TODO: GET /by_id/t3_{post_id}.json and extract score, num_comments
-        logger.info("[Reddit] fetch_metrics post_id=%s — mock", getattr(post, "id", None))
+        logger.info(
+            "[Reddit] fetch_metrics post_id=%s — mock", getattr(post, "id", None)
+        )
         return {"impressions": 0, "clicks": 0, "likes": 0, "comments": 0, "shares": 0}
 
     async def handle_webhook(self, payload: dict) -> dict:
         # TODO: Process Reddit modmail/new-post push events if using Reddit webhooks via mods
-        logger.info("[Reddit] handle_webhook event=%s — mock", payload.get("event_type"))
+        logger.info(
+            "[Reddit] handle_webhook event=%s — mock", payload.get("event_type")
+        )
         return {"received": True, "platform": self.platform}
