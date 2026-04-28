@@ -54,6 +54,8 @@ const contentNeedingUpdate = [
 
 const INTEGRATIONS = ["Google Search Console", "Semrush", "Ahrefs", "DataForSEO"];
 
+const getPositionDiff = (k: KeywordRanking) => k.prevPosition - k.position;
+
 export const SearchRankingsPage: React.FC = () => {
   const navigate = useNavigate();
 
@@ -63,8 +65,15 @@ export const SearchRankingsPage: React.FC = () => {
     }
   }, [navigate]);
 
-  const winners = keywords.filter((k) => k.prevPosition - k.position > 0).sort((a, b) => (b.prevPosition - b.position) - (a.prevPosition - a.position)).slice(0, 3);
-  const losers = keywords.filter((k) => k.prevPosition - k.position < 0).sort((a, b) => (a.prevPosition - a.position) - (b.prevPosition - b.position)).slice(0, 3);
+  const winners = keywords
+    .filter((k) => getPositionDiff(k) > 0)
+    .sort((a, b) => getPositionDiff(b) - getPositionDiff(a))
+    .slice(0, 3);
+
+  const losers = keywords
+    .filter((k) => getPositionDiff(k) < 0)
+    .sort((a, b) => getPositionDiff(a) - getPositionDiff(b))
+    .slice(0, 3);
 
   return (
     <AdminLayout title="Search Rankings">

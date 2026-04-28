@@ -29,7 +29,8 @@ const SECTION_ICONS: Record<string, React.ComponentType<{ className?: string }>>
 export const SettingsPage: React.FC = () => {
   const navigate = useNavigate();
   const [saved, setSaved] = useState<string | null>(null);
-  const [showPassword, setShowPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [siteSettings, setSiteSettings] = useState({
     siteName: "DZIRE",
@@ -164,20 +165,28 @@ export const SettingsPage: React.FC = () => {
                   placeholder="Enter new password"
                 />
                 <button
-                  onClick={() => setShowPassword((v) => !v)}
+                  onClick={() => setShowNewPassword((v) => !v)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-textMuted hover:text-textPrimary"
                 >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  {showNewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
             </div>
             <div>
               <label className={labelClass}>Confirm Password</label>
-              <input
-                type={showPassword ? "text" : "password"}
-                className={inputClass}
-                placeholder="Confirm new password"
-              />
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  className={inputClass + " pr-10"}
+                  placeholder="Confirm new password"
+                />
+                <button
+                  onClick={() => setShowConfirmPassword((v) => !v)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-textMuted hover:text-textPrimary"
+                >
+                  {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
             </div>
           </div>
           <div className="mt-6 flex items-center gap-3">

@@ -225,26 +225,21 @@ export const ArticleDetailPage: React.FC = () => {
   }
 
   const relatedArticles = mockArticles
-    .filter((a) => a.id !== article.id && a.category === article.category)
-    .slice(0, 2)
-    .concat(
-      mockArticles.filter(
-        (a) =>
-          a.id !== article.id &&
-          a.category !== article.category &&
-          !mockArticles
-            .filter((x) => x.id !== article.id && x.category === article.category)
-            .slice(0, 2)
-            .includes(a),
-      ),
-    )
+    .filter((a) => a.id !== article.id)
+    .sort((a, b) => {
+      const aMatch = a.category === article.category ? 1 : 0;
+      const bMatch = b.category === article.category ? 1 : 0;
+      return bMatch - aMatch;
+    })
     .slice(0, 3);
 
   const relatedPositions = mockPositions.slice(0, 2);
   const relatedTerms = mockDictionary.slice(0, 2);
 
   const handleShare = () => {
-    navigator.clipboard?.writeText(window.location.href).catch(() => {});
+    navigator.clipboard?.writeText(window.location.href).catch((err) => {
+      console.warn("[DZIRE] Clipboard copy failed:", err);
+    });
     track("article_share_click", { articleSlug: slug });
   };
 
@@ -338,8 +333,8 @@ export const ArticleDetailPage: React.FC = () => {
             </div>
 
             {/* Newsletter CTA in article */}
-            <div className="mt-10" onClick={() => track("newsletter_signup_from_article", { articleSlug: slug })}>
-              <NewsletterForm />
+            <div className="mt-10">
+              <NewsletterForm onSubmitSuccess={() => track("newsletter_signup_from_article", { articleSlug: slug })} />
             </div>
 
             {/* Sponsor block */}

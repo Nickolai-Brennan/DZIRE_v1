@@ -42,7 +42,7 @@ export const ArticlesPage: React.FC = () => {
     });
   }, [search, activeFilter]);
 
-  const featured = mockArticles[1]; // longform essay as featured
+  const featured = mockArticles.find((a) => a.templateType === "longform-essay") ?? mockArticles[0];
   const rest = filtered.filter((a) => a.id !== featured.id);
 
   return (

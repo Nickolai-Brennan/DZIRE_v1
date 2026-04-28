@@ -85,7 +85,7 @@ export const MonetizationPage: React.FC = () => {
             <YAxis tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
             <Tooltip
               contentStyle={{ backgroundColor: "#15151C", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, color: "#F8FAFC" }}
-              formatter={(v: number) => [`$${v.toLocaleString()}`]}
+              formatter={(v: number) => [`$${v.toLocaleString()}`, "Revenue"]}
             />
             <Line type="monotone" dataKey="affiliate" stroke="#E11D48" strokeWidth={2} name="Affiliate" dot={{ r: 4, fill: "#E11D48" }} />
             <Line type="monotone" dataKey="sponsorship" stroke="#60A5FA" strokeWidth={2} name="Sponsorship" dot={{ r: 4, fill: "#60A5FA" }} />
