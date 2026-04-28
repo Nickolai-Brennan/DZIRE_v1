@@ -24,22 +24,26 @@ export const AffiliateWidget: React.FC<AffiliateWidgetProps> = ({
   postId,
 }) => {
   const handleClick = async () => {
-    try {
-      await fetch("/api/affiliates/track", {
+    // Use sendBeacon for reliable fire-and-forget tracking before navigation
+    const payload = JSON.stringify({
+      affiliate_id: affiliateId,
+      post_id: postId,
+      utm_source: utmSource,
+      utm_medium: utmMedium,
+      utm_campaign: utmCampaign,
+      referrer: window.location.href,
+      session_id: sessionStorage.getItem("session_id"),
+    });
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon("/api/affiliates/track", new Blob([payload], { type: "application/json" }));
+    } else {
+      // Fallback: fire-and-forget fetch (non-blocking)
+      fetch("/api/affiliates/track", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          affiliate_id: affiliateId,
-          post_id: postId,
-          utm_source: utmSource,
-          utm_medium: utmMedium,
-          utm_campaign: utmCampaign,
-          referrer: window.location.href,
-          session_id: sessionStorage.getItem("session_id"),
-        }),
-      });
-    } catch {
-      // Tracking failure should not block navigation
+        body: payload,
+        keepalive: true,
+      }).catch(() => {});
     }
     window.open(url, "_blank", "noopener,noreferrer");
   };

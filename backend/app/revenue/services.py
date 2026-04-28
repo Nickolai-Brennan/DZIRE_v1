@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from typing import Optional
 from uuid import UUID
 
@@ -37,7 +38,11 @@ async def record_revenue_event(
 
 
 async def get_summary(db: AsyncSession) -> RevenueSummary:
-    """Compute a simple revenue summary from local revenue_events table."""
+    """Compute a revenue summary from local revenue_events table.
+
+    MRR = sum of completed subscription revenue events in the current
+    calendar month.  ARR = MRR × 12.
+    """
 
     async def _sum_by_type(event_type: str) -> float:
         result = await db.execute(
@@ -53,9 +58,17 @@ async def get_summary(db: AsyncSession) -> RevenueSummary:
     sponsor_rev = await _sum_by_type("sponsor")
     total = subscription_rev + affiliate_rev + sponsor_rev
 
-    # Simplified MRR: assume subscription revenue is monthly recurring.
-    # In production, filter by current month and use proper billing intervals.
-    mrr = subscription_rev
+    # MRR: sum completed subscription events in the current calendar month only.
+    now = datetime.now(tz=timezone.utc)
+    month_start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    mrr_result = await db.execute(
+        select(func.coalesce(func.sum(RevenueEvent.amount), 0.0)).where(
+            RevenueEvent.type == "subscription",
+            RevenueEvent.status == "completed",
+            RevenueEvent.created_at >= month_start,
+        )
+    )
+    mrr = float(mrr_result.scalar_one())
     arr = mrr * 12
 
     return RevenueSummary(

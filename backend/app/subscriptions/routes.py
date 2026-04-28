@@ -8,8 +8,10 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..admin.permissions import require_role_any_admin
+from ..auth.dependencies import get_current_user
 from ..core.config import get_settings
 from ..core.database import get_db
+from ..models.user import User
 from ..payments import services as payment_services
 from ..payments.schemas import CheckoutSessionRequest, CheckoutSessionResponse
 from . import services
@@ -76,13 +78,14 @@ async def sub_list_plans(
 async def sub_subscribe(
     body: CheckoutSessionRequest,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ) -> CheckoutSessionResponse:
     """Create a Stripe Checkout session for a subscription plan."""
     try:
         result = await payment_services.create_checkout_session(
             db,
-            user_id=body.user_id,
-            email="user@example.com",
+            user_id=current_user.id,
+            email=current_user.email,
             data=body,
         )
     except Exception as exc:
@@ -95,11 +98,11 @@ async def sub_subscribe(
 
 @sub_router.post("/cancel", status_code=200)
 async def sub_cancel(
-    user_id: UUID,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ) -> dict:
-    """Cancel the active subscription for a user."""
-    sub = await services.get_user_subscription(db, user_id)
+    """Cancel the active subscription for the authenticated user."""
+    sub = await services.get_user_subscription(db, current_user.id)
     if not sub:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -107,7 +110,7 @@ async def sub_cancel(
         )
     sub.status = "canceled"
     await db.commit()
-    await services.set_user_vip(db, user_id, False)
+    await services.set_user_vip(db, current_user.id, False)
     return {"status": "canceled"}
 
 
@@ -115,13 +118,14 @@ async def sub_cancel(
 async def sub_upgrade(
     body: CheckoutSessionRequest,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ) -> CheckoutSessionResponse:
     """Create a Stripe Checkout session for an upgraded plan."""
     try:
         result = await payment_services.create_checkout_session(
             db,
-            user_id=body.user_id,
-            email="user@example.com",
+            user_id=current_user.id,
+            email=current_user.email,
             data=body,
         )
     except Exception as exc:
@@ -136,13 +140,14 @@ async def sub_upgrade(
 async def sub_downgrade(
     body: CheckoutSessionRequest,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ) -> CheckoutSessionResponse:
     """Create a Stripe Checkout session for a downgraded plan."""
     try:
         result = await payment_services.create_checkout_session(
             db,
-            user_id=body.user_id,
-            email="user@example.com",
+            user_id=current_user.id,
+            email=current_user.email,
             data=body,
         )
     except Exception as exc:

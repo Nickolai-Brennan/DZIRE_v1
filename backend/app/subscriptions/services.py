@@ -69,6 +69,8 @@ async def set_user_vip(
     db: AsyncSession, user_id: UUID, is_vip: bool
 ) -> None:
     """Toggle the is_vip flag on the users table."""
+    import logging
+    _logger = logging.getLogger(__name__)
     try:
         from ..users.models import User  # avoid circular import at module level
 
@@ -77,5 +79,7 @@ async def set_user_vip(
         )
         await db.commit()
     except Exception:  # noqa: BLE001
-        # Users table may not have is_vip in all configurations; log and continue
+        _logger.exception(
+            "Failed to set is_vip=%s for user %s; rolling back.", is_vip, user_id
+        )
         await db.rollback()

@@ -15,6 +15,8 @@ Stripe events handled:
 from __future__ import annotations
 
 import logging
+from typing import Optional
+from uuid import UUID
 
 import stripe as stripe_sdk
 from fastapi import APIRouter, HTTPException, Request, status
@@ -30,12 +32,6 @@ from ..revenue.services import record_revenue_event
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/payments", tags=["payments-webhook"])
 settings = get_settings()
-
-
-async def _get_db_session() -> AsyncSession:
-    if AsyncSessionLocal is None:
-        raise RuntimeError("DATABASE_URL is not configured.")
-    return AsyncSessionLocal()
 
 
 @router.post("/webhook", include_in_schema=False)
@@ -91,9 +87,15 @@ async def stripe_webhook(request: Request) -> dict:
 
 
 async def _handle_checkout_completed(db: AsyncSession, obj: dict) -> None:
-    """Activate subscription when checkout completes."""
+    """Activate subscription when checkout completes.
+
+    The checkout session metadata should contain 'plan_id' (internal UUID) and
+    'price_id' to identify which plan was purchased.  If plan_id is not present
+    in metadata the handler falls back to matching by price_id.
+    """
     provider_subscription_id = obj.get("subscription")
     provider_customer_id = obj.get("customer")
+    metadata: dict = obj.get("metadata") or {}
 
     if not provider_subscription_id or not provider_customer_id:
         return
@@ -108,13 +110,30 @@ async def _handle_checkout_completed(db: AsyncSession, obj: dict) -> None:
         )
         return
 
-    # Find the first active plan to associate (simplified — caller should pass plan_id via metadata)
-    plans = await sub_services.list_plans(db)
-    if not plans:
-        logger.warning("checkout.session.completed: no VIP plans found")
-        return
+    # Resolve plan: prefer plan_id from metadata, fall back to first active plan
+    plan = None
+    metadata_plan_id: Optional[str] = metadata.get("plan_id")
+    if metadata_plan_id:
+        try:
+            plan = await sub_services.get_plan_by_id(db, UUID(metadata_plan_id))
+        except (ValueError, Exception):
+            logger.warning(
+                "checkout.session.completed: invalid plan_id in metadata: %s",
+                metadata_plan_id,
+            )
 
-    plan = plans[0]
+    if not plan:
+        plans = await sub_services.list_plans(db)
+        if not plans:
+            logger.warning("checkout.session.completed: no VIP plans found")
+            return
+        plan = plans[0]
+        logger.info(
+            "checkout.session.completed: plan_id not in metadata, "
+            "defaulting to first plan %s",
+            plan.id,
+        )
+
     sub = await sub_services.get_user_subscription(db, customer.user_id)
     if not sub:
         req = VipSubscribeRequest(
@@ -129,7 +148,6 @@ async def _handle_checkout_completed(db: AsyncSession, obj: dict) -> None:
         sub.provider_subscription_id = provider_subscription_id
         await db.commit()
 
-    # Grant VIP flag on user
     await sub_services.set_user_vip(db, customer.user_id, True)
 
 
@@ -139,9 +157,13 @@ async def _handle_invoice_succeeded(db: AsyncSession, obj: dict) -> None:
     currency = obj.get("currency", "usd")
     provider_customer_id = obj.get("customer")
 
-    customer = await payment_services.get_customer_by_provider_id(
-        db, provider_customer_id
-    ) if provider_customer_id else None
+    customer = (
+        await payment_services.get_customer_by_provider_id(
+            db, provider_customer_id
+        )
+        if provider_customer_id
+        else None
+    )
 
     await record_revenue_event(
         db,
@@ -197,9 +219,13 @@ async def _handle_subscription_updated(db: AsyncSession, obj: dict) -> None:
     new_status = obj.get("status", "active")
     provider_customer_id = obj.get("customer")
 
-    customer = await payment_services.get_customer_by_provider_id(
-        db, provider_customer_id
-    ) if provider_customer_id else None
+    customer = (
+        await payment_services.get_customer_by_provider_id(
+            db, provider_customer_id
+        )
+        if provider_customer_id
+        else None
+    )
 
     if not customer:
         return
@@ -222,9 +248,13 @@ async def _handle_subscription_deleted(db: AsyncSession, obj: dict) -> None:
     provider_customer_id = obj.get("customer")
     provider_subscription_id = obj.get("id")
 
-    customer = await payment_services.get_customer_by_provider_id(
-        db, provider_customer_id
-    ) if provider_customer_id else None
+    customer = (
+        await payment_services.get_customer_by_provider_id(
+            db, provider_customer_id
+        )
+        if provider_customer_id
+        else None
+    )
 
     if not customer:
         return

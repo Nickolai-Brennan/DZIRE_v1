@@ -21,19 +21,25 @@ export const SponsorBanner: React.FC<SponsorBannerProps> = ({
   targetUrl,
   label,
 }) => {
-  const handleClick = async () => {
-    try {
-      await fetch("/api/sponsors/clicks", {
+  const handleClick = () => {
+    // Use sendBeacon for reliable fire-and-forget tracking before navigation
+    const payload = JSON.stringify({
+      sponsor_id: sponsorId,
+      campaign_id: campaignId,
+      referrer: window.location.href,
+    });
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(
+        "/api/sponsors/clicks",
+        new Blob([payload], { type: "application/json" }),
+      );
+    } else {
+      fetch("/api/sponsors/clicks", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          sponsor_id: sponsorId,
-          campaign_id: campaignId,
-          referrer: window.location.href,
-        }),
-      });
-    } catch {
-      // Tracking failure should not block navigation
+        body: payload,
+        keepalive: true,
+      }).catch(() => {});
     }
     window.open(targetUrl, "_blank", "noopener,noreferrer");
   };

@@ -7,7 +7,9 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from ..auth.dependencies import get_current_user
 from ..core.database import get_db
+from ..models.user import User
 from . import services
 from .schemas import (CheckoutSessionRequest, CheckoutSessionResponse,
                       PaymentMethodRead, PaymentRead)
@@ -19,13 +21,14 @@ router = APIRouter(prefix="/api/payments", tags=["payments"])
 async def create_checkout_session(
     body: CheckoutSessionRequest,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ) -> CheckoutSessionResponse:
     """Create a Stripe Checkout session and return the redirect URL."""
     try:
         result = await services.create_checkout_session(
             db,
-            user_id=body.user_id,
-            email="user@example.com",  # caller should supply real email via auth
+            user_id=current_user.id,
+            email=current_user.email,
             data=body,
         )
     except Exception as exc:
@@ -38,17 +41,17 @@ async def create_checkout_session(
 
 @router.get("/methods", response_model=list[PaymentMethodRead])
 async def list_payment_methods(
-    user_id: UUID,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ) -> list[PaymentMethodRead]:
-    methods = await services.list_payment_methods(db, user_id)
+    methods = await services.list_payment_methods(db, current_user.id)
     return [PaymentMethodRead.model_validate(m) for m in methods]
 
 
 @router.get("/history", response_model=list[PaymentRead])
 async def list_payments(
-    user_id: UUID,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ) -> list[PaymentRead]:
-    payments = await services.list_payments(db, user_id)
+    payments = await services.list_payments(db, current_user.id)
     return [PaymentRead.model_validate(p) for p in payments]
