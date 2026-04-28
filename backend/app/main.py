@@ -27,6 +27,12 @@ from .sponsors.routes import router as sponsors_router
 from .subscriptions.routes import router as subscriptions_router
 from .subscriptions.routes import sub_router as subscriptions_sub_router
 from .users.routes import router as users_router
+# Step 9 routers
+from .search.routes import router as search_router
+from .search.routes import admin_router as search_admin_router
+from .recommendations.routes import router as recommendations_router
+from .recommendations.routes import saved_router as saved_posts_router
+from .user_behavior.routes import router as user_behavior_router
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
@@ -64,6 +70,13 @@ app.include_router(payments_router)
 app.include_router(payments_webhook_router)
 app.include_router(billing_router)
 app.include_router(revenue_router)
+
+# Step 9 routers
+app.include_router(search_router)
+app.include_router(search_admin_router)
+app.include_router(recommendations_router)
+app.include_router(saved_posts_router)
+app.include_router(user_behavior_router)
 
 
 @app.get("/health")

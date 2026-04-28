@@ -592,25 +592,25 @@ T-165 Run Step 9 review
 
 STEP 9 COMPLETION CHECKLIST
 
-[ ] Search index created
-[ ] Basic search works
-[ ] Advanced search works
-[ ] Filters work
-[ ] Sort options work
-[ ] Search suggestions work
-[ ] Search analytics tracked
-[ ] User behavior tracked
-[ ] User preferences stored
-[ ] Personalized feed works
-[ ] Related posts work
-[ ] Trending posts work
-[ ] Saved posts work
-[ ] Recommendation scoring works
-[ ] Admin search insights available
-[ ] Privacy controls defined
-[ ] Search agents added
-[ ] Recommendation skills added
-[ ] Docs created
+[x] Search index created           — database/schemas/search.sql, backend/app/search/models.py
+[x] Basic search works             — GET /api/search, backend/app/search/routes.py + services.py
+[x] Advanced search works          — POST /api/search/advanced
+[x] Filters work                   — content_type, category, is_vip_only, date range filters
+[x] Sort options work              — relevance, newest, oldest, most_viewed, most_clicked
+[x] Search suggestions work        — GET /api/search/suggestions
+[x] Search analytics tracked       — SearchQueryLog model + GET /api/admin/search-analytics
+[x] User behavior tracked          — POST /api/behavior/events, UserBehaviorEvent model
+[x] User preferences stored        — UserPreference model + PUT /api/behavior/preferences/{user_id}
+[x] Personalized feed works        — PersonalizedFeed component + /api/recommendations/for-you/{user_id}
+[x] Related posts work             — GET /api/recommendations/related/{content_id}
+[x] Trending posts work            — GET /api/recommendations/trending + TrendingNow component
+[x] Saved posts work               — /api/saved-posts (add/remove/list/collections)
+[x] Recommendation scoring works   — backend/app/recommendations/scoring.py + personalization.py
+[x] Admin search insights available — GET /api/admin/search-analytics
+[x] Privacy controls defined       — DELETE /api/behavior/history/{user_id}, personalization_enabled toggle
+[x] Search agents added            — .github/agents/search-agent.md, recommendation-agent.md, personalization-agent.md
+[x] Recommendation skills added    — skills/search-builder/, recommendation-engine-builder/, personalization-builder/
+[x] Docs created                   — docs/search.md, docs/recommendations.md, docs/personalization.md
 
 
 ---
