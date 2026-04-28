@@ -18,6 +18,13 @@ import {
   Mail,
   Crown,
   LogOut,
+  Calendar,
+  Clock,
+  Target,
+  ListChecks,
+  Plug,
+  BarChart2,
+  Ruler,
 } from "lucide-react";
 import { adminLogout } from "../lib/api/admin";
 import { clearAdminToken, getAdminToken } from "../lib/auth/token";
@@ -36,6 +43,13 @@ const NAV_ITEMS = [
   { label: "Sponsors", path: "/admin/sponsors", icon: Building2 },
   { label: "Newsletter", path: "/admin/newsletter", icon: Mail },
   { label: "VIP", path: "/admin/vip", icon: Crown },
+  { label: "Content Calendar", path: "/admin/content-calendar", icon: Calendar },
+  { label: "Social Scheduler", path: "/admin/social-scheduler", icon: Clock },
+  { label: "Campaigns", path: "/admin/campaigns", icon: Target },
+  { label: "Publishing Queue", path: "/admin/publishing-queue", icon: ListChecks },
+  { label: "Social Integrations", path: "/admin/social-integrations", icon: Plug },
+  { label: "Social Metrics", path: "/admin/social-metrics", icon: BarChart2 },
+  { label: "Size Chart", path: "/admin/social-size-chart", icon: Ruler },
 ];
 
 interface AdminLayoutProps {

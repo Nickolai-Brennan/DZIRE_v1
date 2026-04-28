@@ -19,6 +19,13 @@ import { AffiliateManager } from "./admin/AffiliateManager";
 import { SponsorManager } from "./admin/SponsorManager";
 import { NewsletterManager } from "./admin/NewsletterManager";
 import { VIPSubscriptionManager } from "./admin/VIPSubscriptionManager";
+import { ContentCalendarPage } from "./admin/ContentCalendarPage";
+import { SocialSchedulerPage } from "./admin/SocialSchedulerPage";
+import { CampaignsPage } from "./admin/CampaignsPage";
+import { PublishingQueuePage } from "./admin/PublishingQueuePage";
+import { SocialIntegrationsPage } from "./admin/SocialIntegrationsPage";
+import { SocialMetricsPage } from "./admin/SocialMetricsPage";
+import { SocialSizeChartPage } from "./admin/SocialSizeChartPage";
 import { PositionsPage } from "./pages/PositionsPage";
 import { PositionDetailPage } from "./pages/PositionDetailPage";
 import { ReviewsPage } from "./pages/ReviewsPage";
@@ -83,6 +90,13 @@ function App() {
               <Route path="/admin/sponsors" element={<SponsorManager />} />
               <Route path="/admin/newsletter" element={<NewsletterManager />} />
               <Route path="/admin/vip" element={<VIPSubscriptionManager />} />
+              <Route path="/admin/content-calendar" element={<ContentCalendarPage />} />
+              <Route path="/admin/social-scheduler" element={<SocialSchedulerPage />} />
+              <Route path="/admin/campaigns" element={<CampaignsPage />} />
+              <Route path="/admin/publishing-queue" element={<PublishingQueuePage />} />
+              <Route path="/admin/social-integrations" element={<SocialIntegrationsPage />} />
+              <Route path="/admin/social-metrics" element={<SocialMetricsPage />} />
+              <Route path="/admin/social-size-chart" element={<SocialSizeChartPage />} />
 
               {/* Public routes */}
               <Route
